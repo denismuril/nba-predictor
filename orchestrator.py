@@ -217,8 +217,8 @@ class PipelineOrchestrator:
             logger.warning(f"⚠️ Erro ao gerar player props (não crítico): {e}")
 
     def run_daily_flow(self):
-        """Executa o fluxo completo v21.4"""
-        logger.info("🎬 Iniciando Orchestrator Diário NBA v21.4 (Production)")
+        """Executa o fluxo completo v21.5"""
+        logger.info("🎬 Iniciando Orchestrator Diário NBA v21.5 (Forensic Audit Complete)")
 
         try:
             # NOVO: Coletar tweets ANTES do pipeline
@@ -230,7 +230,7 @@ class PipelineOrchestrator:
             self.run_step("Player Props Generation", self.step_generate_player_props)
 
             total_time = time.time() - self.start_time
-            logger.info(f"\n🎉 Fluxo v21.4 concluído com sucesso em {total_time:.1f}s")
+            logger.info(f"\n🎉 Fluxo v21.5 concluído com sucesso em {total_time:.1f}s")
 
 
         except Exception as e:

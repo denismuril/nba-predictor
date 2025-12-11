@@ -1,4 +1,4 @@
-# 🏀 NBA Predictor v21.4 - Data Leakage Audit Complete
+# 🏀 NBA Predictor v21.5 - Forensic Audit Complete
 
 [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-orange.svg)](LICENSE)
@@ -13,7 +13,7 @@ Sistema profissional de análise quantitativa e previsão de jogos da NBA usando
 
 ---
 
-## 🎉 Destaques v21.4 (11 Dez 2025) - **Data Leakage Audit Complete**
+## 🎉 Destaques v21.5 (11 Dez 2025) - **Forensic Audit Complete**
 
 ### 🔬 Auditoria de Data Leakage Completa
 
@@ -336,7 +336,7 @@ Este software é para fins educacionais e de pesquisa. O autor não se responsab
 
 ## 📞 Suporte
 
-**Versão:** v21.4 (Data Leakage Audit Complete)  
+**Versão:** v21.5 (Forensic Audit Complete)  
 **Status:** ✅ Production Ready  
 **Temporada:** 2025-26  
 **Última Atualização:** 11 Dezembro 2025  

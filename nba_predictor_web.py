@@ -20,7 +20,7 @@ from betting.web_ui import render_bankroll_management
 
 # Configuração da Página
 st.set_page_config(
-    page_title="NBA Predictor v21.4 - Data Leakage Audit Complete",
+    page_title="NBA Predictor v21.5 - Forensic Audit Complete",
     page_icon="🏀",
     layout="wide",
     initial_sidebar_state="expanded"

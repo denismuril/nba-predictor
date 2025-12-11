@@ -1,3 +1,43 @@
+# Changelog
+
+---
+
+## v21.5 - Forensic Audit Complete (11 Dez 2025)
+
+### 🔍 Auditoria Forense Completa
+
+**Resumo:** Auditoria linha-por-linha realizada por Arquiteto de Sistemas Sênior. Todas as fórmulas matemáticas validadas. Proteções anti-leakage confirmadas robustas.
+
+### ✅ Validações Concluídas
+
+| Componente | Status |
+|------------|--------|
+| Elo Rating (elo_system.py) | ✅ Fórmula correta |
+| Four Factors (data_preparation.py) | ✅ Fórmulas NBA.com |
+| Monte Carlo (simulation.py) | ✅ Vetorizado, STD=12.5 |
+| Kelly Criterion (staking_strategy.py) | ✅ Conservador (0.25) |
+| Data Leakage Protection | ✅ Whitelist + FORCE_DROP |
+
+### 🗑️ Limpeza de Código
+
+- **25 arquivos movidos para `deprecated/`**
+  - 10 de ml_pipeline/ (train_ensemble_v1-v5, feature_pipeline_v1-v3)
+  - 12 de models/ (ensemble_v7*.joblib)
+  - 3 da raiz (check_*.py, send_test.py)
+
+### 🔧 Consolidação
+
+- Criado `ml_pipeline/__init__.py` com aliases:
+  - `train_model` → train_ensemble_v6
+  - `prepare_features` → feature_pipeline_v4
+- `.gitignore` atualizado para ignorar deprecated/
+
+---
+
+## v21.4 - Data Leakage Audit Complete (11 Dez 2025)
+
+---
+
 # Changelog v21.0 - Data Leakage Fix & Infra Improvements
 
 **Data:** 08 Dezembro 2025

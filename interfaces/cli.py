@@ -27,7 +27,7 @@ from data.scrapers.referee_scraper import scrape_referees
 from data.scrapers.odds_scraper import obter_odds  # FIX: Usar scraper robusto com fallback
 from core.algorithms import calcular_power_rating_v11
 from core.simulation import simular_monte_carlo
-from ml_pipeline.train_ensemble import train_ensemble_model
+from ml_pipeline.train_ensemble_v6 import train_ensemble_model_v6 as train_ensemble_model
 from ml_pipeline.predict import predict_next_games
 from utils.confidence import get_prediction_confidence
 from utils.kelly import get_bet_recommendation
@@ -54,7 +54,7 @@ def run_prediction_pipeline(args: argparse.Namespace) -> Optional[List[Dict[str,
     Returns:
         Lista de previsões ou None em caso de erro.
     """
-    logger.info("🚀 Iniciando NBA Predictor v21.4 - Data Leakage Audit Complete...")
+    logger.info("🚀 Iniciando NBA Predictor v21.5 - Forensic Audit Complete...")
 
     # 0. Atualizar resultados pendentes
     logger.info("\n--- ETAPA 0: ATUALIZAÇÃO DE RESULTADOS ---")

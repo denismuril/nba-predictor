@@ -7,7 +7,7 @@ import os
 sys.path.insert(0, '/home/denis/nba-predictor')
 
 # Importar e executar treinamento
-from ml_pipeline.train_ensemble import train_ensemble_model
+from ml_pipeline.train_ensemble_v6 import train_ensemble_model_v6 as train_ensemble_model
 
 if __name__ == "__main__":
     print("🎯 Iniciando retreinamento do modelo ML...")

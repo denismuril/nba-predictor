@@ -47,3 +47,6 @@ results/*.png
 # OS
 .DS_Store
 Thumbs.db
+
+# Código obsoleto (auditoria v21.4)
+deprecated/
