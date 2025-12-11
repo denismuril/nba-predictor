@@ -1,0 +1,9 @@
+{
+  "cv_accuracy_mean": 0.6276729559748428,
+  "cv_accuracy_std": 0.0576820961994908,
+  "calibrated_accuracy": 0.6915887850467289,
+  "n_features": 120,
+  "n_samples_train": 2653,
+  "n_samples_calib": 214,
+  "calibration_method": "isotonic"
+}

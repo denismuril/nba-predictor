@@ -1,0 +1,102 @@
+feature,importance
+away_rolling_10_efg,0.06058027049620656
+away_rolling_5_efg,0.04426852586977518
+home_rolling_10_win,0.04187164914394045
+interaction_win_ratio,0.0401949106533355
+home_sos_10,0.034321452023357325
+away_sos_10,0.03431612166851605
+away_rolling_10_points,0.03321536828114402
+home_rolling_5_efg,0.03136714517228161
+interaction_win_product,0.030621941966508515
+away_rolling_5_points,0.02963665565739609
+home_rolling_10_efg,0.029356406806343844
+away_rolling_10_opp_points,0.0288796220429368
+interaction_home_momentum,0.027791394293299708
+home_win_streak,0.027632668733405582
+away_rolling_5_opp_points,0.027049433202806273
+away_net_rating_trend,0.026696986894291057
+home_rolling_10_points,0.02588251238231278
+home_rolling_5_opp_points,0.025868921377097683
+home_net_rating_trend,0.025114323256061055
+interaction_sos_diff,0.02507088065330736
+interaction_streak_diff,0.02405322011013049
+home_rolling_10_opp_points,0.02386958123473998
+home_rolling_5_points,0.023537870108117198
+home_rolling_5_win,0.02333080814303254
+interaction_away_momentum,0.022970922488701938
+rest_diff,0.017924764226354122
+away_rest_days,0.017645577639627867
+away_win_streak,0.017567105252154894
+home_rest_days,0.016593740291013934
+away_rolling_10_win,0.013080531037792817
+away_team_Charlotte Hornets,0.011361860982047242
+away_rolling_5_win,0.011054047715634977
+home_is_back_to_back,0.009645756026938812
+away_is_back_to_back,0.008666996572865166
+away_team_Brooklyn Nets,0.004633189487124498
+home_team_Washington Wizards,0.004485657326065629
+home_team_Boston Celtics,0.003817716759734067
+away_team_CHA,0.003399135208098186
+away_team_Phoenix Suns,0.0031667782707739964
+odds_away,0.0031121175474485567
+home_team_Oklahoma City Thunder,0.002993965676916382
+home_team_Phoenix Suns,0.002907514450622186
+away_team_Atlanta Hawks,0.0027475403312871064
+home_team_Memphis Grizzlies,0.002626851797316947
+odds_home,0.00260436891374874
+home_team_Houston Rockets,0.0023060077753482427
+home_team_Indiana Pacers,0.0022494424971207048
+home_team_Milwaukee Bucks,0.002186530598014722
+home_team_Golden State Warriors,0.002095861889833838
+away_team_Washington Wizards,0.0018198910574796876
+away_team_New Orleans Pelicans,0.0018119736948696101
+away_team_Utah Jazz,0.0017872245385500618
+home_team_Cleveland Cavaliers,0.0017846071966136348
+away_team_Indiana Pacers,0.0017239388534224436
+home_team_Charlotte Hornets,0.0016242281933539374
+away_team_Orlando Magic,0.0016198985369382797
+home_team_Los Angeles Lakers,0.0016059672060136677
+home_team_Toronto Raptors,0.001592777055627794
+away_team_Dallas Mavericks,0.0015676297888282532
+away_team_Miami Heat,0.001566614683722581
+away_team_Denver Nuggets,0.0015593139902649906
+home_team_Orlando Magic,0.0015526486830923008
+away_team_Boston Celtics,0.0015383522086098117
+away_team_Portland Trail Blazers,0.0015356686343684514
+away_team_Oklahoma City Thunder,0.0015339632270646728
+away_team_Golden State Warriors,0.0015146291406679174
+home_team_Philadelphia 76ers,0.0014429121678835202
+home_team_Minnesota Timberwolves,0.0013928314346641582
+home_team_Dallas Mavericks,0.0013650299280026808
+away_team_Philadelphia 76ers,0.0013471865967279396
+home_team_Atlanta Hawks,0.0013434271992234122
+away_team_Memphis Grizzlies,0.0013299489797014882
+away_team_San Antonio Spurs,0.0013163603780422548
+home_team_Detroit Pistons,0.0013037240094274838
+away_team_Toronto Raptors,0.0012371663104681085
+away_team_Milwaukee Bucks,0.0012308703463896713
+away_team_LA Clippers,0.0012195281329274428
+home_team_Miami Heat,0.0012093935765832315
+away_team_Sacramento Kings,0.001207593707795237
+home_team_Chicago Bulls,0.0011958119531437815
+away_team_Minnesota Timberwolves,0.0011643740503589834
+home_team_New Orleans Pelicans,0.0011243604740700996
+home_team_Denver Nuggets,0.0010894329084549326
+home_team_Brooklyn Nets,0.0010626132767519903
+home_team_San Antonio Spurs,0.001028449612805861
+away_team_Houston Rockets,0.0010262514204922774
+home_team_Sacramento Kings,0.00099956935060656
+away_team_Cleveland Cavaliers,0.0009961783777474116
+away_team_New York Knicks,0.0009806671328613018
+home_team_Portland Trail Blazers,0.0009439861144174124
+away_team_Los Angeles Lakers,0.000882069935998007
+home_team_LA Clippers,0.0008807320881706086
+home_team_New York Knicks,0.0008750692552184495
+away_team_BKN,0.0008714039921016595
+home_team_Utah Jazz,0.0008313407190292234
+away_team_Detroit Pistons,0.0007886115179077595
+away_team_Chicago Bulls,0.0006691385765520276
+away_team_PHX,0.000533099216035119
+home_team_CHA,0.0004540240856261731
+home_team_PHX,0.0003743470849952749
+home_team_BKN,0.0001705184664013265

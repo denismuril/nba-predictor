@@ -1,0 +1,58 @@
+{
+  "overall_accuracy": 0.7628361858190709,
+  "by_favorite": {
+    "favorite_acc": 0.8215613382899628,
+    "underdog_acc": 0.65
+  },
+  "by_spread": {
+    "0-3": 0.5316455696202531,
+    "3-6": 0.5906432748538012,
+    "6-10": 0.6992481203007519,
+    "10+": 0.9719101123595506
+  },
+  "by_total": {
+    "Low (<215)": 0.7788461538461539,
+    "Medium (215-230)": 0.7532467532467533,
+    "High (>230)": 0.7598944591029023
+  },
+  "by_rest": {
+    "Away rested": 0.8247422680412371,
+    "Both B2B": 0.7368421052631579,
+    "Home rested": 0.7684210526315789,
+    "Neither": 0.7545454545454545
+  },
+  "worst_teams": {
+    "worst_home": {
+      "accuracy": {
+        "Denver Nuggets": 0.35,
+        "Cleveland Cavaliers": 0.4545,
+        "Milwaukee Bucks": 0.6,
+        "Boston Celtics": 0.625,
+        "Miami Heat": 0.6364
+      },
+      "games": {
+        "Denver Nuggets": 20,
+        "Cleveland Cavaliers": 22,
+        "Milwaukee Bucks": 20,
+        "Boston Celtics": 24,
+        "Miami Heat": 22
+      }
+    },
+    "worst_away": {
+      "accuracy": {
+        "Indiana Pacers": 0.48,
+        "New York Knicks": 0.5,
+        "Cleveland Cavaliers": 0.5909,
+        "Boston Celtics": 0.65,
+        "Orlando Magic": 0.6667
+      },
+      "games": {
+        "Indiana Pacers": 25,
+        "New York Knicks": 24,
+        "Cleveland Cavaliers": 22,
+        "Boston Celtics": 20,
+        "Orlando Magic": 21
+      }
+    }
+  }
+}

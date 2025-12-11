@@ -1,0 +1,15 @@
+{
+  "timestamp": "2025-11-27 20:40:19",
+  "total_time_seconds": 604.879611492157,
+  "scripts": {
+    "walk_forward": {
+      "success": false,
+      "time": 600
+    },
+    "error_analysis": {
+      "success": false,
+      "time": 1.5504026412963867
+    }
+  },
+  "all_successful": false
+}

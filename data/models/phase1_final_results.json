@@ -1,0 +1,12 @@
+{
+  "timestamp": "2025-11-28 09:52:49",
+  "phase": "Phase 1 Complete",
+  "baseline_accuracy": 0.7455,
+  "with_advanced_features": 0.7114,
+  "with_feature_selection": 0.7275,
+  "final_optimized": 0.6346555323590815,
+  "improvement_vs_baseline": -11.08444676409186,
+  "features_count": 124,
+  "hyperparameters_optimized": true,
+  "training_time_seconds": 54.31746292114258
+}

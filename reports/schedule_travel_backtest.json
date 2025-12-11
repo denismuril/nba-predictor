@@ -1,0 +1,25 @@
+{
+  "baseline": 0.504,
+  "schedule_only": 0.5146666666666667,
+  "travel_only": 0.5253333333333333,
+  "combined": 0.5173333333333333,
+  "schedule_improvement_pct": 1.0666666666666713,
+  "travel_improvement_pct": 2.1333333333333315,
+  "combined_improvement_pct": 1.3333333333333308,
+  "schedule_features": [
+    "back_to_back_home",
+    "back_to_back_away",
+    "games_last_4d_home",
+    "games_last_4d_away",
+    "rest_days_home",
+    "rest_days_away",
+    "schedule_density_home",
+    "schedule_density_away",
+    "schedule_density_gap"
+  ],
+  "travel_features": [
+    "travel_fatigue_home",
+    "travel_fatigue_away",
+    "travel_fatigue_net"
+  ]
+}

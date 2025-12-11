@@ -1,0 +1,24 @@
+{
+  "baseline_accuracy": 0.49066666666666664,
+  "enhanced_accuracy": 0.52,
+  "improvement_pct": 2.933333333333338,
+  "fold_scores": {
+    "baseline": [
+      0.456,
+      0.488,
+      0.528
+    ],
+    "enhanced": [
+      0.488,
+      0.528,
+      0.544
+    ]
+  },
+  "injury_features": [
+    "injury_impact_home",
+    "injury_impact_away",
+    "injury_impact_net"
+  ],
+  "n_features_baseline": 33,
+  "n_features_enhanced": 36
+}

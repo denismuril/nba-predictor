@@ -1,0 +1,26 @@
+{
+  "baseline": 0.5253333333333333,
+  "fastbreak_only": 0.49066666666666664,
+  "paint_only": 0.49066666666666664,
+  "second_chance_only": 0.49066666666666664,
+  "combined": 0.512,
+  "fastbreak_improvement_pct": -3.4666666666666677,
+  "paint_improvement_pct": -3.4666666666666677,
+  "second_chance_improvement_pct": -3.4666666666666677,
+  "combined_improvement_pct": -1.3333333333333308,
+  "fastbreak_features": [
+    "fastbreak_home",
+    "fastbreak_away",
+    "fastbreak_diff_norm"
+  ],
+  "paint_features": [
+    "paint_home",
+    "paint_away",
+    "paint_diff_norm"
+  ],
+  "second_chance_features": [
+    "second_chance_home",
+    "second_chance_away",
+    "second_chance_diff_norm"
+  ]
+}

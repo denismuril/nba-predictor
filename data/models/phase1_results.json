@@ -1,0 +1,16 @@
+{
+  "moneyline": {
+    "accuracy": 0.7387387387387387,
+    "status": "success"
+  },
+  "spread": {
+    "mae": 7.801806304863508,
+    "rmse": 12.409504397244246,
+    "status": "success"
+  },
+  "totals": {
+    "mae": 11.943928016718559,
+    "rmse": 16.536928481353815,
+    "status": "success"
+  }
+}

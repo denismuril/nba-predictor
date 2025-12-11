@@ -1,0 +1,89 @@
+# Core ML & Data Science
+numpy>=1.24.0
+pandas>=2.0.0
+scikit-learn>=1.3.0
+scipy>=1.10.0
+joblib>=1.3.0
+
+# Deep Learning (optional)
+# tensorflow>=2.13.0
+# torch>=2.0.0
+
+# XGBoost for spread model
+xgboost>=1.7.0
+
+# NBA Data
+nba-api>=1.2.0
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+selenium>=4.0.0
+
+# Async & Web Scraping
+aiohttp>=3.8.0
+nest-asyncio>=1.5.0
+
+# Spreadsheet support
+openpyxl>=3.1.0
+xlrd>=2.0.0
+
+# Web Interface
+streamlit>=1.28.0
+
+# Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.17.0
+
+# Database
+sqlalchemy>=2.0.0
+
+# Configuration
+python-dotenv>=1.0.0
+
+# Utilities
+python-dateutil>=2.8.0
+pytz>=2023.3
+tqdm>=4.66.0
+
+# Kelly Criterion & Stats
+statsmodels>=0.14.0
+
+# Calendar calculations
+holidays>=0.35
+
+# Optimization (for hyperparameter tuning)
+optuna>=3.4.0
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
+# Code Quality
+pylint>=2.17.0
+black>=23.7.0
+flake8>=6.1.0
+
+# Type hints
+mypy>=1.5.0
+
+# Documentation
+sphinx>=7.1.0
+
+# Monitoring
+psutil>=5.9.0
+
+# API retry logic
+tenacity>=8.2.0
+
+# Logging
+colorlog>=6.7.0
+
+# Production server (optional)
+gunicorn>=21.2.0
+
+# Rate limiting
+ratelimit>=2.2.0
+
+# Timezone
+tzdata>=2023.3

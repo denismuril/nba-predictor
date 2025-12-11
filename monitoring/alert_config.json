@@ -1,0 +1,11 @@
+{
+  "thresholds": {
+    "ece_max": 0.08,
+    "brier_max": 0.3,
+    "accuracy_min": 0.52,
+    "predictions_min": 5,
+    "model_age_days_max": 14
+  },
+  "alert_cooldown_hours": 24,
+  "enabled": true
+}

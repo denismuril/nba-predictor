@@ -1,0 +1,53 @@
+{
+  "period": "2025-10-27 to 2025-11-26",
+  "accuracy": 0.45454545454545453,
+  "log_loss": 0.757135030168955,
+  "worst_home_teams": {
+    "mean": {
+      "Atlanta Hawks": 0.0,
+      "Boston Celtics": 0.0,
+      "Miami Heat": 0.0,
+      "Golden State Warriors": 0.0,
+      "New York Knicks": 0.0
+    },
+    "count": {
+      "Atlanta Hawks": 1,
+      "Boston Celtics": 4,
+      "Miami Heat": 3,
+      "Golden State Warriors": 1,
+      "New York Knicks": 1
+    }
+  },
+  "worst_away_teams": {
+    "mean": {
+      "Charlotte Hornets": 0.0,
+      "Dallas Mavericks": 0.0,
+      "Indiana Pacers": 0.0,
+      "Golden State Warriors": 0.0,
+      "Milwaukee Bucks": 0.0
+    },
+    "count": {
+      "Charlotte Hornets": 2,
+      "Dallas Mavericks": 1,
+      "Indiana Pacers": 2,
+      "Golden State Warriors": 1,
+      "Milwaukee Bucks": 1
+    }
+  },
+  "confidence_breakdown": {
+    "mean": {
+      "0-20%": 0.47540983606557374,
+      "20-40%": NaN,
+      "40-60%": 0.3333333333333333,
+      "60-80%": 0.0,
+      "80-100%": NaN
+    },
+    "count": {
+      "0-20%": 61,
+      "20-40%": 0,
+      "40-60%": 3,
+      "60-80%": 2,
+      "80-100%": 0
+    }
+  }
+}

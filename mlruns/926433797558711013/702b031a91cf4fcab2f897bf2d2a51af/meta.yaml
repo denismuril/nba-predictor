@@ -1,0 +1,15 @@
+artifact_uri: file:///home/denis/nba-predictor/mlruns/926433797558711013/702b031a91cf4fcab2f897bf2d2a51af/artifacts
+end_time: 1765112356565
+entry_point_name: ''
+experiment_id: '926433797558711013'
+lifecycle_stage: active
+run_id: 702b031a91cf4fcab2f897bf2d2a51af
+run_name: Prop_PTS
+run_uuid: 702b031a91cf4fcab2f897bf2d2a51af
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765112338934
+status: 3
+tags: []
+user_id: denis

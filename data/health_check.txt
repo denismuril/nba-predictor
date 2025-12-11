@@ -1,0 +1,10 @@
+{
+  "timestamp": "2025-12-11T10:19:34.135818",
+  "unix_time": 1765459174.1358206,
+  "status": "ALIVE",
+  "version": "v20.7",
+  "jobs_status": {
+    "sniper_last_run": null,
+    "health_last_run": null
+  }
+}

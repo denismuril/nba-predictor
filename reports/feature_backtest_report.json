@@ -1,0 +1,244 @@
+{
+  "baseline": {
+    "accuracy": 0.58,
+    "auc": 0.5334224598930482,
+    "n_features": 29
+  },
+  "full": {
+    "accuracy": 0.81,
+    "auc": 0.8422459893048129,
+    "n_features": 46
+  },
+  "improvement": {
+    "accuracy_delta": 23.00000000000001,
+    "auc_delta": 30.88235294117647
+  },
+  "feature_importance": [
+    {
+      "feature": "ts_pct_differential",
+      "importance": 0.36454646747548053
+    },
+    {
+      "feature": "pace_differential",
+      "importance": 0.03940718340501317
+    },
+    {
+      "feature": "home_fga",
+      "importance": 0.03705180283527181
+    },
+    {
+      "feature": "away_fga",
+      "importance": 0.03235251942189961
+    },
+    {
+      "feature": "home_ast",
+      "importance": 0.029996539242898357
+    },
+    {
+      "feature": "away_drb",
+      "importance": 0.02503759924455462
+    },
+    {
+      "feature": "home_fg3a",
+      "importance": 0.024757257846279194
+    },
+    {
+      "feature": "away_ast",
+      "importance": 0.02340572464451445
+    },
+    {
+      "feature": "ast_tov_ratio_gap",
+      "importance": 0.023332231972166016
+    },
+    {
+      "feature": "home_3pt_dependency",
+      "importance": 0.023057295346985637
+    },
+    {
+      "feature": "tov_pressure_home",
+      "importance": 0.021467341394575276
+    },
+    {
+      "feature": "home_tov",
+      "importance": 0.021132277207593433
+    },
+    {
+      "feature": "pace_average",
+      "importance": 0.02089355631551702
+    },
+    {
+      "feature": "home_drb",
+      "importance": 0.020410230967882016
+    },
+    {
+      "feature": "away_fg3a",
+      "importance": 0.020381017370903122
+    },
+    {
+      "feature": "tov_pressure_net",
+      "importance": 0.02003759262565065
+    },
+    {
+      "feature": "away_tov",
+      "importance": 0.020029449297940836
+    },
+    {
+      "feature": "orb_edge",
+      "importance": 0.019712720962373063
+    },
+    {
+      "feature": "playoff_desperation_gap",
+      "importance": 0.019617789210486316
+    },
+    {
+      "feature": "away_orb",
+      "importance": 0.019404819728231992
+    },
+    {
+      "feature": "drb_edge",
+      "importance": 0.01939202341871541
+    },
+    {
+      "feature": "away_3pt_dependency",
+      "importance": 0.018577187733510057
+    },
+    {
+      "feature": "three_pt_matchup_gap",
+      "importance": 0.01840579231897137
+    },
+    {
+      "feature": "tov_pressure_away",
+      "importance": 0.01807557267186272
+    },
+    {
+      "feature": "home_orb",
+      "importance": 0.016163750704823655
+    },
+    {
+      "feature": "total_reb_edge",
+      "importance": 0.015373118147197863
+    },
+    {
+      "feature": "clutch_edge",
+      "importance": 0.014767175831157962
+    },
+    {
+      "feature": "home_wins",
+      "importance": 0.013932685920523775
+    },
+    {
+      "feature": "away_wins",
+      "importance": 0.013843966382423514
+    },
+    {
+      "feature": "playoff_desperation_away",
+      "importance": 0.013597029533471854
+    },
+    {
+      "feature": "playoff_desperation_home",
+      "importance": 0.011840280821124725
+    },
+    {
+      "feature": "def_matchup_home",
+      "importance": 0.0
+    },
+    {
+      "feature": "def_matchup_away",
+      "importance": 0.0
+    },
+    {
+      "feature": "def_matchup_net",
+      "importance": 0.0
+    },
+    {
+      "feature": "travel_fatigue_home",
+      "importance": 0.0
+    },
+    {
+      "feature": "schedule_density_home",
+      "importance": 0.0
+    },
+    {
+      "feature": "schedule_density_away",
+      "importance": 0.0
+    },
+    {
+      "feature": "travel_fatigue_away",
+      "importance": 0.0
+    },
+    {
+      "feature": "schedule_density_gap",
+      "importance": 0.0
+    },
+    {
+      "feature": "travel_fatigue_net",
+      "importance": 0.0
+    },
+    {
+      "feature": "injury_impact_away",
+      "importance": 0.0
+    },
+    {
+      "feature": "injury_impact_home",
+      "importance": 0.0
+    },
+    {
+      "feature": "injury_impact_net",
+      "importance": 0.0
+    },
+    {
+      "feature": "second_chance_pts_rate",
+      "importance": 0.0
+    },
+    {
+      "feature": "fast_break_pts_rate",
+      "importance": 0.0
+    },
+    {
+      "feature": "paint_pts_differential",
+      "importance": 0.0
+    }
+  ],
+  "top_domain_features": [
+    {
+      "feature": "ts_pct_differential",
+      "importance": 0.36454646747548053
+    },
+    {
+      "feature": "pace_differential",
+      "importance": 0.03940718340501317
+    },
+    {
+      "feature": "ast_tov_ratio_gap",
+      "importance": 0.023332231972166016
+    },
+    {
+      "feature": "home_3pt_dependency",
+      "importance": 0.023057295346985637
+    },
+    {
+      "feature": "tov_pressure_home",
+      "importance": 0.021467341394575276
+    },
+    {
+      "feature": "pace_average",
+      "importance": 0.02089355631551702
+    },
+    {
+      "feature": "tov_pressure_net",
+      "importance": 0.02003759262565065
+    },
+    {
+      "feature": "playoff_desperation_gap",
+      "importance": 0.019617789210486316
+    },
+    {
+      "feature": "away_3pt_dependency",
+      "importance": 0.018577187733510057
+    },
+    {
+      "feature": "tov_pressure_away",
+      "importance": 0.01807557267186272
+    }
+  ]
+}

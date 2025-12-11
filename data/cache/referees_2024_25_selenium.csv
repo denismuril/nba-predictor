@@ -1,0 +1,1358 @@
+date,home_team,away_team,referee_1,referee_2,referee_3,referees_csv
+2024-10-22,LAL,MIN,Nick Buchert,J.T. Orr,James Williams,"Nick Buchert,J.T. Orr,James Williams"
+2024-10-22,BOS,NYK,Mark Lindsay,Brandon Schwab,Zach Zarba,"Mark Lindsay,Brandon Schwab,Zach Zarba"
+2024-10-23,DET,IND,Brent Barnaky,Tony Brothers,Tyler Ricks,"Brent Barnaky,Tony Brothers,Tyler Ricks"
+2024-10-23,ATL,BRK,Sean Corbin,David Guthrie,Andy Nagy,"Sean Corbin,David Guthrie,Andy Nagy"
+2024-10-23,GSW,POR,,,,
+2024-10-23,PHO,LAC,,,,
+2024-10-23,UTA,MEM,John Conley,Kevin Cutler,James Williams,"John Conley,Kevin Cutler,James Williams"
+2024-10-23,PHI,MIL,Brian Forte,Scott Foster,Marat Kogut,"Brian Forte,Scott Foster,Marat Kogut"
+2024-10-23,CHO,HOU,,,,
+2024-10-23,TOR,CLE,Marc Davis,J.D. Ralls,Sean Wright,"Marc Davis,J.D. Ralls,Sean Wright"
+2024-10-23,ORL,MIA,,,,
+2024-10-23,ATL,BRK,Sean Corbin,David Guthrie,Andy Nagy,"Sean Corbin,David Guthrie,Andy Nagy"
+2024-10-23,NOP,CHI,Nate Green,Bill Kennedy,Gediminas Petraitis,"Nate Green,Bill Kennedy,Gediminas Petraitis"
+2024-10-24,DEN,OKC,J.T. Orr,Danielle Scott,Kevin Scott,"J.T. Orr,Danielle Scott,Kevin Scott"
+2024-10-24,SAS,DAL,,,,
+2024-10-24,MIN,SAC,,,,
+2024-10-24,BOS,WAS,,,,
+2024-10-25,HOU,MEM,Sean Corbin,Nate Green,David Guthrie,"Sean Corbin,Nate Green,David Guthrie"
+2024-10-25,PHI,TOR,,,,
+2024-10-25,NYK,IND,John Butler,J.B. DeRosa,Bill Kennedy,"John Butler,J.B. DeRosa,Bill Kennedy"
+2024-10-25,NOP,POR,,,,
+2024-10-25,CLE,DET,Che Flores,Ed Malloy,Dedric Taylor,"Che Flores,Ed Malloy,Dedric Taylor"
+2024-10-25,LAL,PHO,Derrick Collins,Jacyn Goble,Courtney Kirkland,"Derrick Collins,Jacyn Goble,Courtney Kirkland"
+2024-10-25,ORL,BRK,Mitchell Ervin,Gediminas Petraitis,Jonathan Sterling,"Mitchell Ervin,Gediminas Petraitis,Jonathan Sterling"
+2024-10-25,ATL,CHO,Mousa Dagher,Brian Forte,Zach Zarba,"Mousa Dagher,Brian Forte,Zach Zarba"
+2024-10-25,UTA,GSW,John Goble,Ashley Moyer-Gleich,Tom Washington,"John Goble,Ashley Moyer-Gleich,Tom Washington"
+2024-10-25,MIL,CHI,Marc Davis,Tre Maddox,J.D. Ralls,"Marc Davis,Tre Maddox,J.D. Ralls"
+2024-10-25,ATL,CHO,Mousa Dagher,Brian Forte,Zach Zarba,"Mousa Dagher,Brian Forte,Zach Zarba"
+2024-10-26,DET,BOS,Pat Fraher,Simone Jelks,Rodney Mott,"Pat Fraher,Simone Jelks,Rodney Mott"
+2024-10-26,CLE,WAS,,,,
+2024-10-26,MEM,ORL,James Capers Jr.,Robert Hussey,Natalie Sago,"James Capers Jr.,Robert Hussey,Natalie Sago"
+2024-10-26,CHI,OKC,Intae Hwang,Andy Nagy,Josh Tiven,"Intae Hwang,Andy Nagy,Josh Tiven"
+2024-10-26,MIN,TOR,Curtis Blair,Marat Kogut,Danielle Scott,"Curtis Blair,Marat Kogut,Danielle Scott"
+2024-10-26,DAL,PHO,,,,
+2024-10-26,HOU,SAS,,,,
+2024-10-26,DEN,LAC,Agon Abazi,Ben Taylor,Justin Van Duyne,"Agon Abazi,Ben Taylor,Justin Van Duyne"
+2024-10-26,MIA,CHO,,,,
+2024-10-26,SAC,LAL,,,,
+2024-10-27,POR,NOP,John Goble,Ashley Moyer-Gleich,Tom Washington,"John Goble,Ashley Moyer-Gleich,Tom Washington"
+2024-10-27,ATL,OKC,,,,
+2024-10-27,PHI,IND,,,,
+2024-10-27,GSW,LAC,Jacyn Goble,Courtney Kirkland,Brandon Schwab,"Jacyn Goble,Courtney Kirkland,Brandon Schwab"
+2024-10-27,OKC,ATL,Che Flores,Ed Malloy,Dedric Taylor,"Che Flores,Ed Malloy,Dedric Taylor"
+2024-10-27,MIL,BRK,,,,
+2024-10-28,MEM,CHI,Brent Barnaky,Simone Jelks,Sean Wright,"Brent Barnaky,Simone Jelks,Sean Wright"
+2024-10-28,MIA,DET,Kevin Cutler,Marat Kogut,Gediminas Petraitis,"Kevin Cutler,Marat Kogut,Gediminas Petraitis"
+2024-10-28,NYK,CLE,Sean Corbin,Robert Hussey,Rodney Mott,"Sean Corbin,Robert Hussey,Rodney Mott"
+2024-10-28,DEN,TOR,,,,
+2024-10-28,ATL,WAS,Mitchell Ervin,Intae Hwang,Josh Tiven,"Mitchell Ervin,Intae Hwang,Josh Tiven"
+2024-10-28,IND,ORL,,,,
+2024-10-28,PHO,LAL,Eric Dalen,Michael Smith,Ben Taylor,"Eric Dalen,Michael Smith,Ben Taylor"
+2024-10-28,SAC,POR,Jacyn Goble,Mark Lindsay,Jenna Schroeder,"Jacyn Goble,Mark Lindsay,Jenna Schroeder"
+2024-10-28,HOU,SAS,,,,
+2024-10-28,BOS,MIL,Tony Brothers,J.B. DeRosa,C.J. Washington,"Tony Brothers,J.B. DeRosa,C.J. Washington"
+2024-10-28,ATL,WAS,Mitchell Ervin,Intae Hwang,Josh Tiven,"Mitchell Ervin,Intae Hwang,Josh Tiven"
+2024-10-28,DAL,UTA,Marc Davis,Karl Lane,Brett Nansel,"Marc Davis,Karl Lane,Brett Nansel"
+2024-10-29,NOP,GSW,,,,
+2024-10-29,SAC,UTA,,,,
+2024-10-29,MIN,DAL,Derrick Collins,Ashley Moyer-Gleich,Kevin Scott,"Derrick Collins,Ashley Moyer-Gleich,Kevin Scott"
+2024-10-29,BRK,DEN,Robert Hussey,Bill Kennedy,Scott Twardoski,"Robert Hussey,Bill Kennedy,Scott Twardoski"
+2024-10-30,WAS,ATL,Simone Jelks,Gediminas Petraitis,Sean Wright,"Simone Jelks,Gediminas Petraitis,Sean Wright"
+2024-10-30,CLE,LAL,James Capers Jr.,Sha'Rae Mitchell,C.J. Washington,"James Capers Jr.,Sha'Rae Mitchell,C.J. Washington"
+2024-10-30,IND,BOS,Kevin Cutler,Ed Malloy,Matt Myers,"Kevin Cutler,Ed Malloy,Matt Myers"
+2024-10-30,DET,PHI,,,,
+2024-10-30,WAS,ATL,Simone Jelks,Gediminas Petraitis,Sean Wright,"Simone Jelks,Gediminas Petraitis,Sean Wright"
+2024-10-30,TOR,CHO,,,,
+2024-10-30,ORL,CHI,,,,
+2024-10-30,MEM,BRK,Brian Forte,Brett Nansel,Aaron Smith,"Brian Forte,Brett Nansel,Aaron Smith"
+2024-10-30,OKC,SAS,Marc Davis,Jacyn Goble,Tom Washington,"Marc Davis,Jacyn Goble,Tom Washington"
+2024-10-30,NOP,GSW,,,,
+2024-10-30,LAC,POR,Curtis Blair,Eric Dalen,Michael Smith,"Curtis Blair,Eric Dalen,Michael Smith"
+2024-10-30,MIA,NYK,Scott Foster,Pat Fraher,Tyler Ricks,"Scott Foster,Pat Fraher,Tyler Ricks"
+2024-10-31,LAC,PHO,Ray Acosta,Matt Kallio,Mark Lindsay,"Ray Acosta,Matt Kallio,Mark Lindsay"
+2024-10-31,MEM,MIL,Sean Corbin,John Goble,Danielle Scott,"Sean Corbin,John Goble,Danielle Scott"
+2024-10-31,DAL,HOU,Robert Hussey,Bill Kennedy,Marat Kogut,"Robert Hussey,Bill Kennedy,Marat Kogut"
+2024-10-31,SAS,UTA,,,,
+2024-11-01,OKC,POR,,,,
+2024-11-01,ATL,SAC,J.B. DeRosa,Scott Foster,Tyler Ricks,"J.B. DeRosa,Scott Foster,Tyler Ricks"
+2024-11-01,MIN,DEN,Nick Buchert,Marc Davis,Brett Nansel,"Nick Buchert,Marc Davis,Brett Nansel"
+2024-11-01,NOP,IND,Eric Dalen,Evan Scott,Zach Zarba,"Eric Dalen,Evan Scott,Zach Zarba"
+2024-11-01,NYK,DET,,,,
+2024-11-01,BRK,CHI,Jenna Reneau,Josh Tiven,Justin Van Duyne,"Jenna Reneau,Josh Tiven,Justin Van Duyne"
+2024-11-01,SAC,ATL,,,,
+2024-11-01,ORL,CLE,,,,
+2024-11-01,BOS,CHO,,,,
+2024-11-01,LAL,TOR,,,,
+2024-11-02,UTA,DEN,,,,
+2024-11-02,CLE,MIL,,,,
+2024-11-02,GSW,HOU,,,,
+2024-11-02,TOR,SAC,Che Flores,Brian Forte,Justin Van Duyne,"Che Flores,Brian Forte,Justin Van Duyne"
+2024-11-02,MIA,WAS,,,,
+2024-11-02,PHO,POR,Brandon Adair,James Capers Jr.,Mitchell Ervin,"Brandon Adair,James Capers Jr.,Mitchell Ervin"
+2024-11-02,MIN,SAS,,,,
+2024-11-02,PHI,MEM,Derek Richardson,Josh Tiven,Scott Twardoski,"Derek Richardson,Josh Tiven,Scott Twardoski"
+2024-11-02,BOS,CHO,,,,
+2024-11-02,LAC,OKC,Agon Abazi,Kevin Cutler,Ed Malloy,"Agon Abazi,Kevin Cutler,Ed Malloy"
+2024-11-03,NOP,ATL,Tyler Ford,Suyash Mehta,Phenizee Ransom,"Tyler Ford,Suyash Mehta,Phenizee Ransom"
+2024-11-03,DET,BRK,,,,
+2024-11-03,DAL,ORL,Pat O'Connell,Aaron Smith,Ben Taylor,"Pat O'Connell,Aaron Smith,Ben Taylor"
+2024-11-03,NOP,ATL,Tyler Ford,Suyash Mehta,Phenizee Ransom,"Tyler Ford,Suyash Mehta,Phenizee Ransom"
+2024-11-04,ATL,BOS,Curtis Blair,Eric Dalen,Derek Richardson,"Curtis Blair,Eric Dalen,Derek Richardson"
+2024-11-04,LAC,SAS,James Capers Jr.,Sha'Rae Mitchell,Natalie Sago,"James Capers Jr.,Sha'Rae Mitchell,Natalie Sago"
+2024-11-04,PHI,PHO,,,,
+2024-11-04,DAL,IND,Ray Acosta,Matt Boland,Scott Foster,"Ray Acosta,Matt Boland,Scott Foster"
+2024-11-04,OKC,ORL,Bill Kennedy,Andy Nagy,Danielle Scott,"Bill Kennedy,Andy Nagy,Danielle Scott"
+2024-11-04,MIN,CHO,Courtney Kirkland,Gediminas Petraitis,Brandon Schwab,"Courtney Kirkland,Gediminas Petraitis,Brandon Schwab"
+2024-11-04,TOR,DEN,,,,
+2024-11-04,CHI,UTA,John Butler,Pat Fraher,Kevin Scott,"John Butler,Pat Fraher,Kevin Scott"
+2024-11-04,NYK,HOU,,,,
+2024-11-04,CLE,MIL,Nick Buchert,Marc Davis,Jason Goldenberg,"Nick Buchert,Marc Davis,Jason Goldenberg"
+2024-11-04,GSW,WAS,,,,
+2024-11-04,DET,LAL,Sean Corbin,Brian Forte,Jonathan Sterling,"Sean Corbin,Brian Forte,Jonathan Sterling"
+2024-11-04,POR,NOP,,,,
+2024-11-04,MEM,BRK,,,,
+2024-11-04,MIA,SAC,John Goble,Tyler Mirkovich,Scott Twardoski,"John Goble,Tyler Mirkovich,Scott Twardoski"
+2024-11-04,ATL,BOS,Curtis Blair,Eric Dalen,Derek Richardson,"Curtis Blair,Eric Dalen,Derek Richardson"
+2024-11-06,PHI,LAC,,,,
+2024-11-06,TOR,SAC,,,,
+2024-11-06,CHI,DAL,,,,
+2024-11-06,CLE,NOP,,,,
+2024-11-06,HOU,SAS,Bill Kennedy,Suyash Mehta,Rodney Mott,"Bill Kennedy,Suyash Mehta,Rodney Mott"
+2024-11-06,GSW,BOS,,,,
+2024-11-06,NYK,ATL,,,,
+2024-11-06,ORL,IND,,,,
+2024-11-06,ATL,NYK,J.T. Orr,Jenna Reneau,Ben Taylor,"J.T. Orr,Jenna Reneau,Ben Taylor"
+2024-11-06,CHO,DET,Derrick Collins,Tre Maddox,Aaron Smith,"Derrick Collins,Tre Maddox,Aaron Smith"
+2024-11-06,DEN,OKC,James Capers Jr.,J.B. DeRosa,Sha'Rae Mitchell,"James Capers Jr.,J.B. DeRosa,Sha'Rae Mitchell"
+2024-11-06,PHO,MIA,Scott Foster,Marat Kogut,Danielle Scott,"Scott Foster,Marat Kogut,Danielle Scott"
+2024-11-06,LAL,MEM,,,,
+2024-11-07,POR,SAS,,,,
+2024-11-07,CHI,MIN,Brandon Adair,Curtis Blair,Ashley Moyer-Gleich,"Brandon Adair,Curtis Blair,Ashley Moyer-Gleich"
+2024-11-07,UTA,MIL,,,,
+2024-11-08,LAC,SAC,,,,
+2024-11-08,WAS,MEM,,,,
+2024-11-08,POR,MIN,,,,
+2024-11-08,DEN,MIA,Brian Forte,Simone Jelks,Natalie Sago,"Brian Forte,Simone Jelks,Natalie Sago"
+2024-11-08,LAL,PHI,Che Flores,Marat Kogut,Zach Zarba,"Che Flores,Marat Kogut,Zach Zarba"
+2024-11-08,DET,ATL,James Capers Jr.,Nate Green,Ashley Moyer-Gleich,"James Capers Jr.,Nate Green,Ashley Moyer-Gleich"
+2024-11-08,HOU,OKC,,,,
+2024-11-08,ATL,DET,,,,
+2024-11-08,ORL,NOP,Ray Acosta,Derrick Collins,Pat Fraher,"Ray Acosta,Derrick Collins,Pat Fraher"
+2024-11-08,BOS,BRK,Mark Lindsay,J.T. Orr,Phenizee Ransom,"Mark Lindsay,J.T. Orr,Phenizee Ransom"
+2024-11-08,PHO,DAL,,,,
+2024-11-08,CLE,GSW,John Conley,Rodney Mott,Ben Taylor,"John Conley,Rodney Mott,Ben Taylor"
+2024-11-08,MIL,NYK,,,,
+2024-11-08,IND,CHO,,,,
+2024-11-09,SAS,UTA,Mitchell Ervin,Jason Goldenberg,Tom Washington,"Mitchell Ervin,Jason Goldenberg,Tom Washington"
+2024-11-09,ATL,CHI,Marc Davis,Andy Nagy,Brandon Schwab,"Marc Davis,Andy Nagy,Brandon Schwab"
+2024-11-09,CLE,BRK,Brandon Adair,Curtis Blair,Karl Lane,"Brandon Adair,Curtis Blair,Karl Lane"
+2024-11-09,ATL,CHI,Marc Davis,Andy Nagy,Brandon Schwab,"Marc Davis,Andy Nagy,Brandon Schwab"
+2024-11-09,LAC,TOR,Nick Buchert,Derek Richardson,Zach Zarba,"Nick Buchert,Derek Richardson,Zach Zarba"
+2024-11-10,IND,NYK,J.B. DeRosa,Nate Green,Rodney Mott,"J.B. DeRosa,Nate Green,Rodney Mott"
+2024-11-10,TOR,LAL,,,,
+2024-11-10,DET,HOU,John Conley,Ed Malloy,Phenizee Ransom,"John Conley,Ed Malloy,Phenizee Ransom"
+2024-11-10,MIL,BOS,Eric Dalen,Tyler Ford,Natalie Sago,"Eric Dalen,Tyler Ford,Natalie Sago"
+2024-11-10,ORL,WAS,Brent Barnaky,Matt Kallio,Gediminas Petraitis,"Brent Barnaky,Matt Kallio,Gediminas Petraitis"
+2024-11-10,POR,MEM,Scott Foster,Marat Kogut,Jonathan Sterling,"Scott Foster,Marat Kogut,Jonathan Sterling"
+2024-11-10,MIN,MIA,Kevin Cutler,Mousa Dagher,Mark Lindsay,"Kevin Cutler,Mousa Dagher,Mark Lindsay"
+2024-11-10,OKC,GSW,Pat Fraher,Intae Hwang,Justin Van Duyne,"Pat Fraher,Intae Hwang,Justin Van Duyne"
+2024-11-10,DEN,DAL,Tre Maddox,Brett Nansel,James Williams,"Tre Maddox,Brett Nansel,James Williams"
+2024-11-10,PHO,SAC,Nick Buchert,Che Flores,Bill Kennedy,"Nick Buchert,Che Flores,Bill Kennedy"
+2024-11-10,PHI,CHO,Courtney Kirkland,J.T. Orr,Evan Scott,"Courtney Kirkland,J.T. Orr,Evan Scott"
+2024-11-11,SAS,SAC,Brandon Adair,Ashley Moyer-Gleich,Zach Zarba,"Brandon Adair,Ashley Moyer-Gleich,Zach Zarba"
+2024-11-11,HOU,WAS,Brian Forte,Tyler Ricks,Justin Van Duyne,"Brian Forte,Tyler Ricks,Justin Van Duyne"
+2024-11-11,BRK,NOP,,,,
+2024-11-11,OKC,LAC,Curtis Blair,Jason Goldenberg,Aaron Smith,"Curtis Blair,Jason Goldenberg,Aaron Smith"
+2024-11-11,CLE,CHI,,,,
+2024-11-12,DAL,GSW,,,,
+2024-11-12,POR,MIN,Tony Brothers,John Butler,Derek Richardson,"Tony Brothers,John Butler,Derek Richardson"
+2024-11-12,UTA,PHO,John Conley,Kevin Cutler,Josh Tiven,"John Conley,Kevin Cutler,Josh Tiven"
+2024-11-12,NYK,PHI,,,,
+2024-11-12,TOR,MIL,,,,
+2024-11-12,MIA,DET,,,,
+2024-11-12,BOS,ATL,Ray Acosta,Derrick Collins,Courtney Kirkland,"Ray Acosta,Derrick Collins,Courtney Kirkland"
+2024-11-12,BOS,ATL,Ray Acosta,Derrick Collins,Courtney Kirkland,"Ray Acosta,Derrick Collins,Courtney Kirkland"
+2024-11-12,CHO,ORL,,,,
+2024-11-13,CLE,PHI,,,,
+2024-11-13,PHO,SAC,,,,
+2024-11-13,POR,MIN,Matt Kallio,Bill Kennedy,Andy Nagy,"Matt Kallio,Bill Kennedy,Andy Nagy"
+2024-11-13,SAS,WAS,Simone Jelks,Aaron Smith,Ben Taylor,"Simone Jelks,Aaron Smith,Ben Taylor"
+2024-11-13,LAL,MEM,Jason Goldenberg,Josh Tiven,Scott Twardoski,"Jason Goldenberg,Josh Tiven,Scott Twardoski"
+2024-11-13,LAC,HOU,,,,
+2024-11-13,OKC,NOP,Nick Buchert,James Capers Jr.,Michael Smith,"Nick Buchert,James Capers Jr.,Michael Smith"
+2024-11-13,NYK,CHI,Ray Acosta,Mark Lindsay,Suyash Mehta,"Ray Acosta,Mark Lindsay,Suyash Mehta"
+2024-11-13,BRK,BOS,Brent Barnaky,Marc Davis,J.D. Ralls,"Brent Barnaky,Marc Davis,J.D. Ralls"
+2024-11-13,IND,ORL,,,,
+2024-11-13,MIL,DET,Mitchell Ervin,Matt Myers,Gediminas Petraitis,"Mitchell Ervin,Matt Myers,Gediminas Petraitis"
+2024-11-14,DAL,UTA,,,,
+2024-11-15,IND,MIA,Brandon Adair,Brent Barnaky,James Williams,"Brandon Adair,Brent Barnaky,James Williams"
+2024-11-15,NYK,BRK,John Conley,Courtney Kirkland,Gediminas Petraitis,"John Conley,Courtney Kirkland,Gediminas Petraitis"
+2024-11-15,WAS,ATL,,,,
+2024-11-15,DET,TOR,,,,
+2024-11-15,PHI,ORL,,,,
+2024-11-15,ATL,WAS,John Goble,J.D. Ralls,C.J. Washington,"John Goble,J.D. Ralls,C.J. Washington"
+2024-11-15,PHO,OKC,,,,
+2024-11-15,MEM,GSW,,,,
+2024-11-15,NOP,DEN,Karl Lane,Jenna Schroeder,Ben Taylor,"Karl Lane,Jenna Schroeder,Ben Taylor"
+2024-11-15,LAC,HOU,,,,
+2024-11-15,LAL,SAS,,,,
+2024-11-15,CHI,CLE,,,,
+2024-11-15,MIN,SAC,,,,
+2024-11-16,UTA,SAC,,,,
+2024-11-16,DAL,SAS,Sean Corbin,Pat Fraher,Suyash Mehta,"Sean Corbin,Pat Fraher,Suyash Mehta"
+2024-11-16,LAL,NOP,,,,
+2024-11-16,BOS,TOR,Simone Jelks,Kevin Scott,Justin Van Duyne,"Simone Jelks,Kevin Scott,Justin Van Duyne"
+2024-11-16,CHO,MIL,Curtis Blair,Eric Dalen,Brandon Schwab,"Curtis Blair,Eric Dalen,Brandon Schwab"
+2024-11-17,CLE,CHO,Scott Foster,Tyler Ricks,Natalie Sago,"Scott Foster,Tyler Ricks,Natalie Sago"
+2024-11-17,CHI,HOU,Jacyn Goble,J.D. Ralls,Dedric Taylor,"Jacyn Goble,J.D. Ralls,Dedric Taylor"
+2024-11-17,OKC,DAL,Matt Kallio,Mark Lindsay,Tre Maddox,"Matt Kallio,Mark Lindsay,Tre Maddox"
+2024-11-17,MEM,DEN,Nick Buchert,John Conley,Mitchell Ervin,"Nick Buchert,John Conley,Mitchell Ervin"
+2024-11-17,WAS,DET,Phenizee Ransom,Evan Scott,Zach Zarba,"Phenizee Ransom,Evan Scott,Zach Zarba"
+2024-11-17,LAC,UTA,Tyler Ford,Intae Hwang,Aaron Smith,"Tyler Ford,Intae Hwang,Aaron Smith"
+2024-11-17,NYK,BRK,Tony Brothers,Nate Green,Marat Kogut,"Tony Brothers,Nate Green,Marat Kogut"
+2024-11-17,MIA,IND,,,,
+2024-11-17,POR,ATL,Brian Forte,Josh Tiven,Scott Twardoski,"Brian Forte,Josh Tiven,Scott Twardoski"
+2024-11-17,ATL,POR,,,,
+2024-11-17,MIN,PHO,Ray Acosta,Karl Lane,Michael Smith,"Ray Acosta,Karl Lane,Michael Smith"
+2024-11-18,ATL,SAC,,,,
+2024-11-18,HOU,MIL,,,,
+2024-11-18,IND,TOR,,,,
+2024-11-18,GSW,LAC,,,,
+2024-11-18,DET,CHI,Curtis Blair,Matt Boland,Justin Van Duyne,"Curtis Blair,Matt Boland,Justin Van Duyne"
+2024-11-18,SAC,ATL,Derrick Collins,Pat Fraher,Aaron Smith,"Derrick Collins,Pat Fraher,Aaron Smith"
+2024-11-18,WAS,NYK,,,,
+2024-11-18,MIA,PHI,Mitchell Ervin,Ed Malloy,Suyash Mehta,"Mitchell Ervin,Ed Malloy,Suyash Mehta"
+2024-11-18,PHO,ORL,John Butler,Sean Corbin,Tyler Ford,"John Butler,Sean Corbin,Tyler Ford"
+2024-11-19,CLE,BOS,,,,
+2024-11-19,LAL,UTA,Brent Barnaky,Pat Fraher,Brett Nansel,"Brent Barnaky,Pat Fraher,Brett Nansel"
+2024-11-19,OKC,SAS,,,,
+2024-11-19,MEM,DEN,Courtney Kirkland,Tre Maddox,C.J. Washington,"Courtney Kirkland,Tre Maddox,C.J. Washington"
+2024-11-19,CHO,BRK,,,,
+2024-11-19,DAL,NOP,Eric Dalen,J.B. DeRosa,Jacyn Goble,"Eric Dalen,J.B. DeRosa,Jacyn Goble"
+2024-11-20,ORL,LAC,,,,
+2024-11-20,GSW,ATL,Sean Corbin,Tyler Ford,Brett Nansel,"Sean Corbin,Tyler Ford,Brett Nansel"
+2024-11-20,PHO,NYK,Marc Davis,Phenizee Ransom,Aaron Smith,"Marc Davis,Phenizee Ransom,Aaron Smith"
+2024-11-20,OKC,POR,Derek Richardson,Natalie Sago,Ben Taylor,"Derek Richardson,Natalie Sago,Ben Taylor"
+2024-11-20,MEM,PHI,Scott Foster,J.T. Orr,Brandon Schwab,"Scott Foster,J.T. Orr,Brandon Schwab"
+2024-11-20,NOP,CLE,,,,
+2024-11-20,MIL,CHI,Ed Malloy,Andy Nagy,Jenna Schroeder,"Ed Malloy,Andy Nagy,Jenna Schroeder"
+2024-11-20,GSW,ATL,Sean Corbin,Tyler Ford,Brett Nansel,"Sean Corbin,Tyler Ford,Brett Nansel"
+2024-11-20,HOU,IND,Eric Dalen,Simone Jelks,Sean Wright,"Eric Dalen,Simone Jelks,Sean Wright"
+2024-11-21,MIN,TOR,,,,
+2024-11-21,DET,CHO,,,,
+2024-11-21,UTA,SAS,,,,
+2024-11-21,LAL,ORL,Matt Boland,J.B. DeRosa,Karl Lane,"Matt Boland,J.B. DeRosa,Karl Lane"
+2024-11-22,GSW,NOP,,,,
+2024-11-22,LAC,SAC,Sean Corbin,Karl Lane,Phenizee Ransom,"Sean Corbin,Karl Lane,Phenizee Ransom"
+2024-11-22,POR,HOU,,,,
+2024-11-22,DAL,DEN,,,,
+2024-11-22,IND,MIL,,,,
+2024-11-22,BOS,WAS,,,,
+2024-11-22,BRK,PHI,,,,
+2024-11-22,CHI,ATL,Robert Hussey,Bill Kennedy,J.T. Orr,"Robert Hussey,Bill Kennedy,J.T. Orr"
+2024-11-22,CHI,ATL,Robert Hussey,Bill Kennedy,J.T. Orr,"Robert Hussey,Bill Kennedy,J.T. Orr"
+2024-11-23,MIL,CHO,Ray Acosta,Che Flores,Zach Zarba,"Ray Acosta,Che Flores,Zach Zarba"
+2024-11-23,MEM,CHI,,,,
+2024-11-23,POR,HOU,,,,
+2024-11-23,NYK,UTA,,,,
+2024-11-23,DEN,LAL,,,,
+2024-11-23,GSW,SAS,,,,
+2024-11-23,DET,ORL,,,,
+2024-11-24,LAC,PHI,,,,
+2024-11-24,CLE,TOR,Brandon Adair,Mitchell Ervin,Josh Tiven,"Brandon Adair,Mitchell Ervin,Josh Tiven"
+2024-11-24,BRK,SAC,,,,
+2024-11-24,BOS,MIN,Nick Buchert,Bill Kennedy,Michael Smith,"Nick Buchert,Bill Kennedy,Michael Smith"
+2024-11-24,WAS,IND,,,,
+2024-11-24,DAL,MIA,,,,
+2024-11-25,DEN,NYK,Ray Acosta,John Goble,C.J. Washington,"Ray Acosta,John Goble,C.J. Washington"
+2024-11-25,CHO,ORL,John Butler,Nate Green,Kevin Scott,"John Butler,Nate Green,Kevin Scott"
+2024-11-25,POR,MEM,,,,
+2024-11-25,ATL,DAL,Biniam Maru,Aaron Smith,Sean Wright,"Biniam Maru,Aaron Smith,Sean Wright"
+2024-11-25,ATL,DAL,Biniam Maru,Aaron Smith,Sean Wright,"Biniam Maru,Aaron Smith,Sean Wright"
+2024-11-25,SAC,OKC,Curtis Blair,Mousa Dagher,J.B. DeRosa,"Curtis Blair,Mousa Dagher,J.B. DeRosa"
+2024-11-25,LAC,BOS,,,,
+2024-11-25,NOP,IND,,,,
+2024-11-25,TOR,DET,,,,
+2024-11-25,GSW,BRK,Mark Lindsay,J.T. Orr,Phenizee Ransom,"Mark Lindsay,J.T. Orr,Phenizee Ransom"
+2024-11-26,LAL,PHO,,,,
+2024-11-26,MIN,HOU,Robert Hussey,Marat Kogut,Josh Tiven,"Robert Hussey,Marat Kogut,Josh Tiven"
+2024-11-26,MIA,MIL,James Capers Jr.,Jason Goldenberg,Tom Washington,"James Capers Jr.,Jason Goldenberg,Tom Washington"
+2024-11-26,CHI,WAS,,,,
+2024-11-26,SAS,UTA,,,,
+2024-11-27,DEN,UTA,,,,
+2024-11-27,LAL,SAS,,,,
+2024-11-27,TOR,NOP,,,,
+2024-11-27,SAC,MIN,,,,
+2024-11-27,DET,MEM,,,,
+2024-11-27,WAS,LAC,Nick Buchert,Tre Maddox,Brett Nansel,"Nick Buchert,Tre Maddox,Brett Nansel"
+2024-11-27,DAL,NYK,Derrick Collins,Mitchell Ervin,Zach Zarba,"Derrick Collins,Mitchell Ervin,Zach Zarba"
+2024-11-27,CHI,ORL,,,,
+2024-11-27,GSW,OKC,Ray Acosta,C.J. Washington,James Williams,"Ray Acosta,C.J. Washington,James Williams"
+2024-11-27,BRK,PHO,,,,
+2024-11-27,CLE,ATL,John Butler,Nate Green,Kevin Scott,"John Butler,Nate Green,Kevin Scott"
+2024-11-27,PHI,HOU,Tyler Ford,Sha'Rae Mitchell,Andy Nagy,"Tyler Ford,Sha'Rae Mitchell,Andy Nagy"
+2024-11-27,CLE,ATL,John Butler,Nate Green,Kevin Scott,"John Butler,Nate Green,Kevin Scott"
+2024-11-27,POR,IND,,,,
+2024-11-27,CHO,MIA,Brent Barnaky,Bill Kennedy,Evan Scott,"Brent Barnaky,Bill Kennedy,Evan Scott"
+2024-11-29,BOS,CHI,,,,
+2024-11-29,MIA,TOR,Marat Kogut,Tre Maddox,Brandon Schwab,"Marat Kogut,Tre Maddox,Brandon Schwab"
+2024-11-29,MIN,LAC,Ed Malloy,J.T. Orr,Tom Washington,"Ed Malloy,J.T. Orr,Tom Washington"
+2024-11-29,MEM,NOP,Karl Lane,Jonathan Sterling,Zach Zarba,"Karl Lane,Jonathan Sterling,Zach Zarba"
+2024-11-29,CHO,NYK,Pat Fraher,Andy Nagy,Jenna Schroeder,"Pat Fraher,Andy Nagy,Jenna Schroeder"
+2024-11-29,CLE,ATL,,,,
+2024-11-29,DET,IND,,,,
+2024-11-29,ATL,CLE,Gediminas Petraitis,Michael Smith,Ben Taylor,"Gediminas Petraitis,Michael Smith,Ben Taylor"
+2024-11-29,SAC,POR,,,,
+2024-11-29,LAL,OKC,John Butler,Eric Dalen,John Goble,"John Butler,Eric Dalen,John Goble"
+2024-11-29,ORL,BRK,,,,
+2024-11-30,PHI,DET,,,,
+2024-11-30,ATL,CHO,,,,
+2024-11-30,UTA,DAL,Kevin Cutler,Bill Kennedy,Danielle Scott,"Kevin Cutler,Bill Kennedy,Danielle Scott"
+2024-11-30,CHO,ATL,Ray Acosta,Simone Jelks,Mark Lindsay,"Ray Acosta,Simone Jelks,Mark Lindsay"
+2024-11-30,PHO,GSW,Tony Brothers,Eric Dalen,Che Flores,"Tony Brothers,Eric Dalen,Che Flores"
+2024-11-30,WAS,MIL,,,,
+2024-12-01,NYK,NOP,James Capers Jr.,Pat O'Connell,Sean Wright,"James Capers Jr.,Pat O'Connell,Sean Wright"
+2024-12-01,IND,MEM,,,,
+2024-12-01,ORL,BRK,,,,
+2024-12-01,SAC,SAS,Tony Brothers,Jason Goldenberg,Matt Myers,"Tony Brothers,Jason Goldenberg,Matt Myers"
+2024-12-01,CLE,BOS,Derrick Collins,Jacyn Goble,Ed Malloy,"Derrick Collins,Jacyn Goble,Ed Malloy"
+2024-12-01,LAL,UTA,,,,
+2024-12-01,HOU,OKC,Ben Taylor,Dedric Taylor,C.J. Washington,"Ben Taylor,Dedric Taylor,C.J. Washington"
+2024-12-01,MIA,TOR,,,,
+2024-12-01,DEN,LAC,,,,
+2024-12-01,DAL,POR,,,,
+2024-12-02,ATL,NOP,Curtis Blair,Brett Nansel,Phenizee Ransom,"Curtis Blair,Brett Nansel,Phenizee Ransom"
+2024-12-02,BOS,MIA,Intae Hwang,Rodney Mott,Josh Tiven,"Intae Hwang,Rodney Mott,Josh Tiven"
+2024-12-02,MIN,LAL,Natalie Sago,Scott Twardoski,Zach Zarba,"Natalie Sago,Scott Twardoski,Zach Zarba"
+2024-12-02,ATL,NOP,Curtis Blair,Brett Nansel,Phenizee Ransom,"Curtis Blair,Brett Nansel,Phenizee Ransom"
+2024-12-02,CHI,BRK,Marc Davis,Simone Jelks,Karl Lane,"Marc Davis,Simone Jelks,Karl Lane"
+2024-12-03,PHI,CHO,,,,
+2024-12-03,SAC,HOU,John Goble,Marat Kogut,Jonathan Sterling,"John Goble,Marat Kogut,Jonathan Sterling"
+2024-12-03,POR,LAC,,,,
+2024-12-03,DEN,GSW,Tyler Ford,Matt Myers,Justin Van Duyne,"Tyler Ford,Matt Myers,Justin Van Duyne"
+2024-12-03,PHO,SAS,Nick Buchert,Courtney Kirkland,Brandon Schwab,"Nick Buchert,Courtney Kirkland,Brandon Schwab"
+2024-12-03,DET,MIL,Kevin Cutler,Danielle Scott,Kevin Scott,"Kevin Cutler,Danielle Scott,Kevin Scott"
+2024-12-03,ORL,NYK,,,,
+2024-12-03,IND,TOR,,,,
+2024-12-03,OKC,UTA,Derrick Collins,J.B. DeRosa,Mitchell Ervin,"Derrick Collins,J.B. DeRosa,Mitchell Ervin"
+2024-12-03,CLE,WAS,Eric Dalen,J.D. Ralls,Sean Wright,"Eric Dalen,J.D. Ralls,Sean Wright"
+2024-12-03,DAL,MEM,Sean Corbin,Jenna Schroeder,Ben Taylor,"Sean Corbin,Jenna Schroeder,Ben Taylor"
+2024-12-04,DET,BOS,,,,
+2024-12-04,MIN,LAC,,,,
+2024-12-04,ATL,MIL,,,,
+2024-12-04,BRK,IND,Intae Hwang,Josh Tiven,Scott Twardoski,"Intae Hwang,Josh Tiven,Scott Twardoski"
+2024-12-04,ORL,PHI,,,,
+2024-12-04,MIL,ATL,Bill Kennedy,Natalie Sago,Evan Scott,"Bill Kennedy,Natalie Sago,Evan Scott"
+2024-12-04,LAL,MIA,,,,
+2024-12-05,PHO,NOP,,,,
+2024-12-05,NYK,CHO,Kevin Cutler,Scott Foster,Tom Washington,"Kevin Cutler,Scott Foster,Tom Washington"
+2024-12-05,CHI,SAS,,,,
+2024-12-05,HOU,GSW,,,,
+2024-12-05,OKC,TOR,,,,
+2024-12-05,DAL,WAS,,,,
+2024-12-05,CLE,DEN,Marc Davis,Simone Jelks,Aaron Smith,"Marc Davis,Simone Jelks,Aaron Smith"
+2024-12-05,SAC,MEM,,,,
+2024-12-06,SAC,SAS,,,,
+2024-12-06,IND,CHI,,,,
+2024-12-06,MIL,BOS,,,,
+2024-12-06,POR,UTA,Marat Kogut,Andy Nagy,Zach Zarba,"Marat Kogut,Andy Nagy,Zach Zarba"
+2024-12-06,ATL,LAL,Eric Dalen,Matt Myers,Kevin Scott,"Eric Dalen,Matt Myers,Kevin Scott"
+2024-12-06,MIN,GSW,,,,
+2024-12-06,LAL,ATL,,,,
+2024-12-06,ORL,PHI,,,,
+2024-12-07,DAL,TOR,,,,
+2024-12-07,MIA,PHO,Brandon Adair,John Goble,Dedric Taylor,"Brandon Adair,John Goble,Dedric Taylor"
+2024-12-07,CHO,CLE,Tony Brothers,J.B. DeRosa,Jonathan Sterling,"Tony Brothers,J.B. DeRosa,Jonathan Sterling"
+2024-12-07,OKC,NOP,,,,
+2024-12-07,BOS,MEM,Curtis Blair,Kevin Cutler,Mousa Dagher,"Curtis Blair,Kevin Cutler,Mousa Dagher"
+2024-12-07,DEN,WAS,,,,
+2024-12-07,NYK,DET,Ray Acosta,Josh Tiven,C.J. Washington,"Ray Acosta,Josh Tiven,C.J. Washington"
+2024-12-08,GSW,MIN,Andy Nagy,Danielle Scott,Zach Zarba,"Andy Nagy,Danielle Scott,Zach Zarba"
+2024-12-08,CHI,PHI,Eric Dalen,Michael Smith,James Williams,"Eric Dalen,Michael Smith,James Williams"
+2024-12-08,MIL,BRK,,,,
+2024-12-08,CHO,IND,,,,
+2024-12-08,DEN,ATL,,,,
+2024-12-08,MIA,CLE,Sean Corbin,Mitchell Ervin,Evan Scott,"Sean Corbin,Mitchell Ervin,Evan Scott"
+2024-12-08,PHO,ORL,,,,
+2024-12-08,WAS,MEM,Brent Barnaky,Marc Davis,Matt Myers,"Brent Barnaky,Marc Davis,Matt Myers"
+2024-12-08,NOP,SAS,,,,
+2024-12-08,LAC,HOU,Karl Lane,Jenna Schroeder,Justin Van Duyne,"Karl Lane,Jenna Schroeder,Justin Van Duyne"
+2024-12-08,SAC,UTA,Jacyn Goble,Tre Maddox,Sha'Rae Mitchell,"Jacyn Goble,Tre Maddox,Sha'Rae Mitchell"
+2024-12-08,POR,LAL,,,,
+2024-12-08,ATL,DEN,Brian Forte,Intae Hwang,Mark Lindsay,"Brian Forte,Intae Hwang,Mark Lindsay"
+2024-12-09,NYK,TOR,,,,
+2024-12-10,MIL,ORL,Sean Corbin,Scott Foster,C.J. Washington,"Sean Corbin,Scott Foster,C.J. Washington"
+2024-12-10,DAL,OKC,,,,
+2024-12-11,HOU,GSW,Brent Barnaky,Mousa Dagher,Bill Kennedy,"Brent Barnaky,Mousa Dagher,Bill Kennedy"
+2024-12-11,NYK,ATL,Jacyn Goble,Natalie Sago,Ben Taylor,"Jacyn Goble,Natalie Sago,Ben Taylor"
+2024-12-11,NYK,ATL,Jacyn Goble,Natalie Sago,Ben Taylor,"Jacyn Goble,Natalie Sago,Ben Taylor"
+2024-12-12,DET,BOS,,,,
+2024-12-12,TOR,MIA,,,,
+2024-12-12,SAC,NOP,,,,
+2024-12-13,UTA,PHO,Matt Kallio,Courtney Kirkland,Scott Twardoski,"Matt Kallio,Courtney Kirkland,Scott Twardoski"
+2024-12-13,CHO,CHI,,,,
+2024-12-13,WAS,CLE,,,,
+2024-12-13,SAS,POR,,,,
+2024-12-13,LAL,MIN,,,,
+2024-12-13,BRK,MEM,,,,
+2024-12-13,IND,PHI,,,,
+2024-12-13,DEN,LAC,Eric Dalen,Ed Malloy,Sha'Rae Mitchell,"Eric Dalen,Ed Malloy,Sha'Rae Mitchell"
+2024-12-14,ATL,MIL,,,,
+2024-12-14,MIL,ATL,John Butler,John Goble,Tre Maddox,"John Butler,John Goble,Tre Maddox"
+2024-12-14,HOU,OKC,,,,
+2024-12-15,MEM,LAL,,,,
+2024-12-15,NYK,ORL,,,,
+2024-12-15,DAL,GSW,,,,
+2024-12-15,MIN,SAS,,,,
+2024-12-15,IND,NOP,Matt Boland,Tony Brothers,Marat Kogut,"Matt Boland,Tony Brothers,Marat Kogut"
+2024-12-15,BOS,WAS,,,,
+2024-12-15,POR,PHO,,,,
+2024-12-16,LAC,UTA,Kevin Cutler,Tyler Ford,Derek Richardson,"Kevin Cutler,Tyler Ford,Derek Richardson"
+2024-12-16,SAC,DEN,Marc Davis,Che Flores,J.T. Orr,"Marc Davis,Che Flores,J.T. Orr"
+2024-12-16,DET,MIA,Curtis Blair,Intae Hwang,Andy Nagy,"Curtis Blair,Intae Hwang,Andy Nagy"
+2024-12-16,CHO,PHI,Jason Goldenberg,Michael Smith,Sean Wright,"Jason Goldenberg,Michael Smith,Sean Wright"
+2024-12-16,CHI,TOR,,,,
+2024-12-16,CLE,BRK,,,,
+2024-12-19,MIN,NYK,Derrick Collins,Pat Fraher,Jacyn Goble,"Derrick Collins,Pat Fraher,Jacyn Goble"
+2024-12-19,POR,DEN,Sha'Rae Mitchell,Kevin Scott,C.J. Washington,"Sha'Rae Mitchell,Kevin Scott,C.J. Washington"
+2024-12-19,LAL,SAC,,,,
+2024-12-19,ATL,SAS,,,,
+2024-12-19,DAL,LAC,Sean Corbin,Courtney Kirkland,Scott Twardoski,"Sean Corbin,Courtney Kirkland,Scott Twardoski"
+2024-12-19,GSW,MEM,,,,
+2024-12-19,PHO,IND,Matt Kallio,Rodney Mott,J.T. Orr,"Matt Kallio,Rodney Mott,J.T. Orr"
+2024-12-19,SAS,ATL,Kevin Cutler,Mitchell Ervin,Phenizee Ransom,"Kevin Cutler,Mitchell Ervin,Phenizee Ransom"
+2024-12-19,HOU,NOP,Scott Foster,Tyler Ricks,Aaron Smith,"Scott Foster,Tyler Ricks,Aaron Smith"
+2024-12-19,CHO,WAS,,,,
+2024-12-19,BRK,TOR,,,,
+2024-12-19,BOS,CHI,Tony Brothers,Intae Hwang,Justin Van Duyne,"Tony Brothers,Intae Hwang,Justin Van Duyne"
+2024-12-19,ORL,OKC,John Goble,Pat O'Connell,Natalie Sago,"John Goble,Pat O'Connell,Natalie Sago"
+2024-12-19,UTA,DET,,,,
+2024-12-20,MIL,CLE,,,,
+2024-12-20,OKC,MIA,,,,
+2024-12-20,CHO,PHI,,,,
+2024-12-21,MIL,WAS,Eric Dalen,Intae Hwang,Ben Taylor,"Eric Dalen,Intae Hwang,Ben Taylor"
+2024-12-21,LAL,SAC,,,,
+2024-12-21,MIA,ORL,,,,
+2024-12-21,ATL,MEM,Che Flores,Ed Malloy,Justin Van Duyne,"Che Flores,Ed Malloy,Justin Van Duyne"
+2024-12-21,DET,PHO,,,,
+2024-12-21,BOS,CHI,,,,
+2024-12-21,BRK,UTA,Evan Scott,Tom Washington,Zach Zarba,"Evan Scott,Tom Washington,Zach Zarba"
+2024-12-21,CLE,PHI,Tony Brothers,Derrick Collins,Karl Lane,"Tony Brothers,Derrick Collins,Karl Lane"
+2024-12-21,ATL,MEM,Che Flores,Ed Malloy,Justin Van Duyne,"Che Flores,Ed Malloy,Justin Van Duyne"
+2024-12-21,NOP,NYK,John Goble,J.T. Orr,Danielle Scott,"John Goble,J.T. Orr,Danielle Scott"
+2024-12-21,MIN,GSW,Sean Corbin,Simone Jelks,Sean Wright,"Sean Corbin,Simone Jelks,Sean Wright"
+2024-12-21,POR,SAS,,,,
+2024-12-21,DAL,LAC,Ray Acosta,Pat Fraher,Tyler Ricks,"Ray Acosta,Pat Fraher,Tyler Ricks"
+2024-12-22,NOP,DEN,John Conley,Andy Nagy,James Williams,"John Conley,Andy Nagy,James Williams"
+2024-12-22,IND,SAC,,,,
+2024-12-22,TOR,HOU,Jacyn Goble,Matt Myers,Josh Tiven,"Jacyn Goble,Matt Myers,Josh Tiven"
+2024-12-23,PHI,SAS,Curtis Blair,J.T. Orr,Jenna Schroeder,"Curtis Blair,J.T. Orr,Jenna Schroeder"
+2024-12-23,LAC,MEM,,,,
+2024-12-23,ATL,MIN,Ray Acosta,Brian Forte,Tom Washington,"Ray Acosta,Brian Forte,Tom Washington"
+2024-12-23,CHO,HOU,Eric Dalen,Courtney Kirkland,Derek Richardson,"Eric Dalen,Courtney Kirkland,Derek Richardson"
+2024-12-23,UTA,CLE,,,,
+2024-12-23,ORL,BOS,Brent Barnaky,Marc Davis,Jenna Reneau,"Brent Barnaky,Marc Davis,Jenna Reneau"
+2024-12-23,MIN,ATL,,,,
+2024-12-23,WAS,OKC,,,,
+2024-12-23,TOR,NYK,,,,
+2024-12-23,CHI,MIL,Karl Lane,Natalie Sago,Danielle Scott,"Karl Lane,Natalie Sago,Danielle Scott"
+2024-12-23,POR,DAL,,,,
+2024-12-23,DEN,PHO,John Butler,Kevin Cutler,Intae Hwang,"John Butler,Kevin Cutler,Intae Hwang"
+2024-12-23,GSW,IND,Robert Hussey,Kevin Scott,C.J. Washington,"Robert Hussey,Kevin Scott,C.J. Washington"
+2024-12-23,LAL,DET,Brandon Adair,Mitchell Ervin,Jason Goldenberg,"Brandon Adair,Mitchell Ervin,Jason Goldenberg"
+2024-12-23,MIA,BRK,Sean Corbin,Che Flores,Ed Malloy,"Sean Corbin,Che Flores,Ed Malloy"
+2024-12-25,GSW,LAL,John Butler,Scott Foster,Justin Van Duyne,"John Butler,Scott Foster,Justin Van Duyne"
+2024-12-25,PHI,BOS,,,,
+2024-12-25,PHO,DEN,Jacyn Goble,Jason Goldenberg,Sean Wright,"Jacyn Goble,Jason Goldenberg,Sean Wright"
+2024-12-25,NYK,SAS,Tony Brothers,Sean Corbin,Dedric Taylor,"Tony Brothers,Sean Corbin,Dedric Taylor"
+2024-12-25,DAL,MIN,Kevin Cutler,David Guthrie,Natalie Sago,"Kevin Cutler,David Guthrie,Natalie Sago"
+2024-12-26,CHO,WAS,,,,
+2024-12-26,NOP,HOU,Brent Barnaky,Brian Forte,J.D. Ralls,"Brent Barnaky,Brian Forte,J.D. Ralls"
+2024-12-26,UTA,POR,,,,
+2024-12-26,DET,SAC,,,,
+2024-12-26,ORL,MIA,Karl Lane,Tyler Ricks,Kevin Scott,"Karl Lane,Tyler Ricks,Kevin Scott"
+2024-12-26,ATL,CHI,Courtney Kirkland,Gediminas Petraitis,Jonathan Sterling,"Courtney Kirkland,Gediminas Petraitis,Jonathan Sterling"
+2024-12-26,ATL,CHI,Courtney Kirkland,Gediminas Petraitis,Jonathan Sterling,"Courtney Kirkland,Gediminas Petraitis,Jonathan Sterling"
+2024-12-26,MEM,TOR,Mitchell Ervin,J.T. Orr,Tom Washington,"Mitchell Ervin,J.T. Orr,Tom Washington"
+2024-12-26,IND,OKC,Tyler Ford,Andy Nagy,Jenna Schroeder,"Tyler Ford,Andy Nagy,Jenna Schroeder"
+2024-12-26,BRK,MIL,,,,
+2024-12-27,DAL,PHO,,,,
+2024-12-27,ORL,NYK,Evan Scott,Ben Taylor,Scott Twardoski,"Evan Scott,Ben Taylor,Scott Twardoski"
+2024-12-27,LAC,GSW,Jason Goldenberg,Danielle Scott,Sean Wright,"Jason Goldenberg,Danielle Scott,Sean Wright"
+2024-12-27,BOS,IND,Curtis Blair,Matt Boland,Nick Buchert,"Curtis Blair,Matt Boland,Nick Buchert"
+2024-12-27,CLE,DEN,,,,
+2024-12-27,BRK,SAS,Michael Smith,Josh Tiven,C.J. Washington,"Michael Smith,Josh Tiven,C.J. Washington"
+2024-12-27,MEM,NOP,,,,
+2024-12-27,HOU,MIN,Mousa Dagher,Sha'Rae Mitchell,Gediminas Petraitis,"Mousa Dagher,Sha'Rae Mitchell,Gediminas Petraitis"
+2024-12-28,OKC,CHO,,,,
+2024-12-28,NYK,WAS,,,,
+2024-12-28,ATL,MIA,Brandon Adair,Brent Barnaky,David Guthrie,"Brandon Adair,Brent Barnaky,David Guthrie"
+2024-12-28,PHI,UTA,,,,
+2024-12-28,GSW,PHO,Brian Forte,Brett Nansel,James Williams,"Brian Forte,Brett Nansel,James Williams"
+2024-12-28,DEN,DET,Derrick Collins,Tre Maddox,J.T. Orr,"Derrick Collins,Tre Maddox,J.T. Orr"
+2024-12-28,MIA,ATL,,,,
+2024-12-28,DAL,POR,,,,
+2024-12-28,SAC,LAL,,,,
+2024-12-28,CHI,MIL,Tyler Ford,Andy Nagy,Brandon Schwab,"Tyler Ford,Andy Nagy,Brandon Schwab"
+2024-12-29,TOR,ATL,Ray Acosta,Mousa Dagher,Karl Lane,"Ray Acosta,Mousa Dagher,Karl Lane"
+2024-12-29,MEM,OKC,,,,
+2024-12-29,MIA,HOU,,,,
+2024-12-29,ATL,TOR,,,,
+2024-12-29,IND,BOS,,,,
+2024-12-29,BRK,ORL,,,,
+2024-12-29,SAS,MIN,,,,
+2024-12-30,DEN,UTA,,,,
+2024-12-30,WAS,NYK,Scott Foster,Simone Jelks,Scott Twardoski,"Scott Foster,Simone Jelks,Scott Twardoski"
+2024-12-30,SAC,DAL,Derek Richardson,C.J. Washington,James Williams,"Derek Richardson,C.J. Washington,James Williams"
+2024-12-30,LAC,NOP,,,,
+2024-12-30,CLE,GSW,,,,
+2024-12-30,CHO,CHI,Jacyn Goble,Jenna Reneau,Justin Van Duyne,"Jacyn Goble,Jenna Reneau,Justin Van Duyne"
+2024-12-30,PHI,POR,,,,
+2024-12-31,CLE,LAL,,,,
+2024-12-31,SAS,LAC,Sean Corbin,Tyler Mirkovich,Gediminas Petraitis,"Sean Corbin,Tyler Mirkovich,Gediminas Petraitis"
+2024-12-31,IND,MIL,Ray Acosta,Karl Lane,Sha'Rae Mitchell,"Ray Acosta,Karl Lane,Sha'Rae Mitchell"
+2024-12-31,MEM,PHO,,,,
+2024-12-31,BOS,TOR,John Butler,Evan Scott,Kevin Scott,"John Butler,Evan Scott,Kevin Scott"
+2024-12-31,MIN,OKC,,,,
+2025-01-01,NOP,MIA,,,,
+2025-01-01,PHI,SAC,,,,
+2025-01-01,ATL,DEN,,,,
+2025-01-01,DAL,HOU,,,,
+2025-01-01,DET,ORL,Jacyn Goble,Brandon Schwab,Justin Van Duyne,"Jacyn Goble,Brandon Schwab,Justin Van Duyne"
+2025-01-01,UTA,NYK,,,,
+2025-01-01,CHI,WAS,,,,
+2025-01-01,DEN,ATL,Brett Nansel,Jenna Schroeder,James Williams,"Brett Nansel,Jenna Schroeder,James Williams"
+2025-01-01,BRK,TOR,,,,
+2025-01-02,MIL,BRK,Mousa Dagher,Che Flores,Kevin Scott,"Mousa Dagher,Che Flores,Kevin Scott"
+2025-01-02,MIN,BOS,Matt Kallio,C.J. Washington,Zach Zarba,"Matt Kallio,C.J. Washington,Zach Zarba"
+2025-01-02,LAC,OKC,,,,
+2025-01-02,GSW,PHI,Sean Corbin,Tyler Ford,Suyash Mehta,"Sean Corbin,Tyler Ford,Suyash Mehta"
+2025-01-02,POR,LAL,,,,
+2025-01-02,IND,MIA,,,,
+2025-01-03,NYK,OKC,,,,
+2025-01-03,LAL,ATL,Tre Maddox,Ed Malloy,Michael Smith,"Tre Maddox,Ed Malloy,Michael Smith"
+2025-01-03,MEM,SAC,,,,
+2025-01-03,DAL,CLE,Jacyn Goble,Mark Lindsay,Evan Scott,"Jacyn Goble,Mark Lindsay,Evan Scott"
+2025-01-03,DEN,SAS,Ray Acosta,Rodney Mott,Tom Washington,"Ray Acosta,Rodney Mott,Tom Washington"
+2025-01-03,WAS,NOP,,,,
+2025-01-03,HOU,BOS,Brandon Adair,John Goble,Natalie Sago,"Brandon Adair,John Goble,Natalie Sago"
+2025-01-03,ORL,TOR,,,,
+2025-01-03,CHO,DET,,,,
+2025-01-03,LAL,ATL,Tre Maddox,Ed Malloy,Michael Smith,"Tre Maddox,Ed Malloy,Michael Smith"
+2025-01-04,CHI,NYK,Pat Fraher,Jason Goldenberg,Derek Richardson,"Pat Fraher,Jason Goldenberg,Derek Richardson"
+2025-01-04,DEN,SAS,,,,
+2025-01-04,POR,MIL,,,,
+2025-01-04,MIA,UTA,Robert Hussey,Jenna Schroeder,Kevin Scott,"Robert Hussey,Jenna Schroeder,Kevin Scott"
+2025-01-04,LAC,ATL,Marc Davis,Matt Myers,J.T. Orr,"Marc Davis,Matt Myers,J.T. Orr"
+2025-01-04,DET,MIN,Eric Dalen,Karl Lane,Brett Nansel,"Eric Dalen,Karl Lane,Brett Nansel"
+2025-01-04,BRK,PHI,Kevin Cutler,Andy Nagy,Brandon Schwab,"Kevin Cutler,Andy Nagy,Brandon Schwab"
+2025-01-04,GSW,MEM,Nick Buchert,Sha'Rae Mitchell,Gediminas Petraitis,"Nick Buchert,Sha'Rae Mitchell,Gediminas Petraitis"
+2025-01-04,LAC,ATL,Marc Davis,Matt Myers,J.T. Orr,"Marc Davis,Matt Myers,J.T. Orr"
+2025-01-04,IND,PHO,Curtis Blair,John Butler,John Conley,"Curtis Blair,John Butler,John Conley"
+2025-01-05,UTA,ORL,,,,
+2025-01-05,NOP,WAS,,,,
+2025-01-05,SAC,GSW,,,,
+2025-01-05,BOS,OKC,,,,
+2025-01-05,LAL,HOU,,,,
+2025-01-05,CLE,CHO,Brian Forte,Phenizee Ransom,Brandon Schwab,"Brian Forte,Phenizee Ransom,Brandon Schwab"
+2025-01-06,DET,POR,Kevin Cutler,Ed Malloy,Danielle Scott,"Kevin Cutler,Ed Malloy,Danielle Scott"
+2025-01-06,PHI,PHO,Jacyn Goble,Pat O'Connell,James Williams,"Jacyn Goble,Pat O'Connell,James Williams"
+2025-01-06,ORL,NYK,,,,
+2025-01-06,MIL,TOR,,,,
+2025-01-06,SAS,CHI,,,,
+2025-01-06,DAL,MEM,,,,
+2025-01-06,LAC,MIN,,,,
+2025-01-06,SAC,MIA,Nick Buchert,Marc Davis,Matt Myers,"Nick Buchert,Marc Davis,Matt Myers"
+2025-01-06,IND,BRK,,,,
+2025-01-07,NOP,MIN,Pat Fraher,Jenna Schroeder,Evan Scott,"Pat Fraher,Jenna Schroeder,Evan Scott"
+2025-01-07,DAL,LAL,John Butler,Scott Foster,Brandon Schwab,"John Butler,Scott Foster,Brandon Schwab"
+2025-01-07,WAS,HOU,Tyler Ford,Robert Hussey,Natalie Sago,"Tyler Ford,Robert Hussey,Natalie Sago"
+2025-01-07,UTA,ATL,Courtney Kirkland,Rodney Mott,Tyler Ricks,"Courtney Kirkland,Rodney Mott,Tyler Ricks"
+2025-01-07,UTA,ATL,Courtney Kirkland,Rodney Mott,Tyler Ricks,"Courtney Kirkland,Rodney Mott,Tyler Ricks"
+2025-01-07,DEN,BOS,Che Flores,Gediminas Petraitis,Sean Wright,"Che Flores,Gediminas Petraitis,Sean Wright"
+2025-01-07,MIA,GSW,,,,
+2025-01-07,BOS,DEN,,,,
+2025-01-07,PHO,CHO,,,,
+2025-01-08,DET,BRK,,,,
+2025-01-08,WAS,PHI,,,,
+2025-01-08,TOR,NYK,,,,
+2025-01-08,POR,NOP,,,,
+2025-01-08,OKC,CLE,,,,
+2025-01-08,MIL,SAS,Tre Maddox,Derek Richardson,Josh Tiven,"Tre Maddox,Derek Richardson,Josh Tiven"
+2025-01-08,DEN,LAC,Nick Buchert,Marat Kogut,J.D. Ralls,"Nick Buchert,Marat Kogut,J.D. Ralls"
+2025-01-08,CHI,IND,,,,
+2025-01-09,MIA,UTA,,,,
+2025-01-09,PHO,ATL,Kevin Cutler,Mousa Dagher,David Guthrie,"Kevin Cutler,Mousa Dagher,David Guthrie"
+2025-01-09,TOR,CLE,,,,
+2025-01-09,GSW,DET,,,,
+2025-01-09,MIN,ORL,,,,
+2025-01-09,HOU,MEM,,,,
+2025-01-09,DAL,POR,Nick Buchert,Courtney Kirkland,J.D. Ralls,"Nick Buchert,Courtney Kirkland,J.D. Ralls"
+2025-01-09,ATL,PHO,,,,
+2025-01-10,BOS,SAC,Brent Barnaky,Derrick Collins,John Goble,"Brent Barnaky,Derrick Collins,John Goble"
+2025-01-10,ORL,MIL,Matt Boland,Scott Foster,C.J. Washington,"Matt Boland,Scott Foster,C.J. Washington"
+2025-01-10,GSW,IND,,,,
+2025-01-10,NOP,PHI,,,,
+2025-01-10,OKC,NYK,,,,
+2025-01-10,BOS,SAC,Brent Barnaky,Derrick Collins,John Goble,"Brent Barnaky,Derrick Collins,John Goble"
+2025-01-10,BRK,DEN,,,,
+2025-01-10,WAS,CHI,,,,
+2025-01-11,UTA,PHO,,,,
+2025-01-11,POR,MIA,Matt Kallio,Rodney Mott,Ben Taylor,"Matt Kallio,Rodney Mott,Ben Taylor"
+2025-01-11,MIN,MEM,Mousa Dagher,Marat Kogut,Josh Tiven,"Mousa Dagher,Marat Kogut,Josh Tiven"
+2025-01-11,TOR,DET,,,,
+2025-01-12,ORL,PHI,Nate Green,Evan Scott,James Williams,"Nate Green,Evan Scott,James Williams"
+2025-01-12,BOS,NOP,Sean Corbin,Brian Forte,C.J. Washington,"Sean Corbin,Brian Forte,C.J. Washington"
+2025-01-12,MIL,NYK,,,,
+2025-01-12,DAL,DEN,Brent Barnaky,John Goble,Simone Jelks,"Brent Barnaky,John Goble,Simone Jelks"
+2025-01-12,OKC,WAS,,,,
+2025-01-12,BOS,NOP,Sean Corbin,Brian Forte,C.J. Washington,"Sean Corbin,Brian Forte,C.J. Washington"
+2025-01-12,IND,CLE,,,,
+2025-01-12,BRK,UTA,,,,
+2025-01-12,PHO,CHO,John Conley,Pat Fraher,J.T. Orr,"John Conley,Pat Fraher,J.T. Orr"
+2025-01-12,CHI,SAC,Tre Maddox,Ed Malloy,Tom Washington,"Tre Maddox,Ed Malloy,Tom Washington"
+2025-01-13,LAL,SAS,Jason Goldenberg,Brett Nansel,Ben Taylor,"Jason Goldenberg,Brett Nansel,Ben Taylor"
+2025-01-13,MIA,LAC,,,,
+2025-01-13,DET,NYK,,,,
+2025-01-13,MIN,WAS,,,,
+2025-01-13,HOU,MEM,Tony Brothers,Pat Fraher,Danielle Scott,"Tony Brothers,Pat Fraher,Danielle Scott"
+2025-01-13,TOR,GSW,Sha'Rae Mitchell,Jenna Schroeder,Zach Zarba,"Sha'Rae Mitchell,Jenna Schroeder,Zach Zarba"
+2025-01-14,PHO,ATL,,,,
+2025-01-14,PHI,OKC,Sean Corbin,Che Flores,Kevin Scott,"Sean Corbin,Che Flores,Kevin Scott"
+2025-01-14,CHI,NOP,Kevin Cutler,Karl Lane,Leon Wood,"Kevin Cutler,Karl Lane,Leon Wood"
+2025-01-14,SAC,MIL,,,,
+2025-01-14,DAL,DEN,Brandon Adair,Tyler Ford,Scott Twardoski,"Brandon Adair,Tyler Ford,Scott Twardoski"
+2025-01-14,POR,BRK,Matt Boland,John Butler,Josh Tiven,"Matt Boland,John Butler,Josh Tiven"
+2025-01-14,ATL,PHO,Ray Acosta,Brent Barnaky,Matt Kallio,"Ray Acosta,Brent Barnaky,Matt Kallio"
+2025-01-14,CLE,IND,,,,
+2025-01-15,HOU,DEN,,,,
+2025-01-15,TOR,BOS,Marc Davis,Karl Lane,J.D. Ralls,"Marc Davis,Karl Lane,J.D. Ralls"
+2025-01-15,BRK,LAC,,,,
+2025-01-15,LAL,MIA,Matt Boland,John Butler,Tre Maddox,"Matt Boland,John Butler,Tre Maddox"
+2025-01-15,MEM,SAS,,,,
+2025-01-15,UTA,CHO,Mitchell Ervin,Jacyn Goble,Jonathan Sterling,"Mitchell Ervin,Jacyn Goble,Jonathan Sterling"
+2025-01-15,GSW,MIN,,,,
+2025-01-15,ORL,MIL,,,,
+2025-01-15,ATL,CHI,,,,
+2025-01-15,BOS,TOR,,,,
+2025-01-15,NYK,PHI,,,,
+2025-01-15,CHI,ATL,John Goble,Intae Hwang,Marat Kogut,"John Goble,Intae Hwang,Marat Kogut"
+2025-01-15,DAL,NOP,,,,
+2025-01-16,HOU,SAC,,,,
+2025-01-16,CLE,OKC,,,,
+2025-01-16,PHO,WAS,,,,
+2025-01-16,DET,IND,Brian Forte,David Guthrie,Sha'Rae Mitchell,"Brian Forte,David Guthrie,Sha'Rae Mitchell"
+2025-01-16,LAC,POR,,,,
+2025-01-17,UTA,NOP,,,,
+2025-01-17,MIL,TOR,Kevin Cutler,Robert Hussey,C.J. Washington,"Kevin Cutler,Robert Hussey,C.J. Washington"
+2025-01-17,DEN,MIA,,,,
+2025-01-17,NYK,MIN,Marat Kogut,Karl Lane,Jenna Schroeder,"Marat Kogut,Karl Lane,Jenna Schroeder"
+2025-01-17,OKC,DAL,,,,
+2025-01-17,BRK,LAL,,,,
+2025-01-17,CHO,CHI,,,,
+2025-01-17,BOS,ORL,Che Flores,Mark Lindsay,Andy Nagy,"Che Flores,Mark Lindsay,Andy Nagy"
+2025-01-17,MEM,SAS,,,,
+2025-01-17,BOS,ORL,Che Flores,Mark Lindsay,Andy Nagy,"Che Flores,Mark Lindsay,Andy Nagy"
+2025-01-18,HOU,POR,,,,
+2025-01-18,BOS,ATL,Gediminas Petraitis,Phenizee Ransom,Brandon Schwab,"Gediminas Petraitis,Phenizee Ransom,Brandon Schwab"
+2025-01-18,CLE,MIN,,,,
+2025-01-18,DET,PHO,John Goble,Jason Goldenberg,J.D. Ralls,"John Goble,Jason Goldenberg,J.D. Ralls"
+2025-01-18,IND,PHI,Mark Lindsay,Matt Myers,J.T. Orr,"Mark Lindsay,Matt Myers,J.T. Orr"
+2025-01-18,BOS,ATL,Gediminas Petraitis,Phenizee Ransom,Brandon Schwab,"Gediminas Petraitis,Phenizee Ransom,Brandon Schwab"
+2025-01-18,WAS,GSW,,,,
+2025-01-19,SAS,MIA,,,,
+2025-01-19,SAC,WAS,Brian Forte,Sha'Rae Mitchell,Scott Twardoski,"Brian Forte,Sha'Rae Mitchell,Scott Twardoski"
+2025-01-19,MIL,PHI,Scott Foster,Phenizee Ransom,Brandon Schwab,"Scott Foster,Phenizee Ransom,Brandon Schwab"
+2025-01-19,LAL,LAC,,,,
+2025-01-19,OKC,BRK,Robert Hussey,Rodney Mott,Evan Scott,"Robert Hussey,Rodney Mott,Evan Scott"
+2025-01-19,ORL,DEN,Pat Fraher,Jonathan Sterling,Justin Van Duyne,"Pat Fraher,Jonathan Sterling,Justin Van Duyne"
+2025-01-19,CHI,POR,,,,
+2025-01-20,DET,HOU,,,,
+2025-01-20,ATL,NYK,,,,
+2025-01-20,CLE,PHO,Brent Barnaky,Courtney Kirkland,Suyash Mehta,"Brent Barnaky,Courtney Kirkland,Suyash Mehta"
+2025-01-20,BOS,GSW,,,,
+2025-01-20,NOP,UTA,Karl Lane,Tyler Ricks,C.J. Washington,"Karl Lane,Tyler Ricks,C.J. Washington"
+2025-01-20,LAC,CHI,Mousa Dagher,Brett Nansel,Kevin Scott,"Mousa Dagher,Brett Nansel,Kevin Scott"
+2025-01-20,NYK,ATL,Tyler Ford,J.T. Orr,Danielle Scott,"Tyler Ford,J.T. Orr,Danielle Scott"
+2025-01-20,GSW,BOS,Ray Acosta,David Guthrie,Intae Hwang,"Ray Acosta,David Guthrie,Intae Hwang"
+2025-01-20,DAL,CHO,,,,
+2025-01-20,MEM,MIN,Derrick Collins,Gediminas Petraitis,J.D. Ralls,"Derrick Collins,Gediminas Petraitis,J.D. Ralls"
+2025-01-21,PHI,DEN,,,,
+2025-01-21,ORL,TOR,,,,
+2025-01-21,LAL,WAS,Ray Acosta,Simone Jelks,Sean Wright,"Ray Acosta,Simone Jelks,Sean Wright"
+2025-01-21,NYK,BRK,,,,
+2025-01-21,POR,MIA,,,,
+2025-01-22,ATL,DET,Scott Foster,Justin Van Duyne,Tom Washington,"Scott Foster,Justin Van Duyne,Tom Washington"
+2025-01-22,CHO,MEM,,,,
+2025-01-22,OKC,UTA,Intae Hwang,Marat Kogut,Kevin Scott,"Intae Hwang,Marat Kogut,Kevin Scott"
+2025-01-22,DET,ATL,,,,
+2025-01-22,PHO,BRK,,,,
+2025-01-22,DAL,MIN,Pat Fraher,Nate Green,Evan Scott,"Pat Fraher,Nate Green,Evan Scott"
+2025-01-22,HOU,CLE,Brandon Adair,Nick Buchert,James Williams,"Brandon Adair,Nick Buchert,James Williams"
+2025-01-22,LAC,BOS,Rodney Mott,Natalie Sago,Scott Twardoski,"Rodney Mott,Natalie Sago,Scott Twardoski"
+2025-01-22,SAC,GSW,Curtis Blair,Eric Dalen,Matt Kallio,"Curtis Blair,Eric Dalen,Matt Kallio"
+2025-01-22,LAC,BOS,Rodney Mott,Natalie Sago,Scott Twardoski,"Rodney Mott,Natalie Sago,Scott Twardoski"
+2025-01-23,GSW,CHI,Brian Forte,Michael Smith,Scott Twardoski,"Brian Forte,Michael Smith,Scott Twardoski"
+2025-01-23,SAC,DEN,,,,
+2025-01-23,DAL,OKC,,,,
+2025-01-23,MIA,MIL,,,,
+2025-01-23,WAS,LAC,,,,
+2025-01-23,ORL,POR,Courtney Kirkland,Phenizee Ransom,Brandon Schwab,"Courtney Kirkland,Phenizee Ransom,Brandon Schwab"
+2025-01-23,ATL,TOR,John Conley,Pat Fraher,James Williams,"John Conley,Pat Fraher,James Williams"
+2025-01-23,ATL,TOR,John Conley,Pat Fraher,James Williams,"John Conley,Pat Fraher,James Williams"
+2025-01-23,BOS,LAL,,,,
+2025-01-23,LAL,BOS,Curtis Blair,John Butler,Mousa Dagher,"Curtis Blair,John Butler,Mousa Dagher"
+2025-01-23,IND,SAS,Brent Barnaky,Jenna Schroeder,Zach Zarba,"Brent Barnaky,Jenna Schroeder,Zach Zarba"
+2025-01-24,NOP,MEM,,,,
+2025-01-24,CLE,PHI,,,,
+2025-01-24,POR,CHO,,,,
+2025-01-25,SAC,NYK,,,,
+2025-01-25,CLE,HOU,Ray Acosta,Tony Brothers,Phenizee Ransom,"Ray Acosta,Tony Brothers,Phenizee Ransom"
+2025-01-25,TOR,ATL,,,,
+2025-01-25,DET,ORL,,,,
+2025-01-25,BOS,DAL,,,,
+2025-01-25,MIN,DEN,Nick Buchert,Che Flores,Kevin Scott,"Nick Buchert,Che Flores,Kevin Scott"
+2025-01-25,SAS,IND,Brent Barnaky,Matt Boland,Zach Zarba,"Brent Barnaky,Matt Boland,Zach Zarba"
+2025-01-25,CHO,NOP,John Conley,Natalie Sago,James Williams,"John Conley,Natalie Sago,James Williams"
+2025-01-25,UTA,MEM,,,,
+2025-01-25,DAL,BOS,Scott Foster,Simone Jelks,Andy Nagy,"Scott Foster,Simone Jelks,Andy Nagy"
+2025-01-25,PHO,WAS,Brian Forte,John Goble,Michael Smith,"Brian Forte,John Goble,Michael Smith"
+2025-01-25,LAL,GSW,,,,
+2025-01-25,CHI,PHI,Rodney Mott,Jonathan Sterling,Ben Taylor,"Rodney Mott,Jonathan Sterling,Ben Taylor"
+2025-01-25,LAC,MIL,Curtis Blair,John Butler,Mousa Dagher,"Curtis Blair,John Butler,Mousa Dagher"
+2025-01-25,ATL,TOR,Brandon Adair,Nate Green,Mark Lindsay,"Brandon Adair,Nate Green,Mark Lindsay"
+2025-01-25,BRK,MIA,Eric Dalen,Courtney Kirkland,Brandon Schwab,"Eric Dalen,Courtney Kirkland,Brandon Schwab"
+2025-01-26,OKC,POR,,,,
+2025-01-27,MIL,UTA,,,,
+2025-01-27,MIN,ATL,Robert Hussey,Rodney Mott,Ben Taylor,"Robert Hussey,Rodney Mott,Ben Taylor"
+2025-01-27,LAC,PHO,,,,
+2025-01-27,BOS,HOU,Derrick Collins,Tyler Ford,Suyash Mehta,"Derrick Collins,Tyler Ford,Suyash Mehta"
+2025-01-27,DET,CLE,,,,
+2025-01-27,CHO,LAL,Eric Dalen,Gediminas Petraitis,Tyler Ricks,"Eric Dalen,Gediminas Petraitis,Tyler Ricks"
+2025-01-27,DEN,CHI,,,,
+2025-01-27,BRK,SAC,Mitchell Ervin,Che Flores,Marat Kogut,"Mitchell Ervin,Che Flores,Marat Kogut"
+2025-01-27,ATL,MIN,,,,
+2025-01-27,NOP,TOR,,,,
+2025-01-27,DAL,WAS,Mousa Dagher,Intae Hwang,Josh Tiven,"Mousa Dagher,Intae Hwang,Josh Tiven"
+2025-01-27,MEM,NYK,,,,
+2025-01-27,MIA,ORL,Marc Davis,Jason Goldenberg,J.D. Ralls,"Marc Davis,Jason Goldenberg,J.D. Ralls"
+2025-01-27,BOS,HOU,Derrick Collins,Tyler Ford,Suyash Mehta,"Derrick Collins,Tyler Ford,Suyash Mehta"
+2025-01-28,PHI,LAL,Tony Brothers,Marat Kogut,Matt Myers,"Tony Brothers,Marat Kogut,Matt Myers"
+2025-01-28,MIL,POR,,,,
+2025-01-28,ATL,HOU,John Butler,Jacyn Goble,Jonathan Sterling,"John Butler,Jacyn Goble,Jonathan Sterling"
+2025-01-28,GSW,UTA,Pat Fraher,Matt Kallio,Mark Lindsay,"Pat Fraher,Matt Kallio,Mark Lindsay"
+2025-01-28,HOU,ATL,,,,
+2025-01-29,BOS,CHI,Brent Barnaky,Eric Dalen,Michael Smith,"Brent Barnaky,Eric Dalen,Michael Smith"
+2025-01-29,CHO,BRK,Intae Hwang,Natalie Sago,Sean Wright,"Intae Hwang,Natalie Sago,Sean Wright"
+2025-01-29,IND,DET,Tyler Ford,Suyash Mehta,Evan Scott,"Tyler Ford,Suyash Mehta,Evan Scott"
+2025-01-29,TOR,WAS,,,,
+2025-01-29,MIA,CLE,Che Flores,Jacyn Goble,Zach Zarba,"Che Flores,Jacyn Goble,Zach Zarba"
+2025-01-29,GSW,OKC,John Goble,Danielle Scott,Justin Van Duyne,"John Goble,Danielle Scott,Justin Van Duyne"
+2025-01-29,PHI,SAC,Curtis Blair,Mitchell Ervin,Tom Washington,"Curtis Blair,Mitchell Ervin,Tom Washington"
+2025-01-29,NOP,DAL,Derrick Collins,Kevin Scott,Scott Twardoski,"Derrick Collins,Kevin Scott,Scott Twardoski"
+2025-01-29,LAC,SAS,,,,
+2025-01-29,PHO,MIN,Kevin Cutler,Pat Fraher,C.J. Washington,"Kevin Cutler,Pat Fraher,C.J. Washington"
+2025-01-29,BOS,CHI,Brent Barnaky,Eric Dalen,Michael Smith,"Brent Barnaky,Eric Dalen,Michael Smith"
+2025-01-29,NYK,DEN,Nate Green,Tre Maddox,Rodney Mott,"Nate Green,Tre Maddox,Rodney Mott"
+2025-01-30,POR,ORL,Matt Kallio,Mark Lindsay,Justin Van Duyne,"Matt Kallio,Mark Lindsay,Justin Van Duyne"
+2025-01-30,CLE,ATL,John Conley,Brian Forte,Josh Tiven,"John Conley,Brian Forte,Josh Tiven"
+2025-01-30,HOU,MEM,,,,
+2025-01-30,CLE,ATL,John Conley,Brian Forte,Josh Tiven,"John Conley,Brian Forte,Josh Tiven"
+2025-01-30,WAS,LAL,Brent Barnaky,Marc Davis,Phenizee Ransom,"Brent Barnaky,Marc Davis,Phenizee Ransom"
+2025-01-30,MIN,UTA,,,,
+2025-01-31,NOP,BOS,Ed Malloy,Derek Richardson,C.J. Washington,"Ed Malloy,Derek Richardson,C.J. Washington"
+2025-01-31,SAS,MIL,Tony Brothers,Intae Hwang,Gediminas Petraitis,"Tony Brothers,Intae Hwang,Gediminas Petraitis"
+2025-01-31,GSW,PHO,John Butler,Mousa Dagher,Scott Foster,"John Butler,Mousa Dagher,Scott Foster"
+2025-01-31,DET,DAL,Ray Acosta,Jacyn Goble,Jenna Schroeder,"Ray Acosta,Jacyn Goble,Jenna Schroeder"
+2025-01-31,CHO,LAC,Nick Buchert,Sean Corbin,Che Flores,"Nick Buchert,Sean Corbin,Che Flores"
+2025-01-31,DEN,PHI,,,,
+2025-01-31,CHI,TOR,,,,
+2025-01-31,BOS,NOP,,,,
+2025-02-01,POR,PHO,Jason Goldenberg,Sha'Rae Mitchell,Zach Zarba,"Jason Goldenberg,Sha'Rae Mitchell,Zach Zarba"
+2025-02-01,MIA,SAS,,,,
+2025-02-01,LAL,NYK,,,,
+2025-02-01,ATL,IND,,,,
+2025-02-01,ORL,UTA,,,,
+2025-02-01,BRK,HOU,,,,
+2025-02-01,WAS,MIN,,,,
+2025-02-01,OKC,SAC,Kevin Cutler,Brett Nansel,Ben Taylor,"Kevin Cutler,Brett Nansel,Ben Taylor"
+2025-02-01,IND,ATL,Matt Boland,Marc Davis,Andy Nagy,"Matt Boland,Marc Davis,Andy Nagy"
+2025-02-01,CHO,DEN,Brent Barnaky,Tyler Ricks,Evan Scott,"Brent Barnaky,Tyler Ricks,Evan Scott"
+2025-02-02,CHI,DET,,,,
+2025-02-02,PHI,BOS,Mark Lindsay,Tre Maddox,Brandon Schwab,"Mark Lindsay,Tre Maddox,Brandon Schwab"
+2025-02-02,TOR,LAC,Eric Dalen,Mitchell Ervin,Suyash Mehta,"Eric Dalen,Mitchell Ervin,Suyash Mehta"
+2025-02-02,PHI,BOS,Mark Lindsay,Tre Maddox,Brandon Schwab,"Mark Lindsay,Tre Maddox,Brandon Schwab"
+2025-02-02,CLE,DAL,Nate Green,Karl Lane,Justin Van Duyne,"Nate Green,Karl Lane,Justin Van Duyne"
+2025-02-02,MEM,MIL,,,,
+2025-02-03,SAC,MIN,,,,
+2025-02-03,CHO,WAS,Pat Fraher,Jenna Schroeder,C.J. Washington,"Pat Fraher,Jenna Schroeder,C.J. Washington"
+2025-02-03,DET,ATL,Tony Brothers,Robert Hussey,Phenizee Ransom,"Tony Brothers,Robert Hussey,Phenizee Ransom"
+2025-02-03,NOP,DEN,,,,
+2025-02-03,SAS,MEM,,,,
+2025-02-03,ORL,GSW,,,,
+2025-02-03,POR,PHO,Mousa Dagher,Che Flores,Tyler Ford,"Mousa Dagher,Che Flores,Tyler Ford"
+2025-02-03,DET,ATL,Tony Brothers,Robert Hussey,Phenizee Ransom,"Tony Brothers,Robert Hussey,Phenizee Ransom"
+2025-02-03,MIL,OKC,,,,
+2025-02-03,HOU,NYK,,,,
+2025-02-03,UTA,IND,Ray Acosta,John Conley,Jacyn Goble,"Ray Acosta,John Conley,Jacyn Goble"
+2025-02-04,NYK,TOR,,,,
+2025-02-04,IND,POR,,,,
+2025-02-04,CLE,BOS,Scott Foster,Gediminas Petraitis,C.J. Washington,"Scott Foster,Gediminas Petraitis,C.J. Washington"
+2025-02-04,BRK,HOU,Tony Brothers,Intae Hwang,J.T. Orr,"Tony Brothers,Intae Hwang,J.T. Orr"
+2025-02-04,CHI,MIA,Nate Green,Karl Lane,Matt Myers,"Nate Green,Karl Lane,Matt Myers"
+2025-02-04,PHI,DAL,Matt Boland,Nick Buchert,Josh Tiven,"Matt Boland,Nick Buchert,Josh Tiven"
+2025-02-04,CLE,BOS,Scott Foster,Gediminas Petraitis,C.J. Washington,"Scott Foster,Gediminas Petraitis,C.J. Washington"
+2025-02-04,LAC,LAL,Ray Acosta,John Conley,Tyler Ford,"Ray Acosta,John Conley,Tyler Ford"
+2025-02-05,CLE,DET,,,,
+2025-02-05,SAS,ATL,,,,
+2025-02-05,BRK,WAS,Brent Barnaky,Scott Foster,Scott Twardoski,"Brent Barnaky,Scott Foster,Scott Twardoski"
+2025-02-05,MIL,CHO,,,,
+2025-02-05,PHI,MIA,Simone Jelks,Courtney Kirkland,Natalie Sago,"Simone Jelks,Courtney Kirkland,Natalie Sago"
+2025-02-05,ATL,SAS,John Butler,Mitchell Ervin,James Williams,"John Butler,Mitchell Ervin,James Williams"
+2025-02-05,MIN,CHI,Jacyn Goble,Evan Scott,Zach Zarba,"Jacyn Goble,Evan Scott,Zach Zarba"
+2025-02-05,MEM,TOR,,,,
+2025-02-05,ORL,SAC,,,,
+2025-02-05,NOP,DEN,,,,
+2025-02-05,GSW,UTA,,,,
+2025-02-05,PHO,OKC,,,,
+2025-02-06,IND,LAC,,,,
+2025-02-06,SAC,POR,,,,
+2025-02-06,BOS,DAL,Tony Brothers,Sean Corbin,Danielle Scott,"Tony Brothers,Sean Corbin,Danielle Scott"
+2025-02-06,LAL,GSW,John Goble,Robert Hussey,Marat Kogut,"John Goble,Robert Hussey,Marat Kogut"
+2025-02-06,BOS,DAL,Tony Brothers,Sean Corbin,Danielle Scott,"Tony Brothers,Sean Corbin,Danielle Scott"
+2025-02-06,ORL,DEN,,,,
+2025-02-06,MIN,HOU,Curtis Blair,Matt Myers,Justin Van Duyne,"Curtis Blair,Matt Myers,Justin Van Duyne"
+2025-02-07,CLE,WAS,,,,
+2025-02-07,ATL,MIL,Matt Boland,Eric Dalen,Josh Tiven,"Matt Boland,Eric Dalen,Josh Tiven"
+2025-02-07,CHO,SAS,Mousa Dagher,Courtney Kirkland,Suyash Mehta,"Mousa Dagher,Courtney Kirkland,Suyash Mehta"
+2025-02-07,TOR,OKC,,,,
+2025-02-07,PHI,DET,,,,
+2025-02-07,ATL,MIL,Matt Boland,Eric Dalen,Josh Tiven,"Matt Boland,Eric Dalen,Josh Tiven"
+2025-02-07,BRK,MIA,Nick Buchert,Evan Scott,Zach Zarba,"Nick Buchert,Evan Scott,Zach Zarba"
+2025-02-07,UTA,PHO,,,,
+2025-02-08,DEN,PHO,,,,
+2025-02-08,GSW,CHI,,,,
+2025-02-08,ATL,WAS,,,,
+2025-02-08,ORL,SAS,Eric Dalen,Jacyn Goble,Andy Nagy,"Eric Dalen,Jacyn Goble,Andy Nagy"
+2025-02-08,UTA,LAC,,,,
+2025-02-08,NYK,BOS,John Butler,Tyler Ford,Evan Scott,"John Butler,Tyler Ford,Evan Scott"
+2025-02-08,MIN,POR,Pat Fraher,Intae Hwang,Tre Maddox,"Pat Fraher,Intae Hwang,Tre Maddox"
+2025-02-08,MEM,OKC,Ray Acosta,Mousa Dagher,Josh Tiven,"Ray Acosta,Mousa Dagher,Josh Tiven"
+2025-02-08,DAL,HOU,Brian Forte,Phenizee Ransom,Jenna Schroeder,"Brian Forte,Phenizee Ransom,Jenna Schroeder"
+2025-02-08,NOP,SAC,,,,
+2025-02-08,NYK,BOS,John Butler,Tyler Ford,Evan Scott,"John Butler,Tyler Ford,Evan Scott"
+2025-02-08,WAS,ATL,Curtis Blair,Kevin Cutler,Sha'Rae Mitchell,"Curtis Blair,Kevin Cutler,Sha'Rae Mitchell"
+2025-02-08,LAL,IND,J.T. Orr,Jonathan Sterling,Ben Taylor,"J.T. Orr,Jonathan Sterling,Ben Taylor"
+2025-02-09,HOU,TOR,Matt Boland,Sean Corbin,Courtney Kirkland,"Matt Boland,Sean Corbin,Courtney Kirkland"
+2025-02-09,DET,CHO,Karl Lane,Matt Myers,Natalie Sago,"Karl Lane,Matt Myers,Natalie Sago"
+2025-02-09,PHI,MIL,,,,
+2025-02-10,SAS,WAS,,,,
+2025-02-10,OKC,NOP,Robert Hussey,Marat Kogut,Tre Maddox,"Robert Hussey,Marat Kogut,Tre Maddox"
+2025-02-10,MIA,BOS,Brandon Adair,Eric Dalen,Brian Forte,"Brandon Adair,Eric Dalen,Brian Forte"
+2025-02-10,SAC,DAL,,,,
+2025-02-10,POR,DEN,,,,
+2025-02-10,BRK,CHO,Marc Davis,Jacyn Goble,Sha'Rae Mitchell,"Marc Davis,Jacyn Goble,Sha'Rae Mitchell"
+2025-02-10,ATL,ORL,,,,
+2025-02-10,CLE,MIN,John Goble,Mark Lindsay,Danielle Scott,"John Goble,Mark Lindsay,Danielle Scott"
+2025-02-10,LAL,UTA,Che Flores,Scott Twardoski,Justin Van Duyne,"Che Flores,Scott Twardoski,Justin Van Duyne"
+2025-02-10,GSW,MIL,,,,
+2025-02-10,BOS,MIA,,,,
+2025-02-10,ORL,ATL,Nick Buchert,Scott Foster,Simone Jelks,"Nick Buchert,Scott Foster,Simone Jelks"
+2025-02-11,IND,NYK,Sean Corbin,Intae Hwang,Josh Tiven,"Sean Corbin,Intae Hwang,Josh Tiven"
+2025-02-11,PHI,TOR,Ray Acosta,Ed Malloy,Phenizee Ransom,"Ray Acosta,Ed Malloy,Phenizee Ransom"
+2025-02-11,MEM,PHO,,,,
+2025-02-11,CHI,DET,Brent Barnaky,David Guthrie,Brandon Schwab,"Brent Barnaky,David Guthrie,Brandon Schwab"
+2025-02-12,MIA,OKC,,,,
+2025-02-12,NOP,SAC,Matt Myers,Gediminas Petraitis,Evan Scott,"Matt Myers,Gediminas Petraitis,Evan Scott"
+2025-02-12,MEM,LAC,,,,
+2025-02-12,DAL,GSW,Jacyn Goble,Jonathan Sterling,James Williams,"Jacyn Goble,Jonathan Sterling,James Williams"
+2025-02-12,UTA,LAL,Mousa Dagher,Tre Maddox,J.T. Orr,"Mousa Dagher,Tre Maddox,J.T. Orr"
+2025-02-12,DEN,POR,Tyler Ford,Andy Nagy,C.J. Washington,"Tyler Ford,Andy Nagy,C.J. Washington"
+2025-02-12,PHO,HOU,,,,
+2025-02-12,NYK,ATL,Nate Green,Mark Lindsay,Michael Smith,"Nate Green,Mark Lindsay,Michael Smith"
+2025-02-12,NYK,ATL,Nate Green,Mark Lindsay,Michael Smith,"Nate Green,Mark Lindsay,Michael Smith"
+2025-02-12,DET,CHI,,,,
+2025-02-12,TOR,CLE,Marc Davis,Natalie Sago,Brandon Schwab,"Marc Davis,Natalie Sago,Brandon Schwab"
+2025-02-12,BOS,SAS,Derrick Collins,Phenizee Ransom,Kevin Scott,"Derrick Collins,Phenizee Ransom,Kevin Scott"
+2025-02-12,PHI,BRK,,,,
+2025-02-12,WAS,IND,Nick Buchert,John Goble,Danielle Scott,"Nick Buchert,John Goble,Danielle Scott"
+2025-02-12,ORL,CHO,Ray Acosta,Curtis Blair,Robert Hussey,"Ray Acosta,Curtis Blair,Robert Hussey"
+2025-02-12,BOS,SAS,Derrick Collins,Phenizee Ransom,Kevin Scott,"Derrick Collins,Phenizee Ransom,Kevin Scott"
+2025-02-12,MIL,MIN,,,,
+2025-02-13,UTA,LAC,Courtney Kirkland,Andy Nagy,Jonathan Sterling,"Courtney Kirkland,Andy Nagy,Jonathan Sterling"
+2025-02-13,DAL,MIA,Evan Scott,Justin Van Duyne,Sean Wright,"Evan Scott,Justin Van Duyne,Sean Wright"
+2025-02-13,SAC,NOP,,,,
+2025-02-13,MIN,OKC,Sean Corbin,Jenna Schroeder,Ben Taylor,"Sean Corbin,Jenna Schroeder,Ben Taylor"
+2025-02-13,GSW,HOU,,,,
+2025-02-19,CHO,LAL,,,,
+2025-02-20,LAC,MIL,,,,
+2025-02-20,LAL,POR,,,,
+2025-02-20,PHI,BOS,Brent Barnaky,Courtney Kirkland,Michael Smith,"Brent Barnaky,Courtney Kirkland,Michael Smith"
+2025-02-20,CHO,DEN,,,,
+2025-02-20,NYK,CHI,Marat Kogut,Tyler Ricks,Ben Taylor,"Marat Kogut,Tyler Ricks,Ben Taylor"
+2025-02-20,IND,MEM,Marc Davis,Pat Fraher,J.D. Ralls,"Marc Davis,Pat Fraher,J.D. Ralls"
+2025-02-20,SAS,PHO,Derrick Collins,John Goble,Justin Van Duyne,"Derrick Collins,John Goble,Justin Van Duyne"
+2025-02-20,BRK,CLE,Scott Foster,Intae Hwang,Phenizee Ransom,"Scott Foster,Intae Hwang,Phenizee Ransom"
+2025-02-20,ATL,ORL,John Conley,Natalie Sago,Kevin Scott,"John Conley,Natalie Sago,Kevin Scott"
+2025-02-20,PHI,BOS,Brent Barnaky,Courtney Kirkland,Michael Smith,"Brent Barnaky,Courtney Kirkland,Michael Smith"
+2025-02-20,ATL,ORL,John Conley,Natalie Sago,Kevin Scott,"John Conley,Natalie Sago,Kevin Scott"
+2025-02-21,WAS,MIL,Mousa Dagher,Scott Foster,Jonathan Sterling,"Mousa Dagher,Scott Foster,Jonathan Sterling"
+2025-02-21,MIA,TOR,,,,
+2025-02-21,HOU,MIN,Nick Buchert,Jason Goldenberg,Andy Nagy,"Nick Buchert,Jason Goldenberg,Andy Nagy"
+2025-02-21,UTA,OKC,Rodney Mott,Danielle Scott,Josh Tiven,"Rodney Mott,Danielle Scott,Josh Tiven"
+2025-02-21,NOP,DAL,,,,
+2025-02-21,NYK,CLE,,,,
+2025-02-21,ORL,MEM,Brent Barnaky,Karl Lane,Jenna Schroeder,"Brent Barnaky,Karl Lane,Jenna Schroeder"
+2025-02-21,GSW,SAC,,,,
+2025-02-21,DET,SAS,,,,
+2025-02-22,CHO,POR,,,,
+2025-02-22,BRK,PHI,,,,
+2025-02-22,PHO,CHI,,,,
+2025-02-22,LAL,DEN,,,,
+2025-02-22,HOU,UTA,,,,
+2025-02-23,BOS,NYK,Tony Brothers,Kevin Cutler,Scott Twardoski,"Tony Brothers,Kevin Cutler,Scott Twardoski"
+2025-02-23,MIN,OKC,Jacyn Goble,Michael Smith,Zach Zarba,"Jacyn Goble,Michael Smith,Zach Zarba"
+2025-02-23,CLE,MEM,Nick Buchert,Courtney Kirkland,Brandon Schwab,"Nick Buchert,Courtney Kirkland,Brandon Schwab"
+2025-02-23,NOP,SAS,Simone Jelks,Marat Kogut,Mark Lindsay,"Simone Jelks,Marat Kogut,Mark Lindsay"
+2025-02-23,BOS,NYK,Tony Brothers,Kevin Cutler,Scott Twardoski,"Tony Brothers,Kevin Cutler,Scott Twardoski"
+2025-02-23,GSW,DAL,Natalie Sago,Danielle Scott,Josh Tiven,"Natalie Sago,Danielle Scott,Josh Tiven"
+2025-02-23,DET,ATL,,,,
+2025-02-23,ORL,WAS,John Butler,John Goble,Intae Hwang,"John Butler,John Goble,Intae Hwang"
+2025-02-23,PHO,TOR,,,,
+2025-02-23,ATL,DET,Nate Green,David Guthrie,Evan Scott,"Nate Green,David Guthrie,Evan Scott"
+2025-02-23,MIL,MIA,Andy Nagy,Ben Taylor,Tom Washington,"Andy Nagy,Ben Taylor,Tom Washington"
+2025-02-23,LAC,IND,,,,
+2025-02-24,DET,LAC,Jason Goldenberg,Matt Kallio,Sean Wright,"Jason Goldenberg,Matt Kallio,Sean Wright"
+2025-02-24,CHI,PHI,,,,
+2025-02-24,ATL,MIA,John Butler,Mark Lindsay,J.D. Ralls,"John Butler,Mark Lindsay,J.D. Ralls"
+2025-02-24,BRK,WAS,,,,
+2025-02-24,DEN,IND,,,,
+2025-02-24,POR,UTA,,,,
+2025-02-24,ATL,MIA,John Butler,Mark Lindsay,J.D. Ralls,"John Butler,Mark Lindsay,J.D. Ralls"
+2025-02-24,OKC,MIN,Ray Acosta,Derrick Collins,Brian Forte,"Ray Acosta,Derrick Collins,Brian Forte"
+2025-02-24,CHO,SAC,,,,
+2025-02-25,TOR,BOS,Nick Buchert,Mitchell Ervin,Tyler Ricks,"Nick Buchert,Mitchell Ervin,Tyler Ricks"
+2025-02-25,ORL,CLE,Mousa Dagher,David Guthrie,Justin Van Duyne,"Mousa Dagher,David Guthrie,Justin Van Duyne"
+2025-02-25,MIL,HOU,,,,
+2025-02-25,MEM,PHO,Curtis Blair,Jacyn Goble,Intae Hwang,"Curtis Blair,Jacyn Goble,Intae Hwang"
+2025-02-25,SAS,NOP,,,,
+2025-02-25,GSW,CHO,Brandon Adair,Brent Barnaky,James Williams,"Brandon Adair,Brent Barnaky,James Williams"
+2025-02-25,DAL,LAL,,,,
+2025-02-25,BOS,TOR,,,,
+2025-02-26,SAC,UTA,,,,
+2025-02-26,MIA,ATL,Robert Hussey,Bill Kennedy,Justin Van Duyne,"Robert Hussey,Bill Kennedy,Justin Van Duyne"
+2025-02-26,LAC,CHI,,,,
+2025-02-26,ATL,MIA,,,,
+2025-02-26,DET,BOS,Ed Malloy,Rodney Mott,Phenizee Ransom,"Ed Malloy,Rodney Mott,Phenizee Ransom"
+2025-02-26,POR,WAS,,,,
+2025-02-26,BRK,OKC,Nick Buchert,Simone Jelks,Sean Wright,"Nick Buchert,Simone Jelks,Sean Wright"
+2025-02-26,DET,BOS,Ed Malloy,Rodney Mott,Phenizee Ransom,"Ed Malloy,Rodney Mott,Phenizee Ransom"
+2025-02-26,HOU,SAS,Brian Forte,J.D. Ralls,Kevin Scott,"Brian Forte,J.D. Ralls,Kevin Scott"
+2025-02-26,TOR,IND,,,,
+2025-02-26,NYK,PHI,Sean Corbin,Mitchell Ervin,Brett Nansel,"Sean Corbin,Mitchell Ervin,Brett Nansel"
+2025-02-27,MIL,DEN,Curtis Blair,Karl Lane,Phenizee Ransom,"Curtis Blair,Karl Lane,Phenizee Ransom"
+2025-02-27,DAL,CHO,Gediminas Petraitis,Derek Richardson,C.J. Washington,"Gediminas Petraitis,Derek Richardson,C.J. Washington"
+2025-02-27,NOP,PHO,,,,
+2025-02-27,LAL,MIN,Brandon Adair,Brent Barnaky,James Williams,"Brandon Adair,Brent Barnaky,James Williams"
+2025-02-27,GSW,ORL,,,,
+2025-02-28,BOS,CLE,Tre Maddox,Danielle Scott,Ben Taylor,"Tre Maddox,Danielle Scott,Ben Taylor"
+2025-02-28,DEN,DET,,,,
+2025-02-28,ATL,OKC,Tony Brothers,Jenna Schroeder,Scott Twardoski,"Tony Brothers,Jenna Schroeder,Scott Twardoski"
+2025-02-28,CLE,BOS,,,,
+2025-02-28,POR,BRK,,,,
+2025-02-28,MEM,NYK,Kevin Cutler,Robert Hussey,Bill Kennedy,"Kevin Cutler,Robert Hussey,Bill Kennedy"
+2025-02-28,CHI,TOR,Jacyn Goble,Nate Green,Ed Malloy,"Jacyn Goble,Nate Green,Ed Malloy"
+2025-02-28,PHO,NOP,Ray Acosta,Tom Washington,James Williams,"Ray Acosta,Tom Washington,James Williams"
+2025-02-28,LAL,LAC,Sha'Rae Mitchell,Justin Van Duyne,Zach Zarba,"Sha'Rae Mitchell,Justin Van Duyne,Zach Zarba"
+2025-02-28,ATL,OKC,Tony Brothers,Jenna Schroeder,Scott Twardoski,"Tony Brothers,Jenna Schroeder,Scott Twardoski"
+2025-02-28,IND,MIA,,,,
+2025-02-28,MIN,UTA,,,,
+2025-03-01,GSW,PHI,,,,
+2025-03-01,DAL,MIL,Brandon Adair,Brent Barnaky,Courtney Kirkland,"Brandon Adair,Brent Barnaky,Courtney Kirkland"
+2025-03-01,SAS,MEM,,,,
+2025-03-01,DET,BRK,Matt Myers,Andy Nagy,Gediminas Petraitis,"Matt Myers,Andy Nagy,Gediminas Petraitis"
+2025-03-01,CHO,WAS,Jacyn Goble,Nate Green,Jonathan Sterling,"Jacyn Goble,Nate Green,Jonathan Sterling"
+2025-03-01,HOU,SAC,J.B. DeRosa,Robert Hussey,Karl Lane,"J.B. DeRosa,Robert Hussey,Karl Lane"
+2025-03-02,IND,CHI,Matt Boland,Mitchell Ervin,C.J. Washington,"Matt Boland,Mitchell Ervin,C.J. Washington"
+2025-03-02,DEN,BOS,,,,
+2025-03-02,POR,CLE,,,,
+2025-03-02,NYK,MIA,,,,
+2025-03-02,ORL,TOR,Tony Brothers,Simone Jelks,Phenizee Ransom,"Tony Brothers,Simone Jelks,Phenizee Ransom"
+2025-03-02,BOS,DEN,Sean Corbin,Evan Scott,Josh Tiven,"Sean Corbin,Evan Scott,Josh Tiven"
+2025-03-02,LAC,LAL,,,,
+2025-03-02,OKC,SAS,,,,
+2025-03-02,MIN,PHO,,,,
+2025-03-02,NOP,UTA,,,,
+2025-03-03,MIA,WAS,Curtis Blair,Derrick Collins,Phenizee Ransom,"Curtis Blair,Derrick Collins,Phenizee Ransom"
+2025-03-03,UTA,DET,Intae Hwang,Bill Kennedy,Tre Maddox,"Intae Hwang,Bill Kennedy,Tre Maddox"
+2025-03-03,DAL,SAC,Tyler Ford,Jason Goldenberg,Brandon Schwab,"Tyler Ford,Jason Goldenberg,Brandon Schwab"
+2025-03-03,MEM,ATL,Ray Acosta,John Goble,Jonathan Sterling,"Ray Acosta,John Goble,Jonathan Sterling"
+2025-03-03,ATL,MEM,,,,
+2025-03-03,PHI,POR,Marat Kogut,Danielle Scott,Sean Wright,"Marat Kogut,Danielle Scott,Sean Wright"
+2025-03-03,CHO,GSW,Mark Lindsay,Andy Nagy,Michael Smith,"Mark Lindsay,Andy Nagy,Michael Smith"
+2025-03-03,HOU,OKC,,,,
+2025-03-04,PHO,LAC,J.B. DeRosa,Brian Forte,Nate Green,"J.B. DeRosa,Brian Forte,Nate Green"
+2025-03-04,MIN,PHI,Mousa Dagher,Sha'Rae Mitchell,Josh Tiven,"Mousa Dagher,Sha'Rae Mitchell,Josh Tiven"
+2025-03-04,SAS,BRK,Nick Buchert,David Guthrie,Simone Jelks,"Nick Buchert,David Guthrie,Simone Jelks"
+2025-03-04,NOP,LAL,,,,
+2025-03-04,TOR,ORL,,,,
+2025-03-04,NYK,GSW,Natalie Sago,Kevin Scott,C.J. Washington,"Natalie Sago,Kevin Scott,C.J. Washington"
+2025-03-04,ATL,MIL,Pat Fraher,Robert Hussey,Rodney Mott,"Pat Fraher,Robert Hussey,Rodney Mott"
+2025-03-04,ATL,MIL,Pat Fraher,Robert Hussey,Rodney Mott,"Pat Fraher,Robert Hussey,Rodney Mott"
+2025-03-04,HOU,IND,,,,
+2025-03-04,CLE,CHI,,,,
+2025-03-05,BOS,POR,Jacyn Goble,Suyash Mehta,Gediminas Petraitis,"Jacyn Goble,Suyash Mehta,Gediminas Petraitis"
+2025-03-05,CHO,MIN,Derrick Collins,Marc Davis,Natalie Sago,"Derrick Collins,Marc Davis,Natalie Sago"
+2025-03-05,CLE,MIA,Ray Acosta,Jonathan Sterling,Zach Zarba,"Ray Acosta,Jonathan Sterling,Zach Zarba"
+2025-03-05,UTA,WAS,,,,
+2025-03-05,BOS,POR,Jacyn Goble,Suyash Mehta,Gediminas Petraitis,"Jacyn Goble,Suyash Mehta,Gediminas Petraitis"
+2025-03-05,MIL,DAL,John Butler,Mitchell Ervin,Tre Maddox,"John Butler,Mitchell Ervin,Tre Maddox"
+2025-03-05,DEN,SAC,Ed Malloy,Jenna Schroeder,Justin Van Duyne,"Ed Malloy,Jenna Schroeder,Justin Van Duyne"
+2025-03-05,MEM,OKC,Pat Fraher,Phenizee Ransom,Sean Wright,"Pat Fraher,Phenizee Ransom,Sean Wright"
+2025-03-05,DET,LAC,,,,
+2025-03-06,NYK,LAL,,,,
+2025-03-06,ORL,CHI,Curtis Blair,Robert Hussey,Andy Nagy,"Curtis Blair,Robert Hussey,Andy Nagy"
+2025-03-06,BRK,GSW,Bill Kennedy,Derek Richardson,Evan Scott,"Bill Kennedy,Derek Richardson,Evan Scott"
+2025-03-06,HOU,NOP,,,,
+2025-03-06,ATL,IND,Courtney Kirkland,J.T. Orr,Danielle Scott,"Courtney Kirkland,J.T. Orr,Danielle Scott"
+2025-03-06,ATL,IND,Courtney Kirkland,J.T. Orr,Danielle Scott,"Courtney Kirkland,J.T. Orr,Danielle Scott"
+2025-03-06,BOS,PHI,Ray Acosta,John Goble,Matt Myers,"Ray Acosta,John Goble,Matt Myers"
+2025-03-06,PHI,BOS,,,,
+2025-03-07,TOR,UTA,Jacyn Goble,Mark Lindsay,Suyash Mehta,"Jacyn Goble,Mark Lindsay,Suyash Mehta"
+2025-03-07,DAL,MEM,Simone Jelks,Marat Kogut,Zach Zarba,"Simone Jelks,Marat Kogut,Zach Zarba"
+2025-03-07,MIA,MIN,Kevin Cutler,Brandon Schwab,Kevin Scott,"Kevin Cutler,Brandon Schwab,Kevin Scott"
+2025-03-07,OKC,POR,Brent Barnaky,Marc Davis,Michael Smith,"Brent Barnaky,Marc Davis,Michael Smith"
+2025-03-07,DEN,PHO,Scott Foster,Tre Maddox,Phenizee Ransom,"Scott Foster,Tre Maddox,Phenizee Ransom"
+2025-03-07,SAC,SAS,Karl Lane,Brett Nansel,Scott Twardoski,"Karl Lane,Brett Nansel,Scott Twardoski"
+2025-03-07,NYK,LAC,,,,
+2025-03-07,CLE,CHO,,,,
+2025-03-08,MIA,CHI,Pat Fraher,Intae Hwang,J.T. Orr,"Pat Fraher,Intae Hwang,J.T. Orr"
+2025-03-08,TOR,WAS,Derek Richardson,Josh Tiven,C.J. Washington,"Derek Richardson,Josh Tiven,C.J. Washington"
+2025-03-08,ATL,IND,Brian Forte,Bill Kennedy,Matt Myers,"Brian Forte,Bill Kennedy,Matt Myers"
+2025-03-08,BRK,CHO,,,,
+2025-03-08,NOP,HOU,,,,
+2025-03-08,ATL,IND,Brian Forte,Bill Kennedy,Matt Myers,"Brian Forte,Bill Kennedy,Matt Myers"
+2025-03-08,DET,GSW,,,,
+2025-03-08,BOS,LAL,Jason Goldenberg,Natalie Sago,James Williams,"Jason Goldenberg,Natalie Sago,James Williams"
+2025-03-08,BOS,LAL,Jason Goldenberg,Natalie Sago,James Williams,"Jason Goldenberg,Natalie Sago,James Williams"
+2025-03-08,MIL,ORL,Matt Boland,Nick Buchert,John Goble,"Matt Boland,Nick Buchert,John Goble"
+2025-03-09,DET,POR,,,,
+2025-03-09,OKC,DEN,J.B. DeRosa,David Guthrie,Brandon Schwab,"J.B. DeRosa,David Guthrie,Brandon Schwab"
+2025-03-09,MIL,CLE,Marc Davis,Nate Green,Marat Kogut,"Marc Davis,Nate Green,Marat Kogut"
+2025-03-09,MEM,NOP,,,,
+2025-03-09,UTA,PHI,,,,
+2025-03-09,MIN,SAS,Brent Barnaky,Scott Foster,Phenizee Ransom,"Brent Barnaky,Scott Foster,Phenizee Ransom"
+2025-03-09,LAC,SAC,Mousa Dagher,Mitchell Ervin,Tyler Ford,"Mousa Dagher,Mitchell Ervin,Tyler Ford"
+2025-03-09,DAL,PHO,Jacyn Goble,Sha'Rae Mitchell,Kevin Scott,"Jacyn Goble,Sha'Rae Mitchell,Kevin Scott"
+2025-03-10,OKC,DEN,Jacyn Goble,Mark Lindsay,C.J. Washington,"Jacyn Goble,Mark Lindsay,C.J. Washington"
+2025-03-10,GSW,POR,Mitchell Ervin,Matt Kallio,Justin Van Duyne,"Mitchell Ervin,Matt Kallio,Justin Van Duyne"
+2025-03-10,PHO,MEM,,,,
+2025-03-10,BOS,UTA,Bill Kennedy,J.T. Orr,Derek Richardson,"Bill Kennedy,J.T. Orr,Derek Richardson"
+2025-03-10,NYK,SAC,,,,
+2025-03-10,ATL,PHI,Nick Buchert,Brett Nansel,James Williams,"Nick Buchert,Brett Nansel,James Williams"
+2025-03-10,DAL,SAS,,,,
+2025-03-10,CHI,IND,Ed Malloy,Brandon Schwab,Josh Tiven,"Ed Malloy,Brandon Schwab,Josh Tiven"
+2025-03-10,WAS,TOR,,,,
+2025-03-10,ATL,PHI,Nick Buchert,Brett Nansel,James Williams,"Nick Buchert,Brett Nansel,James Williams"
+2025-03-10,CHO,MIA,,,,
+2025-03-10,BRK,LAL,Ray Acosta,John Goble,Jonathan Sterling,"Ray Acosta,John Goble,Jonathan Sterling"
+2025-03-10,BOS,UTA,Bill Kennedy,J.T. Orr,Derek Richardson,"Bill Kennedy,J.T. Orr,Derek Richardson"
+2025-03-10,HOU,ORL,Pat Fraher,Natalie Sago,Tom Washington,"Pat Fraher,Natalie Sago,Tom Washington"
+2025-03-11,IND,MIL,Scott Foster,Gediminas Petraitis,Evan Scott,"Scott Foster,Gediminas Petraitis,Evan Scott"
+2025-03-11,DET,WAS,J.B. DeRosa,Nate Green,Courtney Kirkland,"J.B. DeRosa,Nate Green,Courtney Kirkland"
+2025-03-11,CLE,BRK,Kevin Cutler,David Guthrie,Brett Nansel,"Kevin Cutler,David Guthrie,Brett Nansel"
+2025-03-11,NOP,LAC,Pat Fraher,Danielle Scott,Kevin Scott,"Pat Fraher,Danielle Scott,Kevin Scott"
+2025-03-12,MEM,UTA,Ed Malloy,Brandon Schwab,Scott Twardoski,"Ed Malloy,Brandon Schwab,Scott Twardoski"
+2025-03-12,BOS,OKC,Nick Buchert,Tyler Ford,Phenizee Ransom,"Nick Buchert,Tyler Ford,Phenizee Ransom"
+2025-03-12,MIA,LAC,Brent Barnaky,Matt Boland,Marc Davis,"Brent Barnaky,Matt Boland,Marc Davis"
+2025-03-12,HOU,PHO,Tony Brothers,Brian Forte,Andy Nagy,"Tony Brothers,Brian Forte,Andy Nagy"
+2025-03-12,ATL,CHO,C.J. Washington,Tom Washington,Zach Zarba,"C.J. Washington,Tom Washington,Zach Zarba"
+2025-03-12,NYK,POR,,,,
+2025-03-12,DEN,MIN,Curtis Blair,John Butler,Mitchell Ervin,"Curtis Blair,John Butler,Mitchell Ervin"
+2025-03-12,BOS,OKC,Nick Buchert,Tyler Ford,Phenizee Ransom,"Nick Buchert,Tyler Ford,Phenizee Ransom"
+2025-03-12,PHI,TOR,,,,
+2025-03-12,DAL,SAS,,,,
+2025-03-12,ATL,CHO,C.J. Washington,Tom Washington,Zach Zarba,"C.J. Washington,Tom Washington,Zach Zarba"
+2025-03-13,SAC,GSW,,,,
+2025-03-13,NOP,ORL,Tre Maddox,J.D. Ralls,James Williams,"Tre Maddox,J.D. Ralls,James Williams"
+2025-03-13,WAS,DET,,,,
+2025-03-13,MIL,LAL,J.B. DeRosa,Courtney Kirkland,Brett Nansel,"J.B. DeRosa,Courtney Kirkland,Brett Nansel"
+2025-03-13,BRK,CHI,,,,
+2025-03-14,DEN,LAL,Jason Goldenberg,Sha'Rae Mitchell,Ben Taylor,"Jason Goldenberg,Sha'Rae Mitchell,Ben Taylor"
+2025-03-14,TOR,UTA,,,,
+2025-03-14,PHO,SAC,John Butler,Bill Kennedy,Michael Smith,"John Butler,Bill Kennedy,Michael Smith"
+2025-03-14,ORL,MIN,,,,
+2025-03-14,MEM,CLE,Curtis Blair,Matt Kallio,Rodney Mott,"Curtis Blair,Matt Kallio,Rodney Mott"
+2025-03-14,MIA,BOS,Tony Brothers,Matt Myers,Gediminas Petraitis,"Tony Brothers,Matt Myers,Gediminas Petraitis"
+2025-03-14,ATL,LAC,Scott Foster,Andy Nagy,Tyler Ricks,"Scott Foster,Andy Nagy,Tyler Ricks"
+2025-03-14,PHI,IND,Brent Barnaky,Kevin Scott,Jonathan Sterling,"Brent Barnaky,Kevin Scott,Jonathan Sterling"
+2025-03-14,MIA,BOS,Tony Brothers,Matt Myers,Gediminas Petraitis,"Tony Brothers,Matt Myers,Gediminas Petraitis"
+2025-03-14,ATL,LAC,Scott Foster,Andy Nagy,Tyler Ricks,"Scott Foster,Andy Nagy,Tyler Ricks"
+2025-03-14,SAS,CHO,Pat Fraher,Brandon Schwab,Evan Scott,"Pat Fraher,Brandon Schwab,Evan Scott"
+2025-03-14,HOU,DAL,Marc Davis,Nate Green,Justin Van Duyne,"Marc Davis,Nate Green,Justin Van Duyne"
+2025-03-15,NYK,GSW,,,,
+2025-03-15,BOS,BRK,,,,
+2025-03-15,NOP,SAS,,,,
+2025-03-15,DEN,WAS,Marat Kogut,J.D. Ralls,Josh Tiven,"Marat Kogut,J.D. Ralls,Josh Tiven"
+2025-03-15,MIA,MEM,,,,
+2025-03-15,OKC,DET,,,,
+2025-03-15,IND,MIL,,,,
+2025-03-15,CHI,HOU,,,,
+2025-03-15,BRK,BOS,Intae Hwang,Karl Lane,Tre Maddox,"Intae Hwang,Karl Lane,Tre Maddox"
+2025-03-16,BRK,ATL,Jacyn Goble,Matt Kallio,Gediminas Petraitis,"Jacyn Goble,Matt Kallio,Gediminas Petraitis"
+2025-03-16,DAL,PHI,J.B. DeRosa,Ed Malloy,C.J. Washington,"J.B. DeRosa,Ed Malloy,C.J. Washington"
+2025-03-16,PHO,LAL,,,,
+2025-03-16,ATL,BRK,,,,
+2025-03-16,ORL,CLE,,,,
+2025-03-16,TOR,POR,,,,
+2025-03-16,MIN,UTA,Matt Boland,Tyler Ford,Andy Nagy,"Matt Boland,Tyler Ford,Andy Nagy"
+2025-03-16,MIL,OKC,Karl Lane,Suyash Mehta,Rodney Mott,"Karl Lane,Suyash Mehta,Rodney Mott"
+2025-03-16,CHO,LAC,,,,
+2025-03-17,SAS,LAL,,,,
+2025-03-17,DEN,GSW,,,,
+2025-03-17,PHO,TOR,Brent Barnaky,Mark Lindsay,Matt Myers,"Brent Barnaky,Mark Lindsay,Matt Myers"
+2025-03-17,IND,MIN,,,,
+2025-03-17,SAC,MEM,Nick Buchert,Derrick Collins,David Guthrie,"Nick Buchert,Derrick Collins,David Guthrie"
+2025-03-17,MIA,NYK,,,,
+2025-03-17,DET,NOP,,,,
+2025-03-17,PHI,HOU,,,,
+2025-03-17,WAS,POR,,,,
+2025-03-17,CHI,UTA,,,,
+2025-03-18,CLE,LAC,,,,
+2025-03-18,BOS,BRK,Brandon Schwab,Josh Tiven,Justin Van Duyne,"Brandon Schwab,Josh Tiven,Justin Van Duyne"
+2025-03-18,BRK,BOS,,,,
+2025-03-18,ATL,CHO,,,,
+2025-03-18,GSW,MIL,Brent Barnaky,Mark Lindsay,Jonathan Sterling,"Brent Barnaky,Mark Lindsay,Jonathan Sterling"
+2025-03-18,CHO,ATL,Matt Boland,Tyler Ford,Rodney Mott,"Matt Boland,Tyler Ford,Rodney Mott"
+2025-03-19,DET,MIA,,,,
+2025-03-19,MIN,NOP,Matt Kallio,Karl Lane,Tre Maddox,"Matt Kallio,Karl Lane,Tre Maddox"
+2025-03-19,OKC,PHI,John Butler,Marat Kogut,Gediminas Petraitis,"John Butler,Marat Kogut,Gediminas Petraitis"
+2025-03-19,NYK,SAS,,,,
+2025-03-19,LAL,DEN,Ray Acosta,Natalie Sago,Zach Zarba,"Ray Acosta,Natalie Sago,Zach Zarba"
+2025-03-19,CLE,SAC,,,,
+2025-03-19,MEM,POR,,,,
+2025-03-19,HOU,ORL,,,,
+2025-03-19,WAS,UTA,,,,
+2025-03-19,CHI,PHO,,,,
+2025-03-19,DAL,IND,,,,
+2025-03-20,CHI,SAC,,,,
+2025-03-20,IND,BRK,Matt Boland,Tony Brothers,Rodney Mott,"Matt Boland,Tony Brothers,Rodney Mott"
+2025-03-20,GSW,TOR,Eric Dalen,Courtney Kirkland,Phenizee Ransom,"Eric Dalen,Courtney Kirkland,Phenizee Ransom"
+2025-03-20,CHO,NYK,Curtis Blair,Suyash Mehta,Justin Van Duyne,"Curtis Blair,Suyash Mehta,Justin Van Duyne"
+2025-03-20,LAL,MIL,Derrick Collins,Kevin Cutler,Pat Fraher,"Derrick Collins,Kevin Cutler,Pat Fraher"
+2025-03-21,ORL,WAS,,,,
+2025-03-21,UTA,BOS,Marc Davis,Brian Forte,J.T. Orr,"Marc Davis,Brian Forte,J.T. Orr"
+2025-03-21,LAC,MEM,Nate Green,Natalie Sago,Kevin Scott,"Nate Green,Natalie Sago,Kevin Scott"
+2025-03-21,DEN,POR,,,,
+2025-03-21,MIN,NOP,James Capers Jr.,Gediminas Petraitis,Evan Scott,"James Capers Jr.,Gediminas Petraitis,Evan Scott"
+2025-03-21,BOS,UTA,,,,
+2025-03-21,DET,DAL,,,,
+2025-03-21,PHI,SAS,,,,
+2025-03-21,OKC,CHO,Sean Corbin,Bill Kennedy,Brett Nansel,"Sean Corbin,Bill Kennedy,Brett Nansel"
+2025-03-21,MIA,HOU,Ed Malloy,Suyash Mehta,C.J. Washington,"Ed Malloy,Suyash Mehta,C.J. Washington"
+2025-03-21,CLE,PHO,,,,
+2025-03-22,GSW,ATL,,,,
+2025-03-22,MIL,SAC,,,,
+2025-03-22,BRK,IND,,,,
+2025-03-22,LAL,CHI,Jason Goldenberg,Courtney Kirkland,J.T. Orr,"Jason Goldenberg,Courtney Kirkland,J.T. Orr"
+2025-03-22,WAS,NYK,,,,
+2025-03-22,ATL,GSW,Tony Brothers,Robert Hussey,Justin Van Duyne,"Tony Brothers,Robert Hussey,Justin Van Duyne"
+2025-03-23,ATL,PHI,John Goble,Matt Myers,Justin Van Duyne,"John Goble,Matt Myers,Justin Van Duyne"
+2025-03-23,ATL,PHI,John Goble,Matt Myers,Justin Van Duyne,"John Goble,Matt Myers,Justin Van Duyne"
+2025-03-23,CLE,UTA,,,,
+2025-03-23,TOR,SAS,James Capers Jr.,Kevin Cutler,Tom Washington,"James Capers Jr.,Kevin Cutler,Tom Washington"
+2025-03-23,BOS,POR,,,,
+2025-03-23,DEN,HOU,,,,
+2025-03-23,MIA,CHO,John Butler,Intae Hwang,Josh Tiven,"John Butler,Intae Hwang,Josh Tiven"
+2025-03-23,OKC,LAC,,,,
+2025-03-23,NOP,DET,,,,
+2025-03-23,POR,BOS,Matt Boland,Natalie Sago,Kevin Scott,"Matt Boland,Natalie Sago,Kevin Scott"
+2025-03-24,IND,MIN,Marat Kogut,Brett Nansel,James Williams,"Marat Kogut,Brett Nansel,James Williams"
+2025-03-24,SAC,BOS,Jason Goldenberg,Courtney Kirkland,Gediminas Petraitis,"Jason Goldenberg,Courtney Kirkland,Gediminas Petraitis"
+2025-03-24,ORL,LAL,Brian Forte,Jacyn Goble,Michael Smith,"Brian Forte,Jacyn Goble,Michael Smith"
+2025-03-24,TOR,WAS,,,,
+2025-03-24,BRK,DAL,J.B. DeRosa,Suyash Mehta,Ben Taylor,"J.B. DeRosa,Suyash Mehta,Ben Taylor"
+2025-03-24,CHI,DEN,,,,
+2025-03-24,MIL,PHO,,,,
+2025-03-24,BOS,SAC,,,,
+2025-03-24,PHI,NOP,,,,
+2025-03-25,DET,SAS,Ray Acosta,Mitchell Ervin,Brett Nansel,"Ray Acosta,Mitchell Ervin,Brett Nansel"
+2025-03-25,CHO,ORL,James Capers Jr.,Simone Jelks,Tre Maddox,"James Capers Jr.,Simone Jelks,Tre Maddox"
+2025-03-25,OKC,SAC,,,,
+2025-03-25,GSW,MIA,,,,
+2025-03-25,UTA,MEM,Pat Fraher,Robert Hussey,Bill Kennedy,"Pat Fraher,Robert Hussey,Bill Kennedy"
+2025-03-25,HOU,ATL,Intae Hwang,Rodney Mott,Josh Tiven,"Intae Hwang,Rodney Mott,Josh Tiven"
+2025-03-25,HOU,ATL,Intae Hwang,Rodney Mott,Josh Tiven,"Intae Hwang,Rodney Mott,Josh Tiven"
+2025-03-25,NYK,DAL,Tony Brothers,Marat Kogut,Tom Washington,"Tony Brothers,Marat Kogut,Tom Washington"
+2025-03-25,POR,CLE,Karl Lane,Gediminas Petraitis,Evan Scott,"Karl Lane,Gediminas Petraitis,Evan Scott"
+2025-03-26,PHO,BOS,Sean Corbin,John Goble,Nate Green,"Sean Corbin,John Goble,Nate Green"
+2025-03-26,PHO,BOS,Sean Corbin,John Goble,Nate Green,"Sean Corbin,John Goble,Nate Green"
+2025-03-26,WAS,PHI,,,,
+2025-03-26,TOR,BRK,,,,
+2025-03-26,IND,LAL,Nick Buchert,David Guthrie,Andy Nagy,"Nick Buchert,David Guthrie,Andy Nagy"
+2025-03-26,LAC,NYK,,,,
+2025-03-26,MIL,DEN,,,,
+2025-03-27,SAC,POR,Robert Hussey,Bill Kennedy,Justin Van Duyne,"Robert Hussey,Bill Kennedy,Justin Van Duyne"
+2025-03-27,HOU,UTA,,,,
+2025-03-27,OKC,MEM,Jacyn Goble,Intae Hwang,Josh Tiven,"Jacyn Goble,Intae Hwang,Josh Tiven"
+2025-03-27,ATL,MIA,,,,
+2025-03-27,WAS,IND,Tony Brothers,Matt Myers,Phenizee Ransom,"Tony Brothers,Matt Myers,Phenizee Ransom"
+2025-03-27,DAL,ORL,,,,
+2025-03-27,SAS,CLE,,,,
+2025-03-27,MIA,ATL,Marat Kogut,Tre Maddox,Brandon Schwab,"Marat Kogut,Tre Maddox,Brandon Schwab"
+2025-03-27,LAL,CHI,,,,
+2025-03-28,DET,CLE,Nick Buchert,John Conley,Kevin Scott,"Nick Buchert,John Conley,Kevin Scott"
+2025-03-28,GSW,NOP,,,,
+2025-03-28,MIN,PHO,John Butler,Marc Davis,Tom Washington,"John Butler,Marc Davis,Tom Washington"
+2025-03-28,BRK,LAC,Brent Barnaky,James Capers Jr.,Brett Nansel,"Brent Barnaky,James Capers Jr.,Brett Nansel"
+2025-03-28,DEN,UTA,Sean Corbin,John Goble,Derek Richardson,"Sean Corbin,John Goble,Derek Richardson"
+2025-03-28,NYK,MIL,,,,
+2025-03-28,TOR,CHO,Jason Goldenberg,David Guthrie,C.J. Washington,"Jason Goldenberg,David Guthrie,C.J. Washington"
+2025-03-29,SAS,BOS,Andy Nagy,Jonathan Sterling,Zach Zarba,"Andy Nagy,Jonathan Sterling,Zach Zarba"
+2025-03-29,WAS,BRK,Jacyn Goble,Simone Jelks,Natalie Sago,"Jacyn Goble,Simone Jelks,Natalie Sago"
+2025-03-29,PHI,MIA,Matt Myers,J.T. Orr,Ben Taylor,"Matt Myers,J.T. Orr,Ben Taylor"
+2025-03-29,OKC,IND,Courtney Kirkland,Karl Lane,Brandon Schwab,"Courtney Kirkland,Karl Lane,Brandon Schwab"
+2025-03-29,ORL,SAC,Brandon Adair,Tony Brothers,Rodney Mott,"Brandon Adair,Tony Brothers,Rodney Mott"
+2025-03-29,SAS,BOS,Andy Nagy,Jonathan Sterling,Zach Zarba,"Andy Nagy,Jonathan Sterling,Zach Zarba"
+2025-03-29,CHI,DAL,Nick Buchert,Mitchell Ervin,Matt Kallio,"Nick Buchert,Mitchell Ervin,Matt Kallio"
+2025-03-29,LAL,MEM,,,,
+2025-03-30,DET,MIN,,,,
+2025-03-30,NOP,CHO,Brian Forte,Sha'Rae Mitchell,Gediminas Petraitis,"Brian Forte,Sha'Rae Mitchell,Gediminas Petraitis"
+2025-03-30,POR,NYK,,,,
+2025-03-30,MIL,ATL,Ray Acosta,Ed Malloy,C.J. Washington,"Ray Acosta,Ed Malloy,C.J. Washington"
+2025-03-30,PHI,TOR,Brett Nansel,Evan Scott,James Williams,"Brett Nansel,Evan Scott,James Williams"
+2025-03-30,SAS,GSW,Sean Corbin,John Goble,Danielle Scott,"Sean Corbin,John Goble,Danielle Scott"
+2025-03-30,CLE,LAC,Curtis Blair,Matt Boland,Kevin Cutler,"Curtis Blair,Matt Boland,Kevin Cutler"
+2025-03-30,PHO,HOU,Bill Kennedy,Jenna Schroeder,Justin Van Duyne,"Bill Kennedy,Jenna Schroeder,Justin Van Duyne"
+2025-03-30,MIL,ATL,Ray Acosta,Ed Malloy,C.J. Washington,"Ray Acosta,Ed Malloy,C.J. Washington"
+2025-03-31,BOS,MEM,,,,
+2025-03-31,OKC,CHI,J.B. DeRosa,Tyler Ford,Suyash Mehta,"J.B. DeRosa,Tyler Ford,Suyash Mehta"
+2025-03-31,MIA,WAS,,,,
+2025-03-31,DAL,BRK,Rodney Mott,Andy Nagy,J.D. Ralls,"Rodney Mott,Andy Nagy,J.D. Ralls"
+2025-03-31,HOU,LAL,,,,
+2025-03-31,LAC,ORL,,,,
+2025-03-31,IND,SAC,Matt Boland,Kevin Cutler,Zach Zarba,"Matt Boland,Kevin Cutler,Zach Zarba"
+2025-03-31,MEM,BOS,Tony Brothers,Matt Kallio,Mark Lindsay,"Tony Brothers,Matt Kallio,Mark Lindsay"
+2025-03-31,UTA,CHO,,,,
+2025-04-01,ATL,POR,Pat Fraher,Jonathan Sterling,Zach Zarba,"Pat Fraher,Jonathan Sterling,Zach Zarba"
+2025-04-01,MIL,PHO,Marat Kogut,Phenizee Ransom,Ben Taylor,"Marat Kogut,Phenizee Ransom,Ben Taylor"
+2025-04-01,GSW,MEM,,,,
+2025-04-01,DEN,MIN,Justin Van Duyne,C.J. Washington,Sean Wright,"Justin Van Duyne,C.J. Washington,Sean Wright"
+2025-04-01,TOR,CHI,,,,
+2025-04-01,POR,ATL,,,,
+2025-04-01,ORL,SAS,,,,
+2025-04-01,NYK,PHI,Nick Buchert,Bill Kennedy,Danielle Scott,"Nick Buchert,Bill Kennedy,Danielle Scott"
+2025-04-02,IND,CHO,Eric Dalen,Robert Hussey,Kevin Scott,"Eric Dalen,Robert Hussey,Kevin Scott"
+2025-04-02,UTA,HOU,,,,
+2025-04-02,BOS,MIA,Tyler Ford,Jacyn Goble,Evan Scott,"Tyler Ford,Jacyn Goble,Evan Scott"
+2025-04-02,SAC,WAS,,,,
+2025-04-02,CLE,NYK,Mitchell Ervin,John Goble,Phenizee Ransom,"Mitchell Ervin,John Goble,Phenizee Ransom"
+2025-04-02,OKC,DET,Matt Kallio,Ed Malloy,Justin Van Duyne,"Matt Kallio,Ed Malloy,Justin Van Duyne"
+2025-04-02,DAL,ATL,James Capers Jr.,Mousa Dagher,Natalie Sago,"James Capers Jr.,Mousa Dagher,Natalie Sago"
+2025-04-02,LAC,NOP,John Butler,Brandon Schwab,Josh Tiven,"John Butler,Brandon Schwab,Josh Tiven"
+2025-04-02,DEN,SAS,Tre Maddox,Scott Twardoski,James Williams,"Tre Maddox,Scott Twardoski,James Williams"
+2025-04-02,DAL,ATL,James Capers Jr.,Mousa Dagher,Natalie Sago,"James Capers Jr.,Mousa Dagher,Natalie Sago"
+2025-04-02,BOS,MIA,Tyler Ford,Jacyn Goble,Evan Scott,"Tyler Ford,Jacyn Goble,Evan Scott"
+2025-04-03,MIN,BRK,,,,
+2025-04-03,MIA,MEM,Nate Green,Courtney Kirkland,Andy Nagy,"Nate Green,Courtney Kirkland,Andy Nagy"
+2025-04-03,PHI,MIL,J.B. DeRosa,Mitchell Ervin,Suyash Mehta,"J.B. DeRosa,Mitchell Ervin,Suyash Mehta"
+2025-04-03,POR,TOR,,,,
+2025-04-03,GSW,LAL,,,,
+2025-04-03,ORL,WAS,,,,
+2025-04-04,CHO,SAC,Ed Malloy,Phenizee Ransom,Jonathan Sterling,"Ed Malloy,Phenizee Ransom,Jonathan Sterling"
+2025-04-04,DAL,LAC,,,,
+2025-04-04,GSW,DEN,Jason Goldenberg,Marat Kogut,Josh Tiven,"Jason Goldenberg,Marat Kogut,Josh Tiven"
+2025-04-04,SAS,CLE,John Butler,Kevin Scott,Justin Van Duyne,"John Butler,Kevin Scott,Justin Van Duyne"
+2025-04-04,LAL,NOP,Matt Kallio,Rodney Mott,Ben Taylor,"Matt Kallio,Rodney Mott,Ben Taylor"
+2025-04-04,CHI,POR,Matt Boland,Sean Corbin,David Guthrie,"Matt Boland,Sean Corbin,David Guthrie"
+2025-04-04,IND,UTA,James Capers Jr.,Brian Forte,Dedric Taylor,"James Capers Jr.,Brian Forte,Dedric Taylor"
+2025-04-04,PHO,BOS,,,,
+2025-04-04,OKC,HOU,,,,
+2025-04-04,BOS,PHO,Brent Barnaky,Pat Fraher,Robert Hussey,"Brent Barnaky,Pat Fraher,Robert Hussey"
+2025-04-04,DET,TOR,,,,
+2025-04-05,ATL,NYK,Curtis Blair,Eric Dalen,Nate Green,"Curtis Blair,Eric Dalen,Nate Green"
+2025-04-05,MEM,DET,,,,
+2025-04-05,MIN,PHI,,,,
+2025-04-05,MIL,MIA,,,,
+2025-04-05,ATL,NYK,Curtis Blair,Eric Dalen,Nate Green,"Curtis Blair,Eric Dalen,Nate Green"
+2025-04-05,DAL,LAC,,,,
+2025-04-06,CHI,CHO,,,,
+2025-04-06,ATL,UTA,Brent Barnaky,Marc Davis,Sha'Rae Mitchell,"Brent Barnaky,Marc Davis,Sha'Rae Mitchell"
+2025-04-06,MIL,NOP,,,,
+2025-04-06,GSW,HOU,Ray Acosta,Mousa Dagher,Ben Taylor,"Ray Acosta,Mousa Dagher,Ben Taylor"
+2025-04-06,DEN,IND,Mark Lindsay,Rodney Mott,Danielle Scott,"Mark Lindsay,Rodney Mott,Danielle Scott"
+2025-04-06,TOR,BRK,,,,
+2025-04-06,POR,SAS,Kevin Cutler,Jason Goldenberg,Josh Tiven,"Kevin Cutler,Jason Goldenberg,Josh Tiven"
+2025-04-06,NYK,PHO,Sean Corbin,Ed Malloy,Andy Nagy,"Sean Corbin,Ed Malloy,Andy Nagy"
+2025-04-06,OKC,LAL,Mitchell Ervin,David Guthrie,Phenizee Ransom,"Mitchell Ervin,David Guthrie,Phenizee Ransom"
+2025-04-06,UTA,ATL,,,,
+2025-04-06,BOS,WAS,J.B. DeRosa,Bill Kennedy,Jenna Schroeder,"J.B. DeRosa,Bill Kennedy,Jenna Schroeder"
+2025-04-06,BOS,WAS,J.B. DeRosa,Bill Kennedy,Jenna Schroeder,"J.B. DeRosa,Bill Kennedy,Jenna Schroeder"
+2025-04-06,CLE,SAC,Eric Dalen,Courtney Kirkland,Brandon Schwab,"Eric Dalen,Courtney Kirkland,Brandon Schwab"
+2025-04-07,PHI,MIA,,,,
+2025-04-07,DET,SAC,Tre Maddox,Evan Scott,Zach Zarba,"Tre Maddox,Evan Scott,Zach Zarba"
+2025-04-08,LAL,OKC,,,,
+2025-04-08,ORL,ATL,James Capers Jr.,Suyash Mehta,Gediminas Petraitis,"James Capers Jr.,Suyash Mehta,Gediminas Petraitis"
+2025-04-08,ATL,ORL,,,,
+2025-04-08,NOP,BRK,,,,
+2025-04-08,BOS,NYK,,,,
+2025-04-08,MIL,MIN,Pat Fraher,Sha'Rae Mitchell,Justin Van Duyne,"Pat Fraher,Sha'Rae Mitchell,Justin Van Duyne"
+2025-04-08,IND,WAS,Sean Corbin,Scott Twardoski,Sean Wright,"Sean Corbin,Scott Twardoski,Sean Wright"
+2025-04-08,SAS,LAC,,,,
+2025-04-08,NYK,BOS,Brian Forte,John Goble,Matt Myers,"Brian Forte,John Goble,Matt Myers"
+2025-04-08,CHI,CLE,,,,
+2025-04-08,MEM,CHO,,,,
+2025-04-08,GSW,PHO,,,,
+2025-04-09,MIA,CHI,,,,
+2025-04-09,SAS,GSW,,,,
+2025-04-09,SAC,DEN,Kevin Cutler,Mousa Dagher,Tyler Ford,"Kevin Cutler,Mousa Dagher,Tyler Ford"
+2025-04-09,LAC,HOU,Brandon Adair,Brent Barnaky,Ed Malloy,"Brandon Adair,Brent Barnaky,Ed Malloy"
+2025-04-09,LAL,DAL,,,,
+2025-04-09,ORL,BOS,Marat Kogut,Brett Nansel,James Williams,"Marat Kogut,Brett Nansel,James Williams"
+2025-04-09,OKC,PHO,,,,
+2025-04-09,BOS,ORL,,,,
+2025-04-09,PHI,WAS,,,,
+2025-04-09,TOR,CHO,Tre Maddox,Andy Nagy,Michael Smith,"Tre Maddox,Andy Nagy,Michael Smith"
+2025-04-09,POR,UTA,,,,
+2025-04-10,DET,NYK,James Capers Jr.,Sha'Rae Mitchell,Justin Van Duyne,"James Capers Jr.,Sha'Rae Mitchell,Justin Van Duyne"
+2025-04-10,BRK,ATL,Karl Lane,Andy Nagy,Natalie Sago,"Karl Lane,Andy Nagy,Natalie Sago"
+2025-04-10,CLE,IND,,,,
+2025-04-10,BRK,ATL,Karl Lane,Andy Nagy,Natalie Sago,"Karl Lane,Andy Nagy,Natalie Sago"
+2025-04-10,MIL,NOP,John Butler,Suyash Mehta,Josh Tiven,"John Butler,Suyash Mehta,Josh Tiven"
+2025-04-10,MIN,MEM,,,,
+2025-04-11,MEM,DEN,,,,
+2025-04-11,SAS,PHO,,,,
+2025-04-11,CHO,BOS,,,,
+2025-04-11,IND,ORL,J.T. Orr,Ben Taylor,C.J. Washington,"J.T. Orr,Ben Taylor,C.J. Washington"
+2025-04-11,MIA,NOP,,,,
+2025-04-11,MIL,DET,,,,
+2025-04-11,OKC,UTA,,,,
+2025-04-11,BRK,MIN,,,,
+2025-04-11,SAC,LAC,Nick Buchert,David Guthrie,Robert Hussey,"Nick Buchert,David Guthrie,Robert Hussey"
+2025-04-11,PHI,ATL,Mark Lindsay,Dedric Taylor,Justin Van Duyne,"Mark Lindsay,Dedric Taylor,Justin Van Duyne"
+2025-04-11,CLE,NYK,,,,
+2025-04-11,LAL,HOU,Kevin Cutler,Nate Green,Kevin Scott,"Kevin Cutler,Nate Green,Kevin Scott"
+2025-04-11,CHI,WAS,Mitchell Ervin,Tre Maddox,Danielle Scott,"Mitchell Ervin,Tre Maddox,Danielle Scott"
+2025-04-11,PHI,ATL,Mark Lindsay,Dedric Taylor,Justin Van Duyne,"Mark Lindsay,Dedric Taylor,Justin Van Duyne"
+2025-04-11,BOS,CHO,John Conley,Rodney Mott,Sean Wright,"John Conley,Rodney Mott,Sean Wright"
+2025-04-11,DAL,TOR,Brian Forte,Jenna Schroeder,Scott Twardoski,"Brian Forte,Jenna Schroeder,Scott Twardoski"
+2025-04-11,GSW,POR,,,,
+2025-04-13,BOS,CHO,Curtis Blair,Danielle Scott,Justin Van Duyne,"Curtis Blair,Danielle Scott,Justin Van Duyne"
+2025-04-13,ATL,ORL,Jason Goldenberg,Josh Tiven,Sean Wright,"Jason Goldenberg,Josh Tiven,Sean Wright"
+2025-04-13,LAL,POR,,,,
+2025-04-13,NOP,OKC,Kevin Cutler,Mousa Dagher,Matt Myers,"Kevin Cutler,Mousa Dagher,Matt Myers"
+2025-04-13,ATL,ORL,Jason Goldenberg,Josh Tiven,Sean Wright,"Jason Goldenberg,Josh Tiven,Sean Wright"
+2025-04-13,BOS,CHO,Curtis Blair,Danielle Scott,Justin Van Duyne,"Curtis Blair,Danielle Scott,Justin Van Duyne"
+2025-04-13,NYK,BRK,,,,
+2025-04-13,CLE,IND,James Capers Jr.,Pat Fraher,Andy Nagy,"James Capers Jr.,Pat Fraher,Andy Nagy"
+2025-04-13,MIA,WAS,Brian Forte,Phenizee Ransom,James Williams,"Brian Forte,Phenizee Ransom,James Williams"
+2025-04-13,UTA,MIN,,,,
+2025-04-13,GSW,LAC,John Butler,Jacyn Goble,Kevin Scott,"John Butler,Jacyn Goble,Kevin Scott"
+2025-04-13,PHI,CHI,Sean Corbin,Tyler Ford,Natalie Sago,"Sean Corbin,Tyler Ford,Natalie Sago"
+2025-04-13,SAS,TOR,Bill Kennedy,Karl Lane,Jonathan Sterling,"Bill Kennedy,Karl Lane,Jonathan Sterling"
+2025-04-13,MIL,DET,J.B. DeRosa,John Goble,J.T. Orr,"J.B. DeRosa,John Goble,J.T. Orr"
+2025-04-13,HOU,DEN,Courtney Kirkland,Mark Lindsay,Scott Twardoski,"Courtney Kirkland,Mark Lindsay,Scott Twardoski"
+2025-04-13,DAL,MEM,,,,
+2025-04-13,SAC,PHO,Brent Barnaky,Nate Green,Ed Malloy,"Brent Barnaky,Nate Green,Ed Malloy"

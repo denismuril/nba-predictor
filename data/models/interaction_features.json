@@ -1,0 +1,17 @@
+{
+  "interactions": [
+    "interaction_efg_product",
+    "interaction_sos_product",
+    "interaction_win_product",
+    "interaction_sos_diff",
+    "interaction_streak_diff",
+    "interaction_rest_diff",
+    "interaction_win_ratio",
+    "interaction_home_momentum",
+    "interaction_away_momentum",
+    "interaction_home_composite"
+  ],
+  "baseline_accuracy": 0.5920925712162826,
+  "with_interactions_accuracy": 0.5946679005957357,
+  "improvement": 0.25753293794531507
+}

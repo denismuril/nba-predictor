@@ -1,0 +1,17 @@
+{
+  "n_folds": 1,
+  "period_start": "2025-11-24T01:23:07.805536",
+  "period_end": "2025-12-01T01:23:07.805536",
+  "total_games_tested": 120,
+  "brier_raw_avg": 0.021337845171348877,
+  "brier_calibrated_avg": 0.0,
+  "brier_improvement_avg": 100.0,
+  "brier_improvement_median": 100.0,
+  "ece_raw_avg": 0.11373676445469469,
+  "ece_calibrated_avg": 0.0,
+  "ece_improvement_avg": 100.0,
+  "ece_improvement_median": 100.0,
+  "folds_improved": 1,
+  "folds_total": 1,
+  "improvement_rate": 100.0
+}

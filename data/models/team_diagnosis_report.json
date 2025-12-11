@@ -1,0 +1,16 @@
+{
+  "DEN": {
+    "total_games": 177,
+    "test_games": 35,
+    "test_accuracy": 0.6,
+    "errors_recent": 4,
+    "errors_old": 10
+  },
+  "CLE": {
+    "total_games": 178,
+    "test_games": 37,
+    "test_accuracy": 0.43243243243243246,
+    "errors_recent": 11,
+    "errors_old": 10
+  }
+}

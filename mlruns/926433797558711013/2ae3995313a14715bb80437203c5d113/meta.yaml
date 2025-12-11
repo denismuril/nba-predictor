@@ -1,0 +1,15 @@
+artifact_uri: file:///home/denis/nba-predictor/mlruns/926433797558711013/2ae3995313a14715bb80437203c5d113/artifacts
+end_time: 1764156496749
+entry_point_name: ''
+experiment_id: '926433797558711013'
+lifecycle_stage: active
+run_id: 2ae3995313a14715bb80437203c5d113
+run_name: Prop_REB
+run_uuid: 2ae3995313a14715bb80437203c5d113
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1764156463736
+status: 3
+tags: []
+user_id: denis

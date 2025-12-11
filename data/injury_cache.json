@@ -1,0 +1,40 @@
+{
+  "timestamp": "2025-11-29T14:24:18.686854",
+  "injuries": [
+    {
+      "player_name": "Jaylen Brown",
+      "team": "BOS",
+      "status": "QUESTIONABLE",
+      "description": "Injury",
+      "date_updated": "2025-11-29"
+    },
+    {
+      "player_name": "Enrique Freeman",
+      "team": "MIN",
+      "status": "AVAILABLE",
+      "description": "Injury",
+      "date_updated": "2025-11-29"
+    },
+    {
+      "player_name": "Myron Gardner",
+      "team": "MIA",
+      "status": "OUT",
+      "description": "Injury",
+      "date_updated": "2025-11-29"
+    },
+    {
+      "player_name": "Jordan Hawkins",
+      "team": "NOP",
+      "status": "OUT",
+      "description": "Injury",
+      "date_updated": "2025-11-29"
+    },
+    {
+      "player_name": "Stephen Curry",
+      "team": "GSW",
+      "status": "OUT",
+      "description": "Injury",
+      "date_updated": "2025-11-29"
+    }
+  ]
+}

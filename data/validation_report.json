@@ -1,0 +1,25 @@
+{
+  "validation_date": "2025-12-04 08:42:04",
+  "period": "Last 30 days",
+  "totals_model": {
+    "model": "Totals V18",
+    "mae": 203.4035388733747,
+    "median_error": 224.95980952636052,
+    "std_error": 47.20829042477176,
+    "max_error": 241.46353420139855,
+    "games_analyzed": 205,
+    "target_mae": 15.2,
+    "improvement_needed": 188.20353887337473,
+    "performance_vs_target": "NEEDS IMPROVEMENT"
+  },
+  "ensemble_model": {
+    "model": "Ensemble V6",
+    "accuracy": 56.58536585365853,
+    "brier_score": 0.37484222981422965,
+    "games_analyzed": 205,
+    "target_accuracy": 63.0,
+    "improvement_needed": -6.41463414634147,
+    "performance_vs_target": "NEEDS IMPROVEMENT"
+  },
+  "overall_status": "BELOW_TARGETS"
+}

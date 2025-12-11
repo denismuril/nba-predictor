@@ -1,0 +1,152 @@
+{
+    "Los Angeles Lakers": {
+        "lat": 34.043,
+        "lon": -118.267,
+        "city": "Los Angeles"
+    },
+    "Los Angeles Clippers": {
+        "lat": 34.043,
+        "lon": -118.267,
+        "city": "Los Angeles"
+    },
+    "Golden State Warriors": {
+        "lat": 37.768,
+        "lon": -122.388,
+        "city": "San Francisco"
+    },
+    "Sacramento Kings": {
+        "lat": 38.580,
+        "lon": -121.500,
+        "city": "Sacramento"
+    },
+    "Phoenix Suns": {
+        "lat": 33.446,
+        "lon": -112.071,
+        "city": "Phoenix"
+    },
+    "Portland Trail Blazers": {
+        "lat": 45.532,
+        "lon": -122.667,
+        "city": "Portland"
+    },
+    "Dallas Mavericks": {
+        "lat": 32.790,
+        "lon": -96.810,
+        "city": "Dallas"
+    },
+    "Houston Rockets": {
+        "lat": 29.751,
+        "lon": -95.362,
+        "city": "Houston"
+    },
+    "San Antonio Spurs": {
+        "lat": 29.427,
+        "lon": -98.438,
+        "city": "San Antonio"
+    },
+    "Memphis Grizzlies": {
+        "lat": 35.138,
+        "lon": -90.051,
+        "city": "Memphis"
+    },
+    "New Orleans Pelicans": {
+        "lat": 29.949,
+        "lon": -90.082,
+        "city": "New Orleans"
+    },
+    "Oklahoma City Thunder": {
+        "lat": 35.463,
+        "lon": -97.515,
+        "city": "Oklahoma City"
+    },
+    "Denver Nuggets": {
+        "lat": 39.749,
+        "lon": -105.008,
+        "city": "Denver"
+    },
+    "Utah Jazz": {
+        "lat": 40.768,
+        "lon": -111.901,
+        "city": "Salt Lake City"
+    },
+    "Minnesota Timberwolves": {
+        "lat": 44.980,
+        "lon": -93.276,
+        "city": "Minneapolis"
+    },
+    "Milwaukee Bucks": {
+        "lat": 43.043,
+        "lon": -87.917,
+        "city": "Milwaukee"
+    },
+    "Chicago Bulls": {
+        "lat": 41.881,
+        "lon": -87.674,
+        "city": "Chicago"
+    },
+    "Indiana Pacers": {
+        "lat": 39.764,
+        "lon": -86.155,
+        "city": "Indianapolis"
+    },
+    "Detroit Pistons": {
+        "lat": 42.341,
+        "lon": -83.055,
+        "city": "Detroit"
+    },
+    "Cleveland Cavaliers": {
+        "lat": 41.497,
+        "lon": -81.688,
+        "city": "Cleveland"
+    },
+    "Toronto Raptors": {
+        "lat": 43.643,
+        "lon": -79.379,
+        "city": "Toronto"
+    },
+    "Boston Celtics": {
+        "lat": 42.366,
+        "lon": -71.062,
+        "city": "Boston"
+    },
+    "New York Knicks": {
+        "lat": 40.751,
+        "lon": -73.993,
+        "city": "New York"
+    },
+    "Brooklyn Nets": {
+        "lat": 40.683,
+        "lon": -73.975,
+        "city": "Brooklyn"
+    },
+    "Philadelphia 76ers": {
+        "lat": 39.901,
+        "lon": -75.172,
+        "city": "Philadelphia"
+    },
+    "Washington Wizards": {
+        "lat": 38.898,
+        "lon": -77.021,
+        "city": "Washington"
+    },
+    "Charlotte Hornets": {
+        "lat": 35.225,
+        "lon": -80.839,
+        "city": "Charlotte"
+    },
+    "Atlanta Hawks": {
+        "lat": 33.757,
+        "lon": -84.396,
+        "city": "Atlanta"
+    },
+    "Miami Heat": {
+        "lat": 25.781,
+        "lon": -80.188,
+        "city": "Miami"
+    },
+    "Orlando Magic": {
+        "lat": 28.539,
+        "lon": -81.383,
+        "city": "Orlando"
+    }
+}

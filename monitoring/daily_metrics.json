@@ -1,0 +1,77 @@
+[
+  {
+    "timestamp": "2025-11-29T00:08:21.814308",
+    "date": "2025-11-29",
+    "calibration": null,
+    "predictions_count": 0,
+    "system_health": {
+      "model_exists": true,
+      "calibrator_exists": false,
+      "model_size_mb": 0.5030603408813477
+    },
+    "logs": {
+      "recalibration_ran": false,
+      "monitoring_ran": false
+    }
+  },
+  {
+    "timestamp": "2025-11-29T00:12:58.740195",
+    "date": "2025-11-29",
+    "calibration": null,
+    "predictions_count": 0,
+    "system_health": {
+      "model_exists": true,
+      "calibrator_exists": false,
+      "model_size_mb": 0.5030603408813477
+    },
+    "logs": {
+      "recalibration_ran": false,
+      "monitoring_ran": false
+    }
+  },
+  {
+    "timestamp": "2025-11-29T10:30:51.684210",
+    "date": "2025-11-29",
+    "calibration": null,
+    "predictions_count": 0,
+    "system_health": {
+      "model_exists": true,
+      "calibrator_exists": false,
+      "model_size_mb": 0.5030603408813477
+    },
+    "logs": {
+      "recalibration_ran": false,
+      "monitoring_ran": false
+    }
+  },
+  {
+    "timestamp": "2025-11-29T10:38:21.896054",
+    "date": "2025-11-29",
+    "calibration": null,
+    "predictions_count": 0,
+    "system_health": {
+      "model_exists": true,
+      "calibrator_exists": false,
+      "model_size_mb": 0.5030603408813477
+    },
+    "logs": {
+      "recalibration_ran": false,
+      "monitoring_ran": false
+    }
+  },
+  {
+    "timestamp": "2025-11-29T10:48:46.104292",
+    "date": "2025-11-29",
+    "calibration": null,
+    "predictions_count": 0,
+    "system_health": {
+      "model_exists": true,
+      "calibrator_exists": false,
+      "model_size_mb": 0.5030603408813477
+    },
+    "logs": {
+      "recalibration_ran": false,
+      "monitoring_ran": false
+    }
+  }
+]

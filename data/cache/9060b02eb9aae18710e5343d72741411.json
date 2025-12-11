@@ -1,0 +1,124 @@
+{
+  "value": {
+    "Milwaukee Bucks vs Boston Celtics": {
+      "home_odds": 4.0,
+      "away_odds": 1.27,
+      "home_team": "Milwaukee Bucks",
+      "away_team": "Boston Celtics",
+      "source": "theoddsapi_fanduel",
+      "timestamp": "2025-12-12T01:10:00Z",
+      "validated": true
+    },
+    "Houston Rockets vs Los Angeles Clippers": {
+      "home_odds": 1.26,
+      "away_odds": 4.1,
+      "home_team": "Houston Rockets",
+      "away_team": "Los Angeles Clippers",
+      "source": "theoddsapi_fanduel",
+      "timestamp": "2025-12-12T01:10:00Z",
+      "validated": true
+    },
+    "New Orleans Pelicans vs Portland Trail Blazers": {
+      "home_odds": 2.54,
+      "away_odds": 1.54,
+      "home_team": "New Orleans Pelicans",
+      "away_team": "Portland Trail Blazers",
+      "source": "theoddsapi_fanduel",
+      "timestamp": "2025-12-12T01:10:00Z",
+      "validated": true
+    },
+    "Sacramento Kings vs Denver Nuggets": {
+      "home_odds": 4.6,
+      "away_odds": 1.22,
+      "home_team": "Sacramento Kings",
+      "away_team": "Denver Nuggets",
+      "source": "theoddsapi_fanduel",
+      "timestamp": "2025-12-12T03:10:00Z",
+      "validated": true
+    },
+    "Detroit Pistons vs Atlanta Hawks": {
+      "home_odds": 1.42,
+      "away_odds": 2.98,
+      "home_team": "Detroit Pistons",
+      "away_team": "Atlanta Hawks",
+      "source": "theoddsapi_fanduel",
+      "timestamp": "2025-12-13T00:10:00Z",
+      "validated": true
+    },
+    "Charlotte Hornets vs Chicago Bulls": {
+      "home_odds": 1.83,
+      "away_odds": 2.02,
+      "home_team": "Charlotte Hornets",
+      "away_team": "Chicago Bulls",
+      "source": "theoddsapi_fanduel",
+      "timestamp": "2025-12-13T00:10:00Z",
+      "validated": true
+    },
+    "Washington Wizards vs Cleveland Cavaliers": {
+      "home_odds": 6.4,
+      "away_odds": 1.13,
+      "home_team": "Washington Wizards",
+      "away_team": "Cleveland Cavaliers",
+      "source": "theoddsapi_fanduel",
+      "timestamp": "2025-12-13T00:10:00Z",
+      "validated": true
+    },
+    "Philadelphia 76ers vs Indiana Pacers": {
+      "home_odds": 1.43,
+      "away_odds": 2.9,
+      "home_team": "Philadelphia 76ers",
+      "away_team": "Indiana Pacers",
+      "source": "theoddsapi_fanduel",
+      "timestamp": "2025-12-13T00:10:00Z",
+      "validated": true
+    },
+    "Memphis Grizzlies vs Utah Jazz": {
+      "home_odds": 1.39,
+      "away_odds": 3.1,
+      "home_team": "Memphis Grizzlies",
+      "away_team": "Utah Jazz",
+      "source": "theoddsapi_fanduel",
+      "timestamp": "2025-12-13T01:10:00Z",
+      "validated": true
+    },
+    "Dallas Mavericks vs Brooklyn Nets": {
+      "home_odds": 1.38,
+      "away_odds": 3.15,
+      "home_team": "Dallas Mavericks",
+      "away_team": "Brooklyn Nets",
+      "source": "theoddsapi_fanduel",
+      "timestamp": "2025-12-13T01:40:00Z",
+      "validated": true
+    },
+    "Golden State Warriors vs Minnesota Timberwolves": {
+      "home_odds": 1.8,
+      "away_odds": 2.05,
+      "home_team": "Golden State Warriors",
+      "away_team": "Minnesota Timberwolves",
+      "source": "theoddsapi_draftkings",
+      "timestamp": "2025-12-13T03:10:00Z",
+      "validated": true
+    },
+    "Orlando Magic vs New York Knicks": {
+      "home_odds": 2.52,
+      "away_odds": 1.56,
+      "home_team": "Orlando Magic",
+      "away_team": "New York Knicks",
+      "source": "theoddsapi_fanduel",
+      "timestamp": "2025-12-13T22:30:00Z",
+      "validated": true
+    },
+    "Oklahoma City Thunder vs San Antonio Spurs": {
+      "home_odds": 1.22,
+      "away_odds": 4.5,
+      "home_team": "Oklahoma City Thunder",
+      "away_team": "San Antonio Spurs",
+      "source": "theoddsapi_fanduel",
+      "timestamp": "2025-12-14T02:00:00Z",
+      "validated": true
+    }
+  },
+  "cached_at": "2025-12-11T10:03:16.310074",
+  "expires_at": "2025-12-11T10:13:16.310080",
+  "ttl_seconds": 600
+}
