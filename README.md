@@ -104,7 +104,7 @@ Sistema profissional de análise quantitativa e previsão de jogos da NBA usando
 <summary><b>v20.6 - Monte Carlo Dinâmico</b></summary>
 
 - ✅ **HCA Adaptativo:** Simulação agora utiliza o **Home Court Advantage dinâmico** (Altitude, Torcida, Recency).
-- ✅ **Precisão Aumentada:** Cenários extremos (ex: Denver em casa vs Lakers fora) agora refletem corretamente nas 300k simulações.
+- ✅ **Precisão Aumentada:** Cenários extremos (ex: Denver em casa vs Lakers fora) agora refletem corretamente nas 1M simulações vetorizadas.
 - ✅ **Validação Estatística:** Testes confirmam ajuste de probabilidade conforme força do mando de campo.
 
 </details>

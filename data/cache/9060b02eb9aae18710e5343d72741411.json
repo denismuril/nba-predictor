@@ -1,8 +1,8 @@
 {
   "value": {
     "Milwaukee Bucks vs Boston Celtics": {
-      "home_odds": 4.0,
-      "away_odds": 1.27,
+      "home_odds": 4.1,
+      "away_odds": 1.25,
       "home_team": "Milwaukee Bucks",
       "away_team": "Boston Celtics",
       "source": "theoddsapi_fanduel",
@@ -10,8 +10,8 @@
       "validated": true
     },
     "Houston Rockets vs Los Angeles Clippers": {
-      "home_odds": 1.26,
-      "away_odds": 4.1,
+      "home_odds": 1.23,
+      "away_odds": 4.4,
       "home_team": "Houston Rockets",
       "away_team": "Los Angeles Clippers",
       "source": "theoddsapi_fanduel",
@@ -118,7 +118,7 @@
       "validated": true
     }
   },
-  "cached_at": "2025-12-11T10:03:16.310074",
-  "expires_at": "2025-12-11T10:13:16.310080",
+  "cached_at": "2025-12-11T10:37:49.266301",
+  "expires_at": "2025-12-11T10:47:49.266305",
   "ttl_seconds": 600
 }

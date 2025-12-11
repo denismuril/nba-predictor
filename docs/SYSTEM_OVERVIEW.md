@@ -36,7 +36,7 @@ Responsável por buscar e persistir dados.
 ### 3.2 Lógica Principal (`core/`)
 Contém o "cérebro" da operação.
 - **`algorithms.py`**: Implementa `calcular_power_rating_v11`. Calcula a força do time com base no Net Rating, lesões, vantagem de jogar em casa e impacto do árbitro.
-- **`simulation.py`**: Executa simulações de Monte Carlo (10.000+ iterações) para determinar probabilidades de vitória baseadas nos power ratings.
+- **`simulation.py`**: Executa simulações de Monte Carlo (1.000.000 iterações vetorizadas) para determinar probabilidades de vitória baseadas nos power ratings.
 - **`roster_manager.py`**: Gerencia elencos de times e disponibilidade de jogadores.
 
 ### 3.3 Machine Learning (`ml_pipeline/`)

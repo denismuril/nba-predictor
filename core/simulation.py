@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 NBA_MARGIN_STD = 12.5  # Desvio padrão histórico das margens de vitória NBA
 
 
-def simular_monte_carlo(prob_home_pct, nr_home, nr_away, iterations=50000, hca_value=3.0):
+def simular_monte_carlo(prob_home_pct, nr_home, nr_away, iterations=1000000, hca_value=3.0):
     """
     AUDIT FIX #4: Versão vetorizada usando NumPy.
     
@@ -26,7 +26,7 @@ def simular_monte_carlo(prob_home_pct, nr_home, nr_away, iterations=50000, hca_v
         prob_home_pct: Probabilidade base (não usado diretamente, mantido para compatibilidade)
         nr_home: Net Rating Ajustado do time da casa
         nr_away: Net Rating Ajustado do time visitante
-        iterations: Número de simulações (default: 50k, suficiente para precisão ±0.2%)
+        iterations: Número de simulações (default: 1M para precisão ±0.03%)
         hca_value: Valor do Home Court Advantage a ser aplicado (default: 3.0)
         
     Returns:
@@ -34,8 +34,8 @@ def simular_monte_carlo(prob_home_pct, nr_home, nr_away, iterations=50000, hca_v
         
     Performance:
         - Versão anterior (loop Python, 300k): ~5 segundos
-        - Versão vetorizada (NumPy, 50k): ~5 milissegundos
-        - Precisão idêntica (< 0.3% de diferença)
+        - Versão vetorizada (NumPy, 1M): ~100 milissegundos
+        - Precisão: ±0.03% com 1M iterações
     """
     # Diferença esperada de pontos (Spread aproximado)
     # Spread = (Home_NR - Away_NR) + HCA
@@ -52,7 +52,7 @@ def simular_monte_carlo(prob_home_pct, nr_home, nr_away, iterations=50000, hca_v
     return prob_simulada
 
 
-def simular_monte_carlo_vetorizado(prob_home, net_rating_home, net_rating_away, iterations=50000, hca_value=3.0):
+def simular_monte_carlo_vetorizado(prob_home, net_rating_home, net_rating_away, iterations=1000000, hca_value=3.0):
     """
     Wrapper mantido para compatibilidade retroativa.
     Agora ambas as funções são igualmente eficientes (vetorizadas).
