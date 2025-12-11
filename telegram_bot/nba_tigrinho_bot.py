@@ -122,6 +122,7 @@ def save_sent_alerts(alerts: dict):
 # Job Intervals
 SNIPER_INTERVAL = 300  # 5 minutes
 HEALTH_INTERVAL = 3600  # 1 hour
+INJURY_ALERT_INTERVAL = 1800  # 30 minutes
 
 # Anti-spam cache for sniper alerts (carregado do disco)
 SENT_ALERTS = load_sent_alerts()
@@ -133,7 +134,8 @@ _sniper_lock = asyncio.Lock()
 # TASK-004/005: Tracking do último sucesso de cada job para monitoramento
 _job_last_success = {
     'sniper': None,
-    'health': None
+    'health': None,
+    'injury_alerts': None
 }
 
 # Logging
@@ -672,6 +674,31 @@ async def check_system_health(context: ContextTypes.DEFAULT_TYPE):
         logger.error(f"Erro no Health Check Job: {e}")
 
 
+async def check_injury_alerts(context: ContextTypes.DEFAULT_TYPE):
+    """
+    Job que roda a cada 30 minutos.
+    Detecta novas lesões críticas e envia alertas para o admin.
+    
+    Foco em jogadores de alto impacto (MVP candidates, All-Stars).
+    """
+    logger.info("🏥 [INJURY] Verificando novas lesões críticas...")
+    
+    try:
+        from data.scrapers.injury_telegram_alerts import InjuryAlertService
+        
+        service = InjuryAlertService(context.bot, str(ADMIN_CHAT_ID))
+        alerts_sent = await service.check_and_send_alerts()
+        
+        if alerts_sent > 0:
+            logger.info(f"🚨 [INJURY] {alerts_sent} alertas de lesão enviados")
+        
+        # Marcar sucesso
+        _job_last_success['injury_alerts'] = datetime.now()
+        
+    except Exception as e:
+        logger.error(f"Erro no Injury Alert Job: {e}")
+
+
 async def update_heartbeat(context: ContextTypes.DEFAULT_TYPE):
     """
     HEARTBEAT FIX: Job que atualiza health_check.txt a cada minuto.
@@ -760,6 +787,15 @@ def main():
         )
         logger.info(f"🏥 Job HEALTH configurado: a cada {HEALTH_INTERVAL//60} min")
         
+        # Injury Alerts: a cada 30 minutos
+        job_queue.run_repeating(
+            check_injury_alerts,
+            interval=INJURY_ALERT_INTERVAL,
+            first=120,  # Iniciar após 2 minutos
+            name='injury_alert_job'
+        )
+        logger.info(f"🏥 Job INJURY ALERTS configurado: a cada {INJURY_ALERT_INTERVAL//60} min")
+        
         # HEARTBEAT FIX: Atualizar health_check.txt a cada 60 segundos
         job_queue.run_repeating(
             update_heartbeat,
@@ -771,9 +807,9 @@ def main():
     else:
         logger.warning("⚠️ JobQueue não disponível. Jobs desativados.")
 
-    logger.info("🤖 NBA TIGRINHO BOT v20.7 iniciado!")
+    logger.info("🤖 NBA TIGRINHO BOT v20.8 iniciado!")
     logger.info("   - Comandos: /jogos, /props, /news, /status, /testes")
-    logger.info("   - Jobs: Sniper (5min), Health (1h), Heartbeat (60s)")
+    logger.info("   - Jobs: Sniper (5min), Health (1h), Injury (30min), Heartbeat (60s)")
     app.run_polling()
 
 

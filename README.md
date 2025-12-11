@@ -1,4 +1,4 @@
-# 🏀 NBA Predictor v21.5 - Forensic Audit Complete
+# 🏀 NBA Predictor v21.6 - Injury Cache System
 
 [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-orange.svg)](LICENSE)
@@ -13,28 +13,28 @@ Sistema profissional de análise quantitativa e previsão de jogos da NBA usando
 
 ---
 
-## 🎉 Destaques v21.5 (11 Dez 2025) - **Forensic Audit Complete**
+## 🎉 Destaques v21.6 (11 Dez 2025) - **Injury Cache System**
 
-### 🔬 Auditoria de Data Leakage Completa
+### 🏥 Sistema de Cache de Lesões
 
-- ✅ **4 Arquivos Auditados:** `feature_engineering_v2.py`, `data_preparation.py`, `opponent_adjusted_stats.py`, `elo_system.py`
-- ✅ **0 Leakage Ativo:** Todas as features perigosas já estão bloqueadas por BLACKLIST + FORCE_DROP
-- ✅ **15+ Features Seguras:** Todas usam `shift(1)` corretamente
+- ✅ **Cache-First Strategy:** Reduz scraping e risco de detecção de bot
+- ✅ **TTL Configurável:** 30 minutos (via `INJURY_CACHE_TTL_MINUTES`)
+- ✅ **Strategy Pattern:** Scrapers modulares (PDF, Rotowire, ESPN)
+- ✅ **Thread-Safe:** Lock para operações de cache concorrentes
 
-### 🔧 Correções Implementadas
+### 🔔 Alertas Automáticos de Lesões (Telegram)
 
-| Correção | Descrição |
+- ✅ **Bot v20.8:** Novo job de alertas a cada 30 minutos
+- ✅ **Jogadores de Alto Impacto:** Notifica quando MVP/All-Stars ficam OUT
+- ✅ **Anti-Spam:** Cooldown de 30 min por alerta
+
+### 📊 Arquivos Criados/Modificados
+
+| Arquivo | Mudança |
 |:---|:---|
-| `ffill(limit=30)` | Limite temporal no forward-fill evita valores stale (>2 meses) |
-| `game_id` no início | ID único criado após normalização de times para merges robustos |
-| Novo teste P3 | Valida que features bloqueadas nunca entram no X de treino |
-| LEAGUE_DEFAULTS 2025-26 | Médias da liga atualizadas para temporada atual |
-
-### 📊 Métricas do Modelo
-
-- Walk-Forward CV: **61.76% ±5.35%**
-- Calibrada Final: **68.49%** (Kelly-safe)
-- Features Aprovadas: **120** (12 BLACKLISTED)
+| `injury_scraper_v2.py` | Refatorado com CacheManager |
+| `injury_telegram_alerts.py` | Novo módulo de alertas |
+| `nba_tigrinho_bot.py` | Atualizado para v20.8 |
 
 ---
 
@@ -125,17 +125,18 @@ Sistema profissional de análise quantitativa e previsão de jogos da NBA usando
 - ✅ **Calibração Isotônica:** Acurácia Calibrada **65.38%**.
 - ✅ **145 Features Seguras:** Seleção via whitelist anti-leakage.
 
-### 🤖 Telegram Bot Sniper
+### 🤖 Telegram Bot Sniper (v20.8)
 
 | Comando | Descrição |
 |---------|-----------|
-| `/start` | Boas-vindas (primeiro user vira Admin) |
+| `/start` | Boas-vindas (Admin via .env) |
 | `/jogos` | Predições do dia com EV |
 | `/props` | Top 3 jogadores (PTS, REB, AST) |
 | `/news` | Alertas de lesão (Woj/Shams) |
 | `/status` | Saúde do sistema |
 | `/heartbeat` | Status dos jobs background |
-| 🚨 Auto | Alertas quando EV > 5%
+| 🚨 Auto | Alertas quando EV > 5% |
+| 🏥 Auto | Alertas de lesões críticas (30 min)
 
 ---
 
@@ -336,11 +337,11 @@ Este software é para fins educacionais e de pesquisa. O autor não se responsab
 
 ## 📞 Suporte
 
-**Versão:** v21.5 (Forensic Audit Complete)  
+**Versão:** v21.6 (Injury Cache System)  
 **Status:** ✅ Production Ready  
 **Temporada:** 2025-26  
 **Última Atualização:** 11 Dezembro 2025  
-**Novidades:** Auditoria completa de Data Leakage, game_id no início do pipeline, LEAGUE_DEFAULTS 2025-26
+**Novidades:** Cache-First para lesões com TTL 30min, Alertas automáticos Telegram para lesões críticas
 
 **Documentação Adicional:**
 
