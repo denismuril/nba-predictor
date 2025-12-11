@@ -20,6 +20,7 @@ env/
 # Logs
 *.log
 logs/
+data/health_check.txt
 
 # Database
 *.db

@@ -9,10 +9,14 @@ import os
 from datetime import datetime
 from telegram import Bot
 import asyncio
+from dotenv import load_dotenv
 
-# Config
-TOKEN = "8263506662:AAFo-VyHHB4Ocrpvx6hFQfNOB1tFhF0G3Hs"
-CHAT_ID = "SEU_CHAT_ID_AQUI"  # Descubra enviando /start pro bot
+# Carregar variáveis de ambiente
+load_dotenv()
+
+# Config - NUNCA hardcode tokens!
+TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
+CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")
 
 
 async def run_tests_and_notif():
@@ -68,15 +72,15 @@ async def run_tests_and_notif():
     bot = Bot(token=TOKEN)
     
     try:
-        if CHAT_ID != "SEU_CHAT_ID_AQUI":
+        if TOKEN and CHAT_ID:
             await bot.send_message(
                 chat_id=CHAT_ID,
                 text=msg,
                 parse_mode='Markdown'
             )
-            print(f"✅ Mensagem enviada para Telegram!")
+            print("✅ Mensagem enviada para Telegram!")
         else:
-            print("⚠️ Configure CHAT_ID primeiro!")
+            print("⚠️ Configure TELEGRAM_BOT_TOKEN e TELEGRAM_CHAT_ID no .env!")
             print(msg)
     except Exception as e:
         print(f"❌ Erro ao enviar Telegram: {e}")
@@ -86,5 +90,5 @@ async def run_tests_and_notif():
 
 
 if __name__ == "__main__":
-    result = asyncio.run(run_tests_and_notify())
+    result = asyncio.run(run_tests_and_notif())
     exit(0 if result else 1)
