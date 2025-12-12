@@ -138,6 +138,56 @@ def check_betting_engine():
         logger.error(f'❌ Erro no betting engine: {e}')
         return False
 
+        return False
+
+
+def check_injury_system():
+    """Verifica sistema de lesões (data-driven v2.2)."""
+    logger.info("\n🔍 Verificando sistema de lesões...")
+    
+    try:
+        from data.scrapers.injury_scraper_v2 import StatsManager, InjuryManager, get_injuries_with_cache
+        
+        # 1. Stats Manager
+        sm = StatsManager()
+        score = sm.get_player_importance("Nikola Jokic")
+        
+        if len(sm._stats_cache) == 0:
+            logger.warning("⚠️ StatsManager não carregou jogadores (fallback será usado)")
+        else:
+            logger.info(f"✅ StatsManager OK ({len(sm._stats_cache)} jogadores carregados)")
+            
+        if 0.2 <= score <= 0.35:
+            logger.info(f"✅ Player Score Validation OK (Jokic: {score:.3f})")
+        else:
+            logger.warning(f"⚠️ Player Score Validation SUSPECT (Jokic: {score:.3f})")
+            
+        # 2. Injury Manager
+        im = InjuryManager()
+        # Não forçar refresh para não pesar na API externa durante health check
+        injuries = im.get_latest_injuries(force_refresh=False)
+        
+        if injuries is None:
+             logger.warning("⚠️ InjuryManager retornou None")
+        else:
+             logger.info(f"✅ InjuryManager OK ({len(injuries)} lesões atuais)")
+             
+        # 3. Compatibility check
+        legacy_data = get_injuries_with_cache()
+        if isinstance(legacy_data, dict):
+            logger.info("✅ Legacy Compatibility Link OK")
+        else:
+            logger.error("❌ Legacy Compatibility Link BROKEN")
+            return False
+            
+        return True
+        
+    except ImportError as e:
+        logger.error(f"❌ Erro de importação no sistema de lesões: {e}")
+        return False
+    except Exception as e:
+        logger.error(f"❌ Erro no sistema de lesões: {e}")
+        return False
 
 def main():
     """Executa todos os health checks."""
@@ -149,7 +199,8 @@ def main():
         ("Modelos", check_models),
         ("Pipeline", check_pipeline),
         ("Fórmulas NBA", check_formulas),
-        ("Betting Engine", check_betting_engine)
+        ("Betting Engine", check_betting_engine),
+        ("Sistema de Lesões", check_injury_system)
     ]
 
     results = []

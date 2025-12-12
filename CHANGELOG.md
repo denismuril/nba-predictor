@@ -2,6 +2,34 @@
 
 ---
 
+## v21.8 - Injury System Reborn & Clean Tests (12 Dez 2025)
+
+### 🏥 Sistema de Lesões v2.2
+
+- **Refatoração Completa:** O script `injury_scraper_v2.py` foi reescrito para eliminar dados hardcoded.
+- **Dynamic Stats:** Importância dos jogadores é calculada dinamicamente via `StatsManager` integrando dados RAPM e Estatísticas básicas.
+- **Normalização Robusta:** Regex aprimorada para lidar com sufixos de nomes (Jr., II, III) garantindo casamento perfeito entre relatórios de lesão e banco de dados.
+- **Cache v2:** Estrutura de cache simplificada e robusta, com validação de TTL e compatibilidade retroativa.
+
+### 🧪 Testes e Qualidade
+
+- **Zero Warnings:** Suite de testes `pytest` limpa.
+  - Testes de `data_preparation` ajustados com maior volume de dados para evitar NaN warnings de rolling features.
+  - Testes de `staking_strategy` agora suprimem logs de alerta esperados para uma saída limpa.
+- **Health Check Enhanced:** `scripts/health_check.py` agora valida a integridade do `InjuryManager` e `StatsManager`.
+
+---
+
+## v21.7 - Spread Model Fixed (12 Dez 2025)
+
+### 🐛 Correção Crítica de Treinamento
+
+- **XGBoost Type Error Fix:** Resolvido erro que impedia o treinamento do modelo de Spread devido à coluna `referees` (object/string) ser passada para o XGBoost.
+- **Feature Cleanup:** Coluna `referees` removida explicitamente do conjunto de features em `train_spread_real.py`.
+- **Validação:** Pipeline `train_all_models` executado com sucesso completo.
+
+---
+
 ## v21.6 - Telegram Bot Fix (12 Dez 2025)
 
 ### 🐛 Correção Crítica

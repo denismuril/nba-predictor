@@ -110,8 +110,10 @@ class TestKellyCriterionStrategy:
             ratio = result['kelly_fraction'] / result['kelly_full']
             assert 0.20 <= ratio <= 0.30  # Aproximadamente 0.25
     
-    def test_correlation_detection_same_game(self, strategy):
+    def test_correlation_detection_same_game(self, strategy, caplog):
         """Testa detecção de correlação para apostas no mesmo jogo."""
+        import logging
+        caplog.set_level(logging.ERROR)
         bets = [
             strategy.calculate_optimal_stake(
                 model_prob=0.555,
@@ -149,8 +151,10 @@ class TestKellyCriterionStrategy:
         assert adjusted[1]['correlation_alert'] is not None
         assert 'LAL_vs_BRK' in adjusted[0]['correlation_alert']
     
-    def test_correlation_detection_same_team(self, strategy):
+    def test_correlation_detection_same_team(self, strategy, caplog):
         """Testa detecção de correlação para múltiplas apostas no mesmo time."""
+        import logging
+        caplog.set_level(logging.ERROR)
         bets = [
             strategy.calculate_optimal_stake(
                 model_prob=0.555,

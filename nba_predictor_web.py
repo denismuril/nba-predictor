@@ -1189,7 +1189,7 @@ with tab3:
         # Fetch injury data
         injury_data = {}
         try:
-            from data.scrapers.injury_scraper import get_injuries_with_cache
+            from data.scrapers.injury_scraper_v2 import get_injuries_with_cache
             injury_data = get_injuries_with_cache()
             if injury_data:
                 total_injuries = sum(len(players) for players in injury_data.values())

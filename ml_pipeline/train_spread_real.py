@@ -38,6 +38,7 @@ def prepare_features_v2(df):
                  # Colunas de texto (object) que XGBoost não aceita
                  'season', 'date_str',
                  # REMOVER LEAKAGE
+                 'referees',
                  'pts', 'opp_pts',
                  'home_off_rating', 'home_def_rating', 'home_efg_pct', 'home_ts_pct', 'home_pace', 'home_pie',
                  'away_off_rating', 'away_def_rating', 'away_efg_pct', 'away_ts_pct', 'away_pace', 'away_pie',

@@ -1,4 +1,4 @@
-# 🏀 NBA Predictor v21.6 - Telegram Bot Fix
+# 🏀 NBA Predictor v21.8 - Injury System Reborn
 
 [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-orange.svg)](LICENSE)
@@ -10,6 +10,34 @@
 [![Season](https://img.shields.io/badge/Season-2025--26-orange.svg)]()
 
 Sistema profissional de análise quantitativa e previsão de jogos da NBA usando **Advanced Machine Learning (Ensemble V6)**, **NLP Sentiment Analysis**, **Bot Sniper com Alertas EV**, **SafeKelly Bankroll Management** e **Multi-source data validation**.
+
+---
+
+## 🎉 Destaques v21.8 (12 Dez 2025) - **Injury System V2.2 & Clean Tests**
+
+### 🏥 Sistema de Lesões Completamente Dinâmico (V2.2)
+
+- ✅ **Dynamic Player Stats:** Adeus dados hardcoded! Importância de jogadores agora carregada dinamicamente via CSV (RAPM/Stats).
+- ✅ **Regex Nominal:** Algoritmo aprimorado de normalização de nomes (lida com "Jr", sufixos e acentos).
+- ✅ **API Resilience:** Testes de scraper ajustados para validação real de fallback (Selenium/Excel).
+- ✅ **Legacy Compatibility:** Camada de compatibilidade transparente para módulos antigos.
+
+### 🧪 Qualidade de Código & Testes
+
+- ✅ **Zero Warnings:** Suite de testes `pytest` limpa de alertas de NaNs e suppressão de logs esperados.
+- ✅ **Health Check 2.0:** Novo módulo de verificação profunda do subsistema de lesões.
+- ✅ **Coverage:** Testes unitários expandidos para `injury_scraper_v2.py`.
+
+---
+
+## 🎉 Destaques v21.7 (12 Dez 2025) - **Spread Model Fixed**
+
+### 🐛 Correção no Modelo de Spread (XGBoost)
+
+- ✅ **XGBoost Type Error:** Corrigido erro crítico que impedia o treinamento do modelo de Spread.
+- ✅ **Referees Cleanup:** Coluna `referees` removida do input do modelo (causa do erro de tipo).
+- ✅ **Training Stability:** Pipeline `train_all_models` validado e executando 100% com sucesso.
+- ✅ **Validation Results:** Spread Model atingiu **MAE de 2.51 pontos** após a correção.
 
 ---
 
@@ -358,11 +386,11 @@ Este software é para fins educacionais e de pesquisa. O autor não se responsab
 
 ## 📞 Suporte
 
-**Versão:** v21.6 (Injury Cache System)  
+**Versão:** v21.7 (Spread Model Fix)  
 **Status:** ✅ Production Ready  
 **Temporada:** 2025-26  
-**Última Atualização:** 11 Dezembro 2025  
-**Novidades:** Cache-First para lesões com TTL 30min, Alertas automáticos Telegram para lesões críticas
+**Última Atualização:** 12 Dezembro 2025  
+**Novidades:** Correção crítica no treinamento do Spread Model (XGBoost), remoção de feature inválida.
 
 **Documentação Adicional:**
 

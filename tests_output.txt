@@ -1,0 +1,76 @@
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-9.0.1, pluggy-1.6.0 -- C:\Users\denis.santos\AppData\Local\Microsoft\WindowsApps\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\python.exe
+cachedir: .pytest_cache
+rootdir: \\wsl$\Ubuntu\home\denis\nba-predictor
+configfile: pytest.ini
+plugins: anyio-4.11.0, asyncio-1.3.0, cov-7.0.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 16 items
+
+tests/test_injury_cache.py::TestInjuryReport::test_injury_report_creation PASSED [  6%]
+tests/test_injury_cache.py::TestInjuryReport::test_is_critical_out PASSED [ 12%]
+tests/test_injury_cache.py::TestInjuryReport::test_is_critical_doubtful PASSED [ 18%]
+tests/test_injury_cache.py::TestInjuryReport::test_is_critical_questionable PASSED [ 25%]
+tests/test_injury_cache.py::TestDataCleaner::test_normalize_name_with_jr PASSED [ 31%]
+tests/test_injury_cache.py::TestDataCleaner::test_normalize_name_with_suffix PASSED [ 37%]
+tests/test_injury_cache.py::TestDataCleaner::test_normalize_status_out PASSED [ 43%]
+tests/test_injury_cache.py::TestDataCleaner::test_normalize_status_questionable PASSED [ 50%]
+tests/test_injury_cache.py::TestDataCleaner::test_normalize_status_gtd FAILED [ 56%]
+tests/test_injury_cache.py::TestCacheManager::test_cache_save_and_load 
+-------------------------------- live log call --------------------------------
+2025-12-12 16:34:35 [INFO] Cache atualizado com sucesso.
+FAILED                                                                   [ 62%]
+tests/test_injury_cache.py::TestCacheManager::test_cache_expired 
+-------------------------------- live log call --------------------------------
+2025-12-12 16:34:35 [ERROR] Erro ao ler cache: data.scrapers.injury_scraper_v2.InjuryReport() argument after ** must be a mapping, not str
+PASSED                                                                   [ 68%]
+tests/test_injury_cache.py::TestCacheManager::test_cache_corrupted 
+-------------------------------- live log call --------------------------------
+2025-12-12 16:34:35 [ERROR] Erro ao ler cache: Expecting property name enclosed in double quotes: line 1 column 3 (char 2)
+PASSED                                                                   [ 75%]
+tests/test_injury_cache.py::TestCacheManager::test_cache_missing_file PASSED [ 81%]
+tests/test_injury_cache.py::TestInjuryManager::test_manager_uses_cache_when_valid 
+-------------------------------- live log call --------------------------------
+2025-12-12 16:34:35 [INFO] Stats carregados: 525 jogadores processados.
+2025-12-12 16:34:35 [ERROR] Erro ao ler cache: data.scrapers.injury_scraper_v2.InjuryReport() argument after ** must be a mapping, not str
+2025-12-12 16:34:35 [INFO] Iniciando coleta na Web...
+2025-12-12 16:34:35 [INFO] \U0001f50d Tentando PDF Oficial da NBA...\n2025-12-12 16:34:37 [WARNING] Retrying utils.retry_utils.smart_retry.<locals>.decorator.<locals>.wrapper in 2.0 seconds as it raised HTTPError: PDF not found: 403.
+2025-12-12 16:34:41 [INFO] \u2705 PDF Encontrado: https://ak-static.cms.nba.com/referee/injury/Injury-Report_2025-12-12_02PM.pdf\n2025-12-12 16:34:41 [INFO] \u2705 PDF Parseado: 12 les\xf5es encontradas em 12 times.\n2025-12-12 16:34:41 [INFO] \u2705 Dados obtidos via NBA_Official (12 items)\n2025-12-12 16:34:41 [INFO] Cache atualizado com sucesso.
+FAILED                                                                   [ 87%]
+tests/test_injury_cache.py::TestInjuryManager::test_manager_calculates_impact PASSED [ 93%]
+tests/test_injury_cache.py::TestIntegration::test_full_flow_with_mocked_scrapers 
+-------------------------------- live log call --------------------------------
+2025-12-12 16:34:41 [INFO] Iniciando coleta na Web...
+2025-12-12 16:34:41 [INFO] \u2705 Dados obtidos via NBA_Official (2 items)\n2025-12-12 16:34:41 [INFO] Cache atualizado com sucesso.
+PASSED                                                                   [100%]
+
+================================== FAILURES ===================================
+__________________ TestDataCleaner.test_normalize_status_gtd __________________
+tests\test_injury_cache.py:113: in test_normalize_status_gtd
+    assert DataCleaner.normalize_status("Game Time Decision") == "GTD"
+E   AssertionError: assert 'UNKNOWN' == 'GTD'
+E     
+E     - GTD
+E     + UNKNOWN
+__________________ TestCacheManager.test_cache_save_and_load __________________
+tests\test_injury_cache.py:136: in test_cache_save_and_load
+    assert result is True
+E   assert None is True
+------------------------------ Captured log call ------------------------------
+INFO     data.scrapers.injury_scraper_v2:injury_scraper_v2.py:96 Cache atualizado com sucesso.
+____________ TestInjuryManager.test_manager_uses_cache_when_valid _____________
+tests\test_injury_cache.py:221: in test_manager_uses_cache_when_valid
+    assert len(injuries) == 1
+E   AssertionError: assert 12 == 1
+E    +  where 12 = len([InjuryReport(player_name='Isaac Jones', team='DET', status='OUT', description='Via NBA Official PDF', source='NBA_Official', updated_at='2025-12-12T16:34:41.427543'), InjuryReport(player_name='Zach Collins', team='CHI', status='PROBABLE', description='Via NBA Official PDF', source='NBA_Official', updated_at='2025-12-12T16:34:41.427543'), InjuryReport(player_name='Jarrett Allen', team='CLE', status='OUT', description='Via NBA Official PDF', source='NBA_Official', updated_at='2025-12-12T16:34:41.427543'), InjuryReport(player_name='Malaki Branham', team='WAS', status='OUT', description='Via NBA Official PDF', source='NBA_Official', updated_at='2025-12-12T16:34:41.427543'), InjuryReport(player_name='Tyrese Haliburton', team='IND', status='OUT', description='Via NBA Official PDF', source='NBA_Official', updated_at='2025-12-12T16:34:41.427543'), InjuryReport(player_name='Johni Broome', team='PHI', status='QUESTIONABLE', description='Via NBA Official PDF', source='NBA_Official', updated_at='2025-12-12T16:34:41.427543'), InjuryReport(player_name='Elijah Harkless', team='UTA', status='OUT', description='Via NBA Official PDF', source='NBA_Official', updated_at='2025-12-12T16:34:41.427543'), InjuryReport(player_name='Brandon Clarke', team='MEM', status='OUT', description='Via NBA Official PDF', source='NBA_Official', updated_at='2025-12-12T16:34:41.427543'), InjuryReport(player_name='Tyson Etienne', team='BKN', status='OUT', description='Via NBA Official PDF', source='NBA_Official', updated_at='2025-12-12T16:34:41.428733'), InjuryReport(player_name='Dante Exum', team='DAL', status='OUT', description='Via NBA Official PDF', source='NBA_Official', updated_at='2025-12-12T16:34:41.428733'), InjuryReport(player_name='Joan Beringer', team='MIN', status='OUT', description='Via NBA Official PDF', source='NBA_Official', updated_at='2025-12-12T16:34:41.428733'), InjuryReport(player_name='Draymond Green', team='GSW', status='OUT', description='Via NBA Official PDF', source='NBA_Official', updated_at='2025-12-12T16:34:41.428733')])
+------------------------------ Captured log call ------------------------------
+INFO     data.scrapers.injury_scraper_v2:injury_scraper_v2.py:159 Stats carregados: 525 jogadores processados.\nERROR    data.scrapers.injury_scraper_v2:injury_scraper_v2.py:87 Erro ao ler cache: data.scrapers.injury_scraper_v2.InjuryReport() argument after ** must be a mapping, not str\nINFO     data.scrapers.injury_scraper_v2:injury_scraper_v2.py:364 Iniciando coleta na Web...\nINFO     injury_scraper:injury_scraper.py:119 \U0001f50d Tentando PDF Oficial da NBA...\nWARNING  utils.retry_utils:before_sleep.py:65 Retrying utils.retry_utils.smart_retry.<locals>.decorator.<locals>.wrapper in 2.0 seconds as it raised HTTPError: PDF not found: 403.\nINFO     injury_scraper:injury_scraper.py:155 \u2705 PDF Encontrado: https://ak-static.cms.nba.com/referee/injury/Injury-Report_2025-12-12_02PM.pdf\nINFO     injury_scraper:injury_scraper.py:217 \u2705 PDF Parseado: 12 les\xf5es encontradas em 12 times.\nINFO     data.scrapers.injury_scraper_v2:injury_scraper_v2.py:371 \u2705 Dados obtidos via NBA_Official (12 items)\nINFO     data.scrapers.injury_scraper_v2:injury_scraper_v2.py:96 Cache atualizado com sucesso.
+=========================== short test summary info ===========================
+FAILED tests/test_injury_cache.py::TestDataCleaner::test_normalize_status_gtd - AssertionError: assert 'UNKNOWN' == 'GTD'
+  
+  - GTD
+  + UNKNOWN
+FAILED tests/test_injury_cache.py::TestCacheManager::test_cache_save_and_load - assert None is True
+FAILED tests/test_injury_cache.py::TestInjuryManager::test_manager_uses_cache_when_valid - AssertionError: assert 12 == 1
+ +  where 12 = len([InjuryReport(player_name='Isaac Jones', team='DET', status='OUT', description='Via NBA Official PDF', source='NBA_Official', updated_at='2025-12-12T16:34:41.427543'), InjuryReport(player_name='Zach Collins', team='CHI', status='PROBABLE', description='Via NBA Official PDF', source='NBA_Official', updated_at='2025-12-12T16:34:41.427543'), InjuryReport(player_name='Jarrett Allen', team='CLE', status='OUT', description='Via NBA Official PDF', source='NBA_Official', updated_at='2025-12-12T16:34:41.427543'), InjuryReport(player_name='Malaki Branham', team='WAS', status='OUT', description='Via NBA Official PDF', source='NBA_Official', updated_at='2025-12-12T16:34:41.427543'), InjuryReport(player_name='Tyrese Haliburton', team='IND', status='OUT', description='Via NBA Official PDF', source='NBA_Official', updated_at='2025-12-12T16:34:41.427543'), InjuryReport(player_name='Johni Broome', team='PHI', status='QUESTIONABLE', description='Via NBA Official PDF', source='NBA_Official', updated_at='2025-12-12T16:34:41.427543'), InjuryReport(player_name='Elijah Harkless', team='UTA', status='OUT', description='Via NBA Official PDF', source='NBA_Official', updated_at='2025-12-12T16:34:41.427543'), InjuryReport(player_name='Brandon Clarke', team='MEM', status='OUT', description='Via NBA Official PDF', source='NBA_Official', updated_at='2025-12-12T16:34:41.427543'), InjuryReport(player_name='Tyson Etienne', team='BKN', status='OUT', description='Via NBA Official PDF', source='NBA_Official', updated_at='2025-12-12T16:34:41.428733'), InjuryReport(player_name='Dante Exum', team='DAL', status='OUT', description='Via NBA Official PDF', source='NBA_Official', updated_at='2025-12-12T16:34:41.428733'), InjuryReport(player_name='Joan Beringer', team='MIN', status='OUT', description='Via NBA Official PDF', source='NBA_Official', updated_at='2025-12-12T16:34:41.428733'), InjuryReport(player_name='Draymond Green', team='GSW', status='OUT', description='Via NBA Official PDF', source='NBA_Official', updated_at='2025-12-12T16:34:41.428733')])
+======================== 3 failed, 13 passed in 9.48s =========================

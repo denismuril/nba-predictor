@@ -431,7 +431,7 @@ def add_player_impact_features(
     # Se não fornecido, tentar carregar lesões
     if injuries_df is None:
         try:
-            from data.scrapers.injury_scraper import get_injuries_with_cache
+            from data.scrapers.injury_scraper_v2 import get_injuries_with_cache
             injuries_dict = get_injuries_with_cache()
             
             # Converter dict → DataFrame

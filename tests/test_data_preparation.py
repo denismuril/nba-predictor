@@ -29,22 +29,24 @@ class TestDataLeakagePrevention:
         
         Rolling features NÃO devem incluir o jogo atual no cálculo.
         """
-        # Criar dados de teste com estrutura correta para add_rolling_features
-        dates = pd.date_range('2024-01-01', periods=20)
+        # Aumentar para 100 jogos para diluir NaNs iniciais (rolling start) e evitar warning de "Alta taxa de NaN"
+        dates = pd.date_range('2024-01-01', periods=100)
         data = {
             'date': dates,
-            'home_team': ['LAL'] * 20,
-            'away_team': ['GSW'] * 20,
-            'home_score': [100 + i for i in range(20)],
-            'away_score': [95 + i for i in range(20)],
-            'home_efg': [0.5] * 20,
-            'away_efg': [0.5] * 20,
-            'home_tov_pct': [0.12] * 20,
-            'away_tov_pct': [0.12] * 20,
-            'home_orb_pct': [0.25] * 20,
-            'away_orb_pct': [0.25] * 20,
-            'home_ftr': [0.25] * 20,
-            'away_ftr': [0.25] * 20,
+            'home_team': ['LAL'] * 100,
+            'away_team': ['GSW'] * 100,
+            'home_score': [100 + i for i in range(100)],
+            'away_score': [95 + i for i in range(100)],
+            'home_efg': [0.5] * 100,
+            'away_efg': [0.5] * 100,
+            'home_tov_pct': [0.12] * 100,
+            'away_tov_pct': [0.12] * 100,
+            'home_orb_pct': [0.25] * 100,
+            'away_orb_pct': [0.25] * 100,
+            'home_ftr': [0.25] * 100,
+            'away_ftr': [0.25] * 100,
+            'home_elo': [1500] * 100,
+            'away_elo': [1500] * 100,
         }
         df = pd.DataFrame(data)
         
@@ -203,21 +205,23 @@ class TestFeatureEngineering:
     
     def test_rolling_creates_expected_columns(self):
         """Testa que rolling cria as colunas esperadas."""
-        dates = pd.date_range('2024-01-01', periods=20)
+        dates = pd.date_range('2024-01-01', periods=100)
         data = {
             'date': dates,
-            'home_team': ['LAL'] * 20,
-            'away_team': ['GSW'] * 20,
-            'home_score': [100 + i for i in range(20)],
-            'away_score': [95 + i for i in range(20)],
-            'home_efg': [0.5] * 20,
-            'away_efg': [0.5] * 20,
-            'home_tov_pct': [0.12] * 20,
-            'away_tov_pct': [0.12] * 20,
-            'home_orb_pct': [0.25] * 20,
-            'away_orb_pct': [0.25] * 20,
-            'home_ftr': [0.25] * 20,
-            'away_ftr': [0.25] * 20,
+            'home_team': ['LAL'] * 100,
+            'away_team': ['GSW'] * 100,
+            'home_score': [100 + i for i in range(100)],
+            'away_score': [95 + i for i in range(100)],
+            'home_efg': [0.5] * 100,
+            'away_efg': [0.5] * 100,
+            'home_tov_pct': [0.12] * 100,
+            'away_tov_pct': [0.12] * 100,
+            'home_orb_pct': [0.25] * 100,
+            'away_orb_pct': [0.25] * 100,
+            'home_ftr': [0.25] * 100,
+            'away_ftr': [0.25] * 100,
+            'home_elo': [1500] * 100,
+            'away_elo': [1500] * 100,
         }
         df = pd.DataFrame(data)
         
@@ -232,21 +236,23 @@ class TestFeatureEngineering:
     
     def test_consistency_across_runs(self):
         """Testa que mesmo input gera mesmo output."""
-        dates = pd.date_range('2024-01-01', periods=15)
+        dates = pd.date_range('2024-01-01', periods=60)
         data = {
             'date': dates,
-            'home_team': ['LAL'] * 15,
-            'away_team': ['GSW'] * 15,
-            'home_score': [100 + i for i in range(15)],
-            'away_score': [95 + i for i in range(15)],
-            'home_efg': [0.5] * 15,
-            'away_efg': [0.5] * 15,
-            'home_tov_pct': [0.12] * 15,
-            'away_tov_pct': [0.12] * 15,
-            'home_orb_pct': [0.25] * 15,
-            'away_orb_pct': [0.25] * 15,
-            'home_ftr': [0.25] * 15,
-            'away_ftr': [0.25] * 15,
+            'home_team': ['LAL'] * 60,
+            'away_team': ['GSW'] * 60,
+            'home_score': [100 + i for i in range(60)],
+            'away_score': [95 + i for i in range(60)],
+            'home_efg': [0.5] * 60,
+            'away_efg': [0.5] * 60,
+            'home_tov_pct': [0.12] * 60,
+            'away_tov_pct': [0.12] * 60,
+            'home_orb_pct': [0.25] * 60,
+            'away_orb_pct': [0.25] * 60,
+            'home_ftr': [0.25] * 60,
+            'away_ftr': [0.25] * 60,
+            'home_elo': [1500] * 60,
+            'away_elo': [1500] * 60,
         }
         df = pd.DataFrame(data)
         
@@ -258,8 +264,12 @@ class TestFeatureEngineering:
 
 
 # Integration test
-def test_full_data_prep_pipeline():
+import logging
+
+def test_full_data_prep_pipeline(caplog):
     """Teste end-to-end do pipeline de preparação."""
+    # Silenciar warnings esperados sobre features bloqueadas
+    caplog.set_level(logging.ERROR)
     dates = pd.date_range('2024-01-01', periods=50)
     df = pd.DataFrame({
         'date': dates,
@@ -275,6 +285,8 @@ def test_full_data_prep_pipeline():
         'away_orb_pct': [0.25] * 50,
         'home_ftr': [0.25] * 50,
         'away_ftr': [0.25] * 50,
+        'home_elo': [1500] * 50,
+        'away_elo': [1500] * 50,
         'winner': np.random.choice(['HOME', 'AWAY'], 50)
     })
     

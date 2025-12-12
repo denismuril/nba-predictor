@@ -24,7 +24,7 @@ from data.scrapers.injury_scraper_v2 import (
     DataCleaner,
     InjuryManager,
     CACHE_FILE,
-    CACHE_TTL_MINUTES,
+    INJURY_CACHE_TTL_MINUTES,
 )
 
 
@@ -147,21 +147,21 @@ class TestCacheManager:
         
         # Criar cache velho (2 horas atrás)
         old_time = (datetime.now() - timedelta(hours=2)).isoformat()
-        cache_data = {
-            'timestamp': old_time,
-            'count': 1,
-            'data': [{
+        cache_data = [{
                 'player_name': 'Old Player',
                 'team': 'OLD',
                 'status': 'OUT',
                 'description': 'Old',
                 'source': 'Old',
                 'updated_at': old_time
-            }]
-        }
+        }]
         
         with open(cache_file, 'w') as f:
             json.dump(cache_data, f)
+            
+        # Ajustar timestamp do arquivo para simular arquivo velho
+        t_old = datetime.now() - timedelta(hours=2)
+        os.utime(cache_file, (t_old.timestamp(), t_old.timestamp()))
         
         with patch('data.scrapers.injury_scraper_v2.CACHE_FILE', cache_file):
             # Com TTL de 30 min, cache de 2h deve ser inválido
@@ -195,21 +195,16 @@ class TestInjuryManager:
         """Manager deve usar cache quando válido."""
         cache_file = tmp_path / "valid_cache.json"
         
-        # Criar cache recente (5 minutos atrás)
+        # Criar cache recente
         recent_time = (datetime.now() - timedelta(minutes=5)).isoformat()
-        cache_data = {
-            'timestamp': recent_time,
-            'count': 1,
-            'ttl_minutes': 30,
-            'data': [{
+        cache_data = [{
                 'player_name': 'Cached Player',
                 'team': 'CAC',
                 'status': 'OUT',
                 'description': 'From cache',
                 'source': 'Cache',
                 'updated_at': recent_time
-            }]
-        }
+        }]
         
         with open(cache_file, 'w') as f:
             json.dump(cache_data, f)
@@ -226,6 +221,11 @@ class TestInjuryManager:
         """Manager deve calcular impacto corretamente."""
         manager = InjuryManager()
         
+        # Mockar stats manager para garantir scores determinísticos
+        manager.stats_manager.get_player_importance = MagicMock(side_effect=lambda name: 
+            0.25 if name == "LeBron James" else 0.05
+        )
+        
         # Simular lesões
         test_injuries = [
             InjuryReport("LeBron James", "LAL", "OUT", "Test", "Test", "2024-01-01"),
@@ -236,7 +236,7 @@ class TestInjuryManager:
         
         # Impact deve ser negativo (lesões prejudicam)
         assert impact < 0
-        # LeBron OUT tem alto impacto
+        # LeBron OUT (0.25 * 1.0) + Unknown (0.05 * 0.3) = -0.265
         assert impact < -0.1
 
 
