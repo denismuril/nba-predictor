@@ -2,6 +2,16 @@
 
 ---
 
+## v21.6 - Telegram Bot Fix (12 Dez 2025)
+
+### 🐛 Correção Crítica
+
+- **Telegram Bot Error:** Resolvido erro `KeyError: 'market_line'` que impedia a geração de resultados `/jogos`.
+- **Compatibilidade de Odds:** Ajustada lógica para tratar corretamente chaves `line` (Spreads) e `odds` (Moneyline) do novo formato do módulo `odds_shopping`.
+- **Estabilidade:** Reinicialização forçada do serviço para garantir aplicação da correção em produção.
+
+---
+
 ## v21.5 - Forensic Audit Complete (11 Dez 2025)
 
 ### 🔍 Auditoria Forense Completa

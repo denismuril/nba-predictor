@@ -10,8 +10,8 @@
       "validated": true
     },
     "Charlotte Hornets vs Chicago Bulls": {
-      "home_odds": 2.22,
-      "away_odds": 1.69,
+      "home_odds": 2.26,
+      "away_odds": 1.68,
       "home_team": "Charlotte Hornets",
       "away_team": "Chicago Bulls",
       "source": "theoddsapi_fanduel",
@@ -19,8 +19,8 @@
       "validated": true
     },
     "Washington Wizards vs Cleveland Cavaliers": {
-      "home_odds": 8.0,
-      "away_odds": 1.09,
+      "home_odds": 8.5,
+      "away_odds": 1.08,
       "home_team": "Washington Wizards",
       "away_team": "Cleveland Cavaliers",
       "source": "theoddsapi_fanduel",
@@ -28,8 +28,8 @@
       "validated": true
     },
     "Philadelphia 76ers vs Indiana Pacers": {
-      "home_odds": 1.33,
-      "away_odds": 3.45,
+      "home_odds": 1.34,
+      "away_odds": 3.35,
       "home_team": "Philadelphia 76ers",
       "away_team": "Indiana Pacers",
       "source": "theoddsapi_fanduel",
@@ -37,8 +37,8 @@
       "validated": true
     },
     "Memphis Grizzlies vs Utah Jazz": {
-      "home_odds": 1.34,
-      "away_odds": 3.35,
+      "home_odds": 1.36,
+      "away_odds": 3.3,
       "home_team": "Memphis Grizzlies",
       "away_team": "Utah Jazz",
       "source": "theoddsapi_fanduel",
@@ -82,7 +82,7 @@
       "validated": true
     }
   },
-  "cached_at": "2025-12-12T14:30:01.054110",
-  "expires_at": "2025-12-12T14:40:01.054117",
+  "cached_at": "2025-12-12T15:17:42.781696",
+  "expires_at": "2025-12-12T15:27:42.781706",
   "ttl_seconds": 600
 }

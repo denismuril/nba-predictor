@@ -159,7 +159,7 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     is_admin = (user_id == ADMIN_CHAT_ID)
     
     welcome = f"""
-🏀 *NBA TIGRINHO BOT* v20.7
+🏀 *NBA TIGRINHO BOT* v21.6
 
 Olá, *{user_name}*!
 
@@ -715,7 +715,7 @@ async def update_heartbeat(context: ContextTypes.DEFAULT_TYPE):
             'timestamp': datetime.now().isoformat(),
             'unix_time': time.time(),
             'status': 'ALIVE',
-            'version': 'v20.7',
+            'version': 'v21.6',
             'jobs_status': {
                 'sniper_last_run': _job_last_success.get('sniper', 'Never'),
                 'health_last_run': _job_last_success.get('health', 'Never')

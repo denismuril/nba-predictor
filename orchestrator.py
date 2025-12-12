@@ -219,7 +219,7 @@ class PipelineOrchestrator:
 
     def run_daily_flow(self):
         """Executa o fluxo completo v21.5"""
-        logger.info("🎬 Iniciando Orchestrator Diário NBA v21.5 (Forensic Audit Complete)")
+        logger.info("🎬 Iniciando Orchestrator Diário NBA v21.6 (Telegram Bot Fix)")
 
         try:
             # NOVO: Coletar tweets ANTES do pipeline

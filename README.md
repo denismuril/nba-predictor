@@ -1,4 +1,4 @@
-# 🏀 NBA Predictor v21.6 - Injury Cache System
+# 🏀 NBA Predictor v21.6 - Telegram Bot Fix
 
 [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-orange.svg)](LICENSE)
@@ -10,6 +10,16 @@
 [![Season](https://img.shields.io/badge/Season-2025--26-orange.svg)]()
 
 Sistema profissional de análise quantitativa e previsão de jogos da NBA usando **Advanced Machine Learning (Ensemble V6)**, **NLP Sentiment Analysis**, **Bot Sniper com Alertas EV**, **SafeKelly Bankroll Management** e **Multi-source data validation**.
+
+---
+
+## 🎉 Destaques v21.6 (12 Dez 2025) - **Telegram Bot Fix**
+
+### 🐛 Correção Crítica no Bot do Telegram
+
+- ✅ **Telegram Bot Fix:** Corrigido erro `market_line` que impedia a geração de resultados.
+- ✅ **Odds Shopping:** Ajuste de compatibilidade para exibir corretamente Spreads e Moneyline.
+- ✅ **Estabilidade:** Reinicialização de serviço para garantir aplicação da correção.
 
 ---
 
