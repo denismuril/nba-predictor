@@ -169,14 +169,15 @@ class PipelineOrchestrator:
             logger.error(f"❌ Erro na predição principal: {e}")
 
         # 2. Player Props Prediction
-        try:
-            logger.info("🔮 Gerando previsões de Player Props...")
-            subprocess.run(
-                [sys.executable, "ml_pipeline/predict_player_props.py"],
-                check=True
-            )
-        except Exception as e:
-            logger.warning(f"⚠️ Erro ao gerar Player Props: {e}")
+        # Falha/Redundante com step_generate_player_props. Removido.
+        # try:
+        #     logger.info("🔮 Gerando previsões de Player Props...")
+        #     subprocess.run(
+        #         [sys.executable, "ml_pipeline/predict_player_props.py"],
+        #         check=True
+        #     )
+        # except Exception as e:
+        #     logger.warning(f"⚠️ Erro ao gerar Player Props: {e}")
 
     def step_fetch_odds(self):
         """Busca odds reais antes de gerar previsões"""

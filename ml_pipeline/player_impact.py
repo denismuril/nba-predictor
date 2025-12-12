@@ -34,13 +34,13 @@ class PlayerImpactCalculator:
         print(f"Impacto total: {impact:.2f} RAPM")  # Negativo = time piora
     """
     
-    def __init__(self, rapm_path: str = 'data/nba_rapm.csv', rapm_column: str = 'rapm_darko'):
+    def __init__(self, rapm_path: str = 'data/nba_rapm.csv', rapm_column: str = 'RAPM'):
         """
         Inicializa o calculador.
         
         Args:
             rapm_path: Caminho para o arquivo CSV com dados RAPM
-            rapm_column: Nome da coluna com valores RAPM (default: rapm_darko)
+            rapm_column: Nome da coluna com valores RAPM (default: RAPM)
         """
         self.rapm_path = Path(rapm_path)
         self.rapm_column = rapm_column
@@ -61,15 +61,21 @@ class PlayerImpactCalculator:
             
             df = pd.read_csv(self.rapm_path)
             
-            # Validar colunas requeridas
-            required_cols = ['player_name', self.rapm_column]
+            # Validar colunas requeridas (Support both old and new format)
+            player_col = 'Player' if 'Player' in df.columns else 'player_name'
+            
+            if self.rapm_column not in df.columns and 'rapm_darko' in df.columns:
+                 self.rapm_column = 'rapm_darko'
+
+            required_cols = [player_col, self.rapm_column]
             missing = [c for c in required_cols if c not in df.columns]
             if missing:
                 logger.error(f"❌ Colunas faltando no CSV: {missing}")
                 return None
             
             # Criar coluna normalizada para busca
-            df['name_normalized'] = df['player_name'].apply(self._normalize_name)
+            df['name_normalized'] = df[player_col].apply(self._normalize_name)
+            df['player_name'] = df[player_col] # Ensure standard column exists
             
             # Converter RAPM para numérico (tratar valores faltantes)
             df[self.rapm_column] = pd.to_numeric(df[self.rapm_column], errors='coerce').fillna(0.0)

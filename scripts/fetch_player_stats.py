@@ -1,8 +1,10 @@
 """
 Script para executar scraper de player stats em background.
-Salva os dados em data/nba_rapm.csv para uso posterior.
+Salva os dados em data/nba_player_stats.csv para uso posterior.
 """
 import sys
+import pandas as pd
+import os
 sys.path.insert(0, '.')
 
 import logging
@@ -16,24 +18,62 @@ try:
     from data.scrapers.stats_scraper import obter_player_stats
     
     print("\n🔄 Iniciando scraper...")
-    df_stats = obter_player_stats()
+    # obter_player_stats retorna um DICT de DataFrames {'RAPM': df, 'BBALL_REF': df, ...}
+    results = obter_player_stats()
     
-    if df_stats is not None and not df_stats.empty:
-        print(f"\n✅ Scraper concluído com sucesso!")
-        print(f"   Jogadores: {len(df_stats)}")
-        print(f"   Colunas: {list(df_stats.columns)}")
+    if isinstance(results, dict):
+        print(f"\n✅ Scraper retornou chaves: {list(results.keys())}")
         
-        # Salvar em CSV para cache
-        csv_path = 'data/nba_rapm.csv'
-        df_stats.to_csv(csv_path, index=False)
-        print(f"\n💾 Dados salvos em: {csv_path}")
+        # 1. Tentar obter RAPM (Prioridade)
+        df_main = results.get('RAPM')
+        if df_main is None or df_main.empty:
+             df_main = results.get('BBALL_REF')
         
-        # Mostrar amostra
-        print("\n📊 Amostra dos dados:")
-        print(df_stats.head(10))
+        # 2. Tentar obter Stats Básicos (PPG)
+        df_basic = results.get('BASIC_STATS')
+        
+        if df_main is not None and not df_main.empty:
+            # Se tivermos basic stats, fazer merge
+            if df_basic is not None and not df_basic.empty:
+                # Normalizar colunas para merge
+                # df_main tem Player, Team, RAPM...
+                # df_basic tem PLAYER, TEAM, PTS...
+                
+                df_basic.columns = [c.upper() for c in df_basic.columns]
+                if 'PLAYER' in df_basic.columns:
+                    df_basic = df_basic.rename(columns={'PLAYER': 'Player'})
+                
+                # Merge left on Player
+                print(f"   Iniciando merge: RAPM ({len(df_main)}) + Basic ({len(df_basic)})")
+                df_final = pd.merge(df_main, df_basic[['Player', 'PTS', 'MIN', 'GP']], on='Player', how='left')
+            else:
+                df_final = df_main
+                if 'PTS' not in df_final.columns:
+                    df_final['PTS'] = 0.0 # Fallback
+            
+            # Salvar
+            csv_path = 'data/nba_player_stats.csv'
+            # Garantir diretório data
+            os.makedirs('data', exist_ok=True)
+            
+            df_final.to_csv(csv_path, index=False)
+            print(f"\n💾 Dados salvos em: {csv_path}")
+            print(f"   Total Jogadores: {len(df_final)}")
+            print(f"   Colunas: {list(df_final.columns)}")
+            
+            # Salvar também o raw rapm para compatibilidade
+            results.get('RAPM', df_main).to_csv('data/nba_rapm.csv', index=False)
+            
+        else:
+            print("⚠️ Nenhuma tabela principal (RAPM/BBALL_REF) encontrada.")
+            
+    elif isinstance(results, pd.DataFrame):
+        # Fallback caso mude a implementação retornando apenas DF
+        print("\n✅ Scraper retornou DataFrame único")
+        results.to_csv('data/nba_player_stats.csv', index=False)
         
     else:
-        print("⚠️ Scraper não retornou dados")
+        print("⚠️ Scraper não retornou dados válidos (None ou vazio)")
         
 except Exception as e:
     print(f"\n❌ Erro ao executar scraper: {e}")

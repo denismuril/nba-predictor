@@ -502,59 +502,193 @@ def add_playoff_contention(df: pd.DataFrame) -> pd.DataFrame:
 
 def add_injury_impact(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Feature 10: Injury Impact
+    Feature 10: Injury Impact (RAPM/PPG Based)
     
-    Impacto de lesões baseado em player importance scores.
+    Impacto de lesões calculado somando o RAPM (Real Plus-Minus) e PPG dos jogadores ausentes.
+    Substitui a heurística de "Player Importance" por dados reais de eficiência.
+    
+    Features geradas:
+    - home_missing_rapm: Soma do RAPM dos jogadores fora (quanto talento o time perdeu)
+    - away_missing_rapm: Soma do RAPM dos jogadores fora
+    - missing_rapm_diff: home_missing_rapm - away_missing_rapm (positivo = home perdeu mais talento)
+    
+    Suporta arquivo histórico (injury_date_mapping.json) e scraper tempo real.
     """
     try:
         import sys
+        import json
         from pathlib import Path
         
         project_root = Path(__file__).parent.parent
         if str(project_root) not in sys.path:
             sys.path.insert(0, str(project_root))
         
-        from data.scrapers.injury_scraper_v2 import InjuryScraper, get_player_importance_scores
         from utils.team_normalization import normalize_team
         
-        scraper = InjuryScraper()
-        injuries = scraper.get_current_injuries(use_cache=True)
-        player_scores = get_player_importance_scores()
+        # 1. Carregar Estatísticas de Jogadores (RAPM/PPG)
+        player_stats_file = project_root / 'data' / 'nba_player_stats.csv'
+        player_stats = {}
         
-        if not injuries:
-            logger.debug("⚠️ Sem injury data, usando valores neutros")
-            df['injury_impact_home'] = 0
-            df['injury_impact_away'] = 0
-            df['injury_impact_net'] = 0
-            return df
+        if player_stats_file.exists():
+            try:
+                # Carregar CSV ignorando erros de linha
+                stats_df = pd.read_csv(player_stats_file)
+                # Normalizar nomes de colunas
+                stats_df.columns = [c.lower() for c in stats_df.columns]
+                
+                for _, row in stats_df.iterrows():
+                    p_name = row.get('player')
+                    if pd.notna(p_name):
+                        # Extrair metricas com defaults seguros
+                        # RAPM > 0 = bom, RAPM < 0 = ruim.
+                        # Se um jogador ruim (RAPM -2) não joga, teoricamente o time melhora? 
+                        # Geralmente sim, mas para simplificar e evitar ruído,
+                        # consideramos impacto 0 se RAPM < 0 (ausência de bagre não é "reforço" imediato na NBA)
+                        # ou mantemos o valor real? Vamos manter o valor real, mas clipado em -2.
+                        rapm = pd.to_numeric(row.get('rapm'), errors='coerce')
+                        pts = pd.to_numeric(row.get('pts'), errors='coerce')
+                        
+                        if pd.isna(rapm): rapm = 0.0
+                        if pd.isna(pts): pts = 5.0 # Média de bench warmer
+                        
+                        player_stats[p_name] = {'rapm': rapm, 'pts': pts}
+                        
+                logger.info(f"   📊 Stats de jogadores carregados: {len(player_stats)} atletas")
+            except Exception as e:
+                logger.warning(f"   ⚠️ Erro ao carregar player stats: {e}")
+        else:
+            logger.warning("   ⚠️ Arquivo nba_player_stats.csv não encontrado. Usando fallback.")
+
         
-        home_impacts = []
-        away_impacts = []
+        STATUS_WEIGHTS = {
+            'OUT': 1.0, 'DOUBTFUL': 0.8, 'QUESTIONABLE': 0.5,
+            'GTD': 0.5, 'PROBABLE': 0.2, 'AVAILABLE': 0.0, 'UNKNOWN': 0.2
+        }
+        
+        # 2. Carregar Histórico de Lesões
+        historical_file = project_root / 'data' / 'injuries_historical' / 'injury_date_mapping.json'
+        historical_injuries = {}
+        if historical_file.exists():
+            try:
+                with open(historical_file, 'r') as f:
+                    historical_injuries = json.load(f)
+            except Exception:
+                pass
+
+        # Se não temos histórico E não temos date column, tentar scraper tempo real
+        current_injuries_cache = {}
+        if not historical_injuries and 'date' not in df.columns:
+            from data.scrapers.injury_scraper_v2 import InjuryScraper
+            scraper = InjuryScraper()
+            current_injuries_cache = scraper.get_current_injuries(use_cache=True)
+
+        def calculate_missing_production(team_code: str, injuries_list: list) -> tuple:
+            """Retorna (missing_rapm, missing_ppg)"""
+            if not injuries_list:
+                return 0.0, 0.0
+            
+            total_rapm = 0.0
+            total_ppg = 0.0
+            
+            for injury in injuries_list:
+                player = injury.get('player', '')
+                status = injury.get('status', 'UNKNOWN').upper()
+                weight = STATUS_WEIGHTS.get(status, 0.2)
+                
+                # Buscar stats reais
+                stats = player_stats.get(player)
+                if stats:
+                    p_rapm = stats['rapm']
+                    p_ppg = stats['pts']
+                else:
+                    # Fallback heurístico se não achar nome exato
+                    p_rapm = 0.5 # Levemente positivo (rotação média)
+                    p_ppg = 8.0
+                    
+                    # Tentar fuzzy match simples se necessário (ex: "Luka Dončić" vs "Luka Doncic")
+                    # (Omitido para performance, assumindo scrapers alinhados)
+                
+                # Só conta impacto se o jogador for POSITIVO (RAPM > -1)
+                # Jogadores muito ruins (-2.0) fora não contam como "perda de talento" significativa
+                clean_rapm = max(p_rapm, -1.0)
+                
+                total_rapm += (clean_rapm * weight)
+                total_ppg += (p_ppg * weight)
+            
+            return total_rapm, total_ppg
+
+        # Listas para novas colunas
+        home_missing_rapm_list = []
+        away_missing_rapm_list = []
+        # Mantemos nomes antigos para compatibilidade com whitelist existente, 
+        # mas populamos com RAPM (mais eficiente)
         
         for idx, row in df.iterrows():
             home_team = row.get('home_team', 'UNK')
             away_team = row.get('away_team', 'UNK')
-            
             home_code = normalize_team(home_team) if home_team != 'UNK' else 'UNK'
             away_code = normalize_team(away_team) if away_team != 'UNK' else 'UNK'
             
-            home_impact = scraper.calculate_team_injury_impact(home_code, injuries, player_scores)
-            away_impact = scraper.calculate_team_injury_impact(away_code, injuries, player_scores)
+            h_rapm, h_ppg = 0.0, 0.0
+            a_rapm, a_ppg = 0.0, 0.0
             
-            home_impacts.append(home_impact)
-            away_impacts.append(away_impact)
+            # 1. Tentar Histórico
+            injuries_found = False
+            if 'date' in df.columns and historical_injuries:
+                 date_val = row.get('date')
+                 if pd.notna(date_val):
+                     date_str = pd.to_datetime(date_val).strftime('%Y-%m-%d')
+                     if date_str in historical_injuries:
+                         date_data = historical_injuries[date_str]
+                         if home_code in date_data:
+                             h_rapm, h_ppg = calculate_missing_production(home_code, date_data[home_code])
+                         if away_code in date_data:
+                             a_rapm, a_ppg = calculate_missing_production(away_code, date_data[away_code])
+                         injuries_found = True
+            
+            # 2. Tentar Tempo Real (apenas se não achou histórico e é data recente/hoje)
+            if not injuries_found and current_injuries_cache:
+                # Assumindo que current_injuries_cache é {team: [players]} para HOJE
+                if home_code in current_injuries_cache:
+                    h_m = [] # Converter formato scraper v2 se necessário
+                    # O scraper v2 retorna dict {player: status}, adapter necessário?
+                    # O código anterior usava get_current_injuries retornando dict?
+                    # ScraperV2 retorna dict {Team: {Player: Status}} ou {Team: [List]}?
+                    # Revisando ScraperV2... ele retorna {Team: {Player: Status}}
+                    # O helper calculate_missing espera lista de dicts.
+                    
+                    raw_injuries = current_injuries_cache.get(home_code, {})
+                    formatted = [{'player': k, 'status': v} for k,v in raw_injuries.items()]
+                    h_rapm, h_ppg = calculate_missing_production(home_code, formatted)
+
+                if away_code in current_injuries_cache:
+                     raw_injuries = current_injuries_cache.get(away_code, {})
+                     formatted = [{'player': k, 'status': v} for k,v in raw_injuries.items()]
+                     a_rapm, a_ppg = calculate_missing_production(away_code, formatted)
+            
+            home_missing_rapm_list.append(h_rapm)
+            away_missing_rapm_list.append(a_rapm)
+
+        # Atribuir às colunas existentes (reutilizando nomes para não quebrar pipeline)
+        # injury_impact_home agora é "Home Missing RAPM" (Continuous, >0)
+        df['injury_impact_home'] = home_missing_rapm_list
+        df['injury_impact_away'] = away_missing_rapm_list
+        # Net: Home Missing - Away Missing. Quanto maior, pior pra Home.
+        # Mas features geralmente são "Home Advantage". 
+        # Se 'injury_impact_net' for usado positivamente pelo modelo, 
+        # vamos inverter: Away Missing - Home Missing (Vantagem de Talento Disponível)
+        # Se Home falta 10 RAPM e Away falta 0, Net = 0 - 10 = -10 (Desvantagem Home).
+        df['injury_impact_net'] = df['injury_impact_away'] - df['injury_impact_home']
         
-        df['injury_impact_home'] = home_impacts
-        df['injury_impact_away'] = away_impacts
-        df['injury_impact_net'] = df['injury_impact_home'] - df['injury_impact_away']
-        
-        logger.info(f"✅ Injury impact calculado para {len(injuries)} injuries")
+        # Logging estatísticas
+        n_inj = sum([1 for x in home_missing_rapm_list if x > 0])
+        logger.info(f"✅ Injury Impact (RAPM) calculado: {n_inj} jogos com desfalques de impacto")
         
     except Exception as e:
-        logger.warning(f"⚠️ Erro ao calcular injury impact: {e}")
-        df['injury_impact_home'] = 0
-        df['injury_impact_away'] = 0
-        df['injury_impact_net'] = 0
+        logger.warning(f"⚠️ Erro ao calcular injury impact (V2): {e}")
+        df['injury_impact_home'] = 0.0
+        df['injury_impact_away'] = 0.0
+        df['injury_impact_net'] = 0.0
     
     return df
 

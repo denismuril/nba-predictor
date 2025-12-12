@@ -1,0 +1,433 @@
+[
+  {
+    "date": "2025-12-05",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2025-12-05_01PM.pdf",
+    "injuries": {
+      "Los Angeles Lakers": {
+        "Luka Doncic": "OUT",
+        "Marcus Smart": "OUT"
+      },
+      "Boston Celtics": {
+        "Max Shulga": "OUT",
+        "Jayson Tatum": "OUT"
+      },
+      "Miami Heat": {
+        "Myron Gardner": "OUT",
+        "Vladislav Goldin": "OUT",
+        "Tyler Herro": "DOUBTFUL",
+        "Kasparas Jakucionis": "OUT",
+        "Keshad Johnson": "AVAILABLE",
+        "Nikola Jovic": "AVAILABLE",
+        "Pelle Larsson": "AVAILABLE",
+        "Norman Powell": "AVAILABLE",
+        "Terry Rozier": "OUT"
+      },
+      "Orlando Magic": {
+        "Paolo Banchero": "AVAILABLE",
+        "Jamal Cain": "OUT",
+        "Colin Castleton": "OUT",
+        "Orlando Robinson": "OUT",
+        "Franz Wagner": "AVAILABLE",
+        "Moritz Wagner": "OUT"
+      },
+      "Charlotte Hornets": {
+        "Pat Connaughton": "OUT",
+        "Josh Green": "OUT",
+        "Ryan Kalkbrenner": "QUESTIONABLE",
+        "Tre Mann": "QUESTIONABLE",
+        "Brandon Miller": "QUESTIONABLE",
+        "Drew Peterson": "OUT",
+        "Collin Sexton": "OUT",
+        "Grant Williams": "OUT"
+      },
+      "Toronto Raptors": {
+        "Ochai Agbaji": "OUT"
+      },
+      "Denver Nuggets": {
+        "Tamar Bates": "OUT",
+        "Christian Braun": "OUT",
+        "Aaron Gordon": "OUT",
+        "Spencer Jones": "QUESTIONABLE",
+        "Julian Strawther": "OUT"
+      },
+      "Atlanta Hawks": {
+        "Nikola Djurisic": "OUT",
+        "Caleb Houstan": "QUESTIONABLE",
+        "Jalen Johnson": "QUESTIONABLE",
+        "Kristaps Porzingis": "QUESTIONABLE",
+        "Jacob Toppin": "OUT",
+        "Trae Young": "OUT"
+      },
+      "Portland Trail Blazers": {
+        "Donovan Clingan": "QUESTIONABLE",
+        "Scoot Henderson": "OUT",
+        "Jrue Holiday": "OUT",
+        "Damian Lillard": "OUT",
+        "Kris Murray": "QUESTIONABLE",
+        "Matisse Thybulle": "OUT",
+        "Blake Wesley": "OUT",
+        "Hansen Yang": "OUT"
+      },
+      "Detroit Pistons": {
+        "Isaac Jones": "OUT",
+        "Bobi Klintman": "OUT",
+        "Duncan Robinson": "QUESTIONABLE",
+        "Marcus Sasser": "QUESTIONABLE",
+        "Tolu Smith": "OUT"
+      },
+      "San Antonio Spurs": {
+        "Stephon Castle": "OUT"
+      },
+      "Cleveland Cavaliers": {
+        "Jarrett Allen": "OUT",
+        "Darius Garland": "OUT",
+        "Sam Merrill": "OUT",
+        "Evan Mobley": "QUESTIONABLE",
+        "Tyrese Proctor": "OUT",
+        "Max Strus": "OUT"
+      },
+      "Utah Jazz": {
+        "Elijah Harkless": "OUT",
+        "Walker Kessler": "OUT",
+        "Georges Niang": "OUT",
+        "Jusuf Nurkic": "QUESTIONABLE"
+      },
+      "New York Knicks": {
+        "Pacome Dadiet": "QUESTIONABLE",
+        "Tosan Evbuomwan": "QUESTIONABLE",
+        "Landry Shamet": "OUT"
+      },
+      "Indiana Pacers": {
+        "Tyrese Haliburton": "OUT",
+        "Quenton Jackson": "OUT",
+        "Kam Jones": "OUT",
+        "Aaron Nesmith": "OUT",
+        "Ben Sheppard": "OUT",
+        "Obi Toppin": "OUT"
+      },
+      "Chicago Bulls": {
+        "Zach Collins": "QUESTIONABLE",
+        "Ayo Dosunmu": "QUESTIONABLE",
+        "Noa Essengue": "OUT"
+      },
+      "LA Clippers": {
+        "Bradley Beal": "OUT",
+        "Bogdan Bogdanovic": "OUT",
+        "Jordan Miller": "QUESTIONABLE",
+        "Chris Paul": "OUT"
+      },
+      "Memphis Grizzlies": {
+        "Brandon Clarke": "OUT",
+        "Ty Jerome": "OUT",
+        "Ja Morant": "OUT",
+        "Javon Small": "OUT"
+      },
+      "Milwaukee Bucks": {
+        "Alex Antetokounmpo": "OUT",
+        "Giannis Antetokounmpo": "OUT",
+        "Taurean Prince": "OUT"
+      },
+      "Phoenix Suns": {
+        "Devin Booker": "OUT",
+        "Jalen Green": "OUT",
+        "Isaiah Livers": "QUESTIONABLE"
+      },
+      "Houston Rockets": {
+        "Isaiah Crawford": "OUT",
+        "Tari Eason": "OUT",
+        "Dorian Smith": "OUT",
+        "Fred Vleet": "OUT"
+      },
+      "Dallas Mavericks": {
+        "Dante Exum": "OUT",
+        "Cooper Flagg": "AVAILABLE",
+        "Daniel Gafford": "QUESTIONABLE",
+        "Kyrie Irving": "OUT"
+      },
+      "Oklahoma City Thunder": {
+        "Brooks Barnhizer": "PROBABLE",
+        "Branden Carlson": "AVAILABLE",
+        "Alex Caruso": "OUT",
+        "Luguentz Dort": "OUT",
+        "Isaiah Hartenstein": "OUT",
+        "Isaiah Joe": "QUESTIONABLE",
+        "Thomas Sorber": "OUT",
+        "Nikola Topic": "OUT",
+        "Chris Youngblood": "PROBABLE"
+      }
+    }
+  },
+  {
+    "date": "2025-12-06",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2025-12-06_01PM.pdf",
+    "injuries": {
+      "New Orleans Pelicans": {
+        "Hunter Dickinson": "OUT",
+        "Herbert Jones": "OUT",
+        "Yves Missi": "QUESTIONABLE",
+        "Dejounte Murray": "OUT",
+        "Jordan Poole": "OUT",
+        "Zion Williamson": "OUT"
+      },
+      "Brooklyn Nets": {
+        "Noah Clowney": "PROBABLE",
+        "Tyson Etienne": "OUT",
+        "Haywood Highsmith": "OUT",
+        "Cam Thomas": "OUT",
+        "Nolan Traore": "OUT"
+      },
+      "Atlanta Hawks": {
+        "Nikola Djurisic": "OUT",
+        "Kristaps Porzingis": "OUT"
+      },
+      "Washington Wizards": {
+        "Sharife Cooper": "OUT",
+        "Bilal Coulibaly": "OUT",
+        "Tre Johnson": "OUT",
+        "Corey Kispert": "OUT",
+        "Khris Middleton": "QUESTIONABLE",
+        "Alex Sarr": "OUT",
+        "Tristan Vukcevic": "QUESTIONABLE",
+        "Cam Whitmore": "QUESTIONABLE"
+      },
+      "Golden State Warriors": {
+        "Seth Curry": "QUESTIONABLE",
+        "Stephen Curry": "OUT",
+        "Draymond Green": "QUESTIONABLE",
+        "Al Horford": "OUT"
+      },
+      "Cleveland Cavaliers": {
+        "Jarrett Allen": "OUT",
+        "Lonzo Ball": "OUT",
+        "Sam Merrill": "OUT",
+        "Tyrese Proctor": "OUT",
+        "Max Strus": "OUT"
+      },
+      "Milwaukee Bucks": {
+        "Alex Antetokounmpo": "OUT",
+        "Giannis Antetokounmpo": "OUT",
+        "Taurean Prince": "OUT"
+      },
+      "Detroit Pistons": {
+        "Tobias Harris": "QUESTIONABLE",
+        "Isaac Jones": "OUT",
+        "Bobi Klintman": "OUT",
+        "Marcus Sasser": "PROBABLE"
+      },
+      "Minnesota Timberwolves": {
+        "Enrique Freeman": "OUT",
+        "Rocco Zikarsky": "OUT"
+      },
+      "Sacramento Kings": {
+        "Dylan Cardwell": "OUT",
+        "Daeqwon Plowden": "OUT",
+        "Domantas Sabonis": "OUT",
+        "Dennis Schroder": "OUT",
+        "Isaiah Stevens": "OUT"
+      },
+      "Miami Heat": {
+        "Myron Gardner": "OUT",
+        "Vladislav Goldin": "OUT",
+        "Tyler Herro": "DOUBTFUL",
+        "Kasparas Jakucionis": "OUT",
+        "Nikola Jovic": "AVAILABLE",
+        "Pelle Larsson": "QUESTIONABLE"
+      }
+    }
+  },
+  {
+    "date": "2025-12-07",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2025-12-07_01PM.pdf",
+    "injuries": {
+      "Boston Celtics": {
+        "Max Shulga": "OUT",
+        "Jayson Tatum": "OUT",
+        "Amari Williams": "OUT"
+      },
+      "Toronto Raptors": {
+        "Jamison Battle": "DOUBTFUL",
+        "Immanuel Quickley": "QUESTIONABLE"
+      },
+      "Denver Nuggets": {
+        "Tamar Bates": "OUT",
+        "Christian Braun": "OUT",
+        "Aaron Gordon": "OUT",
+        "Julian Strawther": "OUT"
+      },
+      "Charlotte Hornets": {
+        "Pat Connaughton": "OUT",
+        "Moussa Diabate": "QUESTIONABLE",
+        "Josh Green": "OUT"
+      },
+      "Portland Trail Blazers": {
+        "Donovan Clingan": "QUESTIONABLE",
+        "Scoot Henderson": "OUT",
+        "Jrue Holiday": "OUT",
+        "Damian Lillard": "OUT",
+        "Matisse Thybulle": "OUT",
+        "Blake Wesley": "OUT"
+      },
+      "Memphis Grizzlies": {
+        "Brandon Clarke": "OUT",
+        "Ty Jerome": "OUT",
+        "Ja Morant": "DOUBTFUL"
+      },
+      "Chicago Bulls": {
+        "Zach Collins": "PROBABLE",
+        "Ayo Dosunmu": "QUESTIONABLE",
+        "Noa Essengue": "OUT",
+        "Kevin Huerter": "OUT",
+        "Tre Jones": "DOUBTFUL",
+        "Isaac Okoro": "DOUBTFUL",
+        "Jalen Smith": "DOUBTFUL",
+        "Dalen Terry": "PROBABLE",
+        "Coby White": "PROBABLE",
+        "Patrick Williams": "PROBABLE"
+      },
+      "Los Angeles Lakers": {
+        "Marcus Smart": "OUT"
+      },
+      "Philadelphia 76ers": {
+        "Johni Broome": "AVAILABLE",
+        "Joel Embiid": "PROBABLE"
+      },
+      "Oklahoma City Thunder": {
+        "Branden Carlson": "AVAILABLE",
+        "Alex Caruso": "OUT",
+        "Luguentz Dort": "OUT",
+        "Shai Alexander": "OUT",
+        "Isaiah Hartenstein": "OUT",
+        "Isaiah Joe": "OUT",
+        "Thomas Sorber": "OUT",
+        "Nikola Topic": "OUT",
+        "Chris Youngblood": "PROBABLE"
+      },
+      "Utah Jazz": {
+        "Elijah Harkless": "OUT",
+        "Walker Kessler": "OUT",
+        "Lauri Markkanen": "QUESTIONABLE"
+      },
+      "Orlando Magic": {
+        "Jamal Cain": "OUT",
+        "Colin Castleton": "OUT",
+        "Orlando Robinson": "OUT",
+        "Franz Wagner": "AVAILABLE",
+        "Moritz Wagner": "OUT"
+      },
+      "New York Knicks": {
+        "Pacome Dadiet": "OUT",
+        "Tosan Evbuomwan": "AVAILABLE",
+        "Landry Shamet": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2025-12-08",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2025-12-08_01PM.pdf",
+    "injuries": {
+      "Sacramento Kings": {
+        "Dylan Cardwell": "OUT",
+        "Devin Carter": "OUT",
+        "Keegan Murray": "QUESTIONABLE",
+        "Daeqwon Plowden": "OUT",
+        "Domantas Sabonis": "OUT",
+        "Dennis Schroder": "QUESTIONABLE",
+        "Isaiah Stevens": "OUT"
+      },
+      "Indiana Pacers": {
+        "Tyrese Haliburton": "OUT",
+        "Quenton Jackson": "OUT",
+        "Kam Jones": "OUT",
+        "Aaron Nesmith": "OUT",
+        "Ben Sheppard": "OUT",
+        "Obi Toppin": "OUT"
+      },
+      "Phoenix Suns": {
+        "Devin Booker": "OUT",
+        "Dillon Brooks": "QUESTIONABLE",
+        "Jalen Green": "OUT",
+        "Isaiah Livers": "OUT"
+      },
+      "Minnesota Timberwolves": {
+        "Anthony Edwards": "QUESTIONABLE",
+        "Enrique Freeman": "AVAILABLE",
+        "Rocco Zikarsky": "OUT"
+      },
+      "San Antonio Spurs": {
+        "Stephon Castle": "QUESTIONABLE",
+        "Harrison Ingram": "OUT",
+        "Luke Kornet": "QUESTIONABLE",
+        "Jordan Laughlin": "OUT",
+        "Riley Minix": "OUT",
+        "Victor Wembanyama": "OUT"
+      },
+      "New Orleans Pelicans": {
+        "Hunter Dickinson": "OUT",
+        "Herbert Jones": "QUESTIONABLE",
+        "Dejounte Murray": "OUT",
+        "Jordan Poole": "OUT",
+        "Zion Williamson": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2025-12-09",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2025-12-09_01PM.pdf",
+    "injuries": {
+      "Miami Heat": {
+        "Vladislav Goldin": "QUESTIONABLE",
+        "Tyler Herro": "PROBABLE",
+        "Pelle Larsson": "PROBABLE",
+        "Davion Mitchell": "PROBABLE",
+        "Terry Rozier": "OUT",
+        "Dru Smith": "QUESTIONABLE"
+      },
+      "Orlando Magic": {
+        "Jamal Cain": "AVAILABLE",
+        "Colin Castleton": "OUT",
+        "Orlando Robinson": "AVAILABLE",
+        "Franz Wagner": "OUT",
+        "Moritz Wagner": "OUT"
+      },
+      "New York Knicks": {
+        "Pacome Dadiet": "OUT",
+        "Miles Bride": "OUT",
+        "Landry Shamet": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2025-12-10",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2025-12-10_01PM.pdf",
+    "injuries": {
+      "Phoenix Suns": {
+        "Devin Booker": "QUESTIONABLE",
+        "Jalen Green": "OUT",
+        "Isaiah Livers": "OUT"
+      },
+      "Oklahoma City Thunder": {
+        "Isaiah Hartenstein": "OUT",
+        "Isaiah Joe": "OUT",
+        "Thomas Sorber": "OUT",
+        "Nikola Topic": "OUT"
+      },
+      "San Antonio Spurs": {
+        "Carter Bryant": "QUESTIONABLE",
+        "Harrison Ingram": "OUT",
+        "David Garcia": "OUT",
+        "Jordan Laughlin": "QUESTIONABLE",
+        "Riley Minix": "OUT",
+        "Victor Wembanyama": "OUT"
+      },
+      "Los Angeles Lakers": {
+        "Maxi Kleber": "QUESTIONABLE"
+      }
+    }
+  }
+]

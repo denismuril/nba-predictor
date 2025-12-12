@@ -61,8 +61,12 @@ class BBRefSeleniumScraper:
         options.add_argument('--disable-software-rasterizer')
         options.add_argument('--disable-extensions')
         options.add_argument('--remote-debugging-port=9222')
-        options.add_argument('--single-process')  # Crucial para WSL
+        # options.add_argument('--single-process')  # ❌ Removido: Pode causar instabilidade em versões novas
         options.add_argument('--disable-setuid-sandbox')
+        options.add_argument('--disable-features=VizDisplayCompositor') # Fix for potential WSL crashes
+        options.page_load_strategy = 'eager' # Don't wait for full load (images etc)
+        options.add_argument('--disable-infobars')
+        options.add_argument('--disable-notifications')
         
         # Anti-detection settings
         options.add_argument('--disable-blink-features=AutomationControlled')

@@ -697,7 +697,7 @@ def add_contextual_rolling_features(df, window=10, use_ewm=True):
     # ============================================================
     context_cols = [c for c in long_df.columns if '_at_home' in c or '_at_away' in c]
     for col in context_cols:
-        long_df[col] = long_df.groupby('team')[col].transform(lambda x: x.ffill(limit=30))
+        long_df[col] = long_df.groupby('team')[col].transform(lambda x: x.ffill(limit=10))
 
     # ============================================================
     # 5. Fallback: usar média GERAL quando contexto não disponível

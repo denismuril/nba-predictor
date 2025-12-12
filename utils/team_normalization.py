@@ -52,7 +52,7 @@ class TeamNormalizer:
     TEAM_ID_MAP: Dict[str, str] = {
         # Eastern Conference - Atlantic
         "Boston Celtics": "BOS",
-        "Brooklyn Nets": "BRK",
+        "Brooklyn Nets": "BKN",  # Updated to modern BKN
         "New York Knicks": "NYK",
         "Philadelphia 76ers": "PHI",
         "Toronto Raptors": "TOR",
@@ -66,7 +66,7 @@ class TeamNormalizer:
         
         # Eastern Conference - Southeast
         "Atlanta Hawks": "ATL",
-        "Charlotte Hornets": "CHO",  # CHO (não CHA) para consistência com fontes externas
+        "Charlotte Hornets": "CHA",  # Updated to modern CHA
         "Miami Heat": "MIA",
         "Orlando Magic": "ORL",
         "Washington Wizards": "WAS",
@@ -82,7 +82,7 @@ class TeamNormalizer:
         "Golden State Warriors": "GSW",
         "Los Angeles Clippers": "LAC",
         "Los Angeles Lakers": "LAL",
-        "Phoenix Suns": "PHO",  # PHO (não PHX) para consistência
+        "Phoenix Suns": "PHX",  # Updated to modern PHX
         "Sacramento Kings": "SAC",
         
         # Western Conference - Southwest

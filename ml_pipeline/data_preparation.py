@@ -626,6 +626,33 @@ def load_historical_data(seasons=None, apply_weights=False, weight_config=None, 
     except Exception as e:
         logger.warning(f"   ⚠️ Smart Money features failed: {e}")
 
+    # 3.4 v21.7 FASE 70%+: Fatigue Score (Travel Distance + B2B + Schedule Density)
+    # Math-Context: Times em road trip longa (>3000km/semana) perdem ~3% win rate
+    try:
+        from core.travel_calculator import calculate_schedule_fatigue
+        df = calculate_schedule_fatigue(df)
+        logger.info("   ✅ v21.7 Fatigue Score features added (travel + b2b + density)")
+    except Exception as e:
+        logger.warning(f"   ⚠️ Fatigue Score features failed: {e}")
+        # Fallback: adicionar placeholders neutros
+        df['home_fatigue_score'] = 0.0
+        df['away_fatigue_score'] = 0.0
+        df['home_distance_km'] = 0.0
+        df['away_distance_km'] = 0.0
+
+    # 3.5 v21.7 FASE 70%+: Injury Impact (Star players OUT afeta spread em ~3 pontos)
+    # Math-Context: Jogadores com RAPM > 4 OUT = impacto de -10 a -15 pontos esperados
+    try:
+        from ml_pipeline.advanced_features import add_injury_impact
+        df = add_injury_impact(df)
+        logger.info("   ✅ v21.7 Injury Impact features added")
+    except Exception as e:
+        logger.warning(f"   ⚠️ Injury Impact features failed: {e}")
+        # Fallback: adicionar placeholders neutros
+        df['injury_impact_home'] = 0.0
+        df['injury_impact_away'] = 0.0
+        df['injury_impact_net'] = 0.0
+
     
     # 4. Validação de Rolling Features
     required_rolling = ['home_rolling_5_points', 'home_rolling_10_points',
@@ -772,6 +799,10 @@ def prepare_data_for_training(df, target='winner'):
         # ❌ REMOVIDO: '_shooting_luck' - Pode usar dados do jogo atual via rolling_efg
         '_volatility',  # Volatility features
         '_trend',       # Trend features
+        # ✅ FASE 70%+: Features de fadiga e lesões (PRÉ-JOGO)
+        '_fatigue',     # fatigue_score, fatigue_index
+        '_injury_impact',  # injury_impact_home, injury_impact_away
+        '_distance',    # travel_distance_km
         # ❌ REMOVIDO (LEAKAGE): '_off_rating', '_def_rating', '_efg_pct', '_ts_pct', '_pace', '_net_rating'
         # Estas são calculadas do score do jogo atual, não de dados históricos
     )
@@ -790,6 +821,12 @@ def prepare_data_for_training(df, target='winner'):
         'home_win_streak', 'away_win_streak',
         'home_ortg_adj', 'away_ortg_adj',  # Ratings AJUSTADOS (histórico)
         'home_drtg_adj', 'away_drtg_adj',
+        # ✅ FASE 70%+: Fatigue e Injury features (PRÉ-JOGO)
+        'home_fatigue_score', 'away_fatigue_score',
+        'home_distance_km', 'away_distance_km',
+        'injury_impact_home', 'injury_impact_away', 'injury_impact_net',
+        'home_injury_impact', 'away_injury_impact', 'total_injury_impact',
+        'fatigue_index',
         # ❌ REMOVIDO (LEAKAGE): home_efg, home_pace, home_ftr, home_orb_pct, home_tov_pct
         # ❌ REMOVIDO (LEAKAGE): home_off_rating, home_def_rating, home_pie
         # Estas features são calculadas do BOX SCORE do jogo atual (pós-jogo)

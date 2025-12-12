@@ -51,12 +51,12 @@ def get_historical_predictions(lookback_days: int = 60) -> pd.DataFrame:
     query = f"""
         SELECT
             date,
-            home_prob / 100.0 as y_pred,
+            prob_home / 100.0 as y_pred,
             CASE WHEN winner = home_team THEN 1 ELSE 0 END as y_true
         FROM predictions
         WHERE date >= '{cutoff_str}'
         AND winner IS NOT NULL
-        AND home_prob IS NOT NULL
+        AND prob_home IS NOT NULL
     """
 
     try:

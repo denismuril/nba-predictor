@@ -31,16 +31,31 @@ with st.sidebar:
     st.header("🏀 NBA Predictor")
 
     # Status do Sistema
-    st.subheader("🖥️ System Status")
+    st.subheader("🖥️ Status do Sistema")
 
     col1, col2 = st.columns(2)
     with col1:
-        st.metric("Database", "Online", delta_color="normal")
+        st.metric("Banco de Dados", "Online", delta_color="normal")
     with col2:
-        st.metric("Model V6/V18", "Active", delta_color="normal")
+        st.metric("Modelos V6/V18", "Ativos", delta_color="normal")
 
     last_update = datetime.now().strftime("%H:%M")
-    st.text(f"Last Update: {last_update}")
+    st.text(f"Última Atualização: {last_update}")
+
+    with st.expander("🛠️ Debug Standings"):
+        st.write("Verificando dados de classificação...")
+        try:
+            raw_std = load_standings()
+            st.write(f"Times carregados: {len(raw_std)}")
+            if len(raw_std) > 0:
+                st.write("Amostra (1º Time):", list(raw_std.items())[0])
+            
+            # Check for current team
+            st.write("Mapeamento (Sample):")
+            sample_team = list(raw_std.keys())[0] if raw_std else "N/A"
+            st.write(f"Key: {sample_team} -> Map: {TEAM_MAP.get(sample_team, 'Not Found')}")
+        except Exception as e:
+            st.error(f"Erro Debug: {e}")
 
     st.markdown("---")
 
@@ -80,10 +95,35 @@ TEAM_MAP = {
 # --- STANDINGS & FORM FUNCTIONS ---
 @st.cache_data(ttl=3600)
 def load_standings():
-    """Load current standings with rankings by win percentage."""
+    """Load current standings with rankings by win percentage (Sync)."""
+    import requests
+    
+    url = "http://site.api.espn.com/apis/v2/sports/basketball/nba/standings"
     try:
-        from data.scrapers.standings_scraper import obter_standings
-        standings = obter_standings()  # {'Team Name': {'wins': X, 'losses': Y}}
+        response = requests.get(url, timeout=5)
+        response.raise_for_status()
+        data = response.json()
+
+        standings = {}
+        children = data.get('children', [])
+        
+        for child in children:
+            entries = child.get('standings', {}).get('entries', [])
+            for entry in entries:
+                try:
+                    team_name = entry['team']['displayName']
+                    stats = entry.get('stats', [])
+                    wins = 0
+                    losses = 0
+                    for stat in stats:
+                        if stat['name'] == 'wins':
+                            wins = int(stat['value'])
+                        elif stat['name'] == 'losses':
+                            losses = int(stat['value'])
+                    
+                    standings[team_name] = {'wins': wins, 'losses': losses}
+                except Exception:
+                    continue
 
         if not standings:
             return {}
@@ -115,10 +155,21 @@ def load_standings():
             abbr = TEAM_MAP.get(item['team'])
             if abbr:
                 result[abbr] = team_data
-
+        
+        # --- CRITICAL FIX: Ensure Legacy Aliases are Covered for UI ---
+        # The UI might lookup 'BRK' but we have 'BKN', etc.
+        aliases = {
+            'BKN': 'BRK', 'PHX': 'PHO', 'CHA': 'CHO', 'NOP': 'NOR', 'UTA': 'UTH',
+            'SAS': 'SAN', 'GSW': 'GS', 'NYK': 'NY'
+        }
+        for current, legacy in aliases.items():
+            if current in result:
+                result[legacy] = result[current]
+                
         return result
     except Exception as e:
-        st.warning(f"⚠️ Erro ao carregar standings: {e}")
+        # Log error to UI for debugging if needed, or just warn
+        print(f"Error loading standings: {e}")
         return {}
 
 def get_team_form(df_history, team_name, n=5):
@@ -582,7 +633,7 @@ def get_fatigue_color(score):
 
 # --- MAIN CONTENT ---
 
-tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["📊 Dashboard", "💰 Sugestões de Aposta", "⛹️ Player Props", "📈 Performance", "🔍 Model Health", "🧪 Backtest Analysis"])
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["📊 Dashboard", "💰 Gestão de Banca", "⛹️ Player Props", "📈 Performance", "🔍 Saúde do Modelo", "🧪 Análise de Backtest"])
 
 # --- TAB 1: DASHBOARD (GAME CARDS) ---
 with tab1:
@@ -652,13 +703,23 @@ with tab1:
             text_map = {
                 'LOW': 50, 'BAIXA': 50,
                 'MEDIUM': 65, 'MÉDIA': 65, 'MEDIA': 65,
-                'HIGH': 80, 'ALTA': 80
+                'HIGH': 80, 'ALTA': 80, 'VERY HIGH': 90, 'MUITO ALTA': 90
             }
             if val_str in text_map: return text_map[val_str]
             try: return float(val_str.rstrip('%'))
             except: return 0
 
         daily_games['confidence_num'] = daily_games['confidence'].apply(convert_confidence)
+        
+        # Traduzir label para exibição
+        def translate_conf_label(val):
+            val_upper = str(val).upper().strip().replace('%','')
+            if val_upper in ['HIGH', 'ALTA'] or (val_upper.isdigit() and float(val_upper) >= 80): return 'ALTA 🚀'
+            if val_upper in ['MEDIUM', 'MEDIA', 'MÉDIA'] or (val_upper.isdigit() and float(val_upper) >= 60): return 'MÉDIA ⚖️'
+            return 'BAIXA ⚠️'
+            
+        daily_games['confidence_display'] = daily_games['confidence'].apply(translate_conf_label)
+
         daily_games = daily_games[daily_games['confidence_num'] >= confidence_threshold]
 
         if daily_games.empty and total_games_before > 0:
@@ -798,7 +859,18 @@ with tab1:
                 # Header
                 c1, c2 = st.columns([3, 1])
                 with c1: st.caption(f"📅 {game['date']}")
-                with c2: st.markdown(f"<span style='background-color: {conf_color}20; color: {conf_color}; padding: 2px 6px; border-radius: 4px; font-weight: bold;'>{game['confidence']}</span>", unsafe_allow_html=True)
+                # Barra de Confiança Visual
+                conf_pct = min(100, max(0, int(game['confidence_num'])))
+                conf_display = game.get('confidence_display', str(game['confidence']))
+                
+                with c2: 
+                    # Meter Style
+                    st.markdown(f"""
+                    <div style="text-align: right;">
+                        <span style='font-size: 0.7em; color: #aaa;'>CONFIANÇA</span><br>
+                        <span style='background-color: {conf_color}30; color: {conf_color}; padding: 2px 8px; border-radius: 12px; font-weight: bold; font-size: 0.85em; border: 1px solid {conf_color}'>{conf_display}</span>
+                    </div>
+                    """, unsafe_allow_html=True)
 
                 # Placar / Times
                 col_home, col_vs, col_away = st.columns([4, 1, 4])
@@ -959,7 +1031,7 @@ with tab1:
 
                 # --- ADVANCED INSIGHTS SECTION (V4 Features) ---
                 st.markdown("<hr style='border-color: rgba(255,255,255,0.1); margin: 10px 0;'>", unsafe_allow_html=True)
-                st.markdown("<div style='text-align: center; font-size: 0.8em; color: #aaa; margin-bottom: 5px;'>ADVANCED INSIGHTS</div>", unsafe_allow_html=True)
+                st.markdown("<div style='text-align: center; font-size: 0.8em; color: #aaa; margin-bottom: 5px;'>INSIGHTS AVANÇADOS (V21.8)</div>", unsafe_allow_html=True)
 
                 ai1, ai2 = st.columns(2)
 
@@ -1364,36 +1436,64 @@ with tab4:
             with st.spinner("Buscando resultados..."):
                 try:
                     from data.scrapers.results_scraper import update_game_results
-
-                    progress_placeholder.info("🔍 Buscando jogos finalizados dos últimos 7 dias...")
-
-                    # Atualizar jogos dos últimos 7 dias
-                    updated_count = update_game_results(days_back=7)
-
-                    progress_placeholder.empty()
-
+                    
+                    # Add legacy aliases BKN->BRK etc
+                    legacy_aliases = {
+                        'BKN': 'BRK', 'CHA': 'CHO', 'CLE': 'CLE', 'DAL': 'DAL', 'DEN': 'DEN',
+                        'DET': 'DET', 'GSW': 'GSW', 'HOU': 'HOU', 'IND': 'IND', 'LAC': 'LAC',
+                        'LAL': 'LAL', 'MEM': 'MEM', 'MIA': 'MIA', 'MIL': 'MIL', 'MIN': 'MIN',
+                        'NOP': 'NOR', 'NYK': 'NYK', 'OKC': 'OKC', 'ORL': 'ORL', 'PHI': 'PHI',
+                        'PHX': 'PHO', 'POR': 'POR', 'SAC': 'SAC', 'SAS': 'SAS', 'TOR': 'TOR',
+                        'UTA': 'UTA', 'WAS': 'WAS', 'ATL': 'ATL', 'BOS': 'BOS', 'CHI': 'CHI'
+                    }
+                    
+                    # Definir quantos dias buscar
+                    deep_update = st.session_state.get('deep_update', False)
+                    days = 200 if deep_update else 7
+                    
+                    st.info(f"🔍 Buscando resultados dos últimos {days} dias...")
+                    updated_count = update_game_results(days_back=days)
+                    
                     if updated_count > 0:
                         st.success(f"✅ {updated_count} jogos atualizados com sucesso!")
-                        st.rerun()
                     else:
-                        st.info("ℹ️ Nenhum jogo novo para atualizar. Todos os jogos já estão sincronizados.")
+                        st.info("ℹ️ Nenhum jogo novo para atualizar (ou API não retornou dados novos).")
+                    
+                    if deep_update:
+                        st.info("ℹ️ Deep Update finalizado. Verifique se os placares antigos (ex: Nov) apareceram.")
+                    
+                    time.sleep(1)
+                    st.rerun()
                 except Exception as e:
-                    progress_placeholder.empty()
                     st.error(f"❌ Erro ao atualizar: {e}")
                     st.caption("Verifique os logs para mais detalhes.")
 
-    # Filtro de Data (Range)
-    col_p1, col_p2 = st.columns(2)
-    with col_p1:
-        default_start = datetime.now() - timedelta(days=30)
-        default_end = datetime.now()
+    # Opção de Deep Update
+    st.checkbox("Forçar atualização da temporada completa (Deep Update)", key='deep_update', help="Marque para buscar resultados desde o início da temporada. Mais lento.")
 
-        date_range = st.date_input(
-            "Período de Análise",
-            value=(default_start, default_end),
+    # Filtro de Data (Split Inputs)
+    col_p1, col_p2 = st.columns(2)
+    
+    default_start = datetime.now() - timedelta(days=30)
+    default_end = datetime.now()
+
+    with col_p1:
+        start_date = st.date_input(
+            "Data Inicial",
+            value=default_start,
+            format="DD/MM/YYYY"
+        )
+
+    with col_p2:
+        end_date = st.date_input(
+            "Data Final",
+            value=default_end,
             max_value=datetime.now() + timedelta(days=365),
             format="DD/MM/YYYY"
         )
+        
+    # Logic adjustment (merging into single usage)
+    date_range = (start_date, end_date)
 
     # Carregar histórico de previsões
     all_preds = db.get_latest_predictions()

@@ -1,0 +1,11 @@
+--- DEBUGGING STANDINGS MAPPING ---
+Raw Teams Found: 30
+Sample Key: Washington Wizards
+Mapped Abbreviations (30): ['ATL', 'BKN', 'BOS', 'CHA', 'CHI', 'CLE', 'DAL', 'DEN', 'DET', 'GSW', 'HOU', 'IND', 'LAC', 'LAL', 'MEM', 'MIA', 'MIL', 'MIN', 'NOP', 'NYK', 'OKC', 'ORL', 'PHI', 'PHX', 'POR', 'SAC', 'SAS', 'TOR', 'UTA', 'WAS']
+
+--- DEBUGGING RESULTS API (NBA_API) ---
+Games found for 2025-12-10: 2
+Game: 0022501203 - Status: 7:30 pm ET
+Game: 0022501204 - Status: 10:00 pm ET
+Line Scores available (Sample):
+['2025-12-10T00:00:00', 1, '0022501203', 1610612756, 'PHX', 'Phoenix', 'Suns', '14-10', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]

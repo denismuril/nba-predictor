@@ -1,0 +1,71 @@
+{
+  "timestamp": "2025-12-11T15:36:00.970530",
+  "count": 8,
+  "ttl_minutes": 30,
+  "data": [
+    {
+      "player_name": "Chris Boucher",
+      "team": "BOS",
+      "status": "OUT",
+      "description": "Via NBA Official PDF",
+      "source": "NBA_Official",
+      "updated_at": "2025-12-11T15:36:00.970277"
+    },
+    {
+      "player_name": "Alex Antetokounmpo",
+      "team": "MIL",
+      "status": "OUT",
+      "description": "Via NBA Official PDF",
+      "source": "NBA_Official",
+      "updated_at": "2025-12-11T15:36:00.970307"
+    },
+    {
+      "player_name": "Bradley Beal",
+      "team": "UNK",
+      "status": "OUT",
+      "description": "Via NBA Official PDF",
+      "source": "NBA_Official",
+      "updated_at": "2025-12-11T15:36:00.970315"
+    },
+    {
+      "player_name": "Tari Eason",
+      "team": "HOU",
+      "status": "OUT",
+      "description": "Via NBA Official PDF",
+      "source": "NBA_Official",
+      "updated_at": "2025-12-11T15:36:00.970320"
+    },
+    {
+      "player_name": "Donovan Clingan",
+      "team": "POR",
+      "status": "OUT",
+      "description": "Via NBA Official PDF",
+      "source": "NBA_Official",
+      "updated_at": "2025-12-11T15:36:00.970326"
+    },
+    {
+      "player_name": "Trey Alexander",
+      "team": "NOP",
+      "status": "OUT",
+      "description": "Via NBA Official PDF",
+      "source": "NBA_Official",
+      "updated_at": "2025-12-11T15:36:00.970331"
+    },
+    {
+      "player_name": "Tamar Bates",
+      "team": "DEN",
+      "status": "OUT",
+      "description": "Via NBA Official PDF",
+      "source": "NBA_Official",
+      "updated_at": "2025-12-11T15:36:00.970336"
+    },
+    {
+      "player_name": "Dylan Cardwell",
+      "team": "SAC",
+      "status": "OUT",
+      "description": "Via NBA Official PDF",
+      "source": "NBA_Official",
+      "updated_at": "2025-12-11T15:36:00.970340"
+    }
+  ]
+}

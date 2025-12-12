@@ -1,0 +1,4207 @@
+[
+  {
+    "date": "2024-10-21",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-10-21_05PM.pdf",
+    "injuries": {
+      "New York Knicks": {
+        "Precious Achiuwa": "OUT",
+        "Mitchell Robinson": "OUT"
+      },
+      "Boston Celtics": {
+        "Kristaps Porzingis": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-10-22",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-10-22_01PM.pdf",
+    "injuries": {
+      "New York Knicks": {
+        "Precious Achiuwa": "OUT",
+        "Mitchell Robinson": "OUT"
+      },
+      "Boston Celtics": {
+        "Kristaps Porzingis": "OUT"
+      },
+      "Los Angeles Lakers": {
+        "Christian Koloko": "OUT",
+        "Jarred Vanderbilt": "OUT",
+        "Christian Wood": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-10-23",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-10-23_01PM.pdf",
+    "injuries": {
+      "Indiana Pacers": {
+        "Enrique Freeman": "QUESTIONABLE",
+        "Isaiah Jackson": "QUESTIONABLE",
+        "Quenton Jackson": "QUESTIONABLE",
+        "Tristen Newton": "QUESTIONABLE"
+      },
+      "Detroit Pistons": {
+        "Bobi Klintman": "OUT",
+        "Ausar Thompson": "OUT"
+      },
+      "Brooklyn Nets": {
+        "Bojan Bogdanovic": "OUT",
+        "Trendon Watford": "OUT"
+      },
+      "Atlanta Hawks": {
+        "Dominick Barlow": "OUT",
+        "Kobe Bufkin": "OUT",
+        "Seth Lundy": "OUT",
+        "Cody Zeller": "OUT"
+      },
+      "Cleveland Cavaliers": {
+        "Emoni Bates": "OUT",
+        "Max Strus": "OUT"
+      },
+      "Toronto Raptors": {
+        "Bruce Brown": "OUT",
+        "Kelly Olynyk": "OUT"
+      },
+      "Milwaukee Bucks": {
+        "Giannis Antetokounmpo": "PROBABLE",
+        "Khris Middleton": "OUT"
+      },
+      "Philadelphia 76ers": {
+        "Joel Embiid": "OUT",
+        "Paul George": "OUT"
+      },
+      "Miami Heat": {
+        "Josh Richardson": "OUT"
+      },
+      "Charlotte Hornets": {
+        "Josh Green": "QUESTIONABLE",
+        "Mark Williams": "OUT"
+      },
+      "Houston Rockets": {
+        "Steven Adams": "QUESTIONABLE"
+      },
+      "Chicago Bulls": {
+        "Lonzo Ball": "AVAILABLE",
+        "Dalen Terry": "AVAILABLE"
+      },
+      "New Orleans Pelicans": {
+        "Jose Alvarado": "QUESTIONABLE",
+        "Dejounte Murray": "QUESTIONABLE",
+        "Zion Williamson": "QUESTIONABLE"
+      },
+      "Memphis Grizzlies": {
+        "Luke Kennard": "OUT",
+        "Cam Spencer": "OUT"
+      },
+      "Utah Jazz": {
+        "Isaiah Collier": "OUT",
+        "Johnny Juzang": "OUT"
+      },
+      "Portland Trail Blazers": {
+        "Shaedon Sharpe": "OUT",
+        "Matisse Thybulle": "OUT"
+      },
+      "Phoenix Suns": {
+        "Grayson Allen": "PROBABLE",
+        "Damion Lee": "PROBABLE",
+        "Josh Okogie": "OUT"
+      },
+      "LA Clippers": {
+        "Mo Bamba": "OUT",
+        "Kawhi Leonard": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-10-24",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-10-24_01PM.pdf",
+    "injuries": {
+      "Boston Celtics": {
+        "Sam Hauser": "QUESTIONABLE",
+        "Kristaps Porzingis": "OUT"
+      },
+      "Washington Wizards": {
+        "Saddiq Bey": "OUT",
+        "Malcolm Brogdon": "OUT"
+      },
+      "San Antonio Spurs": {
+        "Devin Vassell": "OUT"
+      },
+      "Dallas Mavericks": {
+        "Kessler Edwards": "OUT",
+        "Dante Exum": "OUT",
+        "Brandon Williams": "OUT"
+      },
+      "Sacramento Kings": {
+        "Devin Carter": "OUT",
+        "Orlando Robinson": "OUT"
+      },
+      "Oklahoma City Thunder": {
+        "Isaiah Hartenstein": "OUT",
+        "Nikola Topic": "OUT",
+        "Jaylin Williams": "OUT",
+        "Kenrich Williams": "OUT"
+      },
+      "Cleveland Cavaliers": {
+        "Emoni Bates": "OUT",
+        "Max Strus": "OUT",
+        "Luke Travers": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-10-25",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-10-25_01PM.pdf",
+    "injuries": {
+      "Brooklyn Nets": {
+        "Bojan Bogdanovic": "OUT",
+        "Trendon Watford": "OUT"
+      },
+      "Orlando Magic": {
+        "Jonathan Isaac": "QUESTIONABLE",
+        "Mac Clung": "QUESTIONABLE",
+        "Trevelin Queen": "QUESTIONABLE"
+      },
+      "Philadelphia 76ers": {
+        "Joel Embiid": "OUT",
+        "Paul George": "OUT",
+        "Caleb Martin": "PROBABLE"
+      },
+      "Toronto Raptors": {
+        "Bruce Brown": "OUT",
+        "Kelly Olynyk": "OUT",
+        "Immanuel Quickley": "DOUBTFUL"
+      },
+      "Charlotte Hornets": {
+        "Josh Green": "QUESTIONABLE",
+        "Brandon Miller": "OUT",
+        "Tidjane Salaun": "QUESTIONABLE",
+        "Mark Williams": "OUT"
+      },
+      "Atlanta Hawks": {
+        "Dominick Barlow": "OUT",
+        "Bogdan Bogdanovic": "OUT",
+        "Kobe Bufkin": "OUT",
+        "Seth Lundy": "OUT",
+        "Cody Zeller": "OUT"
+      },
+      "Detroit Pistons": {
+        "Bobi Klintman": "OUT",
+        "Ausar Thompson": "OUT"
+      },
+      "Cleveland Cavaliers": {
+        "Emoni Bates": "OUT",
+        "Max Strus": "OUT",
+        "Luke Travers": "OUT"
+      },
+      "Indiana Pacers": {
+        "Isaiah Jackson": "QUESTIONABLE"
+      },
+      "New York Knicks": {
+        "Precious Achiuwa": "OUT",
+        "Mitchell Robinson": "OUT"
+      },
+      "Chicago Bulls": {
+        "Lonzo Ball": "OUT",
+        "Adama Sanogo": "QUESTIONABLE",
+        "Dalen Terry": "AVAILABLE"
+      },
+      "Milwaukee Bucks": {
+        "Giannis Antetokounmpo": "PROBABLE",
+        "Brook Lopez": "PROBABLE",
+        "Khris Middleton": "OUT"
+      },
+      "Houston Rockets": {
+        "Steven Adams": "OUT",
+        "Dillon Brooks": "PROBABLE",
+        "Cam Whitmore": "PROBABLE"
+      },
+      "Golden State Warriors": {
+        "Reece Beekman": "OUT",
+        "Stephen Curry": "AVAILABLE",
+        "Draymond Green": "AVAILABLE",
+        "Brandin Podziemski": "AVAILABLE",
+        "Quinten Post": "OUT",
+        "Pat Spencer": "OUT"
+      },
+      "Utah Jazz": {
+        "Isaiah Collier": "OUT",
+        "Johnny Juzang": "OUT"
+      },
+      "New Orleans Pelicans": {
+        "Jamal Cain": "QUESTIONABLE",
+        "Trey Jemison": "QUESTIONABLE",
+        "Dejounte Murray": "OUT"
+      },
+      "Portland Trail Blazers": {
+        "Bryce Gowens": "QUESTIONABLE",
+        "Justin Minaya": "QUESTIONABLE",
+        "Taze Moore": "QUESTIONABLE",
+        "Shaedon Sharpe": "OUT",
+        "Matisse Thybulle": "OUT"
+      },
+      "Phoenix Suns": {
+        "Grayson Allen": "PROBABLE",
+        "Bradley Beal": "PROBABLE",
+        "Josh Okogie": "OUT"
+      },
+      "Los Angeles Lakers": {
+        "Jalen Schifino": "OUT",
+        "Christian Koloko": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-10-26",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-10-26_01PM.pdf",
+    "injuries": {
+      "LA Clippers": {
+        "Mo Bamba": "OUT",
+        "Kawhi Leonard": "OUT"
+      },
+      "Boston Celtics": {
+        "Sam Hauser": "OUT",
+        "Kristaps Porzingis": "OUT"
+      },
+      "Detroit Pistons": {
+        "Bobi Klintman": "OUT",
+        "Ausar Thompson": "OUT"
+      },
+      "Cleveland Cavaliers": {
+        "Emoni Bates": "OUT",
+        "Max Strus": "OUT",
+        "Luke Travers": "OUT"
+      },
+      "Washington Wizards": {
+        "Saddiq Bey": "OUT",
+        "Malcolm Brogdon": "OUT"
+      },
+      "Miami Heat": {
+        "Josh Christopher": "AVAILABLE",
+        "Kevin Love": "OUT",
+        "Josh Richardson": "QUESTIONABLE"
+      },
+      "Charlotte Hornets": {
+        "Seth Curry": "QUESTIONABLE",
+        "Josh Green": "OUT",
+        "Cody Martin": "QUESTIONABLE",
+        "Brandon Miller": "OUT",
+        "Mark Williams": "OUT"
+      },
+      "Oklahoma City Thunder": {
+        "Isaiah Hartenstein": "OUT",
+        "Nikola Topic": "OUT",
+        "Jaylin Williams": "OUT",
+        "Kenrich Williams": "OUT"
+      },
+      "Orlando Magic": {
+        "Jonathan Isaac": "QUESTIONABLE",
+        "Mac Clung": "QUESTIONABLE",
+        "Trevelin Queen": "QUESTIONABLE"
+      },
+      "San Antonio Spurs": {
+        "Tre Jones": "OUT",
+        "Devin Vassell": "OUT"
+      },
+      "Dallas Mavericks": {
+        "Kessler Edwards": "OUT",
+        "Dante Exum": "OUT",
+        "Brandon Williams": "OUT"
+      },
+      "Sacramento Kings": {
+        "Devin Carter": "OUT",
+        "Orlando Robinson": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-10-27",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-10-27_01PM.pdf",
+    "injuries": {
+      "Philadelphia 76ers": {
+        "Joel Embiid": "OUT",
+        "Paul George": "OUT"
+      },
+      "Indiana Pacers": {
+        "Tristen Newton": "QUESTIONABLE",
+        "James Wiseman": "OUT"
+      },
+      "Milwaukee Bucks": {
+        "Giannis Antetokounmpo": "PROBABLE",
+        "Khris Middleton": "OUT"
+      },
+      "Brooklyn Nets": {
+        "Bojan Bogdanovic": "OUT",
+        "Trendon Watford": "OUT"
+      },
+      "New Orleans Pelicans": {
+        "Jamal Cain": "QUESTIONABLE",
+        "Trey Jemison": "QUESTIONABLE"
+      },
+      "Portland Trail Blazers": {
+        "Bryce Gowens": "QUESTIONABLE",
+        "Justin Minaya": "QUESTIONABLE",
+        "Taze Moore": "QUESTIONABLE",
+        "Shaedon Sharpe": "OUT",
+        "Matisse Thybulle": "OUT"
+      },
+      "Atlanta Hawks": {
+        "Dominick Barlow": "OUT",
+        "Bogdan Bogdanovic": "OUT",
+        "Kobe Bufkin": "OUT",
+        "Seth Lundy": "OUT",
+        "Cody Zeller": "OUT"
+      },
+      "Golden State Warriors": {
+        "Reece Beekman": "OUT",
+        "Quinten Post": "OUT",
+        "Pat Spencer": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-10-28",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-10-28_01PM.pdf",
+    "injuries": {
+      "Indiana Pacers": {
+        "Johnny Furphy": "OUT",
+        "Tristen Newton": "OUT",
+        "James Wiseman": "OUT"
+      },
+      "Orlando Magic": {
+        "Goga Bitadze": "QUESTIONABLE",
+        "Tristan Silva": "QUESTIONABLE",
+        "Jonathan Isaac": "QUESTIONABLE",
+        "Franz Wagner": "QUESTIONABLE"
+      },
+      "Cleveland Cavaliers": {
+        "Emoni Bates": "OUT",
+        "Max Strus": "OUT",
+        "Luke Travers": "OUT"
+      },
+      "New York Knicks": {
+        "Precious Achiuwa": "OUT",
+        "Josh Hart": "QUESTIONABLE",
+        "Miles Bride": "PROBABLE"
+      },
+      "Denver Nuggets": {
+        "Spencer Jones": "OUT"
+      },
+      "Toronto Raptors": {
+        "Bruce Brown": "OUT",
+        "Ulrich Chomche": "OUT",
+        "Kelly Olynyk": "OUT",
+        "Immanuel Quickley": "DOUBTFUL"
+      },
+      "Detroit Pistons": {
+        "Bobi Klintman": "OUT",
+        "Ausar Thompson": "OUT"
+      },
+      "Miami Heat": {
+        "Josh Christopher": "OUT",
+        "Kevin Love": "OUT"
+      },
+      "Milwaukee Bucks": {
+        "Giannis Antetokounmpo": "PROBABLE"
+      },
+      "Boston Celtics": {
+        "Sam Hauser": "QUESTIONABLE",
+        "Kristaps Porzingis": "OUT"
+      },
+      "Washington Wizards": {
+        "Saddiq Bey": "OUT",
+        "Malcolm Brogdon": "OUT"
+      },
+      "Atlanta Hawks": {
+        "Dominick Barlow": "OUT",
+        "Bogdan Bogdanovic": "OUT",
+        "Kobe Bufkin": "OUT",
+        "Mouhamed Gueye": "QUESTIONABLE",
+        "Seth Lundy": "OUT",
+        "Onyeka Okongwu": "OUT",
+        "Keaton Wallace": "QUESTIONABLE",
+        "Cody Zeller": "OUT"
+      },
+      "Chicago Bulls": {
+        "Lonzo Ball": "AVAILABLE"
+      },
+      "Memphis Grizzlies": {
+        "Luke Kennard": "OUT",
+        "John Konchar": "QUESTIONABLE",
+        "Ja Morant": "QUESTIONABLE",
+        "Cam Spencer": "OUT"
+      },
+      "Houston Rockets": {
+        "Steven Adams": "QUESTIONABLE",
+        "Jack Veigh": "OUT",
+        "Nate Williams": "OUT"
+      },
+      "San Antonio Spurs": {
+        "Tre Jones": "OUT",
+        "Devin Vassell": "OUT"
+      },
+      "Utah Jazz": {
+        "Isaiah Collier": "OUT"
+      },
+      "Dallas Mavericks": {
+        "Dante Exum": "OUT",
+        "Jazian Gortman": "OUT",
+        "Maxi Kleber": "OUT"
+      },
+      "Los Angeles Lakers": {
+        "Jalen Schifino": "OUT",
+        "Christian Koloko": "OUT",
+        "Maxwell Lewis": "OUT",
+        "Quincy Olivari": "OUT",
+        "Armel Traore": "OUT",
+        "Jarred Vanderbilt": "OUT",
+        "Christian Wood": "OUT"
+      },
+      "Phoenix Suns": {
+        "Bradley Beal": "QUESTIONABLE"
+      },
+      "Sacramento Kings": {
+        "Devin Carter": "OUT",
+        "Orlando Robinson": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-10-29",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-10-29_01PM.pdf",
+    "injuries": {
+      "Minnesota Timberwolves": {
+        "Jaylen Clark": "OUT",
+        "Jesse Edwards": "OUT",
+        "Leonard Miller": "OUT"
+      },
+      "Denver Nuggets": {
+        "Spencer Jones": "OUT",
+        "Jamal Murray": "PROBABLE"
+      },
+      "Brooklyn Nets": {
+        "Bojan Bogdanovic": "OUT",
+        "Jaylen Martin": "QUESTIONABLE",
+        "Tyrese Martin": "QUESTIONABLE",
+        "Ben Simmons": "OUT",
+        "Trendon Watford": "OUT",
+        "Dariq Whitehead": "QUESTIONABLE",
+        "Cui Yongxi": "QUESTIONABLE"
+      },
+      "New Orleans Pelicans": {
+        "Karlo Matkovic": "OUT",
+        "Dejounte Murray": "OUT",
+        "Antonio Reeves": "OUT"
+      },
+      "Golden State Warriors": {
+        "Stephen Curry": "OUT",
+        "Brandin Podziemski": "AVAILABLE",
+        "Andrew Wiggins": "QUESTIONABLE"
+      }
+    }
+  },
+  {
+    "date": "2024-10-30",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-10-30_01PM.pdf",
+    "injuries": {
+      "Atlanta Hawks": {
+        "Dominick Barlow": "OUT",
+        "Bogdan Bogdanovic": "OUT",
+        "Kobe Bufkin": "OUT",
+        "Dyson Daniels": "OUT",
+        "Vit Krejci": "OUT",
+        "Seth Lundy": "OUT",
+        "Cody Zeller": "OUT"
+      },
+      "Washington Wizards": {
+        "Saddiq Bey": "OUT",
+        "Malcolm Brogdon": "OUT",
+        "Kyle Kuzma": "OUT"
+      },
+      "Boston Celtics": {
+        "Sam Hauser": "PROBABLE"
+      },
+      "Indiana Pacers": {
+        "Johnny Furphy": "QUESTIONABLE",
+        "Quenton Jackson": "QUESTIONABLE",
+        "Tristen Newton": "OUT",
+        "Myles Turner": "QUESTIONABLE",
+        "James Wiseman": "OUT"
+      },
+      "Detroit Pistons": {
+        "Bobi Klintman": "OUT",
+        "Ausar Thompson": "OUT"
+      },
+      "Philadelphia 76ers": {
+        "Joel Embiid": "OUT",
+        "Paul George": "OUT"
+      },
+      "Los Angeles Lakers": {
+        "Jalen Schifino": "OUT",
+        "Christian Koloko": "OUT",
+        "Maxwell Lewis": "OUT",
+        "Quincy Olivari": "OUT"
+      },
+      "Cleveland Cavaliers": {
+        "Emoni Bates": "OUT",
+        "Max Strus": "OUT",
+        "Luke Travers": "OUT"
+      },
+      "Toronto Raptors": {
+        "Scottie Barnes": "OUT",
+        "Bruce Brown": "OUT",
+        "Ulrich Chomche": "OUT",
+        "Kelly Olynyk": "OUT",
+        "Immanuel Quickley": "DOUBTFUL"
+      },
+      "Charlotte Hornets": {
+        "Vasilije Micic": "QUESTIONABLE",
+        "Brandon Miller": "OUT",
+        "Mark Williams": "OUT"
+      },
+      "New York Knicks": {
+        "Precious Achiuwa": "OUT",
+        "Josh Hart": "QUESTIONABLE",
+        "Mitchell Robinson": "OUT"
+      },
+      "Miami Heat": {
+        "Josh Christopher": "OUT",
+        "Kevin Love": "OUT",
+        "Josh Richardson": "QUESTIONABLE"
+      },
+      "Memphis Grizzlies": {
+        "Zach Edey": "QUESTIONABLE",
+        "Luke Kennard": "OUT",
+        "John Konchar": "QUESTIONABLE"
+      },
+      "Orlando Magic": {
+        "Goga Bitadze": "QUESTIONABLE",
+        "Jonathan Isaac": "QUESTIONABLE",
+        "Mac Clung": "OUT",
+        "Trevelin Queen": "OUT"
+      },
+      "Chicago Bulls": {
+        "Lonzo Ball": "OUT",
+        "Jalen Smith": "QUESTIONABLE"
+      },
+      "San Antonio Spurs": {
+        "Harrison Ingram": "OUT",
+        "Tre Jones": "OUT",
+        "Riley Minix": "OUT",
+        "Devin Vassell": "OUT"
+      },
+      "Oklahoma City Thunder": {
+        "Isaiah Hartenstein": "OUT",
+        "Nikola Topic": "OUT"
+      },
+      "Portland Trail Blazers": {
+        "Bryce Gowens": "OUT",
+        "Justin Minaya": "OUT",
+        "Taze Moore": "OUT",
+        "Shaedon Sharpe": "OUT",
+        "Matisse Thybulle": "OUT"
+      },
+      "LA Clippers": {
+        "Mo Bamba": "OUT",
+        "Cam Christie": "OUT",
+        "Trentyn Flowers": "OUT",
+        "Kawhi Leonard": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-10-31",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-10-31_01PM.pdf",
+    "injuries": {
+      "Milwaukee Bucks": {
+        "Giannis Antetokounmpo": "PROBABLE",
+        "Chris Livingston": "OUT",
+        "Khris Middleton": "OUT",
+        "Stanley Umude": "OUT"
+      },
+      "Houston Rockets": {
+        "Steven Adams": "QUESTIONABLE",
+        "Jack Veigh": "OUT",
+        "Nate Williams": "OUT"
+      },
+      "Dallas Mavericks": {
+        "Kessler Edwards": "OUT",
+        "Dante Exum": "OUT",
+        "Jazian Gortman": "OUT",
+        "Maxi Kleber": "OUT",
+        "Brandon Williams": "AVAILABLE"
+      },
+      "Utah Jazz": {
+        "Isaiah Collier": "OUT",
+        "Taylor Hendricks": "OUT",
+        "Lauri Markkanen": "QUESTIONABLE",
+        "Micah Potter": "OUT",
+        "Jason Preston": "OUT",
+        "Oscar Tshiebwe": "OUT"
+      },
+      "Phoenix Suns": {
+        "Bradley Beal": "QUESTIONABLE",
+        "Jalen Bridges": "OUT",
+        "Josh Okogie": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-11-01",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-11-01_01PM.pdf",
+    "injuries": {
+      "Boston Celtics": {
+        "Sam Hauser": "AVAILABLE",
+        "Al Horford": "OUT",
+        "Drew Peterson": "OUT",
+        "Kristaps Porzingis": "OUT",
+        "Anton Watson": "OUT"
+      },
+      "Charlotte Hornets": {
+        "Brandon Miller": "QUESTIONABLE",
+        "Mark Williams": "OUT"
+      },
+      "New York Knicks": {
+        "Precious Achiuwa": "OUT",
+        "Mitchell Robinson": "OUT"
+      },
+      "Detroit Pistons": {
+        "Bobi Klintman": "OUT",
+        "Cole Swider": "OUT",
+        "Ausar Thompson": "OUT"
+      },
+      "Orlando Magic": {
+        "Paolo Banchero": "OUT",
+        "Goga Bitadze": "QUESTIONABLE",
+        "Franz Wagner": "AVAILABLE"
+      },
+      "Cleveland Cavaliers": {
+        "Emoni Bates": "OUT",
+        "Max Strus": "OUT",
+        "Luke Travers": "OUT"
+      },
+      "Chicago Bulls": {
+        "Lonzo Ball": "OUT",
+        "Zach Vine": "QUESTIONABLE",
+        "Jalen Smith": "QUESTIONABLE",
+        "Patrick Williams": "QUESTIONABLE"
+      },
+      "Brooklyn Nets": {
+        "Bojan Bogdanovic": "OUT",
+        "Jaylen Martin": "OUT"
+      },
+      "Los Angeles Lakers": {
+        "Anthony Davis": "PROBABLE",
+        "Jalen Schifino": "OUT",
+        "Christian Koloko": "OUT",
+        "Maxwell Lewis": "OUT",
+        "Quincy Olivari": "OUT",
+        "Armel Traore": "OUT",
+        "Jarred Vanderbilt": "OUT",
+        "Christian Wood": "OUT"
+      },
+      "Toronto Raptors": {
+        "Scottie Barnes": "OUT",
+        "Bruce Brown": "OUT"
+      },
+      "Sacramento Kings": {
+        "Devin Carter": "OUT",
+        "Isaiah Crawford": "OUT",
+        "Mason Jones": "OUT",
+        "Orlando Robinson": "OUT"
+      },
+      "Atlanta Hawks": {
+        "Dominick Barlow": "OUT",
+        "Bogdan Bogdanovic": "OUT",
+        "Kobe Bufkin": "OUT",
+        "Dyson Daniels": "OUT",
+        "Mouhamed Gueye": "QUESTIONABLE",
+        "Vit Krejci": "OUT",
+        "Seth Lundy": "OUT"
+      },
+      "Indiana Pacers": {
+        "Quenton Jackson": "PROBABLE",
+        "Andrew Nembhard": "QUESTIONABLE",
+        "Tristen Newton": "OUT",
+        "Myles Turner": "QUESTIONABLE",
+        "James Wiseman": "OUT"
+      },
+      "New Orleans Pelicans": {
+        "Jordan Hawkins": "QUESTIONABLE",
+        "Herbert Jones": "OUT",
+        "Yves Missi": "QUESTIONABLE",
+        "Dejounte Murray": "OUT",
+        "Daniel Theis": "QUESTIONABLE"
+      },
+      "Denver Nuggets": {
+        "Vlatko Cancar": "PROBABLE",
+        "Aaron Gordon": "PROBABLE"
+      },
+      "Minnesota Timberwolves": {
+        "Jaylen Clark": "OUT",
+        "Jesse Edwards": "OUT",
+        "Leonard Miller": "OUT"
+      },
+      "Oklahoma City Thunder": {
+        "Alex Ducas": "OUT",
+        "Adam Flagler": "OUT",
+        "Isaiah Hartenstein": "OUT",
+        "Nikola Topic": "OUT",
+        "Jaylin Williams": "OUT",
+        "Kenrich Williams": "OUT"
+      },
+      "Portland Trail Blazers": {
+        "Shaedon Sharpe": "OUT",
+        "Matisse Thybulle": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-11-02",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-11-02_01PM.pdf",
+    "injuries": {
+      "Boston Celtics": {
+        "Jaylen Brown": "OUT",
+        "Sam Hauser": "PROBABLE",
+        "Drew Peterson": "OUT",
+        "Kristaps Porzingis": "OUT",
+        "Anton Watson": "OUT"
+      },
+      "Charlotte Hornets": {
+        "Seth Curry": "QUESTIONABLE",
+        "Brandon Miller": "QUESTIONABLE",
+        "Nick Richards": "OUT",
+        "Mark Williams": "OUT"
+      },
+      "Memphis Grizzlies": {
+        "Desmond Bane": "OUT",
+        "Luke Kennard": "OUT",
+        "John Konchar": "DOUBTFUL"
+      },
+      "Philadelphia 76ers": {
+        "Joel Embiid": "OUT",
+        "Paul George": "OUT"
+      },
+      "Sacramento Kings": {
+        "Devin Carter": "OUT",
+        "Isaiah Crawford": "OUT",
+        "Kevin Huerter": "OUT",
+        "Mason Jones": "OUT",
+        "Orlando Robinson": "OUT"
+      },
+      "Toronto Raptors": {
+        "Scottie Barnes": "OUT",
+        "Bruce Brown": "OUT",
+        "Ulrich Chomche": "OUT",
+        "Kelly Olynyk": "OUT",
+        "Immanuel Quickley": "DOUBTFUL"
+      },
+      "Milwaukee Bucks": {
+        "Giannis Antetokounmpo": "PROBABLE",
+        "Chris Livingston": "OUT",
+        "Khris Middleton": "OUT",
+        "Stanley Umude": "OUT"
+      },
+      "Golden State Warriors": {
+        "Stephen Curry": "OUT",
+        "Brandin Podziemski": "AVAILABLE",
+        "Andrew Wiggins": "PROBABLE"
+      },
+      "Houston Rockets": {
+        "Steven Adams": "OUT",
+        "Jack Veigh": "OUT",
+        "Nate Williams": "OUT"
+      },
+      "San Antonio Spurs": {
+        "Harrison Ingram": "OUT",
+        "Tre Jones": "OUT"
+      },
+      "Miami Heat": {
+        "Josh Christopher": "OUT",
+        "Keshad Johnson": "OUT",
+        "Kevin Love": "OUT",
+        "Duncan Robinson": "OUT"
+      },
+      "Washington Wizards": {
+        "Saddiq Bey": "OUT",
+        "Malcolm Brogdon": "OUT",
+        "Kyle Kuzma": "OUT"
+      },
+      "Phoenix Suns": {
+        "Bradley Beal": "QUESTIONABLE",
+        "Jalen Bridges": "OUT",
+        "Collin Gillespie": "OUT"
+      },
+      "Utah Jazz": {
+        "Jordan Clarkson": "OUT",
+        "Isaiah Collier": "OUT",
+        "Taylor Hendricks": "OUT",
+        "Lauri Markkanen": "DOUBTFUL"
+      },
+      "LA Clippers": {
+        "Mo Bamba": "OUT",
+        "Cam Christie": "OUT",
+        "Trentyn Flowers": "OUT",
+        "Kawhi Leonard": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-11-03",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-11-03_01PM.pdf",
+    "injuries": {
+      "Detroit Pistons": {
+        "Daniss Jenkins": "OUT",
+        "Bobi Klintman": "OUT",
+        "Cole Swider": "OUT",
+        "Ausar Thompson": "OUT",
+        "Alondes Williams": "OUT"
+      },
+      "Brooklyn Nets": {
+        "Bojan Bogdanovic": "OUT",
+        "Jaylen Martin": "OUT",
+        "Ben Simmons": "AVAILABLE",
+        "Trendon Watford": "OUT",
+        "Dariq Whitehead": "OUT"
+      },
+      "Atlanta Hawks": {
+        "Bogdan Bogdanovic": "OUT",
+        "Kobe Bufkin": "OUT",
+        "Dyson Daniels": "QUESTIONABLE"
+      },
+      "New Orleans Pelicans": {
+        "Jordan Hawkins": "QUESTIONABLE",
+        "Herbert Jones": "OUT",
+        "Dejounte Murray": "OUT"
+      },
+      "Orlando Magic": {
+        "Paolo Banchero": "OUT",
+        "Goga Bitadze": "QUESTIONABLE",
+        "Mac Clung": "OUT",
+        "Trevelin Queen": "OUT"
+      },
+      "Dallas Mavericks": {
+        "Kessler Edwards": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-11-04",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-11-04_01PM.pdf",
+    "injuries": {
+      "Milwaukee Bucks": {
+        "Giannis Antetokounmpo": "QUESTIONABLE",
+        "Pat Connaughton": "PROBABLE",
+        "Chris Livingston": "OUT",
+        "Khris Middleton": "OUT"
+      },
+      "Cleveland Cavaliers": {
+        "Emoni Bates": "OUT",
+        "Caris Vert": "QUESTIONABLE",
+        "Max Strus": "OUT",
+        "Jaylon Tyson": "OUT",
+        "Dean Wade": "QUESTIONABLE"
+      },
+      "Golden State Warriors": {
+        "Stephen Curry": "QUESTIONABLE",
+        "Brandin Podziemski": "AVAILABLE",
+        "Andrew Wiggins": "PROBABLE"
+      },
+      "Washington Wizards": {
+        "Saddiq Bey": "OUT"
+      },
+      "Los Angeles Lakers": {
+        "Anthony Davis": "PROBABLE",
+        "Jalen Schifino": "OUT",
+        "Christian Koloko": "OUT",
+        "Maxwell Lewis": "OUT",
+        "Quincy Olivari": "OUT",
+        "Austin Reaves": "PROBABLE",
+        "Armel Traore": "OUT",
+        "Jarred Vanderbilt": "OUT",
+        "Christian Wood": "OUT"
+      },
+      "Detroit Pistons": {
+        "Daniss Jenkins": "OUT",
+        "Bobi Klintman": "OUT",
+        "Ausar Thompson": "OUT",
+        "Alondes Williams": "OUT"
+      },
+      "Boston Celtics": {
+        "Jaylen Brown": "OUT"
+      },
+      "Atlanta Hawks": {
+        "Bogdan Bogdanovic": "OUT",
+        "Kobe Bufkin": "OUT",
+        "Vit Krejci": "OUT",
+        "Seth Lundy": "OUT",
+        "Cody Zeller": "OUT"
+      },
+      "Memphis Grizzlies": {
+        "Desmond Bane": "OUT",
+        "Luke Kennard": "OUT",
+        "John Konchar": "DOUBTFUL",
+        "Marcus Smart": "OUT"
+      },
+      "Brooklyn Nets": {
+        "Bojan Bogdanovic": "OUT",
+        "Noah Clowney": "QUESTIONABLE",
+        "Jaylen Martin": "QUESTIONABLE",
+        "Ben Simmons": "OUT",
+        "Trendon Watford": "OUT",
+        "Dariq Whitehead": "OUT"
+      },
+      "Sacramento Kings": {
+        "Devin Carter": "OUT",
+        "Isaiah Crawford": "OUT",
+        "Kevin Huerter": "QUESTIONABLE",
+        "Orlando Robinson": "OUT"
+      },
+      "Miami Heat": {
+        "Josh Christopher": "OUT",
+        "Keshad Johnson": "OUT"
+      },
+      "Utah Jazz": {
+        "Jordan Clarkson": "OUT"
+      },
+      "Chicago Bulls": {
+        "Lonzo Ball": "OUT",
+        "Josh Giddey": "PROBABLE",
+        "Zach Vine": "QUESTIONABLE",
+        "Jalen Smith": "PROBABLE",
+        "Patrick Williams": "PROBABLE"
+      },
+      "New York Knicks": {
+        "Precious Achiuwa": "OUT",
+        "Cameron Payne": "DOUBTFUL"
+      },
+      "Houston Rockets": {
+        "Steven Adams": "QUESTIONABLE",
+        "Jack Veigh": "OUT",
+        "Nate Williams": "OUT"
+      },
+      "Charlotte Hornets": {
+        "Brandon Miller": "QUESTIONABLE",
+        "Nick Richards": "OUT",
+        "Mark Williams": "OUT"
+      },
+      "Minnesota Timberwolves": {
+        "Jaylen Clark": "OUT",
+        "Jesse Edwards": "OUT",
+        "Rudy Gobert": "QUESTIONABLE",
+        "Leonard Miller": "OUT"
+      },
+      "Orlando Magic": {
+        "Paolo Banchero": "OUT",
+        "Goga Bitadze": "QUESTIONABLE"
+      },
+      "Oklahoma City Thunder": {
+        "Alex Ducas": "OUT",
+        "Adam Flagler": "OUT",
+        "Isaiah Hartenstein": "OUT",
+        "Nikola Topic": "OUT",
+        "Jaylin Williams": "OUT",
+        "Kenrich Williams": "OUT"
+      },
+      "Portland Trail Blazers": {
+        "Bryce Gowens": "OUT",
+        "Justin Minaya": "OUT",
+        "Taze Moore": "OUT",
+        "Shaedon Sharpe": "OUT",
+        "Matisse Thybulle": "OUT"
+      },
+      "Indiana Pacers": {
+        "Isaiah Jackson": "OUT",
+        "Andrew Nembhard": "QUESTIONABLE"
+      },
+      "Dallas Mavericks": {
+        "Kessler Edwards": "OUT",
+        "Dante Exum": "OUT",
+        "Maxi Kleber": "OUT",
+        "Brandon Williams": "OUT"
+      },
+      "Toronto Raptors": {
+        "Scottie Barnes": "OUT",
+        "Bruce Brown": "OUT",
+        "Ulrich Chomche": "OUT",
+        "Kelly Olynyk": "OUT",
+        "Immanuel Quickley": "DOUBTFUL"
+      },
+      "Denver Nuggets": {
+        "Vlatko Cancar": "DOUBTFUL",
+        "Aaron Gordon": "PROBABLE"
+      },
+      "Philadelphia 76ers": {
+        "Justin Edwards": "OUT",
+        "Joel Embiid": "OUT",
+        "Paul George": "QUESTIONABLE"
+      },
+      "Phoenix Suns": {
+        "Bradley Beal": "QUESTIONABLE",
+        "Jalen Bridges": "OUT",
+        "Collin Gillespie": "OUT"
+      },
+      "San Antonio Spurs": {
+        "Harrison Ingram": "OUT",
+        "Tre Jones": "OUT",
+        "Riley Minix": "OUT",
+        "Devin Vassell": "OUT"
+      },
+      "LA Clippers": {
+        "Mo Bamba": "OUT",
+        "Cam Christie": "OUT",
+        "Trentyn Flowers": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-11-05",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-11-05_01PM.pdf",
+    "injuries": {
+      "Orlando Magic": {
+        "Paolo Banchero": "OUT",
+        "Mac Clung": "OUT",
+        "Trevelin Queen": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-11-06",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-11-06_01PM.pdf",
+    "injuries": {
+      "Detroit Pistons": {
+        "Daniss Jenkins": "OUT",
+        "Bobi Klintman": "OUT",
+        "Cole Swider": "OUT",
+        "Ausar Thompson": "OUT",
+        "Alondes Williams": "OUT"
+      },
+      "Charlotte Hornets": {
+        "Cody Martin": "PROBABLE",
+        "Nick Richards": "OUT",
+        "Mark Williams": "OUT"
+      },
+      "Orlando Magic": {
+        "Paolo Banchero": "OUT",
+        "Mac Clung": "OUT",
+        "Trevelin Queen": "OUT"
+      },
+      "Indiana Pacers": {
+        "Isaiah Jackson": "OUT"
+      },
+      "Golden State Warriors": {
+        "Brandin Podziemski": "AVAILABLE"
+      },
+      "Boston Celtics": {
+        "Jaylen Brown": "OUT",
+        "Drew Peterson": "OUT",
+        "Kristaps Porzingis": "OUT",
+        "Baylor Scheierman": "OUT",
+        "Anton Watson": "OUT"
+      },
+      "New York Knicks": {
+        "Precious Achiuwa": "OUT",
+        "Cameron Payne": "QUESTIONABLE"
+      },
+      "Atlanta Hawks": {
+        "Dominick Barlow": "QUESTIONABLE",
+        "Bogdan Bogdanovic": "OUT",
+        "Kobe Bufkin": "OUT",
+        "Mouhamed Gueye": "QUESTIONABLE",
+        "Vit Krejci": "OUT",
+        "Seth Lundy": "OUT",
+        "David Roddy": "QUESTIONABLE",
+        "Trae Young": "PROBABLE",
+        "Cody Zeller": "OUT"
+      },
+      "Cleveland Cavaliers": {
+        "Emoni Bates": "OUT",
+        "Caris Vert": "QUESTIONABLE",
+        "Max Strus": "OUT",
+        "Jaylon Tyson": "QUESTIONABLE",
+        "Dean Wade": "OUT"
+      },
+      "New Orleans Pelicans": {
+        "Jose Alvarado": "QUESTIONABLE",
+        "Jordan Hawkins": "QUESTIONABLE"
+      },
+      "Los Angeles Lakers": {
+        "Anthony Davis": "QUESTIONABLE",
+        "Rui Hachimura": "DOUBTFUL",
+        "Jalen Schifino": "OUT",
+        "Maxwell Lewis": "OUT",
+        "Quincy Olivari": "OUT",
+        "Austin Reaves": "PROBABLE",
+        "Armel Traore": "OUT",
+        "Jarred Vanderbilt": "OUT",
+        "Christian Wood": "OUT"
+      },
+      "Memphis Grizzlies": {
+        "Desmond Bane": "OUT"
+      },
+      "San Antonio Spurs": {
+        "Harrison Ingram": "OUT",
+        "Tre Jones": "OUT",
+        "Riley Minix": "OUT",
+        "Jeremy Sochan": "OUT",
+        "Devin Vassell": "OUT"
+      },
+      "Houston Rockets": {
+        "Steven Adams": "OUT",
+        "Dillon Brooks": "QUESTIONABLE",
+        "Tari Eason": "QUESTIONABLE",
+        "Jack Veigh": "AVAILABLE"
+      },
+      "Chicago Bulls": {
+        "Lonzo Ball": "OUT",
+        "Josh Giddey": "PROBABLE",
+        "Zach Vine": "QUESTIONABLE",
+        "Adama Sanogo": "OUT",
+        "Jalen Smith": "PROBABLE",
+        "Patrick Williams": "PROBABLE"
+      },
+      "Dallas Mavericks": {
+        "Dante Exum": "OUT",
+        "Maxi Kleber": "OUT",
+        "Brandon Williams": "OUT"
+      },
+      "Miami Heat": {
+        "Josh Christopher": "OUT",
+        "Keshad Johnson": "OUT",
+        "Kevin Love": "OUT"
+      },
+      "Phoenix Suns": {
+        "Bradley Beal": "PROBABLE",
+        "Jalen Bridges": "OUT",
+        "Collin Gillespie": "OUT"
+      },
+      "Oklahoma City Thunder": {
+        "Alex Ducas": "OUT",
+        "Adam Flagler": "OUT",
+        "Isaiah Hartenstein": "OUT",
+        "Nikola Topic": "OUT",
+        "Jaylin Williams": "OUT",
+        "Kenrich Williams": "OUT"
+      },
+      "Denver Nuggets": {
+        "Vlatko Cancar": "DOUBTFUL",
+        "Aaron Gordon": "OUT",
+        "Jamal Murray": "OUT"
+      },
+      "Philadelphia 76ers": {
+        "Justin Edwards": "OUT",
+        "Joel Embiid": "OUT",
+        "Paul George": "PROBABLE"
+      },
+      "LA Clippers": {
+        "Mo Bamba": "OUT",
+        "Cam Christie": "OUT",
+        "Trentyn Flowers": "OUT",
+        "Kawhi Leonard": "OUT"
+      },
+      "Toronto Raptors": {
+        "Scottie Barnes": "OUT",
+        "Bruce Brown": "OUT",
+        "Ulrich Chomche": "OUT",
+        "Kelly Olynyk": "OUT",
+        "Immanuel Quickley": "DOUBTFUL"
+      },
+      "Sacramento Kings": {
+        "Devin Carter": "OUT",
+        "Kevin Huerter": "QUESTIONABLE",
+        "Orlando Robinson": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-11-07",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-11-07_01PM.pdf",
+    "injuries": {
+      "Minnesota Timberwolves": {
+        "Jaylen Clark": "OUT",
+        "Jesse Edwards": "OUT",
+        "Leonard Miller": "OUT",
+        "Daishen Nix": "OUT"
+      },
+      "Chicago Bulls": {
+        "Lonzo Ball": "OUT",
+        "Zach Vine": "DOUBTFUL",
+        "Adama Sanogo": "OUT",
+        "Jalen Smith": "PROBABLE"
+      },
+      "Portland Trail Blazers": {
+        "Bryce Gowens": "OUT",
+        "Justin Minaya": "OUT",
+        "Taze Moore": "OUT",
+        "Shaedon Sharpe": "QUESTIONABLE",
+        "Matisse Thybulle": "OUT"
+      },
+      "Utah Jazz": {
+        "Jordan Clarkson": "PROBABLE",
+        "Isaiah Collier": "PROBABLE",
+        "Taylor Hendricks": "OUT",
+        "Lauri Markkanen": "PROBABLE",
+        "Micah Potter": "OUT",
+        "Jason Preston": "OUT",
+        "Collin Sexton": "AVAILABLE"
+      },
+      "Milwaukee Bucks": {
+        "Giannis Antetokounmpo": "QUESTIONABLE",
+        "Chris Livingston": "OUT",
+        "Khris Middleton": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-11-08",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-11-08_01PM.pdf",
+    "injuries": {
+      "Atlanta Hawks": {
+        "Dominick Barlow": "OUT",
+        "Bogdan Bogdanovic": "OUT",
+        "Kobe Bufkin": "OUT",
+        "Vit Krejci": "OUT",
+        "Seth Lundy": "OUT",
+        "Cody Zeller": "OUT"
+      },
+      "Detroit Pistons": {
+        "Jalen Duren": "DOUBTFUL",
+        "Daniss Jenkins": "OUT",
+        "Bobi Klintman": "OUT",
+        "Cole Swider": "QUESTIONABLE",
+        "Ausar Thompson": "OUT",
+        "Alondes Williams": "OUT"
+      },
+      "Indiana Pacers": {
+        "Isaiah Jackson": "OUT"
+      },
+      "Charlotte Hornets": {
+        "Miles Bridges": "OUT",
+        "Brandon Miller": "PROBABLE",
+        "Nick Richards": "OUT",
+        "Grant Williams": "PROBABLE",
+        "Mark Williams": "OUT"
+      },
+      "New Orleans Pelicans": {
+        "Jordan Hawkins": "OUT",
+        "Herbert Jones": "OUT",
+        "Karlo Matkovic": "OUT"
+      },
+      "Orlando Magic": {
+        "Paolo Banchero": "OUT",
+        "Mac Clung": "OUT",
+        "Trevelin Queen": "OUT"
+      },
+      "Brooklyn Nets": {
+        "Bojan Bogdanovic": "OUT",
+        "Noah Clowney": "QUESTIONABLE",
+        "Jaylen Martin": "OUT",
+        "Trendon Watford": "OUT",
+        "Dariq Whitehead": "OUT"
+      },
+      "Boston Celtics": {
+        "Jaylen Brown": "OUT",
+        "Luke Kornet": "DOUBTFUL"
+      },
+      "Golden State Warriors": {
+        "Draymond Green": "QUESTIONABLE",
+        "Brandin Podziemski": "QUESTIONABLE"
+      },
+      "Cleveland Cavaliers": {
+        "Emoni Bates": "OUT",
+        "Sam Merrill": "QUESTIONABLE",
+        "Max Strus": "OUT",
+        "Dean Wade": "QUESTIONABLE"
+      },
+      "Milwaukee Bucks": {
+        "Giannis Antetokounmpo": "PROBABLE",
+        "Chris Livingston": "OUT",
+        "Khris Middleton": "OUT"
+      },
+      "New York Knicks": {
+        "Precious Achiuwa": "OUT"
+      },
+      "Phoenix Suns": {
+        "Bradley Beal": "PROBABLE",
+        "Jalen Bridges": "OUT",
+        "Ryan Dunn": "DOUBTFUL",
+        "Collin Gillespie": "OUT"
+      },
+      "Dallas Mavericks": {
+        "Dante Exum": "OUT",
+        "Maxi Kleber": "DOUBTFUL"
+      },
+      "Houston Rockets": {
+        "Steven Adams": "QUESTIONABLE",
+        "Cam Whitmore": "OUT",
+        "Nate Williams": "OUT"
+      },
+      "Oklahoma City Thunder": {
+        "Alex Ducas": "OUT",
+        "Adam Flagler": "OUT"
+      },
+      "Washington Wizards": {
+        "Saddiq Bey": "OUT",
+        "Malcolm Brogdon": "OUT",
+        "Justin Champagnie": "OUT",
+        "Kyle Kuzma": "OUT",
+        "Tristan Vukcevic": "OUT"
+      },
+      "Memphis Grizzlies": {
+        "Desmond Bane": "OUT",
+        "John Konchar": "QUESTIONABLE",
+        "Ja Morant": "OUT",
+        "Marcus Smart": "OUT",
+        "Cam Spencer": "OUT"
+      },
+      "Miami Heat": {
+        "Josh Christopher": "OUT",
+        "Tyler Herro": "AVAILABLE",
+        "Keshad Johnson": "OUT",
+        "Kevin Love": "OUT"
+      },
+      "Denver Nuggets": {
+        "Vlatko Cancar": "OUT",
+        "Aaron Gordon": "OUT",
+        "Jamal Murray": "QUESTIONABLE"
+      },
+      "LA Clippers": {
+        "Mo Bamba": "OUT",
+        "Cam Christie": "OUT",
+        "Trentyn Flowers": "OUT",
+        "Kawhi Leonard": "OUT"
+      },
+      "Sacramento Kings": {
+        "Devin Carter": "OUT",
+        "Orlando Robinson": "OUT"
+      },
+      "Philadelphia 76ers": {
+        "Justin Edwards": "OUT",
+        "Joel Embiid": "OUT",
+        "Tyrese Maxey": "OUT"
+      },
+      "Los Angeles Lakers": {
+        "Anthony Davis": "PROBABLE",
+        "Rui Hachimura": "QUESTIONABLE",
+        "Jaxson Hayes": "PROBABLE",
+        "Jarred Vanderbilt": "OUT",
+        "Christian Wood": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-11-09",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-11-09_01PM.pdf",
+    "injuries": {
+      "Utah Jazz": {
+        "Keyonte George": "QUESTIONABLE",
+        "Taylor Hendricks": "OUT",
+        "Micah Potter": "OUT",
+        "Jason Preston": "OUT",
+        "Collin Sexton": "AVAILABLE",
+        "Oscar Tshiebwe": "OUT"
+      },
+      "San Antonio Spurs": {
+        "Malaki Branham": "QUESTIONABLE",
+        "Harrison Ingram": "OUT",
+        "Tre Jones": "OUT",
+        "Riley Minix": "OUT",
+        "Jeremy Sochan": "OUT",
+        "Devin Vassell": "PROBABLE"
+      },
+      "Brooklyn Nets": {
+        "Bojan Bogdanovic": "OUT",
+        "Jaylen Martin": "OUT"
+      },
+      "Cleveland Cavaliers": {
+        "Emoni Bates": "OUT",
+        "Max Strus": "OUT",
+        "Luke Travers": "OUT"
+      },
+      "Chicago Bulls": {
+        "Lonzo Ball": "OUT",
+        "Torrey Craig": "QUESTIONABLE",
+        "Zach Vine": "QUESTIONABLE",
+        "Adama Sanogo": "OUT",
+        "Jalen Smith": "PROBABLE"
+      },
+      "Atlanta Hawks": {
+        "Dominick Barlow": "OUT",
+        "Bogdan Bogdanovic": "OUT",
+        "Kobe Bufkin": "OUT"
+      },
+      "Toronto Raptors": {
+        "Scottie Barnes": "OUT",
+        "Bruce Brown": "OUT",
+        "Ulrich Chomche": "OUT",
+        "Jonathan Mogbo": "PROBABLE",
+        "Kelly Olynyk": "OUT",
+        "Immanuel Quickley": "QUESTIONABLE",
+        "Garrett Temple": "DOUBTFUL"
+      }
+    }
+  },
+  {
+    "date": "2024-11-10",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-11-10_01PM.pdf",
+    "injuries": {
+      "Houston Rockets": {
+        "Steven Adams": "OUT",
+        "Cam Whitmore": "OUT",
+        "Nate Williams": "OUT"
+      },
+      "Detroit Pistons": {
+        "Jalen Duren": "DOUBTFUL",
+        "Daniss Jenkins": "OUT",
+        "Bobi Klintman": "OUT",
+        "Cole Swider": "QUESTIONABLE",
+        "Ausar Thompson": "OUT",
+        "Alondes Williams": "OUT"
+      },
+      "Boston Celtics": {
+        "Jaylen Brown": "QUESTIONABLE",
+        "Luke Kornet": "QUESTIONABLE",
+        "Kristaps Porzingis": "OUT",
+        "Baylor Scheierman": "OUT"
+      },
+      "Milwaukee Bucks": {
+        "Giannis Antetokounmpo": "PROBABLE",
+        "Khris Middleton": "OUT",
+        "Ryan Rollins": "PROBABLE"
+      },
+      "New York Knicks": {
+        "Precious Achiuwa": "OUT",
+        "Miles Bride": "QUESTIONABLE",
+        "Cameron Payne": "QUESTIONABLE",
+        "Mitchell Robinson": "OUT"
+      },
+      "Indiana Pacers": {
+        "Isaiah Jackson": "OUT"
+      },
+      "Washington Wizards": {
+        "Saddiq Bey": "OUT",
+        "Malcolm Brogdon": "OUT",
+        "Carlton Carrington": "AVAILABLE",
+        "Justin Champagnie": "OUT",
+        "Kyle Kuzma": "OUT",
+        "Tristan Vukcevic": "OUT"
+      },
+      "Orlando Magic": {
+        "Paolo Banchero": "OUT",
+        "Jonathan Isaac": "PROBABLE",
+        "Mac Clung": "OUT",
+        "Trevelin Queen": "OUT"
+      },
+      "Charlotte Hornets": {
+        "Miles Bridges": "OUT",
+        "Tre Mann": "PROBABLE",
+        "Nick Richards": "OUT",
+        "Mark Williams": "OUT"
+      },
+      "Philadelphia 76ers": {
+        "Joel Embiid": "OUT",
+        "Tyrese Maxey": "OUT"
+      },
+      "Golden State Warriors": {
+        "Brandin Podziemski": "AVAILABLE"
+      },
+      "Oklahoma City Thunder": {
+        "Alex Ducas": "OUT",
+        "Adam Flagler": "OUT",
+        "Isaiah Hartenstein": "OUT",
+        "Nikola Topic": "OUT",
+        "Jaylin Williams": "OUT",
+        "Kenrich Williams": "OUT"
+      },
+      "Miami Heat": {
+        "Jimmy Butler": "OUT"
+      },
+      "Minnesota Timberwolves": {
+        "Jaylen Clark": "OUT",
+        "Jesse Edwards": "OUT",
+        "Leonard Miller": "OUT",
+        "Daishen Nix": "OUT"
+      },
+      "Dallas Mavericks": {
+        "Luka Doncic": "QUESTIONABLE",
+        "Dante Exum": "OUT",
+        "Jazian Gortman": "OUT",
+        "Maxi Kleber": "DOUBTFUL"
+      },
+      "Denver Nuggets": {
+        "Vlatko Cancar": "OUT",
+        "Aaron Gordon": "OUT"
+      },
+      "Sacramento Kings": {
+        "Devin Carter": "OUT",
+        "Isaiah Crawford": "OUT",
+        "Mason Jones": "OUT",
+        "Orlando Robinson": "OUT"
+      },
+      "Phoenix Suns": {
+        "Jalen Bridges": "OUT",
+        "Ryan Dunn": "PROBABLE",
+        "Kevin Durant": "OUT",
+        "Collin Gillespie": "OUT",
+        "Jusuf Nurkic": "QUESTIONABLE"
+      },
+      "Memphis Grizzlies": {
+        "Desmond Bane": "OUT",
+        "Colin Castleton": "QUESTIONABLE",
+        "Ja Morant": "OUT",
+        "Marcus Smart": "DOUBTFUL",
+        "Cam Spencer": "OUT"
+      },
+      "Portland Trail Blazers": {
+        "Bryce Gowens": "OUT",
+        "Justin Minaya": "OUT",
+        "Taze Moore": "OUT",
+        "Matisse Thybulle": "OUT"
+      },
+      "Los Angeles Lakers": {
+        "Anthony Davis": "PROBABLE",
+        "Jaxson Hayes": "PROBABLE",
+        "Jarred Vanderbilt": "OUT",
+        "Christian Wood": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-11-11",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-11-11_01PM.pdf",
+    "injuries": {
+      "Brooklyn Nets": {
+        "Bojan Bogdanovic": "OUT",
+        "Jaylen Martin": "OUT",
+        "Trendon Watford": "OUT",
+        "Dariq Whitehead": "OUT"
+      },
+      "New Orleans Pelicans": {
+        "Jordan Hawkins": "OUT",
+        "Herbert Jones": "OUT",
+        "Karlo Matkovic": "OUT",
+        "Dejounte Murray": "OUT",
+        "Zion Williamson": "OUT"
+      },
+      "Cleveland Cavaliers": {
+        "Emoni Bates": "OUT",
+        "Max Strus": "OUT",
+        "Luke Travers": "OUT"
+      },
+      "Chicago Bulls": {
+        "Lonzo Ball": "OUT",
+        "Zach Vine": "PROBABLE",
+        "Adama Sanogo": "QUESTIONABLE",
+        "Jalen Smith": "QUESTIONABLE"
+      },
+      "LA Clippers": {
+        "Mo Bamba": "OUT",
+        "Cam Christie": "OUT",
+        "Trentyn Flowers": "OUT",
+        "Kawhi Leonard": "OUT"
+      },
+      "San Antonio Spurs": {
+        "Malaki Branham": "QUESTIONABLE",
+        "Harrison Ingram": "OUT",
+        "Tre Jones": "OUT",
+        "Riley Minix": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-11-12",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-11-12_01PM.pdf",
+    "injuries": {
+      "Atlanta Hawks": {
+        "Bogdan Bogdanovic": "OUT",
+        "Kobe Bufkin": "OUT",
+        "Vit Krejci": "OUT",
+        "Seth Lundy": "OUT",
+        "Trae Young": "OUT",
+        "Cody Zeller": "OUT"
+      },
+      "Boston Celtics": {
+        "Al Horford": "QUESTIONABLE",
+        "Drew Peterson": "AVAILABLE",
+        "Kristaps Porzingis": "OUT",
+        "Baylor Scheierman": "AVAILABLE",
+        "Jaden Springer": "QUESTIONABLE",
+        "Jayson Tatum": "QUESTIONABLE"
+      },
+      "Charlotte Hornets": {
+        "Miles Bridges": "OUT",
+        "Tre Mann": "QUESTIONABLE",
+        "Cody Martin": "QUESTIONABLE",
+        "Nick Richards": "OUT",
+        "Mark Williams": "OUT"
+      },
+      "Orlando Magic": {
+        "Paolo Banchero": "OUT",
+        "Mac Clung": "OUT",
+        "Trevelin Queen": "OUT"
+      },
+      "Miami Heat": {
+        "Jimmy Butler": "OUT",
+        "Josh Christopher": "OUT",
+        "Tyler Herro": "AVAILABLE",
+        "Keshad Johnson": "OUT"
+      },
+      "Detroit Pistons": {
+        "Jalen Duren": "QUESTIONABLE"
+      },
+      "New York Knicks": {
+        "Precious Achiuwa": "OUT",
+        "Miles Bride": "QUESTIONABLE",
+        "Cameron Payne": "QUESTIONABLE",
+        "Mitchell Robinson": "OUT"
+      },
+      "Philadelphia 76ers": {
+        "Adem Bona": "AVAILABLE",
+        "Justin Edwards": "AVAILABLE",
+        "Tyrese Maxey": "OUT",
+        "Lester Quinones": "OUT"
+      },
+      "Toronto Raptors": {
+        "Scottie Barnes": "OUT",
+        "Bruce Brown": "OUT",
+        "Ulrich Chomche": "OUT",
+        "Kelly Olynyk": "OUT",
+        "Immanuel Quickley": "QUESTIONABLE",
+        "Garrett Temple": "DOUBTFUL"
+      },
+      "Milwaukee Bucks": {
+        "Giannis Antetokounmpo": "PROBABLE",
+        "Damian Lillard": "OUT",
+        "Khris Middleton": "OUT"
+      },
+      "Phoenix Suns": {
+        "Jalen Bridges": "OUT",
+        "Kevin Durant": "OUT",
+        "Collin Gillespie": "OUT",
+        "Jusuf Nurkic": "QUESTIONABLE"
+      },
+      "Utah Jazz": {
+        "Keyonte George": "PROBABLE",
+        "Taylor Hendricks": "OUT",
+        "Walker Kessler": "OUT",
+        "Micah Potter": "OUT",
+        "Jason Preston": "OUT",
+        "Collin Sexton": "AVAILABLE",
+        "Oscar Tshiebwe": "OUT"
+      },
+      "Dallas Mavericks": {
+        "Luka Doncic": "PROBABLE",
+        "Dante Exum": "OUT",
+        "Jazian Gortman": "OUT"
+      },
+      "Golden State Warriors": {
+        "Andrew Wiggins": "QUESTIONABLE"
+      },
+      "Minnesota Timberwolves": {
+        "Jaylen Clark": "OUT",
+        "Jesse Edwards": "OUT",
+        "Leonard Miller": "OUT",
+        "Daishen Nix": "OUT"
+      },
+      "Portland Trail Blazers": {
+        "Matisse Thybulle": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-11-13",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-11-13_01PM.pdf",
+    "injuries": {
+      "Indiana Pacers": {
+        "Isaiah Jackson": "OUT",
+        "Andrew Nembhard": "OUT",
+        "Aaron Nesmith": "OUT",
+        "Tristen Newton": "OUT",
+        "Obi Toppin": "QUESTIONABLE",
+        "James Wiseman": "OUT"
+      },
+      "Orlando Magic": {
+        "Paolo Banchero": "OUT"
+      },
+      "Boston Celtics": {
+        "Al Horford": "OUT",
+        "Kristaps Porzingis": "OUT",
+        "Baylor Scheierman": "OUT",
+        "Jaden Springer": "OUT",
+        "Anton Watson": "OUT"
+      },
+      "Brooklyn Nets": {
+        "Bojan Bogdanovic": "OUT",
+        "Dorian Smith": "QUESTIONABLE",
+        "Jaylen Martin": "AVAILABLE",
+        "Ben Simmons": "QUESTIONABLE",
+        "Trendon Watford": "OUT",
+        "Dariq Whitehead": "AVAILABLE"
+      },
+      "Chicago Bulls": {
+        "Lonzo Ball": "OUT",
+        "Zach Vine": "PROBABLE",
+        "Adama Sanogo": "QUESTIONABLE",
+        "Jalen Smith": "QUESTIONABLE"
+      },
+      "New York Knicks": {
+        "Precious Achiuwa": "OUT",
+        "Jalen Brunson": "QUESTIONABLE",
+        "Miles Bride": "QUESTIONABLE",
+        "Cameron Payne": "QUESTIONABLE"
+      },
+      "Cleveland Cavaliers": {
+        "Jarrett Allen": "QUESTIONABLE",
+        "Emoni Bates": "OUT",
+        "Sam Merrill": "QUESTIONABLE",
+        "Max Strus": "OUT"
+      },
+      "Philadelphia 76ers": {
+        "Joel Embiid": "OUT",
+        "Paul George": "OUT",
+        "Tyrese Maxey": "OUT"
+      },
+      "New Orleans Pelicans": {
+        "Jose Alvarado": "OUT",
+        "Jordan Hawkins": "OUT",
+        "Herbert Jones": "OUT",
+        "Karlo Matkovic": "OUT",
+        "Dejounte Murray": "OUT",
+        "Zion Williamson": "OUT"
+      },
+      "Oklahoma City Thunder": {
+        "Alex Caruso": "OUT",
+        "Alex Ducas": "QUESTIONABLE"
+      },
+      "Detroit Pistons": {
+        "Simone Fontecchio": "OUT",
+        "Jaden Ivey": "OUT",
+        "Bobi Klintman": "OUT",
+        "Ausar Thompson": "OUT"
+      },
+      "LA Clippers": {
+        "Mo Bamba": "OUT",
+        "Cam Christie": "OUT",
+        "Trentyn Flowers": "OUT",
+        "Kawhi Leonard": "OUT"
+      },
+      "Houston Rockets": {
+        "Steven Adams": "QUESTIONABLE",
+        "Jock Landale": "PROBABLE",
+        "Fred Vleet": "QUESTIONABLE",
+        "Cam Whitmore": "OUT",
+        "Nate Williams": "OUT"
+      },
+      "Washington Wizards": {
+        "Saddiq Bey": "OUT",
+        "Malcolm Brogdon": "OUT",
+        "Richaun Holmes": "AVAILABLE"
+      },
+      "San Antonio Spurs": {
+        "Malaki Branham": "QUESTIONABLE",
+        "Harrison Ingram": "OUT",
+        "Tre Jones": "OUT",
+        "Riley Minix": "OUT",
+        "Jeremy Sochan": "OUT"
+      },
+      "Memphis Grizzlies": {
+        "Desmond Bane": "OUT",
+        "Brandon Clarke": "QUESTIONABLE"
+      },
+      "Los Angeles Lakers": {
+        "Anthony Davis": "PROBABLE",
+        "Jaxson Hayes": "OUT",
+        "Jalen Schifino": "OUT",
+        "Jarred Vanderbilt": "OUT",
+        "Christian Wood": "OUT"
+      },
+      "Sacramento Kings": {
+        "Devin Carter": "OUT",
+        "Malik Monk": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-11-14",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-11-14_01PM.pdf",
+    "injuries": {
+      "Dallas Mavericks": {
+        "Luka Doncic": "PROBABLE",
+        "Dante Exum": "OUT",
+        "Jazian Gortman": "OUT",
+        "Kyrie Irving": "QUESTIONABLE"
+      },
+      "Utah Jazz": {
+        "Taylor Hendricks": "OUT",
+        "Walker Kessler": "OUT",
+        "Micah Potter": "OUT",
+        "Jason Preston": "OUT",
+        "Collin Sexton": "AVAILABLE",
+        "Oscar Tshiebwe": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-11-15",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-11-15_01PM.pdf",
+    "injuries": {
+      "Detroit Pistons": {
+        "Simone Fontecchio": "DOUBTFUL",
+        "Jaden Ivey": "QUESTIONABLE",
+        "Bobi Klintman": "OUT",
+        "Ausar Thompson": "OUT",
+        "Alondes Williams": "OUT"
+      },
+      "Toronto Raptors": {
+        "Scottie Barnes": "OUT",
+        "Bruce Brown": "OUT",
+        "Ulrich Chomche": "OUT",
+        "Kelly Olynyk": "OUT",
+        "Immanuel Quickley": "OUT"
+      },
+      "Miami Heat": {
+        "Jimmy Butler": "OUT"
+      },
+      "Indiana Pacers": {
+        "Isaiah Jackson": "OUT",
+        "Andrew Nembhard": "OUT",
+        "Aaron Nesmith": "OUT",
+        "Tristen Newton": "OUT",
+        "James Wiseman": "OUT"
+      },
+      "Philadelphia 76ers": {
+        "Andre Drummond": "QUESTIONABLE",
+        "Justin Edwards": "OUT",
+        "Tyrese Maxey": "OUT",
+        "Lester Quinones": "OUT"
+      },
+      "Orlando Magic": {
+        "Paolo Banchero": "OUT"
+      },
+      "Brooklyn Nets": {
+        "Bojan Bogdanovic": "OUT",
+        "Nic Claxton": "OUT",
+        "Dorian Smith": "AVAILABLE",
+        "Jaylen Martin": "OUT",
+        "Trendon Watford": "OUT",
+        "Dariq Whitehead": "OUT"
+      },
+      "New York Knicks": {
+        "Precious Achiuwa": "OUT",
+        "Jalen Brunson": "PROBABLE",
+        "Miles Bride": "QUESTIONABLE",
+        "Cameron Payne": "PROBABLE",
+        "Mitchell Robinson": "OUT"
+      },
+      "Chicago Bulls": {
+        "Lonzo Ball": "OUT"
+      },
+      "Cleveland Cavaliers": {
+        "Jarrett Allen": "PROBABLE",
+        "Emoni Bates": "OUT",
+        "Sam Merrill": "OUT",
+        "Evan Mobley": "QUESTIONABLE",
+        "Max Strus": "OUT"
+      },
+      "Los Angeles Lakers": {
+        "Anthony Davis": "PROBABLE",
+        "Rui Hachimura": "QUESTIONABLE",
+        "Jaxson Hayes": "OUT",
+        "Jalen Schifino": "OUT",
+        "Jarred Vanderbilt": "OUT",
+        "Christian Wood": "OUT"
+      },
+      "San Antonio Spurs": {
+        "Harrison Ingram": "OUT",
+        "Tre Jones": "OUT",
+        "Riley Minix": "OUT",
+        "Jeremy Sochan": "OUT"
+      },
+      "Washington Wizards": {
+        "Saddiq Bey": "OUT",
+        "Malcolm Brogdon": "OUT",
+        "Anthony Gill": "QUESTIONABLE"
+      },
+      "Atlanta Hawks": {
+        "Dominick Barlow": "OUT",
+        "Bogdan Bogdanovic": "OUT",
+        "Kobe Bufkin": "OUT",
+        "Vit Krejci": "OUT",
+        "Seth Lundy": "OUT",
+        "Cody Zeller": "OUT"
+      },
+      "Denver Nuggets": {
+        "Vlatko Cancar": "QUESTIONABLE",
+        "Aaron Gordon": "OUT",
+        "Nikola Jokic": "OUT",
+        "Spencer Jones": "OUT",
+        "Jalen Pickett": "OUT"
+      },
+      "New Orleans Pelicans": {
+        "Jose Alvarado": "OUT",
+        "Jordan Hawkins": "OUT"
+      },
+      "LA Clippers": {
+        "Mo Bamba": "OUT",
+        "Cam Christie": "OUT",
+        "Trentyn Flowers": "OUT",
+        "Kawhi Leonard": "OUT"
+      },
+      "Houston Rockets": {
+        "Steven Adams": "QUESTIONABLE",
+        "Cam Whitmore": "OUT",
+        "Nate Williams": "OUT"
+      },
+      "Phoenix Suns": {
+        "Grayson Allen": "QUESTIONABLE",
+        "Bradley Beal": "OUT",
+        "Kevin Durant": "OUT",
+        "Collin Gillespie": "OUT"
+      },
+      "Oklahoma City Thunder": {
+        "Alex Caruso": "OUT",
+        "Alex Ducas": "OUT",
+        "Isaiah Hartenstein": "OUT",
+        "Chet Holmgren": "OUT",
+        "Nikola Topic": "OUT",
+        "Jaylin Williams": "OUT"
+      },
+      "Memphis Grizzlies": {
+        "Desmond Bane": "QUESTIONABLE",
+        "Colin Castleton": "OUT",
+        "Brandon Clarke": "QUESTIONABLE",
+        "Yuki Kawamura": "OUT",
+        "Ja Morant": "OUT",
+        "Cam Spencer": "OUT"
+      },
+      "Golden State Warriors": {
+        "Kyle Anderson": "PROBABLE"
+      },
+      "Minnesota Timberwolves": {
+        "Jaylen Clark": "OUT",
+        "Jesse Edwards": "OUT",
+        "Leonard Miller": "OUT",
+        "Daishen Nix": "OUT"
+      },
+      "Sacramento Kings": {
+        "Devin Carter": "OUT",
+        "Malik Monk": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-11-16",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-11-16_01PM.pdf",
+    "injuries": {
+      "Milwaukee Bucks": {
+        "Giannis Antetokounmpo": "PROBABLE",
+        "Damian Lillard": "OUT",
+        "Khris Middleton": "OUT",
+        "Bobby Portis": "DOUBTFUL",
+        "Ryan Rollins": "OUT"
+      },
+      "Charlotte Hornets": {
+        "Miles Bridges": "QUESTIONABLE",
+        "Jared Rhoden": "OUT",
+        "Nick Richards": "OUT",
+        "Mark Williams": "OUT"
+      },
+      "Toronto Raptors": {
+        "Scottie Barnes": "OUT",
+        "Bruce Brown": "OUT",
+        "Ulrich Chomche": "OUT",
+        "Kelly Olynyk": "OUT",
+        "Immanuel Quickley": "OUT"
+      },
+      "Boston Celtics": {
+        "Jrue Holiday": "QUESTIONABLE",
+        "Drew Peterson": "OUT",
+        "Kristaps Porzingis": "OUT",
+        "Baylor Scheierman": "OUT",
+        "Jaden Springer": "QUESTIONABLE",
+        "Anton Watson": "OUT"
+      },
+      "San Antonio Spurs": {
+        "Harrison Ingram": "OUT",
+        "Tre Jones": "PROBABLE",
+        "Riley Minix": "OUT",
+        "Jeremy Sochan": "OUT",
+        "Devin Vassell": "OUT",
+        "Victor Wembanyama": "QUESTIONABLE"
+      },
+      "Dallas Mavericks": {
+        "Luka Doncic": "PROBABLE",
+        "Dante Exum": "OUT",
+        "Jazian Gortman": "OUT",
+        "Naji Marshall": "QUESTIONABLE"
+      },
+      "Utah Jazz": {
+        "Taylor Hendricks": "OUT",
+        "Walker Kessler": "OUT",
+        "Lauri Markkanen": "QUESTIONABLE",
+        "Micah Potter": "OUT",
+        "Jason Preston": "OUT",
+        "Collin Sexton": "AVAILABLE"
+      }
+    }
+  },
+  {
+    "date": "2024-11-17",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-11-17_01PM.pdf",
+    "injuries": {
+      "Phoenix Suns": {
+        "Grayson Allen": "PROBABLE",
+        "Bradley Beal": "OUT",
+        "Kevin Durant": "OUT",
+        "Collin Gillespie": "OUT",
+        "Jusuf Nurkic": "PROBABLE"
+      },
+      "Minnesota Timberwolves": {
+        "Jaylen Clark": "OUT",
+        "Donte Vincenzo": "QUESTIONABLE",
+        "Jesse Edwards": "OUT",
+        "Leonard Miller": "OUT",
+        "Daishen Nix": "OUT"
+      },
+      "Miami Heat": {
+        "Jimmy Butler": "OUT",
+        "Josh Christopher": "OUT",
+        "Tyler Herro": "AVAILABLE",
+        "Haywood Highsmith": "AVAILABLE",
+        "Keshad Johnson": "OUT"
+      },
+      "Indiana Pacers": {
+        "Isaiah Jackson": "OUT",
+        "Andrew Nembhard": "OUT",
+        "Aaron Nesmith": "OUT",
+        "Tristen Newton": "OUT",
+        "James Wiseman": "OUT"
+      },
+      "Atlanta Hawks": {
+        "Dominick Barlow": "OUT",
+        "Bogdan Bogdanovic": "OUT",
+        "Kobe Bufkin": "DOUBTFUL",
+        "Mouhamed Gueye": "OUT",
+        "Vit Krejci": "QUESTIONABLE",
+        "Seth Lundy": "OUT",
+        "Cody Zeller": "OUT"
+      },
+      "Portland Trail Blazers": {
+        "Deandre Ayton": "DOUBTFUL"
+      },
+      "Charlotte Hornets": {
+        "Miles Bridges": "QUESTIONABLE",
+        "Tre Mann": "QUESTIONABLE",
+        "Nick Richards": "OUT",
+        "Mark Williams": "OUT"
+      },
+      "Cleveland Cavaliers": {
+        "Emoni Bates": "OUT",
+        "Sam Merrill": "OUT",
+        "Donovan Mitchell": "OUT",
+        "Evan Mobley": "PROBABLE",
+        "Max Strus": "OUT"
+      },
+      "Denver Nuggets": {
+        "Vlatko Cancar": "PROBABLE"
+      },
+      "Memphis Grizzlies": {
+        "Ja Morant": "OUT",
+        "Marcus Smart": "DOUBTFUL",
+        "Cam Spencer": "OUT"
+      },
+      "Detroit Pistons": {
+        "Simone Fontecchio": "QUESTIONABLE",
+        "Daniss Jenkins": "OUT",
+        "Bobi Klintman": "OUT",
+        "Cole Swider": "OUT",
+        "Ausar Thompson": "OUT",
+        "Alondes Williams": "OUT"
+      },
+      "Washington Wizards": {
+        "Saddiq Bey": "OUT"
+      },
+      "Brooklyn Nets": {
+        "Bojan Bogdanovic": "OUT",
+        "Nic Claxton": "OUT",
+        "Jaylen Martin": "OUT",
+        "Dariq Whitehead": "OUT",
+        "Ziaire Williams": "QUESTIONABLE"
+      },
+      "New York Knicks": {
+        "Precious Achiuwa": "OUT",
+        "Miles Bride": "QUESTIONABLE",
+        "Mitchell Robinson": "OUT"
+      },
+      "Dallas Mavericks": {
+        "Luka Doncic": "OUT",
+        "Dante Exum": "OUT",
+        "Jazian Gortman": "OUT"
+      },
+      "Oklahoma City Thunder": {
+        "Alex Caruso": "OUT"
+      },
+      "Houston Rockets": {
+        "Steven Adams": "OUT",
+        "Amen Thompson": "QUESTIONABLE"
+      },
+      "Chicago Bulls": {
+        "Lonzo Ball": "OUT",
+        "Adama Sanogo": "OUT"
+      },
+      "LA Clippers": {
+        "Cam Christie": "OUT",
+        "Trentyn Flowers": "OUT",
+        "Kawhi Leonard": "OUT"
+      },
+      "Orlando Magic": {
+        "Paolo Banchero": "OUT",
+        "Mac Clung": "OUT",
+        "Trevelin Queen": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-11-18",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-11-18_01PM.pdf",
+    "injuries": {
+      "Chicago Bulls": {
+        "Lonzo Ball": "OUT",
+        "Adama Sanogo": "OUT",
+        "Patrick Williams": "PROBABLE"
+      },
+      "Detroit Pistons": {
+        "Jaden Ivey": "PROBABLE",
+        "Daniss Jenkins": "OUT",
+        "Bobi Klintman": "OUT",
+        "Cole Swider": "OUT",
+        "Ausar Thompson": "OUT",
+        "Alondes Williams": "OUT"
+      },
+      "Indiana Pacers": {
+        "Isaiah Jackson": "OUT",
+        "Andrew Nembhard": "OUT",
+        "Aaron Nesmith": "OUT"
+      },
+      "Toronto Raptors": {
+        "Scottie Barnes": "OUT",
+        "Bruce Brown": "OUT",
+        "Ulrich Chomche": "OUT",
+        "Bruno Fernando": "OUT",
+        "Kelly Olynyk": "OUT",
+        "Immanuel Quickley": "OUT"
+      },
+      "Philadelphia 76ers": {
+        "Adem Bona": "AVAILABLE",
+        "Justin Edwards": "OUT",
+        "Joel Embiid": "DOUBTFUL",
+        "Tyrese Maxey": "OUT"
+      },
+      "Miami Heat": {
+        "Jimmy Butler": "AVAILABLE",
+        "Josh Christopher": "OUT",
+        "Tyler Herro": "AVAILABLE",
+        "Haywood Highsmith": "AVAILABLE",
+        "Keshad Johnson": "OUT",
+        "Nikola Jovic": "AVAILABLE",
+        "Terry Rozier": "OUT"
+      },
+      "Washington Wizards": {
+        "Saddiq Bey": "OUT",
+        "Bilal Coulibaly": "QUESTIONABLE",
+        "Tristan Vukcevic": "OUT"
+      },
+      "New York Knicks": {
+        "Precious Achiuwa": "OUT",
+        "Miles Bride": "OUT",
+        "Mitchell Robinson": "OUT"
+      },
+      "Milwaukee Bucks": {
+        "Giannis Antetokounmpo": "PROBABLE",
+        "Damian Lillard": "PROBABLE",
+        "Khris Middleton": "OUT",
+        "Ryan Rollins": "OUT"
+      },
+      "Orlando Magic": {
+        "Paolo Banchero": "OUT",
+        "Mac Clung": "OUT",
+        "Trevelin Queen": "OUT"
+      },
+      "Sacramento Kings": {
+        "Devin Carter": "OUT",
+        "Malik Monk": "OUT",
+        "Domantas Sabonis": "DOUBTFUL"
+      },
+      "Golden State Warriors": {
+        "Reece Beekman": "OUT",
+        "Stephen Curry": "QUESTIONABLE",
+        "Kevon Looney": "QUESTIONABLE"
+      }
+    }
+  },
+  {
+    "date": "2024-11-19",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-11-19_01PM.pdf",
+    "injuries": {
+      "Cleveland Cavaliers": {
+        "Emoni Bates": "OUT",
+        "Caris Vert": "QUESTIONABLE",
+        "Sam Merrill": "QUESTIONABLE",
+        "Isaac Okoro": "QUESTIONABLE",
+        "Max Strus": "OUT",
+        "Dean Wade": "OUT"
+      },
+      "Boston Celtics": {
+        "Drew Peterson": "OUT",
+        "Kristaps Porzingis": "OUT",
+        "Payton Pritchard": "QUESTIONABLE",
+        "Anton Watson": "OUT"
+      },
+      "Charlotte Hornets": {
+        "Tre Mann": "QUESTIONABLE",
+        "Jared Rhoden": "OUT",
+        "Nick Richards": "OUT"
+      },
+      "Brooklyn Nets": {
+        "Bojan Bogdanovic": "OUT",
+        "Nic Claxton": "OUT",
+        "Dorian Smith": "PROBABLE",
+        "Jaylen Martin": "OUT",
+        "Cam Thomas": "PROBABLE",
+        "Dariq Whitehead": "OUT",
+        "Ziaire Williams": "AVAILABLE",
+        "Cui Yongxi": "OUT"
+      },
+      "Denver Nuggets": {
+        "Aaron Gordon": "OUT",
+        "Nikola Jokic": "OUT",
+        "Spencer Jones": "OUT",
+        "Jalen Pickett": "OUT"
+      },
+      "Memphis Grizzlies": {
+        "Zach Edey": "OUT"
+      },
+      "New Orleans Pelicans": {
+        "Jose Alvarado": "OUT",
+        "Jordan Hawkins": "OUT",
+        "Herbert Jones": "OUT",
+        "Dejounte Murray": "OUT",
+        "Zion Williamson": "OUT"
+      },
+      "Dallas Mavericks": {
+        "Luka Doncic": "QUESTIONABLE",
+        "Dante Exum": "OUT",
+        "Jazian Gortman": "OUT"
+      },
+      "Oklahoma City Thunder": {
+        "Isaiah Hartenstein": "OUT",
+        "Chet Holmgren": "OUT",
+        "Isaiah Joe": "OUT",
+        "Nikola Topic": "OUT",
+        "Jaylin Williams": "OUT"
+      },
+      "San Antonio Spurs": {
+        "Harrison Ingram": "OUT",
+        "Riley Minix": "OUT",
+        "Jeremy Sochan": "OUT",
+        "Victor Wembanyama": "DOUBTFUL"
+      },
+      "Utah Jazz": {
+        "Taylor Hendricks": "OUT",
+        "Walker Kessler": "OUT",
+        "Micah Potter": "OUT",
+        "Jason Preston": "OUT",
+        "Collin Sexton": "AVAILABLE",
+        "Oscar Tshiebwe": "OUT"
+      },
+      "Los Angeles Lakers": {
+        "Anthony Davis": "PROBABLE",
+        "Rui Hachimura": "QUESTIONABLE",
+        "Jaxson Hayes": "OUT",
+        "Jalen Schifino": "OUT",
+        "Bronny James": "DOUBTFUL",
+        "Jarred Vanderbilt": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-11-20",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-11-20_01PM.pdf",
+    "injuries": {
+      "Chicago Bulls": {
+        "Lonzo Ball": "OUT",
+        "Adama Sanogo": "OUT",
+        "Patrick Williams": "OUT"
+      },
+      "Milwaukee Bucks": {
+        "Giannis Antetokounmpo": "PROBABLE",
+        "Chris Livingston": "OUT",
+        "Khris Middleton": "OUT",
+        "Ryan Rollins": "OUT",
+        "Tyler Smith": "OUT"
+      },
+      "New Orleans Pelicans": {
+        "Jose Alvarado": "OUT",
+        "Jordan Hawkins": "OUT",
+        "Brandon Ingram": "OUT",
+        "Herbert Jones": "OUT"
+      },
+      "Cleveland Cavaliers": {
+        "Emoni Bates": "OUT",
+        "Darius Garland": "OUT",
+        "Caris Vert": "OUT",
+        "Sam Merrill": "OUT",
+        "Isaac Okoro": "OUT",
+        "Max Strus": "OUT",
+        "Dean Wade": "OUT"
+      },
+      "Indiana Pacers": {
+        "Johnny Furphy": "QUESTIONABLE",
+        "Isaiah Jackson": "OUT",
+        "Andrew Nembhard": "OUT",
+        "Aaron Nesmith": "OUT"
+      },
+      "Houston Rockets": {
+        "Jalen Green": "QUESTIONABLE",
+        "Cam Whitmore": "QUESTIONABLE"
+      },
+      "Philadelphia 76ers": {
+        "Justin Edwards": "OUT",
+        "Kyle Lowry": "OUT",
+        "Tyrese Maxey": "QUESTIONABLE",
+        "Lester Quinones": "AVAILABLE"
+      },
+      "Portland Trail Blazers": {
+        "Deandre Ayton": "DOUBTFUL",
+        "Bryce Gowens": "OUT",
+        "Justin Minaya": "OUT",
+        "Taze Moore": "OUT"
+      },
+      "Atlanta Hawks": {
+        "Dominick Barlow": "OUT",
+        "Mouhamed Gueye": "OUT",
+        "Jalen Johnson": "QUESTIONABLE",
+        "Seth Lundy": "OUT",
+        "Cody Zeller": "OUT"
+      },
+      "Golden State Warriors": {
+        "Kyle Anderson": "QUESTIONABLE",
+        "Stephen Curry": "PROBABLE",
+        "Kevon Looney": "PROBABLE"
+      },
+      "New York Knicks": {
+        "Precious Achiuwa": "OUT",
+        "Miles Bride": "OUT",
+        "Mitchell Robinson": "OUT"
+      },
+      "Phoenix Suns": {
+        "Bradley Beal": "OUT",
+        "Kevin Durant": "OUT",
+        "Collin Gillespie": "OUT",
+        "Jusuf Nurkic": "QUESTIONABLE"
+      },
+      "Orlando Magic": {
+        "Paolo Banchero": "OUT",
+        "Mac Clung": "OUT",
+        "Trevelin Queen": "OUT"
+      },
+      "LA Clippers": {
+        "Cam Christie": "OUT",
+        "Trentyn Flowers": "OUT",
+        "Kawhi Leonard": "OUT",
+        "Norman Powell": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-11-21",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-11-21_01PM.pdf",
+    "injuries": {
+      "Detroit Pistons": {
+        "Daniss Jenkins": "OUT",
+        "Bobi Klintman": "OUT",
+        "Cole Swider": "OUT",
+        "Ausar Thompson": "DOUBTFUL",
+        "Alondes Williams": "OUT"
+      },
+      "Charlotte Hornets": {
+        "Miles Bridges": "QUESTIONABLE",
+        "Tre Mann": "PROBABLE",
+        "Jared Rhoden": "OUT",
+        "Nick Richards": "OUT",
+        "Mark Williams": "OUT"
+      },
+      "Minnesota Timberwolves": {
+        "Jaylen Clark": "OUT",
+        "Mike Conley": "QUESTIONABLE",
+        "Donte Vincenzo": "QUESTIONABLE"
+      },
+      "Toronto Raptors": {
+        "Scottie Barnes": "QUESTIONABLE",
+        "Bruce Brown": "OUT",
+        "Bruno Fernando": "OUT",
+        "Kelly Olynyk": "OUT",
+        "Immanuel Quickley": "OUT"
+      },
+      "Utah Jazz": {
+        "Jordan Clarkson": "DOUBTFUL",
+        "Taylor Hendricks": "OUT",
+        "Walker Kessler": "OUT",
+        "Micah Potter": "OUT",
+        "Jason Preston": "OUT",
+        "Collin Sexton": "AVAILABLE",
+        "Oscar Tshiebwe": "OUT"
+      },
+      "San Antonio Spurs": {
+        "Zach Collins": "QUESTIONABLE"
+      },
+      "Los Angeles Lakers": {
+        "Anthony Davis": "PROBABLE",
+        "Rui Hachimura": "QUESTIONABLE",
+        "Jaxson Hayes": "OUT",
+        "Jalen Schifino": "OUT",
+        "Bronny James": "DOUBTFUL",
+        "Jarred Vanderbilt": "OUT",
+        "Christian Wood": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-11-22",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-11-22_01PM.pdf",
+    "injuries": {
+      "Brooklyn Nets": {
+        "Bojan Bogdanovic": "OUT",
+        "Nic Claxton": "PROBABLE",
+        "Dorian Smith": "PROBABLE",
+        "Jaylen Martin": "OUT",
+        "Cam Thomas": "AVAILABLE",
+        "Dariq Whitehead": "OUT",
+        "Cui Yongxi": "OUT"
+      },
+      "Philadelphia 76ers": {
+        "Joel Embiid": "QUESTIONABLE",
+        "Paul George": "OUT",
+        "Kyle Lowry": "OUT"
+      },
+      "Boston Celtics": {
+        "Drew Peterson": "OUT",
+        "Kristaps Porzingis": "OUT",
+        "Baylor Scheierman": "OUT",
+        "Anton Watson": "OUT"
+      },
+      "Washington Wizards": {
+        "Saddiq Bey": "OUT",
+        "Justin Champagnie": "OUT",
+        "Tristan Vukcevic": "OUT"
+      },
+      "Golden State Warriors": {
+        "Stephen Curry": "PROBABLE"
+      },
+      "New Orleans Pelicans": {
+        "Jose Alvarado": "OUT",
+        "Jordan Hawkins": "AVAILABLE",
+        "Brandon Ingram": "AVAILABLE",
+        "Herbert Jones": "OUT",
+        "Karlo Matkovic": "OUT",
+        "Yves Missi": "QUESTIONABLE",
+        "Dejounte Murray": "OUT",
+        "Zion Williamson": "OUT"
+      },
+      "Atlanta Hawks": {
+        "Dominick Barlow": "OUT",
+        "Mouhamed Gueye": "OUT",
+        "Seth Lundy": "OUT",
+        "Cody Zeller": "OUT"
+      },
+      "Chicago Bulls": {
+        "Lonzo Ball": "OUT",
+        "Torrey Craig": "PROBABLE",
+        "Adama Sanogo": "OUT",
+        "Coby White": "PROBABLE",
+        "Patrick Williams": "OUT"
+      },
+      "Indiana Pacers": {
+        "Isaiah Jackson": "OUT",
+        "Andrew Nembhard": "OUT",
+        "Aaron Nesmith": "OUT",
+        "Tristen Newton": "QUESTIONABLE",
+        "Ben Sheppard": "QUESTIONABLE",
+        "Jarace Walker": "QUESTIONABLE",
+        "James Wiseman": "OUT"
+      },
+      "Milwaukee Bucks": {
+        "Giannis Antetokounmpo": "PROBABLE"
+      },
+      "Portland Trail Blazers": {
+        "Deandre Ayton": "DOUBTFUL",
+        "Scoot Henderson": "QUESTIONABLE",
+        "Bryce Gowens": "OUT",
+        "Anfernee Simons": "QUESTIONABLE",
+        "Matisse Thybulle": "OUT"
+      },
+      "Houston Rockets": {
+        "Cam Whitmore": "OUT",
+        "Nate Williams": "OUT"
+      },
+      "Dallas Mavericks": {
+        "Luka Doncic": "OUT",
+        "Kessler Edwards": "OUT",
+        "Dante Exum": "OUT",
+        "Jazian Gortman": "OUT",
+        "Brandon Williams": "OUT"
+      },
+      "Denver Nuggets": {
+        "Vlatko Cancar": "OUT"
+      },
+      "Sacramento Kings": {
+        "Devin Carter": "OUT",
+        "Isaiah Crawford": "OUT",
+        "Mason Jones": "OUT",
+        "Malik Monk": "OUT"
+      },
+      "LA Clippers": {
+        "Kawhi Leonard": "OUT",
+        "Norman Powell": "OUT"
+      },
+      "Orlando Magic": {
+        "Paolo Banchero": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-11-23",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-11-23_01PM.pdf",
+    "injuries": {
+      "New York Knicks": {
+        "Precious Achiuwa": "OUT",
+        "Miles Bride": "QUESTIONABLE",
+        "Mitchell Robinson": "OUT"
+      },
+      "Utah Jazz": {
+        "Jordan Clarkson": "QUESTIONABLE",
+        "Kyle Filipowski": "OUT",
+        "Taylor Hendricks": "OUT",
+        "David Jones": "OUT",
+        "Walker Kessler": "QUESTIONABLE",
+        "Micah Potter": "OUT",
+        "Collin Sexton": "AVAILABLE",
+        "Oscar Tshiebwe": "OUT"
+      },
+      "Detroit Pistons": {
+        "Cade Cunningham": "OUT",
+        "Daniss Jenkins": "OUT"
+      },
+      "Orlando Magic": {
+        "Paolo Banchero": "OUT",
+        "Mac Clung": "OUT",
+        "Trevelin Queen": "OUT"
+      },
+      "Charlotte Hornets": {
+        "Miles Bridges": "OUT",
+        "Tre Mann": "OUT",
+        "Jared Rhoden": "OUT",
+        "Nick Richards": "OUT",
+        "Mark Williams": "OUT"
+      },
+      "Memphis Grizzlies": {
+        "Colin Castleton": "OUT"
+      },
+      "Chicago Bulls": {
+        "Lonzo Ball": "OUT",
+        "Julian Phillips": "QUESTIONABLE",
+        "Adama Sanogo": "OUT",
+        "Jalen Smith": "QUESTIONABLE",
+        "Patrick Williams": "OUT"
+      },
+      "San Antonio Spurs": {
+        "Harrison Ingram": "OUT",
+        "Keldon Johnson": "QUESTIONABLE"
+      },
+      "Los Angeles Lakers": {
+        "Anthony Davis": "PROBABLE",
+        "Jaxson Hayes": "OUT",
+        "Bronny James": "OUT",
+        "Quincy Olivari": "OUT",
+        "Jarred Vanderbilt": "OUT",
+        "Christian Wood": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-11-24",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-11-24_01PM.pdf",
+    "injuries": {
+      "Minnesota Timberwolves": {
+        "Jaylen Clark": "OUT",
+        "Mike Conley": "OUT",
+        "Jesse Edwards": "OUT",
+        "Leonard Miller": "OUT"
+      },
+      "Boston Celtics": {
+        "Al Horford": "QUESTIONABLE",
+        "Drew Peterson": "OUT",
+        "Kristaps Porzingis": "OUT",
+        "Baylor Scheierman": "OUT",
+        "Anton Watson": "OUT"
+      },
+      "Washington Wizards": {
+        "Saddiq Bey": "OUT",
+        "Justin Champagnie": "OUT",
+        "Jordan Poole": "OUT",
+        "Alexandre Sarr": "QUESTIONABLE",
+        "Tristan Vukcevic": "OUT"
+      },
+      "Indiana Pacers": {
+        "Isaiah Jackson": "OUT"
+      },
+      "Dallas Mavericks": {
+        "Luka Doncic": "OUT",
+        "Dante Exum": "OUT",
+        "Daniel Gafford": "QUESTIONABLE",
+        "Brandon Williams": "OUT"
+      },
+      "Miami Heat": {
+        "Jimmy Butler": "QUESTIONABLE",
+        "Josh Christopher": "OUT",
+        "Nikola Jovic": "AVAILABLE",
+        "Terry Rozier": "OUT",
+        "Dru Smith": "OUT"
+      },
+      "LA Clippers": {
+        "Cam Christie": "OUT",
+        "Trentyn Flowers": "OUT"
+      },
+      "Philadelphia 76ers": {
+        "Adem Bona": "OUT",
+        "Justin Edwards": "OUT",
+        "Joel Embiid": "OUT",
+        "Paul George": "OUT",
+        "Kyle Lowry": "OUT",
+        "Lester Quinones": "OUT"
+      },
+      "Toronto Raptors": {
+        "Bruce Brown": "OUT",
+        "Ulrich Chomche": "OUT",
+        "Bruno Fernando": "QUESTIONABLE",
+        "Kelly Olynyk": "OUT",
+        "Immanuel Quickley": "OUT"
+      },
+      "Cleveland Cavaliers": {
+        "Emoni Bates": "OUT",
+        "Caris Vert": "OUT",
+        "Isaac Okoro": "QUESTIONABLE",
+        "Max Strus": "OUT",
+        "Dean Wade": "OUT"
+      },
+      "Brooklyn Nets": {
+        "Bojan Bogdanovic": "OUT",
+        "Dorian Smith": "OUT",
+        "Jaylen Martin": "OUT",
+        "Dennis Schroder": "PROBABLE",
+        "Trendon Watford": "PROBABLE",
+        "Dariq Whitehead": "OUT",
+        "Ziaire Williams": "PROBABLE",
+        "Cui Yongxi": "OUT"
+      },
+      "Sacramento Kings": {
+        "Devin Carter": "OUT",
+        "Isaiah Crawford": "OUT",
+        "Isaac Jones": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-11-25",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-11-25_01PM.pdf",
+    "injuries": {
+      "New Orleans Pelicans": {
+        "Jose Alvarado": "OUT",
+        "Brandon Ingram": "QUESTIONABLE",
+        "Herbert Jones": "OUT",
+        "Karlo Matkovic": "OUT",
+        "Yves Missi": "PROBABLE",
+        "Dejounte Murray": "OUT",
+        "Zion Williamson": "OUT"
+      },
+      "Indiana Pacers": {
+        "Johnny Furphy": "QUESTIONABLE",
+        "Isaiah Jackson": "OUT",
+        "Andrew Nembhard": "OUT",
+        "Aaron Nesmith": "OUT",
+        "Tristen Newton": "QUESTIONABLE",
+        "Ben Sheppard": "OUT",
+        "Myles Turner": "QUESTIONABLE",
+        "James Wiseman": "OUT"
+      },
+      "Orlando Magic": {
+        "Paolo Banchero": "OUT",
+        "Mac Clung": "OUT",
+        "Trevelin Queen": "OUT",
+        "Jalen Suggs": "QUESTIONABLE"
+      },
+      "Charlotte Hornets": {
+        "Miles Bridges": "OUT",
+        "Tre Mann": "OUT",
+        "Jared Rhoden": "OUT",
+        "Nick Richards": "OUT",
+        "Grant Williams": "OUT",
+        "Mark Williams": "OUT"
+      },
+      "Toronto Raptors": {
+        "Bruce Brown": "OUT",
+        "Ulrich Chomche": "OUT"
+      },
+      "Detroit Pistons": {
+        "Cade Cunningham": "DOUBTFUL",
+        "Daniss Jenkins": "OUT",
+        "Bobi Klintman": "OUT",
+        "Cole Swider": "OUT"
+      },
+      "Dallas Mavericks": {
+        "Luka Doncic": "OUT",
+        "Dante Exum": "OUT",
+        "Klay Thompson": "QUESTIONABLE",
+        "Brandon Williams": "OUT"
+      },
+      "Atlanta Hawks": {
+        "Dominick Barlow": "OUT",
+        "Mouhamed Gueye": "OUT",
+        "Seth Lundy": "OUT",
+        "Keaton Wallace": "OUT",
+        "Cody Zeller": "OUT"
+      },
+      "LA Clippers": {
+        "Mo Bamba": "OUT"
+      },
+      "Boston Celtics": {
+        "Al Horford": "DOUBTFUL",
+        "Luke Kornet": "DOUBTFUL",
+        "Drew Peterson": "OUT",
+        "Kristaps Porzingis": "PROBABLE",
+        "Anton Watson": "OUT"
+      },
+      "Portland Trail Blazers": {
+        "Deandre Ayton": "DOUBTFUL",
+        "Donovan Clingan": "OUT",
+        "Jerami Grant": "QUESTIONABLE",
+        "Scoot Henderson": "QUESTIONABLE",
+        "Bryce Gowens": "OUT"
+      },
+      "Memphis Grizzlies": {
+        "Zach Edey": "OUT",
+        "Ja Morant": "QUESTIONABLE"
+      },
+      "New York Knicks": {
+        "Precious Achiuwa": "OUT",
+        "Miles Bride": "QUESTIONABLE",
+        "Mitchell Robinson": "OUT"
+      },
+      "Denver Nuggets": {
+        "Vlatko Cancar": "OUT",
+        "Aaron Gordon": "OUT",
+        "Spencer Jones": "OUT"
+      },
+      "Golden State Warriors": {
+        "Jonathan Kuminga": "QUESTIONABLE"
+      },
+      "Oklahoma City Thunder": {
+        "Alex Caruso": "OUT",
+        "Ousmane Dieng": "OUT",
+        "Alex Ducas": "OUT",
+        "Chet Holmgren": "OUT",
+        "Isaiah Joe": "QUESTIONABLE",
+        "Nikola Topic": "OUT",
+        "Jaylin Williams": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-11-26",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-11-26_01PM.pdf",
+    "injuries": {
+      "Chicago Bulls": {
+        "Lonzo Ball": "DOUBTFUL",
+        "Talen Tucker": "PROBABLE",
+        "Julian Phillips": "PROBABLE",
+        "Adama Sanogo": "OUT",
+        "Patrick Williams": "OUT"
+      },
+      "Washington Wizards": {
+        "Saddiq Bey": "OUT",
+        "Justin Champagnie": "OUT",
+        "Jordan Poole": "QUESTIONABLE",
+        "Tristan Vukcevic": "OUT"
+      },
+      "Milwaukee Bucks": {
+        "Giannis Antetokounmpo": "PROBABLE",
+        "Khris Middleton": "OUT"
+      },
+      "Miami Heat": {
+        "Josh Christopher": "OUT",
+        "Haywood Highsmith": "AVAILABLE",
+        "Nikola Jovic": "AVAILABLE",
+        "Terry Rozier": "PROBABLE",
+        "Dru Smith": "QUESTIONABLE"
+      },
+      "Houston Rockets": {
+        "Steven Adams": "OUT",
+        "Jalen Green": "QUESTIONABLE",
+        "Cam Whitmore": "OUT",
+        "Nate Williams": "OUT"
+      },
+      "Minnesota Timberwolves": {
+        "Mike Conley": "QUESTIONABLE",
+        "Joe Ingles": "QUESTIONABLE"
+      },
+      "San Antonio Spurs": {
+        "Harrison Ingram": "OUT",
+        "Keldon Johnson": "PROBABLE",
+        "Riley Minix": "OUT"
+      },
+      "Utah Jazz": {
+        "Jordan Clarkson": "OUT",
+        "Kyle Filipowski": "OUT",
+        "Taylor Hendricks": "OUT",
+        "David Jones": "OUT",
+        "Collin Sexton": "AVAILABLE",
+        "Oscar Tshiebwe": "OUT",
+        "Cody Williams": "OUT"
+      },
+      "Los Angeles Lakers": {
+        "Anthony Davis": "PROBABLE",
+        "Jalen Schifino": "OUT",
+        "Bronny James": "OUT",
+        "Jarred Vanderbilt": "OUT",
+        "Christian Wood": "OUT"
+      },
+      "Phoenix Suns": {
+        "Bradley Beal": "PROBABLE"
+      }
+    }
+  },
+  {
+    "date": "2024-11-27",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-11-27_01PM.pdf",
+    "injuries": {
+      "Atlanta Hawks": {
+        "Dominick Barlow": "OUT",
+        "Mouhamed Gueye": "OUT",
+        "Seth Lundy": "OUT",
+        "Keaton Wallace": "OUT",
+        "Trae Young": "QUESTIONABLE",
+        "Cody Zeller": "OUT"
+      },
+      "Cleveland Cavaliers": {
+        "Emoni Bates": "OUT",
+        "Caris Vert": "OUT",
+        "Max Strus": "OUT",
+        "Luke Travers": "OUT",
+        "Dean Wade": "OUT"
+      },
+      "Chicago Bulls": {
+        "Lonzo Ball": "QUESTIONABLE",
+        "Adama Sanogo": "OUT",
+        "Jalen Smith": "QUESTIONABLE",
+        "Patrick Williams": "OUT"
+      },
+      "Orlando Magic": {
+        "Paolo Banchero": "OUT",
+        "Gary Harris": "OUT",
+        "Mac Clung": "OUT",
+        "Trevelin Queen": "OUT"
+      },
+      "Houston Rockets": {
+        "Cam Whitmore": "OUT",
+        "Nate Williams": "OUT"
+      },
+      "Philadelphia 76ers": {
+        "Joel Embiid": "OUT",
+        "Paul George": "OUT",
+        "Kyle Lowry": "OUT",
+        "Caleb Martin": "QUESTIONABLE"
+      },
+      "LA Clippers": {
+        "Mo Bamba": "QUESTIONABLE",
+        "Kobe Brown": "QUESTIONABLE",
+        "Cam Christie": "OUT",
+        "Trentyn Flowers": "OUT",
+        "Kawhi Leonard": "OUT"
+      },
+      "Washington Wizards": {
+        "Saddiq Bey": "OUT",
+        "Justin Champagnie": "OUT",
+        "Jordan Poole": "QUESTIONABLE",
+        "Tristan Vukcevic": "OUT"
+      },
+      "Miami Heat": {
+        "Josh Christopher": "OUT",
+        "Haywood Highsmith": "AVAILABLE",
+        "Nikola Jovic": "AVAILABLE",
+        "Kevin Love": "OUT",
+        "Terry Rozier": "AVAILABLE",
+        "Dru Smith": "PROBABLE"
+      },
+      "Charlotte Hornets": {
+        "Miles Bridges": "OUT",
+        "Tre Mann": "OUT"
+      },
+      "Portland Trail Blazers": {
+        "Deandre Ayton": "QUESTIONABLE",
+        "Donovan Clingan": "OUT",
+        "Jerami Grant": "DOUBTFUL",
+        "Scoot Henderson": "QUESTIONABLE",
+        "Bryce Gowens": "QUESTIONABLE",
+        "Kris Murray": "QUESTIONABLE",
+        "Matisse Thybulle": "OUT"
+      },
+      "Indiana Pacers": {
+        "Johnny Furphy": "QUESTIONABLE",
+        "Isaiah Jackson": "OUT",
+        "Andrew Nembhard": "OUT",
+        "Aaron Nesmith": "OUT"
+      },
+      "New York Knicks": {
+        "Precious Achiuwa": "OUT",
+        "Tyler Kolek": "QUESTIONABLE",
+        "Mitchell Robinson": "OUT"
+      },
+      "Dallas Mavericks": {
+        "Luka Doncic": "OUT",
+        "Dante Exum": "OUT",
+        "Quentin Grimes": "QUESTIONABLE",
+        "Klay Thompson": "QUESTIONABLE"
+      },
+      "Detroit Pistons": {
+        "Cade Cunningham": "DOUBTFUL",
+        "Tobias Harris": "QUESTIONABLE",
+        "Daniss Jenkins": "OUT",
+        "Bobi Klintman": "OUT"
+      },
+      "Memphis Grizzlies": {
+        "Zach Edey": "OUT",
+        "Ja Morant": "OUT"
+      },
+      "Sacramento Kings": {
+        "Devin Carter": "OUT",
+        "Isaiah Crawford": "OUT",
+        "Mason Jones": "OUT",
+        "Trey Lyles": "OUT"
+      },
+      "Minnesota Timberwolves": {
+        "Joe Ingles": "OUT"
+      },
+      "Toronto Raptors": {
+        "Bruce Brown": "OUT",
+        "Ulrich Chomche": "OUT",
+        "Gradey Dick": "OUT",
+        "Kelly Olynyk": "OUT"
+      },
+      "New Orleans Pelicans": {
+        "Jose Alvarado": "OUT",
+        "Jordan Hawkins": "QUESTIONABLE",
+        "Brandon Ingram": "QUESTIONABLE",
+        "Herbert Jones": "OUT",
+        "Karlo Matkovic": "OUT",
+        "Dejounte Murray": "AVAILABLE",
+        "Zion Williamson": "OUT"
+      },
+      "Brooklyn Nets": {
+        "Bojan Bogdanovic": "OUT",
+        "Nic Claxton": "QUESTIONABLE",
+        "Noah Clowney": "OUT",
+        "Dorian Smith": "QUESTIONABLE",
+        "Cameron Johnson": "QUESTIONABLE",
+        "Jaylen Martin": "OUT"
+      },
+      "Denver Nuggets": {
+        "Vlatko Cancar": "OUT",
+        "Aaron Gordon": "OUT",
+        "Spencer Jones": "AVAILABLE",
+        "Jalen Pickett": "OUT",
+        "Peyton Watson": "PROBABLE"
+      },
+      "Oklahoma City Thunder": {
+        "Alex Caruso": "OUT",
+        "Ousmane Dieng": "OUT",
+        "Alex Ducas": "OUT",
+        "Chet Holmgren": "OUT",
+        "Nikola Topic": "OUT",
+        "Jaylin Williams": "OUT"
+      },
+      "Golden State Warriors": {
+        "Stephen Curry": "QUESTIONABLE"
+      }
+    }
+  },
+  {
+    "date": "2024-11-28",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-11-28_05PM.pdf",
+    "injuries": {
+      "Cleveland Cavaliers": {
+        "Emoni Bates": "OUT",
+        "Caris Vert": "QUESTIONABLE",
+        "Max Strus": "OUT",
+        "Luke Travers": "OUT",
+        "Dean Wade": "OUT"
+      },
+      "Atlanta Hawks": {
+        "Dominick Barlow": "QUESTIONABLE",
+        "Mouhamed Gueye": "QUESTIONABLE",
+        "Seth Lundy": "QUESTIONABLE",
+        "Keaton Wallace": "QUESTIONABLE",
+        "Trae Young": "PROBABLE",
+        "Cody Zeller": "OUT"
+      },
+      "New Orleans Pelicans": {
+        "Jose Alvarado": "OUT",
+        "Jamal Cain": "QUESTIONABLE",
+        "Jordan Hawkins": "QUESTIONABLE",
+        "Brandon Ingram": "QUESTIONABLE"
+      },
+      "Orlando Magic": {
+        "Paolo Banchero": "OUT",
+        "Gary Harris": "OUT",
+        "Mac Clung": "OUT",
+        "Trevelin Queen": "OUT"
+      },
+      "Brooklyn Nets": {
+        "Bojan Bogdanovic": "OUT",
+        "Nic Claxton": "QUESTIONABLE",
+        "Noah Clowney": "OUT",
+        "Dorian Smith": "QUESTIONABLE",
+        "Jaylen Martin": "OUT",
+        "Dennis Schroder": "OUT"
+      },
+      "Detroit Pistons": {
+        "Cade Cunningham": "QUESTIONABLE",
+        "Tobias Harris": "QUESTIONABLE",
+        "Daniss Jenkins": "OUT",
+        "Bobi Klintman": "OUT",
+        "Cole Swider": "QUESTIONABLE",
+        "Alondes Williams": "OUT"
+      },
+      "Indiana Pacers": {
+        "Isaiah Jackson": "OUT",
+        "Andrew Nembhard": "OUT",
+        "Aaron Nesmith": "OUT",
+        "Tristen Newton": "QUESTIONABLE",
+        "Ben Sheppard": "OUT",
+        "James Wiseman": "OUT"
+      },
+      "Toronto Raptors": {
+        "Bruce Brown": "OUT"
+      },
+      "Miami Heat": {
+        "Jimmy Butler": "PROBABLE",
+        "Josh Christopher": "OUT",
+        "Haywood Highsmith": "AVAILABLE",
+        "Keshad Johnson": "OUT",
+        "Nikola Jovic": "AVAILABLE",
+        "Kevin Love": "QUESTIONABLE",
+        "Duncan Robinson": "PROBABLE",
+        "Terry Rozier": "PROBABLE",
+        "Dru Smith": "AVAILABLE"
+      },
+      "New York Knicks": {
+        "Precious Achiuwa": "OUT"
+      },
+      "Charlotte Hornets": {
+        "Miles Bridges": "OUT",
+        "Tre Mann": "OUT",
+        "Jared Rhoden": "OUT",
+        "Nick Richards": "OUT",
+        "Grant Williams": "OUT",
+        "Mark Williams": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-11-29",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-11-29_01PM.pdf",
+    "injuries": {
+      "Cleveland Cavaliers": {
+        "Emoni Bates": "OUT",
+        "Caris Vert": "QUESTIONABLE",
+        "Max Strus": "OUT",
+        "Luke Travers": "OUT",
+        "Dean Wade": "OUT"
+      },
+      "Atlanta Hawks": {
+        "Dominick Barlow": "OUT",
+        "Mouhamed Gueye": "OUT",
+        "Seth Lundy": "OUT",
+        "Keaton Wallace": "OUT",
+        "Trae Young": "AVAILABLE",
+        "Cody Zeller": "OUT"
+      },
+      "New Orleans Pelicans": {
+        "Jose Alvarado": "OUT",
+        "Jamal Cain": "QUESTIONABLE",
+        "Jordan Hawkins": "QUESTIONABLE",
+        "Brandon Ingram": "QUESTIONABLE"
+      },
+      "Memphis Grizzlies": {
+        "Zach Edey": "OUT",
+        "Ja Morant": "PROBABLE"
+      },
+      "LA Clippers": {
+        "Kobe Brown": "OUT",
+        "Cam Christie": "OUT",
+        "Trentyn Flowers": "OUT",
+        "Kawhi Leonard": "OUT",
+        "Norman Powell": "QUESTIONABLE"
+      },
+      "Minnesota Timberwolves": {
+        "Jaylen Clark": "OUT",
+        "Jesse Edwards": "OUT",
+        "Joe Ingles": "OUT",
+        "Leonard Miller": "OUT"
+      },
+      "Orlando Magic": {
+        "Paolo Banchero": "OUT",
+        "Gary Harris": "OUT",
+        "Mac Clung": "OUT",
+        "Trevelin Queen": "OUT"
+      },
+      "Brooklyn Nets": {
+        "Bojan Bogdanovic": "OUT",
+        "Nic Claxton": "QUESTIONABLE",
+        "Noah Clowney": "OUT",
+        "Dorian Smith": "QUESTIONABLE",
+        "Cameron Johnson": "QUESTIONABLE",
+        "Jaylen Martin": "OUT",
+        "Dennis Schroder": "OUT",
+        "Cam Thomas": "OUT",
+        "Jalen Wilson": "QUESTIONABLE"
+      },
+      "Boston Celtics": {
+        "Luke Kornet": "PROBABLE",
+        "Anton Watson": "OUT"
+      },
+      "Chicago Bulls": {
+        "Lonzo Ball": "PROBABLE",
+        "Jalen Smith": "QUESTIONABLE",
+        "Dalen Terry": "QUESTIONABLE",
+        "Coby White": "QUESTIONABLE",
+        "Patrick Williams": "OUT"
+      },
+      "Detroit Pistons": {
+        "Cade Cunningham": "QUESTIONABLE",
+        "Tobias Harris": "QUESTIONABLE",
+        "Daniss Jenkins": "OUT",
+        "Bobi Klintman": "OUT",
+        "Cole Swider": "QUESTIONABLE",
+        "Alondes Williams": "OUT"
+      },
+      "Indiana Pacers": {
+        "Isaiah Jackson": "OUT",
+        "Andrew Nembhard": "OUT",
+        "Aaron Nesmith": "OUT",
+        "Tristen Newton": "QUESTIONABLE",
+        "Ben Sheppard": "OUT"
+      },
+      "Toronto Raptors": {
+        "Bruce Brown": "OUT",
+        "Gradey Dick": "OUT",
+        "Kelly Olynyk": "OUT",
+        "Immanuel Quickley": "OUT"
+      },
+      "Miami Heat": {
+        "Jimmy Butler": "PROBABLE",
+        "Josh Christopher": "OUT",
+        "Haywood Highsmith": "AVAILABLE",
+        "Keshad Johnson": "OUT",
+        "Nikola Jovic": "AVAILABLE",
+        "Kevin Love": "QUESTIONABLE",
+        "Duncan Robinson": "PROBABLE",
+        "Terry Rozier": "PROBABLE",
+        "Dru Smith": "AVAILABLE"
+      },
+      "Oklahoma City Thunder": {
+        "Alex Caruso": "OUT",
+        "Ousmane Dieng": "OUT"
+      },
+      "Los Angeles Lakers": {
+        "Anthony Davis": "PROBABLE",
+        "Jaxson Hayes": "DOUBTFUL",
+        "Bronny James": "OUT",
+        "Dalton Knecht": "PROBABLE",
+        "Jarred Vanderbilt": "OUT",
+        "Christian Wood": "OUT"
+      },
+      "Sacramento Kings": {
+        "Devin Carter": "OUT",
+        "Trey Lyles": "OUT"
+      },
+      "Portland Trail Blazers": {
+        "Donovan Clingan": "OUT",
+        "Jerami Grant": "DOUBTFUL"
+      },
+      "New York Knicks": {
+        "Precious Achiuwa": "OUT",
+        "Mitchell Robinson": "OUT"
+      },
+      "Charlotte Hornets": {
+        "Miles Bridges": "OUT",
+        "Tre Mann": "OUT",
+        "Jared Rhoden": "OUT",
+        "Nick Richards": "OUT",
+        "Grant Williams": "OUT",
+        "Mark Williams": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-11-30",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-11-30_01PM.pdf",
+    "injuries": {
+      "Atlanta Hawks": {
+        "Dominick Barlow": "OUT",
+        "Bogdan Bogdanovic": "QUESTIONABLE",
+        "Mouhamed Gueye": "OUT",
+        "Seth Lundy": "OUT",
+        "Keaton Wallace": "OUT",
+        "Trae Young": "PROBABLE",
+        "Cody Zeller": "OUT"
+      },
+      "Charlotte Hornets": {
+        "Miles Bridges": "OUT",
+        "Tre Mann": "OUT",
+        "Vasilije Micic": "PROBABLE",
+        "Jared Rhoden": "OUT",
+        "Nick Richards": "QUESTIONABLE",
+        "Grant Williams": "OUT"
+      },
+      "Philadelphia 76ers": {
+        "Joel Embiid": "OUT",
+        "Paul George": "QUESTIONABLE",
+        "Reggie Jackson": "QUESTIONABLE",
+        "Kyle Lowry": "OUT",
+        "Caleb Martin": "QUESTIONABLE"
+      },
+      "Detroit Pistons": {
+        "Daniss Jenkins": "OUT",
+        "Bobi Klintman": "OUT",
+        "Cole Swider": "OUT",
+        "Alondes Williams": "OUT"
+      },
+      "Washington Wizards": {
+        "Saddiq Bey": "OUT",
+        "Kyle Kuzma": "OUT",
+        "Tristan Vukcevic": "OUT"
+      },
+      "Milwaukee Bucks": {
+        "Giannis Antetokounmpo": "PROBABLE"
+      },
+      "Golden State Warriors": {
+        "Stephen Curry": "QUESTIONABLE",
+        "Jonathan Kuminga": "PROBABLE",
+        "Gui Santos": "OUT",
+        "Andrew Wiggins": "QUESTIONABLE"
+      },
+      "Phoenix Suns": {
+        "Bradley Beal": "QUESTIONABLE",
+        "Collin Gillespie": "OUT",
+        "Jusuf Nurkic": "QUESTIONABLE"
+      },
+      "Dallas Mavericks": {
+        "Luka Doncic": "DOUBTFUL",
+        "Dante Exum": "OUT"
+      },
+      "Utah Jazz": {
+        "Jordan Clarkson": "OUT",
+        "Kyle Filipowski": "OUT",
+        "Taylor Hendricks": "OUT",
+        "David Garcia": "OUT",
+        "Collin Sexton": "AVAILABLE",
+        "Oscar Tshiebwe": "OUT",
+        "Cody Williams": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-12-01",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-12-01_01PM.pdf",
+    "injuries": {
+      "Indiana Pacers": {
+        "Isaiah Jackson": "OUT",
+        "Andrew Nembhard": "QUESTIONABLE",
+        "Aaron Nesmith": "OUT",
+        "Tristen Newton": "QUESTIONABLE",
+        "Ben Sheppard": "OUT",
+        "James Wiseman": "OUT"
+      },
+      "Memphis Grizzlies": {
+        "Zach Edey": "OUT"
+      },
+      "Orlando Magic": {
+        "Paolo Banchero": "OUT",
+        "Gary Harris": "OUT",
+        "Mac Clung": "OUT",
+        "Trevelin Queen": "OUT"
+      },
+      "Brooklyn Nets": {
+        "Bojan Bogdanovic": "OUT"
+      },
+      "Boston Celtics": {
+        "Jrue Holiday": "QUESTIONABLE",
+        "Al Horford": "QUESTIONABLE",
+        "Kristaps Porzingis": "QUESTIONABLE",
+        "Anton Watson": "OUT",
+        "Derrick White": "QUESTIONABLE"
+      },
+      "Cleveland Cavaliers": {
+        "Emoni Bates": "OUT",
+        "Max Strus": "OUT",
+        "Luke Travers": "OUT",
+        "Dean Wade": "OUT"
+      },
+      "Miami Heat": {
+        "Josh Christopher": "OUT",
+        "Keshad Johnson": "OUT"
+      },
+      "Toronto Raptors": {
+        "Bruce Brown": "OUT",
+        "Gradey Dick": "OUT",
+        "Kelly Olynyk": "OUT",
+        "Immanuel Quickley": "OUT"
+      },
+      "New Orleans Pelicans": {
+        "Jose Alvarado": "OUT",
+        "Jordan Hawkins": "OUT",
+        "Brandon Ingram": "OUT",
+        "Herbert Jones": "OUT",
+        "Zion Williamson": "OUT"
+      },
+      "New York Knicks": {
+        "Precious Achiuwa": "OUT"
+      },
+      "Oklahoma City Thunder": {
+        "Alex Caruso": "OUT",
+        "Ousmane Dieng": "OUT",
+        "Alex Ducas": "OUT",
+        "Chet Holmgren": "OUT",
+        "Nikola Topic": "OUT",
+        "Jaylin Williams": "OUT"
+      },
+      "Houston Rockets": {
+        "Jack Veigh": "QUESTIONABLE",
+        "Nate Williams": "OUT"
+      },
+      "Los Angeles Lakers": {
+        "Anthony Davis": "PROBABLE",
+        "Jaxson Hayes": "OUT",
+        "Bronny James": "OUT",
+        "Austin Reaves": "QUESTIONABLE"
+      },
+      "Portland Trail Blazers": {
+        "Donovan Clingan": "OUT",
+        "Jerami Grant": "QUESTIONABLE",
+        "Scoot Henderson": "QUESTIONABLE",
+        "Kris Murray": "PROBABLE",
+        "Matisse Thybulle": "OUT"
+      },
+      "San Antonio Spurs": {
+        "Harrison Ingram": "OUT",
+        "Riley Minix": "OUT",
+        "Jeremy Sochan": "OUT"
+      },
+      "Sacramento Kings": {
+        "Devin Carter": "OUT",
+        "Isaiah Crawford": "OUT"
+      },
+      "Denver Nuggets": {
+        "Trey Alexander": "OUT",
+        "Vlatko Cancar": "OUT",
+        "Aaron Gordon": "DOUBTFUL",
+        "Spencer Jones": "OUT",
+        "Peyton Watson": "PROBABLE"
+      },
+      "LA Clippers": {
+        "Kobe Brown": "OUT",
+        "Cam Christie": "OUT",
+        "Trentyn Flowers": "OUT",
+        "Kawhi Leonard": "OUT",
+        "Norman Powell": "QUESTIONABLE"
+      }
+    }
+  },
+  {
+    "date": "2024-12-02",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-12-02_01PM.pdf",
+    "injuries": {
+      "Miami Heat": {
+        "Jimmy Butler": "OUT",
+        "Josh Christopher": "OUT",
+        "Nikola Jovic": "OUT",
+        "Kevin Love": "PROBABLE",
+        "Josh Richardson": "OUT",
+        "Terry Rozier": "AVAILABLE",
+        "Dru Smith": "AVAILABLE"
+      },
+      "Boston Celtics": {
+        "Jaylen Brown": "QUESTIONABLE",
+        "Jrue Holiday": "OUT",
+        "Al Horford": "OUT",
+        "Kristaps Porzingis": "OUT",
+        "Jayson Tatum": "QUESTIONABLE",
+        "Derrick White": "QUESTIONABLE"
+      },
+      "New Orleans Pelicans": {
+        "Jose Alvarado": "OUT"
+      },
+      "Atlanta Hawks": {
+        "Dominick Barlow": "QUESTIONABLE",
+        "Bogdan Bogdanovic": "PROBABLE",
+        "Mouhamed Gueye": "QUESTIONABLE",
+        "Seth Lundy": "QUESTIONABLE",
+        "Keaton Wallace": "QUESTIONABLE",
+        "Trae Young": "PROBABLE",
+        "Cody Zeller": "OUT"
+      },
+      "Chicago Bulls": {
+        "Adama Sanogo": "OUT",
+        "Coby White": "QUESTIONABLE",
+        "Patrick Williams": "OUT"
+      },
+      "Minnesota Timberwolves": {
+        "Jaylen Clark": "OUT",
+        "Rob Dillingham": "QUESTIONABLE",
+        "Jesse Edwards": "OUT",
+        "Joe Ingles": "OUT",
+        "Leonard Miller": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-12-03",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-12-03_01PM.pdf",
+    "injuries": {
+      "Milwaukee Bucks": {
+        "Giannis Antetokounmpo": "PROBABLE",
+        "Khris Middleton": "OUT",
+        "Taurean Prince": "PROBABLE"
+      },
+      "Detroit Pistons": {
+        "Daniss Jenkins": "OUT",
+        "Bobi Klintman": "OUT",
+        "Cole Swider": "OUT",
+        "Alondes Williams": "OUT"
+      },
+      "Philadelphia 76ers": {
+        "Andre Drummond": "OUT",
+        "Joel Embiid": "OUT",
+        "Reggie Jackson": "PROBABLE",
+        "Kyle Lowry": "PROBABLE",
+        "Caleb Martin": "PROBABLE"
+      },
+      "Washington Wizards": {
+        "Saddiq Bey": "OUT",
+        "Kyle Kuzma": "OUT",
+        "Tristan Vukcevic": "OUT"
+      },
+      "Cleveland Cavaliers": {
+        "Emoni Bates": "OUT",
+        "Ty Jerome": "QUESTIONABLE",
+        "Max Strus": "OUT",
+        "Luke Travers": "OUT",
+        "Dean Wade": "QUESTIONABLE"
+      },
+      "Indiana Pacers": {
+        "Isaiah Jackson": "OUT",
+        "Andrew Nembhard": "QUESTIONABLE"
+      },
+      "Toronto Raptors": {
+        "Bruce Brown": "OUT",
+        "Ulrich Chomche": "OUT",
+        "Gradey Dick": "QUESTIONABLE",
+        "Kelly Olynyk": "OUT",
+        "Immanuel Quickley": "OUT"
+      },
+      "Orlando Magic": {
+        "Paolo Banchero": "OUT",
+        "Gary Harris": "OUT",
+        "Mac Clung": "OUT",
+        "Trevelin Queen": "OUT"
+      },
+      "New York Knicks": {
+        "Precious Achiuwa": "OUT"
+      },
+      "Utah Jazz": {
+        "Jordan Clarkson": "OUT",
+        "Kyle Filipowski": "OUT",
+        "Taylor Hendricks": "OUT",
+        "David Garcia": "OUT",
+        "Micah Potter": "QUESTIONABLE",
+        "Collin Sexton": "AVAILABLE",
+        "Oscar Tshiebwe": "OUT",
+        "Cody Williams": "OUT"
+      },
+      "Oklahoma City Thunder": {
+        "Alex Caruso": "OUT",
+        "Ousmane Dieng": "OUT",
+        "Alex Ducas": "OUT",
+        "Chet Holmgren": "OUT",
+        "Nikola Topic": "OUT",
+        "Jaylin Williams": "OUT"
+      },
+      "Memphis Grizzlies": {
+        "Zach Edey": "OUT"
+      },
+      "Dallas Mavericks": {
+        "Dante Exum": "OUT",
+        "Naji Marshall": "OUT",
+        "Klay Thompson": "QUESTIONABLE",
+        "Brandon Williams": "OUT"
+      },
+      "San Antonio Spurs": {
+        "Harrison Ingram": "OUT",
+        "Tre Jones": "OUT",
+        "Riley Minix": "OUT",
+        "Jeremy Sochan": "PROBABLE"
+      },
+      "Phoenix Suns": {
+        "Bradley Beal": "AVAILABLE",
+        "Collin Gillespie": "OUT",
+        "Jusuf Nurkic": "OUT"
+      },
+      "Golden State Warriors": {
+        "Stephen Curry": "PROBABLE"
+      },
+      "Denver Nuggets": {
+        "Trey Alexander": "OUT",
+        "Vlatko Cancar": "OUT",
+        "Aaron Gordon": "PROBABLE",
+        "Spencer Jones": "OUT",
+        "Peyton Watson": "PROBABLE"
+      },
+      "Houston Rockets": {
+        "Cam Whitmore": "OUT",
+        "Nate Williams": "OUT"
+      },
+      "Sacramento Kings": {
+        "Devin Carter": "OUT",
+        "Isaiah Crawford": "OUT",
+        "Kevin Huerter": "QUESTIONABLE",
+        "Mason Jones": "OUT",
+        "Trey Lyles": "OUT"
+      },
+      "Portland Trail Blazers": {
+        "Donovan Clingan": "OUT",
+        "Scoot Henderson": "QUESTIONABLE",
+        "Bryce Gowens": "OUT"
+      },
+      "LA Clippers": {
+        "Kobe Brown": "OUT",
+        "Cam Christie": "OUT",
+        "Trentyn Flowers": "OUT",
+        "Kawhi Leonard": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-12-04",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-12-04_01PM.pdf",
+    "injuries": {
+      "Detroit Pistons": {
+        "Daniss Jenkins": "OUT",
+        "Bobi Klintman": "OUT",
+        "Ausar Thompson": "OUT"
+      },
+      "Boston Celtics": {
+        "Jrue Holiday": "QUESTIONABLE",
+        "Jayson Tatum": "QUESTIONABLE",
+        "Anton Watson": "OUT"
+      },
+      "Indiana Pacers": {
+        "Isaiah Jackson": "OUT",
+        "Andrew Nembhard": "OUT",
+        "Aaron Nesmith": "OUT",
+        "Ben Sheppard": "OUT",
+        "James Wiseman": "OUT"
+      },
+      "Brooklyn Nets": {
+        "Bojan Bogdanovic": "OUT"
+      },
+      "Los Angeles Lakers": {
+        "Anthony Davis": "PROBABLE",
+        "Jaxson Hayes": "OUT",
+        "Jalen Schifino": "QUESTIONABLE",
+        "Bronny James": "OUT",
+        "Austin Reaves": "QUESTIONABLE",
+        "Jarred Vanderbilt": "OUT",
+        "Christian Wood": "OUT"
+      },
+      "Miami Heat": {
+        "Jimmy Butler": "QUESTIONABLE",
+        "Josh Christopher": "OUT",
+        "Nikola Jovic": "QUESTIONABLE",
+        "Kevin Love": "PROBABLE"
+      },
+      "Orlando Magic": {
+        "Paolo Banchero": "OUT",
+        "Goga Bitadze": "QUESTIONABLE",
+        "Gary Harris": "OUT",
+        "Mac Clung": "OUT",
+        "Trevelin Queen": "OUT"
+      },
+      "Philadelphia 76ers": {
+        "Andre Drummond": "OUT",
+        "Joel Embiid": "OUT",
+        "Paul George": "OUT",
+        "Kyle Lowry": "OUT"
+      },
+      "Atlanta Hawks": {
+        "Dominick Barlow": "OUT",
+        "Mouhamed Gueye": "OUT",
+        "Seth Lundy": "OUT"
+      },
+      "Milwaukee Bucks": {
+        "Giannis Antetokounmpo": "PROBABLE",
+        "Chris Livingston": "OUT",
+        "Khris Middleton": "OUT",
+        "Tyler Smith": "OUT"
+      },
+      "Minnesota Timberwolves": {
+        "Jaylen Clark": "OUT",
+        "Rob Dillingham": "OUT",
+        "Jesse Edwards": "OUT",
+        "Joe Ingles": "OUT",
+        "Leonard Miller": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-12-05",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-12-05_01PM.pdf",
+    "injuries": {
+      "Dallas Mavericks": {
+        "Kessler Edwards": "OUT",
+        "Dante Exum": "OUT",
+        "Jazian Gortman": "OUT",
+        "Naji Marshall": "OUT",
+        "Brandon Williams": "OUT"
+      },
+      "Washington Wizards": {
+        "Saddiq Bey": "OUT",
+        "Malcolm Brogdon": "QUESTIONABLE",
+        "Kyshawn George": "OUT",
+        "Corey Kispert": "OUT",
+        "Kyle Kuzma": "OUT",
+        "Tristan Vukcevic": "OUT"
+      },
+      "Denver Nuggets": {
+        "Trey Alexander": "OUT",
+        "Vlatko Cancar": "OUT",
+        "Aaron Gordon": "PROBABLE",
+        "Spencer Jones": "OUT"
+      },
+      "Cleveland Cavaliers": {
+        "Emoni Bates": "OUT",
+        "Ty Jerome": "QUESTIONABLE",
+        "Max Strus": "OUT",
+        "Luke Travers": "OUT"
+      },
+      "Charlotte Hornets": {
+        "Miles Bridges": "OUT",
+        "Tre Mann": "OUT",
+        "Grant Williams": "OUT"
+      },
+      "New York Knicks": {
+        "Precious Achiuwa": "QUESTIONABLE",
+        "Pacome Dadiet": "OUT",
+        "Cameron Payne": "QUESTIONABLE",
+        "Mitchell Robinson": "OUT"
+      },
+      "Oklahoma City Thunder": {
+        "Ousmane Dieng": "OUT",
+        "Alex Ducas": "OUT",
+        "Chet Holmgren": "OUT"
+      },
+      "Toronto Raptors": {
+        "Jamison Battle": "OUT",
+        "Bruce Brown": "OUT",
+        "Ulrich Chomche": "OUT",
+        "Gradey Dick": "QUESTIONABLE",
+        "Kelly Olynyk": "OUT",
+        "Jakob Poeltl": "QUESTIONABLE",
+        "Immanuel Quickley": "OUT"
+      },
+      "Chicago Bulls": {
+        "Lonzo Ball": "OUT",
+        "Josh Giddey": "QUESTIONABLE",
+        "Adama Sanogo": "OUT"
+      },
+      "San Antonio Spurs": {
+        "Harrison Ingram": "OUT",
+        "Tre Jones": "OUT",
+        "Riley Minix": "OUT",
+        "Victor Wembanyama": "OUT"
+      },
+      "Phoenix Suns": {
+        "Jalen Bridges": "OUT",
+        "Ryan Dunn": "QUESTIONABLE",
+        "Kevin Durant": "OUT",
+        "Collin Gillespie": "OUT",
+        "Jusuf Nurkic": "OUT"
+      },
+      "New Orleans Pelicans": {
+        "Jose Alvarado": "OUT",
+        "Jordan Hawkins": "OUT",
+        "Brandon Ingram": "AVAILABLE",
+        "Herbert Jones": "AVAILABLE"
+      },
+      "Sacramento Kings": {
+        "Devin Carter": "OUT",
+        "Trey Lyles": "OUT"
+      },
+      "Memphis Grizzlies": {
+        "Zach Edey": "OUT"
+      },
+      "Houston Rockets": {
+        "Tari Eason": "OUT",
+        "Fred Vleet": "QUESTIONABLE",
+        "Cam Whitmore": "OUT",
+        "Nate Williams": "OUT"
+      },
+      "Golden State Warriors": {
+        "Stephen Curry": "OUT",
+        "Draymond Green": "OUT",
+        "Andrew Wiggins": "QUESTIONABLE"
+      }
+    }
+  },
+  {
+    "date": "2024-12-06",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-12-06_01PM.pdf",
+    "injuries": {
+      "Orlando Magic": {
+        "Paolo Banchero": "OUT",
+        "Gary Harris": "OUT",
+        "Mac Clung": "OUT",
+        "Trevelin Queen": "OUT"
+      },
+      "Philadelphia 76ers": {
+        "Adem Bona": "OUT",
+        "Andre Drummond": "QUESTIONABLE",
+        "Justin Edwards": "OUT",
+        "Joel Embiid": "OUT"
+      },
+      "Los Angeles Lakers": {
+        "Anthony Davis": "PROBABLE",
+        "Jaxson Hayes": "OUT",
+        "Jalen Schifino": "OUT",
+        "Bronny James": "QUESTIONABLE",
+        "Austin Reaves": "OUT",
+        "Jarred Vanderbilt": "OUT"
+      },
+      "Atlanta Hawks": {
+        "Dominick Barlow": "QUESTIONABLE",
+        "Mouhamed Gueye": "QUESTIONABLE",
+        "Seth Lundy": "QUESTIONABLE",
+        "Keaton Wallace": "QUESTIONABLE",
+        "Trae Young": "PROBABLE",
+        "Cody Zeller": "OUT"
+      },
+      "Milwaukee Bucks": {
+        "Giannis Antetokounmpo": "PROBABLE",
+        "Chris Livingston": "OUT",
+        "Khris Middleton": "PROBABLE",
+        "Taurean Prince": "QUESTIONABLE",
+        "Tyler Smith": "OUT"
+      },
+      "Boston Celtics": {
+        "Al Horford": "AVAILABLE",
+        "Kristaps Porzingis": "OUT"
+      },
+      "Indiana Pacers": {
+        "Isaiah Jackson": "OUT",
+        "Andrew Nembhard": "QUESTIONABLE",
+        "Aaron Nesmith": "OUT",
+        "Ben Sheppard": "OUT",
+        "James Wiseman": "OUT"
+      },
+      "Minnesota Timberwolves": {
+        "Jaylen Clark": "OUT",
+        "Rob Dillingham": "OUT",
+        "Jesse Edwards": "OUT",
+        "Joe Ingles": "OUT",
+        "Leonard Miller": "OUT"
+      },
+      "Utah Jazz": {
+        "Jordan Clarkson": "OUT",
+        "Kyle Filipowski": "OUT",
+        "Taylor Hendricks": "OUT",
+        "David Garcia": "OUT",
+        "Collin Sexton": "AVAILABLE",
+        "Oscar Tshiebwe": "OUT",
+        "Cody Williams": "OUT"
+      },
+      "Portland Trail Blazers": {
+        "Donovan Clingan": "OUT",
+        "Scoot Henderson": "QUESTIONABLE",
+        "Matisse Thybulle": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-12-07",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-12-07_01PM.pdf",
+    "injuries": {
+      "Cleveland Cavaliers": {
+        "Emoni Bates": "OUT",
+        "Isaac Okoro": "OUT",
+        "Max Strus": "OUT"
+      },
+      "Charlotte Hornets": {
+        "Miles Bridges": "OUT",
+        "Moussa Diabate": "OUT",
+        "Tre Mann": "OUT",
+        "Nick Richards": "OUT",
+        "Tidjane Salaun": "OUT",
+        "Grant Williams": "OUT"
+      },
+      "Denver Nuggets": {
+        "Trey Alexander": "AVAILABLE",
+        "Vlatko Cancar": "OUT",
+        "Aaron Gordon": "QUESTIONABLE",
+        "Spencer Jones": "OUT"
+      },
+      "Washington Wizards": {
+        "Saddiq Bey": "OUT",
+        "Malcolm Brogdon": "OUT",
+        "Kyshawn George": "OUT",
+        "Corey Kispert": "OUT",
+        "Kyle Kuzma": "OUT",
+        "Tristan Vukcevic": "OUT"
+      },
+      "Oklahoma City Thunder": {
+        "Ousmane Dieng": "OUT",
+        "Alex Ducas": "OUT",
+        "Chet Holmgren": "OUT",
+        "Dillon Jones": "OUT",
+        "Nikola Topic": "OUT",
+        "Jaylin Williams": "OUT"
+      },
+      "New Orleans Pelicans": {
+        "Jose Alvarado": "OUT",
+        "Jordan Hawkins": "OUT"
+      },
+      "Dallas Mavericks": {
+        "Kessler Edwards": "OUT",
+        "Dante Exum": "OUT",
+        "Jaden Hardy": "DOUBTFUL",
+        "Naji Marshall": "OUT",
+        "Brandon Williams": "OUT"
+      },
+      "Toronto Raptors": {
+        "Bruce Brown": "OUT",
+        "Davion Mitchell": "QUESTIONABLE",
+        "Kelly Olynyk": "QUESTIONABLE",
+        "Jakob Poeltl": "QUESTIONABLE",
+        "Immanuel Quickley": "OUT"
+      },
+      "Detroit Pistons": {
+        "Daniss Jenkins": "OUT",
+        "Bobi Klintman": "OUT",
+        "Cole Swider": "OUT"
+      },
+      "New York Knicks": {
+        "Jalen Brunson": "QUESTIONABLE",
+        "Pacome Dadiet": "OUT",
+        "Cameron Payne": "QUESTIONABLE",
+        "Mitchell Robinson": "OUT"
+      },
+      "Memphis Grizzlies": {
+        "Zach Edey": "OUT",
+        "Luke Kennard": "OUT",
+        "Marcus Smart": "QUESTIONABLE"
+      },
+      "Boston Celtics": {
+        "Al Horford": "OUT",
+        "Anton Watson": "OUT",
+        "Derrick White": "PROBABLE"
+      },
+      "Phoenix Suns": {
+        "Jalen Bridges": "OUT",
+        "Ryan Dunn": "QUESTIONABLE",
+        "Kevin Durant": "OUT",
+        "Collin Gillespie": "OUT",
+        "Jusuf Nurkic": "OUT"
+      },
+      "Miami Heat": {
+        "Jimmy Butler": "PROBABLE",
+        "Josh Christopher": "OUT",
+        "Nikola Jovic": "AVAILABLE",
+        "Pelle Larsson": "QUESTIONABLE",
+        "Josh Richardson": "AVAILABLE",
+        "Dru Smith": "AVAILABLE"
+      },
+      "Brooklyn Nets": {
+        "Bojan Bogdanovic": "OUT",
+        "Noah Clowney": "QUESTIONABLE",
+        "Jaylen Martin": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-12-08",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-12-08_01PM.pdf",
+    "injuries": {
+      "Philadelphia 76ers": {
+        "Adem Bona": "OUT",
+        "Justin Edwards": "OUT",
+        "Joel Embiid": "AVAILABLE"
+      },
+      "Chicago Bulls": {
+        "Lonzo Ball": "AVAILABLE",
+        "Adama Sanogo": "OUT",
+        "Nikola Vucevic": "AVAILABLE",
+        "Coby White": "AVAILABLE",
+        "Patrick Williams": "OUT"
+      },
+      "Milwaukee Bucks": {
+        "Giannis Antetokounmpo": "PROBABLE"
+      },
+      "Brooklyn Nets": {
+        "Bojan Bogdanovic": "OUT",
+        "Noah Clowney": "QUESTIONABLE",
+        "Jaylen Martin": "OUT",
+        "Cam Thomas": "OUT",
+        "Dariq Whitehead": "OUT",
+        "Ziaire Williams": "OUT",
+        "Cui Yongxi": "OUT"
+      },
+      "Charlotte Hornets": {
+        "Miles Bridges": "OUT",
+        "Moussa Diabate": "OUT",
+        "Tre Mann": "OUT",
+        "Nick Richards": "QUESTIONABLE",
+        "Tidjane Salaun": "OUT"
+      },
+      "Indiana Pacers": {
+        "Isaiah Jackson": "OUT",
+        "Andrew Nembhard": "QUESTIONABLE",
+        "Aaron Nesmith": "OUT",
+        "Ben Sheppard": "OUT",
+        "James Wiseman": "OUT"
+      },
+      "Cleveland Cavaliers": {
+        "Emoni Bates": "OUT",
+        "Isaac Okoro": "OUT",
+        "Max Strus": "OUT"
+      },
+      "Miami Heat": {
+        "Jimmy Butler": "PROBABLE",
+        "Josh Christopher": "OUT",
+        "Nikola Jovic": "AVAILABLE",
+        "Pelle Larsson": "OUT",
+        "Josh Richardson": "AVAILABLE",
+        "Dru Smith": "AVAILABLE"
+      },
+      "Denver Nuggets": {
+        "Christian Braun": "PROBABLE",
+        "Vlatko Cancar": "OUT",
+        "Aaron Gordon": "QUESTIONABLE",
+        "Spencer Jones": "OUT",
+        "Jamal Murray": "OUT",
+        "Dario Saric": "OUT",
+        "Julian Strawther": "PROBABLE"
+      },
+      "Atlanta Hawks": {
+        "Dominick Barlow": "OUT",
+        "Bogdan Bogdanovic": "QUESTIONABLE",
+        "Mouhamed Gueye": "OUT",
+        "Jalen Johnson": "QUESTIONABLE",
+        "Seth Lundy": "OUT",
+        "Keaton Wallace": "OUT"
+      },
+      "Phoenix Suns": {
+        "Jalen Bridges": "OUT",
+        "Ryan Dunn": "OUT",
+        "Kevin Durant": "OUT",
+        "Collin Gillespie": "OUT",
+        "Jusuf Nurkic": "OUT"
+      },
+      "Orlando Magic": {
+        "Paolo Banchero": "OUT",
+        "Gary Harris": "OUT",
+        "Jonathan Isaac": "QUESTIONABLE",
+        "Mac Clung": "OUT",
+        "Trevelin Queen": "OUT",
+        "Franz Wagner": "OUT"
+      },
+      "Memphis Grizzlies": {
+        "Desmond Bane": "QUESTIONABLE",
+        "Zach Edey": "OUT",
+        "Luke Kennard": "OUT",
+        "Ja Morant": "QUESTIONABLE"
+      },
+      "Washington Wizards": {
+        "Saddiq Bey": "OUT",
+        "Malcolm Brogdon": "OUT",
+        "Kyshawn George": "OUT",
+        "Corey Kispert": "OUT",
+        "Kyle Kuzma": "OUT",
+        "Alexandre Sarr": "OUT",
+        "Tristan Vukcevic": "OUT"
+      },
+      "San Antonio Spurs": {
+        "Harrison Ingram": "OUT",
+        "Tre Jones": "OUT",
+        "Riley Minix": "OUT",
+        "Victor Wembanyama": "QUESTIONABLE"
+      },
+      "Minnesota Timberwolves": {
+        "Jaylen Clark": "OUT",
+        "Rob Dillingham": "OUT",
+        "Jesse Edwards": "OUT"
+      },
+      "Golden State Warriors": {
+        "Moses Moody": "QUESTIONABLE",
+        "Andrew Wiggins": "QUESTIONABLE"
+      },
+      "Houston Rockets": {
+        "Tari Eason": "OUT",
+        "Fred Vleet": "QUESTIONABLE",
+        "Cam Whitmore": "OUT",
+        "Nate Williams": "OUT"
+      },
+      "LA Clippers": {
+        "Mo Bamba": "QUESTIONABLE",
+        "Kobe Brown": "OUT",
+        "Kris Dunn": "QUESTIONABLE",
+        "James Harden": "QUESTIONABLE",
+        "Kawhi Leonard": "OUT"
+      },
+      "Utah Jazz": {
+        "Jordan Clarkson": "OUT",
+        "Kyle Filipowski": "QUESTIONABLE",
+        "Taylor Hendricks": "OUT",
+        "David Garcia": "OUT",
+        "Lauri Markkanen": "QUESTIONABLE",
+        "Collin Sexton": "AVAILABLE",
+        "Oscar Tshiebwe": "OUT",
+        "Cody Williams": "OUT"
+      },
+      "Sacramento Kings": {
+        "Devin Carter": "OUT",
+        "Trey Lyles": "OUT"
+      },
+      "Portland Trail Blazers": {
+        "Toumani Camara": "DOUBTFUL",
+        "Donovan Clingan": "OUT",
+        "Scoot Henderson": "QUESTIONABLE",
+        "Taze Moore": "OUT",
+        "Duop Reath": "DOUBTFUL"
+      },
+      "Los Angeles Lakers": {
+        "Anthony Davis": "PROBABLE",
+        "Jaxson Hayes": "OUT",
+        "Austin Reaves": "DOUBTFUL",
+        "Jarred Vanderbilt": "OUT",
+        "Christian Wood": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-12-09",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-12-09_01PM.pdf",
+    "injuries": {
+      "New York Knicks": {
+        "Cameron Payne": "QUESTIONABLE",
+        "Mitchell Robinson": "OUT"
+      },
+      "Toronto Raptors": {
+        "Bruce Brown": "OUT",
+        "Immanuel Quickley": "OUT"
+      }
+    }
+  },
+  {
+    "date": "2024-12-10",
+    "source": "nba_official_pdf",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2024-12-10_01PM.pdf",
+    "injuries": {
+      "Orlando Magic": {
+        "Paolo Banchero": "OUT",
+        "Gary Harris": "OUT",
+        "Jonathan Isaac": "QUESTIONABLE",
+        "Mac Clung": "AVAILABLE",
+        "Franz Wagner": "OUT"
+      },
+      "Milwaukee Bucks": {
+        "Giannis Antetokounmpo": "PROBABLE",
+        "Chris Livingston": "OUT",
+        "Khris Middleton": "PROBABLE"
+      },
+      "Dallas Mavericks": {
+        "Dante Exum": "OUT",
+        "Jaden Hardy": "OUT",
+        "Maxi Kleber": "OUT",
+        "Naji Marshall": "QUESTIONABLE",
+        "Brandon Williams": "OUT"
+      },
+      "Oklahoma City Thunder": {
+        "Branden Carlson": "PROBABLE",
+        "Ousmane Dieng": "OUT",
+        "Adam Flagler": "OUT",
+        "Chet Holmgren": "OUT",
+        "Dillon Jones": "OUT",
+        "Nikola Topic": "OUT",
+        "Jaylin Williams": "OUT"
+      }
+    }
+  }
+]

@@ -13,6 +13,17 @@ Sistema profissional de análise quantitativa e previsão de jogos da NBA usando
 
 ---
 
+## 🎉 Destaques v21.9 (12 Dez 2025) - **Missing Games Fixed**
+
+### 🚑 Correção de Resultados Faltantes ("None")
+
+- ✅ **Full Date Alignment:** Script `align_prediction_dates` corrigiu +2900 previsões com data/fuso diferente da API.
+- ✅ **Preseason Support:** `force_update_all_results.py` agora busca dados de Preseason e Regular Season.
+- ✅ **Smart Insert:** Script de atualização agora faz INSERT de jogos novos (antes apenas UPDATE), recuperando ~800 jogos perdidos.
+- ✅ **Team Normalization:** Suporte aprimorado para nomes completos ("Milwaukee Bucks" -> "MIL").
+
+---
+
 ## 🎉 Destaques v21.6 (11 Dez 2025) - **Injury Cache System**
 
 ### 🏥 Sistema de Cache de Lesões
