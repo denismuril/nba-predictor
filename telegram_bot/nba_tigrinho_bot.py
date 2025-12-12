@@ -253,7 +253,8 @@ async def jogos_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     icon = "✅" if best['recommendation'] == 'APOSTAR' else "⚠️"
                     msg += f"\n🛒 *Line Shopping:*\n"
                     msg += f"{icon} Melhor: *{best['bookie']}*\n"
-                    msg += f"   Linha: {best['market_line']} @ {best['price']}\n"
+                    line_desc = "ML" if best['market'] == 'Moneyline' else f"{best.get('line', '?'):+}"
+                    msg += f"   Linha: {line_desc} @ {best.get('odds', '?')}\n"
                     msg += f"   EV: {best['ev']:.1f}% ({best['recommendation']})\n"
             
             msg += "--------------------------------\n"
