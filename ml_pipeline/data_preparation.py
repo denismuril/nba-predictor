@@ -280,12 +280,15 @@ def add_rolling_features(df, windows=[5, 10]):
         nan_pct = (df[sample_rolling_col].isna().sum() / len(df)) * 100 if len(df) > 0 else 0
         logger.info(f"📊 Merge de rolling features: {nan_pct:.1f}% NaN em '{sample_rolling_col}'")
         
-        if nan_pct > 5:
-            logger.warning(f"⚠️ Alta taxa de NaN ({nan_pct:.1f}%) - possível problema de nomes de times")
+        # Tolerância aumentada para 15% para acomodar "cold start" em datasets pequenos
+        if nan_pct > 15:
+            logger.warning(f"⚠️ Alta taxa de NaN ({nan_pct:.1f}%) - verifique nomes de times se > 20%")
             # Mostrar exemplo de times não encontrados
             if df[df[sample_rolling_col].isna()].shape[0] > 0:
                 missing = df[df[sample_rolling_col].isna()][['date', 'home_team', 'away_team']].head(3)
                 logger.warning(f"   Exemplos de jogos com NaN:\n{missing}")
+        elif nan_pct > 0:
+            logger.info(f"ℹ️ Taxa de NaN esperada ({nan_pct:.1f}%) devido a cold start (início do histórico)")
     
     return df
 
