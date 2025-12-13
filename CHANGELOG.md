@@ -2,7 +2,15 @@
 
 ---
 
-## v21.12 - Health Check & System Integrity (13 Dez 2025)
+## v21.13 - OddsPedia Scraper Stability Fix (13 Dez 2025)
+
+### 🕷️ Correção de Scraper
+- **Timeout Fix:** Aumentado timeout de navegação para 60s e alterada estratégia de espera para `domcontentloaded` para evitar erros de `Timeout 30000ms exceeded`.
+- **Robustez:** Adicionado `wait_for_selector` explícito para garantir que o conteúdo dinâmico (jogos) foi carregado antes da extração.
+- **Debug:** Implementado dump automático de HTML (`debug_oddspedia.html`) quando nenhum jogo é encontrado, facilitando diagnóstico de falhas de seletor.
+
+---
+
 
 ### 🏥 Integridade de Sistema Aprimorada
 

@@ -391,13 +391,19 @@ class OddsPediaScraper:
                 # Navegar para página
                 await page.goto(
                     self.BASE_URL,
-                    timeout=30000,
-                    wait_until='networkidle'
+                    timeout=60000,
+                    wait_until='domcontentloaded'
                 )
                 
                 # Delay para parecer humano
                 await page.wait_for_timeout(random.randint(2000, 4000))
                 
+                # Aguardar carregamento inicial do conteúdo (critical for SPA)
+                try:
+                    await page.wait_for_selector('div[class*="match"], div[class*="event"]', timeout=15000)
+                except Exception:
+                    logger.warning("⚠️ Timeout aguardando seletor de jogos, tentando continuar...")
+
                 # Scroll para carregar lazy loading
                 await self._scroll_page(page)
                 
@@ -409,6 +415,15 @@ class OddsPediaScraper:
                 
                 # Parsear odds
                 odds_dict = self._extract_games_from_html(html)
+                
+                if not odds_dict:
+                    logger.warning("⚠️ Nenhum jogo encontrado. Dumpando HTML para debug.")
+                    try:
+                        with open("debug_oddspedia.html", "w", encoding="utf-8") as f:
+                            f.write(html)
+                        logger.info("ℹ️ HTML salvo em 'debug_oddspedia.html'")
+                    except Exception as e:
+                        logger.error(f"Erro ao salvar debug HTML: {e}")
                 
                 logger.info(f"✅ OddsPedia: {len(odds_dict)} jogos extraídos")
                 
