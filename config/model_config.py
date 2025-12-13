@@ -125,3 +125,19 @@ SAMPLE_WEIGHT_CONFIG = {
 # =============================================================================
 
 ML_SEASONS = ['2023-24', '2024-25', '2025-26']
+
+
+# =============================================================================
+# BACKTEST CONFIG - Sincronizado com Produção
+# =============================================================================
+# REGRA: Backtest e treinamento DEVEM usar os mesmos parâmetros
+# para garantir que a performance validada = performance real
+
+BACKTEST_CONFIG = {
+    'test_size': 0.2,           # 20% dos dados para teste
+    'cv_folds': 5,              # Cross-validation k-folds
+    'random_state': 42,         # Seed para reprodutibilidade
+    'use_sample_weights': True,  # Ponderar jogos recentes
+    'test_days': 14,            # Dias para validação temporal
+}
+

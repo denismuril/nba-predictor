@@ -1,12 +1,12 @@
 [
   {
-    "date": "2025-11-28T23:40:22.694544",
+    "date": "2025-12-13T11:44:16.603606",
     "n_samples": 40,
-    "brier_raw": 0.02916749613036691,
-    "mean_pred_raw": 0.560886624927629,
-    "mean_true": 0.525,
-    "brier_calibrated": 0.0029530782415167025,
-    "mean_pred_calibrated": 0.5366960823929875,
-    "improvement_pct": 89.87544824445116
+    "brier_raw": 0.02966251365236609,
+    "mean_pred_raw": 0.5260758167854885,
+    "mean_true": 0.475,
+    "brier_calibrated": 0.0,
+    "mean_pred_calibrated": 0.475,
+    "improvement_pct": 100.0
   }
 ]

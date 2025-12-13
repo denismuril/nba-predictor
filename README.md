@@ -1,15 +1,46 @@
-# 🏀 NBA Predictor v21.8 - Injury System Reborn
+# 🏀 NBA Predictor v21.11 - Scraping First
 
 [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-orange.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/status-production-brightgreen.svg)]()
 [![ML](https://img.shields.io/badge/ML-Ensemble%20V6-purple.svg)]()
 [![Bot](https://img.shields.io/badge/Telegram-Sniper%20Bot-blue.svg)]()
-[![Kelly](https://img.shields.io/badge/Kelly-SafeKelly%20Strategy-green.svg)]()
+[![PBP](https://img.shields.io/badge/PBP-Clean%20Metrics-red.svg)]()
 [![Docker](https://img.shields.io/badge/docker-ready-blue.svg)](Dockerfile)
 [![Season](https://img.shields.io/badge/Season-2025--26-orange.svg)]()
 
-Sistema profissional de análise quantitativa e previsão de jogos da NBA usando **Advanced Machine Learning (Ensemble V6)**, **NLP Sentiment Analysis**, **Bot Sniper com Alertas EV**, **SafeKelly Bankroll Management** e **Multi-source data validation**.
+Sistema profissional de análise quantitativa e previsão de jogos da NBA usando **Advanced Machine Learning (Ensemble V6)**, **NLP Sentiment Analysis**, **PBP Clean Metrics (No Garbage Time)**, **Bot Sniper com Alertas EV**, **SafeKelly Bankroll Management** e **Multi-source data validation**.
+
+---
+
+## 🎉 Destaques v21.11 (13 Dez 2025) - **Scraping First Strategy**
+
+### 🕷️ Odds Gratuits com Scraper Web
+
+- ✅ **Zero Cost:** Prioridade para scraper do OddsPedia (Playwright) antes de usar APIs pagas.
+- ✅ **Smart Fallback:** Sistema tenta scraping -> falha silenciosa -> API de backup. TIER 1 = Gratuito.
+- ✅ **Anti-Bot Tech:** Simulação humana avançada (Scroll, Delays, FakeAgent) para evitar bloqueios.
+- ✅ **Data Integrity:** Validação rigorosa de nomes de times evita "alucinações" do scraper.
+
+---
+
+## 🎉 Destaques v21.10 (13 Dez 2025) - **PBPStats Clean Metrics**
+
+### 📊 Métricas Livres de Garbage Time
+
+- ✅ **Clean Data:** Integração com `pbpstats` filtra minutos irrelevantes de jogos decididos.
+- ✅ **New Features:** `clean_off_rtg`, `clean_def_rtg` e `clean_pace` permitem modelagem mais precisa da força real dos times.
+- ✅ **Robustez:** Fallback agressivo garante operação contínua mesmo se API falhar.
+
+---
+
+## 🎉 Destaques v21.9 (13 Dez 2025) - **Web Performance Duplicate Fix**
+
+### 🐛 Correção de UI e Estabilidade
+
+- ✅ **Duplicate Rows Fixed:** Resolvido problema de duplicação de linhas na aba de Performance do web app.
+- ✅ **Optimized Merge:** Lógica de junção de dados otimizada para garantir unicidade de chaves.
+- ✅ **Documentation Update:** Changelog e README atualizados para refletir correções.
 
 ---
 
@@ -208,7 +239,11 @@ venv\Scripts\activate
 source venv/bin/activate
 
 # Instalar dependências
+# Instalar dependências
 pip install -r requirements.txt
+
+# Instalar navegadores para o Scraper
+playwright install chromium
 ```
 
 ### 2. Configuração
@@ -386,11 +421,11 @@ Este software é para fins educacionais e de pesquisa. O autor não se responsab
 
 ## 📞 Suporte
 
-**Versão:** v21.7 (Spread Model Fix)  
+**Versão:** v21.9 (Web Performance Fix)  
 **Status:** ✅ Production Ready  
 **Temporada:** 2025-26  
-**Última Atualização:** 12 Dezembro 2025  
-**Novidades:** Correção crítica no treinamento do Spread Model (XGBoost), remoção de feature inválida.
+**Última Atualização:** 13 Dezembro 2025  
+**Novidades:** Correção de duplicação na UI de Performance e estabilidade.
 
 **Documentação Adicional:**
 

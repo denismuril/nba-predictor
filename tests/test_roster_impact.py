@@ -3,17 +3,21 @@ Teste Unitário: Validando Impacto do Roster Manager
 =====================================================
 Testa se a remoção de uma estrela (ex: Jokic) impacta
 significativamente o spread previsto (target: 3-4+ pontos).
+
+NOTA: Este teste foi adaptado após remoção do train_spread_model.py
 """
 
 import sys
 import os
+import pytest
 
 # Adicionar diretório raiz ao path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from core.roster_manager import get_roster_impact
-from ml_pipeline.train_spread_model import predict_spreads_batch
+# REMOVIDO: from ml_pipeline.train_spread_model import predict_spreads_batch
 import pandas as pd
+import logging
 import logging
 
 logging.basicConfig(level=logging.INFO)

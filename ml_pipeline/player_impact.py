@@ -325,9 +325,239 @@ class PlayerImpactCalculator:
         
         if team_injuries.empty:
             return 0.0
-        
+
         injured_players = team_injuries['player'].tolist()
         return self.calculate_missing_impact(injured_players)
+
+
+# =============================================================================
+# FASE 2: StatLineShift - Análise de Impacto de Ausência
+# =============================================================================
+
+
+def calculate_injury_impact(
+    player_name: str,
+    team_code: str,
+    df_boxscores: pd.DataFrame = None
+) -> Dict:
+    """
+    FASE 2 IMPLEMENTATION: Analisa o impacto histórico de um jogador estar OUT.
+
+    Lógica:
+    1. Filtra jogos anteriores onde o jogador NÃO jogou (minutos = 0 ou ausente)
+    2. Compara performance do time COM vs SEM o jogador
+    3. Calcula "Usage Rate Lift" dos companheiros restantes
+
+    Args:
+        player_name: Nome do jogador lesionado (ex: 'Luka Doncic')
+        team_code: Código do time (ex: 'DAL')
+        df_boxscores: DataFrame com histórico de boxscores
+                      Requer colunas: Date, Player, Team, MIN, PTS, USG_PCT
+
+    Returns:
+        Dict com:
+        - 'pts_impact': Diferença média de pontos/jogo do time (negativo = piora)
+        - 'win_pct_without': Win% do time sem este jogador
+        - 'win_pct_with': Win% do time com este jogador
+        - 'games_without': Número de jogos analisados sem o jogador
+        - 'usage_lift': Dict de jogadores com aumento de usage quando ausente
+        - 'beneficiaries': Lista top 3 jogadores que mais se beneficiam
+
+    Exemplo:
+        >>> impact = calculate_injury_impact('Luka Doncic', 'DAL', df_boxscores)
+        >>> print(impact['usage_lift'])  # {'Kyrie Irving': +4.5, 'PJ Washington': +2.1}
+        >>> print(impact['pts_impact'])   # -8.3 (time marca 8.3 pontos a menos)
+    """
+    logger.info(f"📊 Calculando impacto de ausência: {player_name} ({team_code})...")
+
+    # Resultado padrão (neutro)
+    default_result = {
+        'player_name': player_name,
+        'team_code': team_code,
+        'pts_impact': 0.0,
+        'win_pct_without': 0.5,
+        'win_pct_with': 0.5,
+        'games_without': 0,
+        'games_with': 0,
+        'usage_lift': {},
+        'beneficiaries': [],
+        'error': None
+    }
+
+    # Carregar boxscores se não fornecido
+    if df_boxscores is None:
+        boxscores_path = Path('data/player_boxscores_history.csv')
+        if not boxscores_path.exists():
+            logger.warning(f"⚠️ Arquivo de boxscores não encontrado: {boxscores_path}")
+            default_result['error'] = 'boxscores_not_found'
+            return default_result
+
+        try:
+            df_boxscores = pd.read_csv(boxscores_path)
+            logger.info(f"   Carregados {len(df_boxscores)} registros de boxscores")
+        except Exception as e:
+            logger.error(f"❌ Erro ao carregar boxscores: {e}")
+            default_result['error'] = str(e)
+            return default_result
+
+    # Validar colunas necessárias
+    required_cols = ['Player', 'Team', 'MIN', 'PTS']
+    date_col = 'Date' if 'Date' in df_boxscores.columns else 'date'
+    required_cols.append(date_col)
+
+    missing_cols = [c for c in required_cols if c not in df_boxscores.columns]
+    if missing_cols:
+        logger.warning(f"⚠️ Colunas faltando no boxscore: {missing_cols}")
+        default_result['error'] = f'missing_columns: {missing_cols}'
+        return default_result
+
+    # Normalizar nome para busca
+    def normalize(name):
+        if not isinstance(name, str):
+            return ''
+        normalized = unicodedata.normalize('NFKD', name)
+        normalized = normalized.encode('ASCII', 'ignore').decode('ASCII')
+        return normalized.lower().strip()
+
+    player_normalized = normalize(player_name)
+
+    # Filtrar boxscores do time
+    team_games = df_boxscores[df_boxscores['Team'] == team_code].copy()
+
+    if team_games.empty:
+        logger.warning(f"⚠️ Nenhum jogo encontrado para {team_code}")
+        default_result['error'] = 'no_team_games'
+        return default_result
+
+    # Converter datas
+    team_games[date_col] = pd.to_datetime(team_games[date_col])
+
+    # Identificar jogos ÚNICOS (agrupar por data)
+    game_dates = team_games.groupby(date_col)
+
+    # Classificar jogos: COM vs SEM o jogador
+    games_with_player = []
+    games_without_player = []
+
+    for game_date, game_df in game_dates:
+        # Verificar se o jogador jogou neste jogo
+        player_rows = game_df[
+            game_df['Player'].apply(lambda x: normalize(x) == player_normalized if isinstance(x, str) else False)
+        ]
+
+        if not player_rows.empty:
+            # Jogador presente: verificar se jogou minutos
+            player_mins = pd.to_numeric(player_rows['MIN'].iloc[0], errors='coerce')
+            if pd.notna(player_mins) and player_mins > 0:
+                games_with_player.append(game_df)
+            else:
+                games_without_player.append(game_df)
+        else:
+            # Jogador ausente do boxscore
+            games_without_player.append(game_df)
+
+    # Precisamos de pelo menos 3 jogos em cada categoria para análise significativa
+    if len(games_without_player) < 3:
+        logger.info(f"   ⚠️ Poucos jogos sem {player_name} ({len(games_without_player)}). Análise limitada.")
+        default_result['games_without'] = len(games_without_player)
+        default_result['games_with'] = len(games_with_player)
+        return default_result
+
+    # ========== CALCULAR MÉTRICAS ==========
+
+    # 1. Pontos por jogo do time
+    def get_team_pts(game_dfs):
+        """Soma pontos de todos jogadores do time em cada jogo."""
+        totals = []
+        for gdf in game_dfs:
+            team_pts = pd.to_numeric(gdf['PTS'], errors='coerce').sum()
+            totals.append(team_pts)
+        return np.mean(totals) if totals else 0
+
+    pts_with = get_team_pts(games_with_player)
+    pts_without = get_team_pts(games_without_player)
+    pts_impact = pts_without - pts_with  # Negativo = time piora sem jogador
+
+    # 2. Win% (se temos coluna de resultado)
+    def get_win_pct(game_dfs):
+        """Calcula win% baseado nos jogos."""
+        # Método: se tiver PTS suficiente, considerar vitória
+        # (Ideal seria ter coluna W/L, mas como proxy usamos pontos > 100)
+        if not game_dfs:
+            return 0.5
+        wins = sum(1 for gdf in game_dfs if pd.to_numeric(gdf['PTS'], errors='coerce').sum() > 105)
+        return wins / len(game_dfs) if game_dfs else 0.5
+
+    win_pct_with = get_win_pct(games_with_player)
+    win_pct_without = get_win_pct(games_without_player)
+
+    # 3. Usage Rate Lift dos companheiros
+    usage_lift = {}
+    if 'USG_PCT' in df_boxscores.columns:
+        # Agrupar uso médio de cada jogador COM e SEM o star
+        all_teammates = set()
+        for gdf in games_with_player + games_without_player:
+            all_teammates.update(gdf['Player'].tolist())
+
+        # Remover o próprio jogador
+        all_teammates.discard(player_name)
+
+        for teammate in all_teammates:
+            teammate_norm = normalize(teammate)
+
+            # Uso médio quando star jogou
+            usage_with = []
+            for gdf in games_with_player:
+                tm_row = gdf[gdf['Player'].apply(lambda x: normalize(x) == teammate_norm if isinstance(x, str) else False)]
+                if not tm_row.empty:
+                    usg = pd.to_numeric(tm_row['USG_PCT'].iloc[0], errors='coerce')
+                    if pd.notna(usg):
+                        usage_with.append(usg)
+
+            # Uso médio quando star ausente
+            usage_without = []
+            for gdf in games_without_player:
+                tm_row = gdf[gdf['Player'].apply(lambda x: normalize(x) == teammate_norm if isinstance(x, str) else False)]
+                if not tm_row.empty:
+                    usg = pd.to_numeric(tm_row['USG_PCT'].iloc[0], errors='coerce')
+                    if pd.notna(usg):
+                        usage_without.append(usg)
+
+            # Calcular lift
+            if usage_with and usage_without:
+                avg_with = np.mean(usage_with)
+                avg_without = np.mean(usage_without)
+                lift = avg_without - avg_with
+                if abs(lift) > 1.0:  # Apenas lifts significativos (>1%)
+                    usage_lift[teammate] = round(lift, 2)
+
+    # Ordenar por lift descendente e pegar top 3
+    sorted_by_lift = sorted(usage_lift.items(), key=lambda x: x[1], reverse=True)
+    beneficiaries = [
+        {'player': name, 'usage_lift': lift, 'pts_boost_estimate': round(lift * 0.3, 1)}
+        for name, lift in sorted_by_lift[:3]
+    ]
+
+    result = {
+        'player_name': player_name,
+        'team_code': team_code,
+        'pts_impact': round(pts_impact, 1),
+        'win_pct_without': round(win_pct_without, 3),
+        'win_pct_with': round(win_pct_with, 3),
+        'games_without': len(games_without_player),
+        'games_with': len(games_with_player),
+        'usage_lift': usage_lift,
+        'beneficiaries': beneficiaries,
+        'error': None
+    }
+
+    logger.info(f"   ✅ Análise completa: {len(games_without_player)} jogos sem, {len(games_with_player)} com")
+    logger.info(f"   📊 Impacto: {pts_impact:+.1f} pts | Win%: {win_pct_with:.1%} → {win_pct_without:.1%}")
+
+    if beneficiaries:
+        logger.info(f"   🔝 Top beneficiários: {[b['player'] for b in beneficiaries]}")
+
+    return result
 
 
 # =============================================================================

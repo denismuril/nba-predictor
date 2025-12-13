@@ -4,13 +4,20 @@ Testes unitários para Odds Scraper.
 
 import pytest
 import requests
-from unittest.mock import Mock, patch
+from unittest.mock import Mock, patch, MagicMock
 from data.scrapers.odds_scraper import (
     OddsValidator,
     TheOddsAPIClient,
     obter_odds,
     get_odds_for_game
 )
+from exceptions.odds_exceptions import OddsUnavailableError
+
+# Mock para OddsPediaScraper se não puder ser importado
+try:
+    from data.scrapers.odds_web_scraper import OddsPediaScraper
+except ImportError:
+    OddsPediaScraper = MagicMock()
 
 
 class TestOddsValidator:
@@ -57,22 +64,22 @@ class TestOddsValidator:
         input_dict = {
             'Lakers vs Warriors': {
                 'home_odds': 1.85,
-                'away_odds': 2.05,
+                'away_odds': 2.00,  # Vigorish ~5% (válido)
                 'home_team': 'Lakers',
                 'away_team': 'Warriors',
                 'source': 'test'
             },
             'Heat vs Celtics': {
-                'home_odds': 0.50,  # INVÁLIDO
+                'home_odds': 0.50,  # INVÁLIDO (<1.01)
                 'away_odds': 2.00,
                 'home_team': 'Heat',
                 'away_team': 'Celtics',
                 'source': 'test'
             }
         }
-        
+
         validated = OddsValidator.normalize_and_validate(input_dict)
-        
+
         # Apenas o primeiro jogo deve passar
         assert len(validated) == 1
         assert 'Lakers vs Warriors' in validated
@@ -150,43 +157,101 @@ class TestTheOddsAPIClient:
 class TestObterOdds:
     """Testes para função principal obter_odds."""
     
-    @patch('data.scrapers.odds_scraper.TheOddsAPIClient')
-    def test_obter_odds_theoddsapi_success(self, mock_client_class):
-        """Testa que TheOddsAPI é tentado primeiro."""
-        # Mock client
-        mock_client = Mock()
-        mock_client.fetch_odds.return_value = {
-            'Lakers vs Warriors': {
-                'home_odds': 1.85,
-                'away_odds': 2.05,
-                'home_team': 'Lakers',
-                'away_team': 'Warriors',
-                'source': 'theoddsapi'
+    @pytest.fixture(autouse=True)
+    def mock_cache_instance(self):
+        """Mock da instância de cache interna para garantir cache miss."""
+        with patch('utils.cache._cache') as mock_c:
+            mock_c.get.return_value = None  # Always miss (força execução)
+            yield mock_c
+
+    @pytest.fixture
+    def mock_oddspedia(self):
+        # Patch na classe importada dentro de odds_scraper
+        with patch('data.scrapers.odds_scraper.OddsPediaScraper') as mock:
+            yield mock
+
+    @pytest.fixture
+    def mock_client_class(self):
+        with patch('data.scrapers.odds_scraper.TheOddsAPIClient') as mock:
+            yield mock
+    
+    @pytest.fixture(autouse=True)
+    def force_oddspedia_available(self):
+        """Força ODDSPEDIA_AVAILABLE = True durante os testes."""
+        with patch('data.scrapers.odds_scraper.ODDSPEDIA_AVAILABLE', True):
+            yield
+
+    def test_obter_odds_oddspedia_success(self, mock_oddspedia, mock_client_class):
+        """Testa que OddsPedia é tentado primeiro (TIER 1)."""
+        # Configurar mock
+        mock_instance = mock_oddspedia.return_value
+        mock_instance.fetch_odds.return_value = {
+            "TeamA vs TeamB": {
+                "home_team": "TeamA", "away_team": "TeamB",
+                "home_odds": 1.5, "away_odds": 2.5,
+                "source": "oddspedia_scraper"
             }
         }
-        mock_client_class.return_value = mock_client
         
-        odds = obter_odds()
+        # Executar
+        resultado = obter_odds()
         
-        # TheOddsAPI deve ter sido chamado
-        mock_client.fetch_odds.assert_called_once()
-        assert len(odds) == 1
+        # Verificar
+        assert len(resultado) == 1
+        assert resultado["TeamA vs TeamB"]["source"] == "oddspedia_scraper"
+        mock_oddspedia.assert_called_once()
+        # TheOddsAPI NÃO deve ser chamado
+        mock_client_class.assert_not_called()
+
+    def test_obter_odds_theoddsapi_success(self, mock_oddspedia, mock_client_class):
+        """Testa fallback para TheOddsAPI quando OddsPedia falha."""
+        # Configurar OddsPedia para falhar/retornar vazio
+        mock_oddspedia_instance = mock_oddspedia.return_value
+        mock_oddspedia_instance.fetch_odds.side_effect = Exception("Scraper error")
+        
+        # Configurar TheOddsAPI para sucesso
+        mock_client = mock_client_class.return_value
+        mock_client.fetch_odds.return_value = {
+            "TeamA vs TeamB": {
+                "home_team": "TeamA", "away_team": "TeamB",
+                "home_odds": 1.95, "away_odds": 1.95,
+                "source": "theoddsapi_test" 
+            }
+        }
+        
+        # Executar
+        resultado = obter_odds()
+        
+        # Verificar
+        assert len(resultado) == 1
+        assert resultado["TeamA vs TeamB"]["source"] == "theoddsapi_test"
+        
+        # Ambos devem ter sido chamados
+        mock_oddspedia.assert_called_once()
+        mock_client_class.assert_called_once()
     
-    @patch('data.scrapers.odds_scraper.TheOddsAPIClient')
-    def test_obter_odds_fallback_to_default(self, mock_client_class):
+    def test_obter_odds_fallback_to_default(self, mock_oddspedia, mock_client_class):
         """Testa fallback para default quando tudo falha."""
+        # OddsPedia falha
+        mock_oddspedia.return_value.fetch_odds.side_effect = Exception("Scraper fail")
+        
         # TheOddsAPI falha
-        mock_client_class.side_effect = ValueError("No API key")
+        mock_client_class.return_value.fetch_odds.side_effect = Exception("API fail")
         
-        odds = obter_odds()
-        
-        # Deve retornar vazio (sistema usa default downstream)
-        assert odds == {}
+        # Mockar outros fallbacks também (SportsDataIO, RapidAPI, OddsAPI.io)
+        from data.scrapers.odds_scraper import SportsDataIOClient, RapidAPIFootballClient, OddsAPIioClient
+        with patch.object(SportsDataIOClient, 'fetch_odds', side_effect=Exception("SD fail")), \
+             patch.object(RapidAPIFootballClient, 'fetch_odds', side_effect=Exception("Rapid fail")), \
+             patch.object(OddsAPIioClient, 'fetch_odds', side_effect=Exception("OddsIO fail")):
+            
+            # Executar - deve lançar OddsUnavailableError (Tier 6)
+            with pytest.raises(OddsUnavailableError):
+                obter_odds()
     
     def test_force_source_default(self):
-        """Testa forçar source default."""
-        odds = obter_odds(force_source='default')
-        assert odds == {}
+        """Testa forçar source que não existe lança exceção (agora todas as fontes falham)."""
+        with pytest.raises(OddsUnavailableError):
+            obter_odds(force_source='nonexistent_source')
 
 
 class TestGetOddsForGame:

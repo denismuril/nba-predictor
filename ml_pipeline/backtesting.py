@@ -2,18 +2,22 @@ import pandas as pd
 import logging
 from datetime import datetime, timedelta
 from ml_pipeline.data_preparation import load_historical_data
-from ml_pipeline.train_model import train_and_save_model
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+from sklearn.ensemble import RandomForestClassifier
 import joblib
 
-# FASE 3 FIX: Importar parâmetros centralizados (Single Source of Truth)
-from config.model_config import RF_PARAMS
+# FASE 1 REFACTOR: Importar parâmetros centralizados (Single Source of Truth)
+from config.model_config import RF_PARAMS, BACKTEST_CONFIG
 
 # Configurar logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-def run_backtest(test_days=14):
+
+def run_backtest(test_days=None):
+    # Usar valor do config centralizado se não especificado
+    if test_days is None:
+        test_days = BACKTEST_CONFIG.get('test_days', 14)
     """
     Executa um backtest simples:
     - Treina com dados anteriores aos últimos 'test_days'.
@@ -86,8 +90,7 @@ def run_backtest(test_days=14):
     X_test = X_test[X_train.columns]
     
     # Treinar Modelo
-    # FASE 3 FIX: Usar RF_PARAMS centralizado (idêntico ao train_model.py)
-    from sklearn.ensemble import RandomForestClassifier
+    # FASE 1 REFACTOR: Usar RF_PARAMS centralizado (Single Source of Truth)
     model = RandomForestClassifier(**RF_PARAMS)
     model.fit(X_train, y_train)
     

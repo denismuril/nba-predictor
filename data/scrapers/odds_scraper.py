@@ -16,6 +16,15 @@ from dotenv import load_dotenv
 from config.constants import TEAM_ABBREV_MAP
 from utils.cache import smart_cache, TTL_ODDS
 
+# Importar scraper web (TIER 1 - Gratuito)
+try:
+    from data.scrapers.odds_web_scraper import OddsPediaScraper
+    ODDSPEDIA_AVAILABLE = True
+except ImportError:
+    ODDSPEDIA_AVAILABLE = False
+    logger = logging.getLogger(__name__)
+    # Logger será definido abaixo, ignorar aqui
+
 # CRITICAL: Carregar .env no escopo global
 # Isso garante que as variáveis estejam disponíveis independente de quem importou
 load_dotenv()
@@ -695,19 +704,19 @@ class OddsSharkScraper:
 
 def obter_odds(force_source: Optional[str] = None) -> Dict:
     """
-    Busca odds com hierarquia de fallback robusta (5 tiers!).
+    Busca odds com hierarquia de fallback robusta (6 tiers!).
     
-    Hierarquia:
-    1. TheOddsAPI (se API key disponível) ← TIER 1
-    2. SportsDataIO (FREE trial disponível) ← TIER 2
-    3. RapidAPI Basketball (FREE tier) ← TIER 3
-    4. OddsAPI.io (fallback gratuito) ← TIER 4
-    5. OddsShark scraping (backup) ← TIER 5 [TODO]
+    Hierarquia (Scraping First - economiza API):
+    1. OddsPediaScraper (GRATUITO - web scraping) ← TIER 1
+    2. TheOddsAPI (se API key disponível) ← TIER 2
+    3. SportsDataIO (FREE trial disponível) ← TIER 3
+    4. RapidAPI Basketball (FREE tier) ← TIER 4
+    5. OddsAPI.io (fallback gratuito) ← TIER 5
     6. Erro (não usa dados fictícios) ← TIER 6
     
     Args:
         force_source: Forçar source específico para testes
-                     ('theoddsapi', 'sportsdata', 'rapidapi', 'oddsapiio', 'oddsshark')
+                     ('oddspedia', 'theoddsapi', 'sportsdata', 'rapidapi', 'oddsapiio')
     
     Returns:
         Dict com formato padronizado de odds
@@ -720,7 +729,28 @@ def _obter_odds_cached(force_source: Optional[str] = None) -> Dict:
     odds_dict = {}
     source_used = "none"
     
-    # 1. Tentar TheOddsAPI (TIER 1)
+    # ===== TIER 1: OddsPedia Web Scraper (GRATUITO) =====
+    # Prioridade máxima para economizar chamadas de API paga
+    if force_source in [None, 'oddspedia'] and ODDSPEDIA_AVAILABLE:
+        try:
+            logger.info("📡 Tentando OddsPedia Scraper (TIER 1 - Gratuito)...")
+            scraper = OddsPediaScraper()
+            odds_dict = scraper.fetch_odds()
+            source_used = "oddspedia"
+            
+            odds_dict = OddsValidator.normalize_and_validate(odds_dict)
+            
+            if odds_dict:
+                logger.info(f"✅ Odds obtidos via OddsPedia Scraper: {len(odds_dict)} jogos")
+                return odds_dict
+            else:
+                logger.warning("⚠️ OddsPedia Scraper retornou 0 jogos válidos")
+                
+        except Exception as e:
+            # Falha SILENCIOSA - apenas warning, não interrompe o sistema
+            logger.warning(f"⚠️ Falha no Scraper Web: {e}. Usando API de backup...")
+    
+    # ===== TIER 2: TheOddsAPI (API Paga) =====
     if force_source in [None, 'theoddsapi']:
         try:
             api_client = TheOddsAPIClient()
@@ -740,7 +770,7 @@ def _obter_odds_cached(force_source: Optional[str] = None) -> Dict:
         except Exception as e:
             logger.warning(f"⚠️  TheOddsAPI falhou: {e}. Tentando fallback...")
     
-    # 2. Fallback: SportsDataIO (TIER 2) ← NOVO!
+    # ===== TIER 3: SportsDataIO (API Paga) =====
     if force_source in [None, 'sportsdata']:
         try:
             sportsdata_client = SportsDataIOClient()
@@ -758,7 +788,7 @@ def _obter_odds_cached(force_source: Optional[str] = None) -> Dict:
         except Exception as e:
             logger.warning(f"⚠️  SportsDataIO falhou: {e}. Tentando próximo fallback...")
     
-    # 3. Fallback: RapidAPI (TIER 3)
+    # ===== TIER 4: RapidAPI (API) =====
     if force_source in [None, 'rapidapi']:
         try:
             rapidapi_client = RapidAPIFootballClient()
@@ -776,7 +806,7 @@ def _obter_odds_cached(force_source: Optional[str] = None) -> Dict:
         except Exception as e:
             logger.warning(f"⚠️  RapidAPI falhou: {e}. Tentando próximo fallback...")
     
-    # 5. Fallback: OddsAPI.io (TIER 4)
+    # ===== TIER 5: OddsAPI.io (Gratuito/Limitado) =====
     if force_source in [None, 'oddsapiio']:
         try:
             oddsapi_client = OddsAPIioClient()
@@ -794,7 +824,8 @@ def _obter_odds_cached(force_source: Optional[str] = None) -> Dict:
         except Exception as e:
             logger.warning(f"⚠️  OddsAPI.io falhou: {e}. Tentando próximo fallback...")
     
-    # 6. Fallback: Odds Shark (TIER 5) [TODO]
+    # ===== TIER 6: Erro Final =====
+    # REMOVIDO: OddsShark (substituído por OddsPedia como TIER 1)
     if force_source in [None, 'oddsshark']:
         try:
             scraper = OddsSharkScraper()

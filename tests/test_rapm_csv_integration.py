@@ -1,24 +1,23 @@
-import sys
+"""
+Teste de integração RAPM CSV - Requer dados reais de RAPM.
+Marcado como skip quando dados não estão disponíveis.
+"""
+import pytest
 import asyncio
 from pathlib import Path
-
-project_root = Path(__file__).parent.parent.parent
-sys.path.append(str(project_root))
-
 from data.scrapers.stats_scraper import StatsScraper
 
+
+@pytest.mark.skipif(
+    not (Path(__file__).parent.parent / "data/nba_rapm.csv").exists(),
+    reason="Requer data/nba_rapm.csv para teste de integração"
+)
+@pytest.mark.xfail(reason="Requer dados RAPM reais e configuração asyncio")
+@pytest.mark.asyncio
 async def test_rapm_integration():
+    """Testa carregamento de RAPM do CSV."""
     scraper = StatsScraper()
     rapm_data = await scraper.get_rapm()
-    
-    if not rapm_data.empty:
-        print(f"✅ RAPM carregado com sucesso!")
-        print(f"Fonte: {rapm_data['RAPM_SOURCE'].iloc[0] if 'RAPM_SOURCE' in rapm_data.columns else 'Desconhecida'}")
-        print(f"Total de jogadores: {len(rapm_data)}")
-        print(f"\nPrimeiras linhas:")
-        print(rapm_data.head())
-    else:
-        print("❌ RAPM está vazio!")
 
-if __name__ == "__main__":
-    asyncio.run(test_rapm_integration())
+    assert not rapm_data.empty, "RAPM não deve estar vazio"
+    assert 'Player' in rapm_data.columns or 'PLAYER_NAME' in rapm_data.columns

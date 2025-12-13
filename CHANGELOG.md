@@ -2,6 +2,41 @@
 
 ---
 
+## v21.11 - Scraping First for Odds (13 Dez 2025)
+
+### 🕷️ Estratégia "Scraping First"
+
+- **New Scraper:** Implementado `OddsPediaScraper` usando **Playwright** + **BeautifulSoup** para capturar odds em tempo real sem custo.
+- **Anti-Detection:** Rotacionamento de User-Agent, delays aleatórios e simulação de scroll humano para evitar bloqueios.
+- **Tiered Fallback:** Nova hierarquia de coleta prioriza fontes gratuitas:
+    1. **OddsPedia (Scraper)** - Gratuito
+    2. **TheOddsAPI** - Pago/Limitado
+    3. **SportsDataIO** - Pago/Limitado
+    4. **RapidAPI** - Limitado
+- **Cost Reduction:** Redução drástica no consumo de cotas de APIs pagas.
+
+---
+
+## v21.10 - PBPStats Integration & Clean Metrics (13 Dez 2025)
+
+### 📊 Métricas Limpas (Sem Garbage Time)
+
+- **Integration:** Adicionada biblioteca `pbpstats` para filtrar minutos irrelevantes de jogos decididos.
+- **New Metrics:** Introduzidas `clean_off_rtg`, `clean_def_rtg` e `clean_pace` no pipeline de Feature Engineering.
+- **Garbage Time Filter:** Filtra automaticamente possessões nos últimos 5 minutos com diferença > 15 pontos.
+- **Robustez:** Implementado Fallback Agressivo no `pbp_client` para garantir que o pipeline nunca quebre se a API falhar.
+
+---
+
+## v21.9 - Web Performance Duplicate Fix (13 Dez 2025)
+
+### 🐛 Correção de UI
+
+- **Duplicate Rows:** Corrigido problema de duplicação na aba Performance do web app, causado por chaves de junção não-únicas.
+- **Deduplication Logic:** Adicionada etapa explícita de `drop_duplicates` antes do merge de previsões com resultados históricos em `nba_predictor_web.py`.
+
+---
+
 ## v21.8 - Injury System Reborn & Clean Tests (12 Dez 2025)
 
 ### 🏥 Sistema de Lesões v2.2

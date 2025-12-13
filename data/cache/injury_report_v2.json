@@ -1,98 +1,34 @@
 [
   {
-    "player_name": "Isaac Jones",
-    "team": "DET",
-    "status": "OUT",
-    "description": "Via NBA Official PDF",
-    "source": "NBA_Official",
-    "updated_at": "2025-12-12T16:26:46.717688"
-  },
-  {
-    "player_name": "Zach Collins",
-    "team": "CHI",
-    "status": "PROBABLE",
-    "description": "Via NBA Official PDF",
-    "source": "NBA_Official",
-    "updated_at": "2025-12-12T16:26:46.717688"
-  },
-  {
-    "player_name": "Jarrett Allen",
-    "team": "CLE",
-    "status": "OUT",
-    "description": "Via NBA Official PDF",
-    "source": "NBA_Official",
-    "updated_at": "2025-12-12T16:26:46.717688"
-  },
-  {
-    "player_name": "Malaki Branham",
-    "team": "WAS",
-    "status": "OUT",
-    "description": "Via NBA Official PDF",
-    "source": "NBA_Official",
-    "updated_at": "2025-12-12T16:26:46.717688"
-  },
-  {
-    "player_name": "Tyrese Haliburton",
-    "team": "IND",
-    "status": "OUT",
-    "description": "Via NBA Official PDF",
-    "source": "NBA_Official",
-    "updated_at": "2025-12-12T16:26:46.717688"
-  },
-  {
-    "player_name": "Johni Broome",
-    "team": "PHI",
+    "player_name": "Pacome Dadiet",
+    "team": "NYK",
     "status": "QUESTIONABLE",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-12T16:26:46.717688"
+    "updated_at": "2025-12-13T12:19:02.434893"
   },
   {
-    "player_name": "Elijah Harkless",
-    "team": "UTA",
+    "player_name": "Colin Castleton",
+    "team": "ORL",
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-12T16:26:46.717688"
+    "updated_at": "2025-12-13T12:19:02.434929"
   },
   {
-    "player_name": "Brandon Clarke",
-    "team": "MEM",
+    "player_name": "Harrison Ingram",
+    "team": "SAS",
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-12T16:26:46.717688"
+    "updated_at": "2025-12-13T12:19:02.434936"
   },
   {
-    "player_name": "Tyson Etienne",
-    "team": "BKN",
+    "player_name": "Isaiah Joe",
+    "team": "OKC",
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-12T16:26:46.717688"
-  },
-  {
-    "player_name": "Dante Exum",
-    "team": "DAL",
-    "status": "OUT",
-    "description": "Via NBA Official PDF",
-    "source": "NBA_Official",
-    "updated_at": "2025-12-12T16:26:46.717688"
-  },
-  {
-    "player_name": "Joan Beringer",
-    "team": "MIN",
-    "status": "OUT",
-    "description": "Via NBA Official PDF",
-    "source": "NBA_Official",
-    "updated_at": "2025-12-12T16:26:46.717688"
-  },
-  {
-    "player_name": "Draymond Green",
-    "team": "GSW",
-    "status": "OUT",
-    "description": "Via NBA Official PDF",
-    "source": "NBA_Official",
-    "updated_at": "2025-12-12T16:26:46.717688"
+    "updated_at": "2025-12-13T12:19:02.434943"
   }
 ]

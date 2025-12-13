@@ -631,6 +631,122 @@ def get_fatigue_color(score):
         return "bg-red-500", "Alta"
 
 
+# =============================================================================
+# FASE 4: Visualizações de Player Props e Impacto de Lesões
+# =============================================================================
+
+
+def render_top_trends_section(df_props: pd.DataFrame):
+    """
+    FASE 4 IMPLEMENTATION: Exibe jogadores com Hit Rate > 80% nos últimos 10 jogos.
+
+    Mostra uma seção de "jogadores quentes" para identificar boas apostas Over.
+
+    Args:
+        df_props: DataFrame com colunas de hit rate (PTS_hit_L10, etc.)
+    """
+    if df_props is None or df_props.empty:
+        st.info("📊 Nenhum dado de player props disponível para Top Trends.")
+        return
+
+    st.subheader("🔥 Top Trends - Hit Rate > 80% (L10)")
+
+    # Verificar se temos colunas de hit rate
+    hit_cols = [c for c in df_props.columns if '_hit_L10' in c]
+    if not hit_cols:
+        st.info("📊 Execute o cálculo de hit rates primeiro.")
+        return
+
+    # Filtrar jogadores com hit rate >= 80%
+    hot_players = []
+    for col in hit_cols:
+        stat = col.replace('_hit_L10', '')
+        hot = df_props[df_props[col] >= 0.80][['Player', 'Team', col]].copy()
+        hot['Stat'] = stat
+        hot['Hit Rate L10'] = hot[col]
+        hot_players.append(hot[['Player', 'Team', 'Stat', 'Hit Rate L10']])
+
+    if not hot_players:
+        st.info("📊 Nenhum jogador com Hit Rate > 80% encontrado.")
+        return
+
+    combined = pd.concat(hot_players, ignore_index=True)
+    combined = combined.sort_values('Hit Rate L10', ascending=False).head(10)
+
+    # Formatar display
+    combined['Hit Rate L10'] = combined['Hit Rate L10'].apply(lambda x: f"{x*100:.0f}%")
+
+    # Estilizar
+    st.dataframe(
+        combined.style.applymap(
+            lambda x: 'color: #4ade80; font-weight: bold' if x.endswith('%') else '',
+            subset=['Hit Rate L10']
+        ),
+        use_container_width=True,
+        hide_index=True
+    )
+
+    st.caption("💡 Jogadores que superaram a linha em 8+ dos últimos 10 jogos.")
+
+
+def render_injury_impact_alert(injury_adjustments: list):
+    """
+    FASE 4 IMPLEMENTATION: Exibe alertas visuais de impacto de lesões.
+
+    Mostra como a ausência de um jogador afeta a projeção de outros.
+
+    Args:
+        injury_adjustments: Lista de dicts com:
+            - 'injured_player': Nome do jogador lesionado
+            - 'team': Time afetado
+            - 'beneficiary': Jogador que se beneficia
+            - 'pts_lift': Pontos adicionais projetados
+
+    Exemplo:
+        render_injury_impact_alert([
+            {'injured_player': 'Luka Doncic', 'team': 'DAL',
+             'beneficiary': 'Kyrie Irving', 'pts_lift': 4.5}
+        ])
+    """
+    if not injury_adjustments:
+        return
+
+    st.subheader("🏥 Impacto de Lesões")
+
+    for adj in injury_adjustments:
+        with st.container():
+            cols = st.columns([3, 1, 3, 1])
+
+            # Jogador lesionado
+            cols[0].markdown(
+                f"🚑 **{adj.get('injured_player', 'Unknown')}** OUT",
+                help=f"Time: {adj.get('team', 'N/A')}"
+            )
+
+            # Seta
+            cols[1].markdown("→")
+
+            # Beneficiário
+            cols[2].markdown(
+                f"📈 **{adj.get('beneficiary', 'Unknown')}**",
+                help="Jogador que recebe aumento de usage"
+            )
+
+            # Lift em pontos
+            pts_lift = adj.get('pts_lift', 0)
+            cols[3].metric(
+                "Ajuste",
+                f"+{pts_lift:.1f} pts",
+                delta=f"+{pts_lift:.1f}",
+                delta_color="normal"
+            )
+
+    st.caption(
+        "💡 Projeções baseadas em análise histórica de usage rate quando "
+        "o jogador titular está ausente."
+    )
+
+
 # --- MAIN CONTENT ---
 
 tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["📊 Dashboard", "💰 Gestão de Banca", "⛹️ Player Props", "📈 Performance", "🔍 Saúde do Modelo", "🧪 Análise de Backtest"])
@@ -1541,6 +1657,14 @@ with tab4:
                 df_confirmed['home_team'].astype(str) +
                 df_confirmed['away_team'].astype(str)
             )
+
+            # --- DEDUPLICATION FIX ---
+            # Remove any duplicate entries that might cause row multiplication
+            if not all_preds.empty:
+                all_preds = all_preds.drop_duplicates(subset=['join_key'], keep='first')
+            
+            if not df_confirmed.empty:
+                df_confirmed = df_confirmed.drop_duplicates(subset=['join_key'], keep='first')
 
             # Merge com sufixos explícitos para evitar colisão
             # Usar LEFT JOIN para manter previsões mesmo sem resultado (pendentes)

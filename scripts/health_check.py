@@ -189,6 +189,38 @@ def check_injury_system():
         logger.error(f"❌ Erro no sistema de lesões: {e}")
         return False
 
+
+def check_integrations():
+    """Verifica integrações externas e novos módulos."""
+    logger.info("\n🔍 Verificando integrações...")
+    
+    try:
+        import importlib.util
+        
+        # 1. Playwright
+        if importlib.util.find_spec("playwright"):
+            logger.info("✅ Playwright instalado")
+        else:
+             logger.warning("⚠️ Playwright NÃO encontrado (necessário para odds scraper)")
+
+        # 2. PBPStats Client
+        if importlib.util.find_spec("data.clients.pbp_client"):
+            logger.info("✅ PBPStats Client módulo encontrado")
+        else:
+            logger.warning("⚠️ data.clients.pbp_client NÃO encontrado")
+
+        # 3. Odds Web Scraper
+        if importlib.util.find_spec("data.scrapers.odds_web_scraper"):
+            logger.info("✅ Odds Web Scraper módulo encontrado")
+        else:
+            logger.warning("⚠️ data.scrapers.odds_web_scraper NÃO encontrado")
+
+        return True
+
+    except Exception as e:
+        logger.error(f"❌ Erro nas integrações: {e}")
+        return False
+
 def main():
     """Executa todos os health checks."""
     logger.info("="*60)
@@ -200,7 +232,8 @@ def main():
         ("Pipeline", check_pipeline),
         ("Fórmulas NBA", check_formulas),
         ("Betting Engine", check_betting_engine),
-        ("Sistema de Lesões", check_injury_system)
+        ("Sistema de Lesões", check_injury_system),
+        ("Integrações", check_integrations)
     ]
 
     results = []

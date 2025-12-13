@@ -83,12 +83,12 @@ class TestV21Fixes:
         assert result['liga_ortg_avg'].iloc[0] == pytest.approx(112.0, rel=0.01)
 
     def test_odds_shopping_ttl(self):
-        """Teste V21: TTL parameter no compare_lines."""
-        from market.odds_shopping import compare_lines
+        """Teste V21: TTL implementado em _is_odds_fresh."""
+        from market.odds_shopping import _is_odds_fresh
 
-        # Verificar que a função aceita max_age_minutes
+        # Verificar que a função _is_odds_fresh aceita max_age_minutes
         import inspect
-        sig = inspect.signature(compare_lines)
+        sig = inspect.signature(_is_odds_fresh)
         assert 'max_age_minutes' in sig.parameters
 
     def test_predict_fail_fast(self):

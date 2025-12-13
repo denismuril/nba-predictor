@@ -196,9 +196,11 @@ class TestSafeGet:
 @pytest.mark.parametrize("prob,odds,expected_valid", [
     (55.0, 1.90, True),
     (50.0, 2.00, True),
-    (0.0, 1.90, False),  # Probabilidade zero
-    (100.0, 1.90, False),  # Probabilidade 100%
-    (55.0, 0.5, False),  # Odds inválidas
+    (0.0, 1.90, True),   # Probabilidade zero É válida (range [0, 100])
+    (100.0, 1.90, True),  # Probabilidade 100% É válida (range [0, 100])
+    (-1.0, 1.90, False),  # Prob negativa é inválida
+    (101.0, 1.90, False),  # Prob > 100 é inválida
+    (55.0, 0.5, False),  # Odds < 1.0 inválidas
 ])
 def test_validation_combinations(prob, odds, expected_valid):
     """Testa combinações de probabilidade e odds."""
@@ -206,9 +208,11 @@ def test_validation_combinations(prob, odds, expected_valid):
         validate_probability(prob)
         validate_odds(odds)
     else:
-        if prob <= 0 or prob >= 100:
+        # Testar probabilidade inválida
+        if prob < 0 or prob > 100:
             with pytest.raises(ValidationError):
                 validate_probability(prob)
+        # Testar odds inválidas
         if odds < 1.0:
             with pytest.raises(ValidationError):
                 validate_odds(odds)
