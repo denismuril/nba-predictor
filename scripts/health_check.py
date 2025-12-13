@@ -201,7 +201,7 @@ def check_integrations():
         if importlib.util.find_spec("playwright"):
             logger.info("✅ Playwright instalado")
         else:
-             logger.warning("⚠️ Playwright NÃO encontrado (necessário para odds scraper)")
+            logger.warning("⚠️ Playwright NÃO encontrado (necessário para odds scraper)")
 
         # 2. PBPStats Client
         if importlib.util.find_spec("data.clients.pbp_client"):
@@ -221,8 +221,10 @@ def check_integrations():
         logger.error(f"❌ Erro nas integrações: {e}")
         return False
 
+
 def main():
     """Executa todos os health checks."""
+
     logger.info("="*60)
     logger.info("🏥 HEALTH CHECK - NBA Predictor v21.5")
     logger.info("="*60)
@@ -235,6 +237,7 @@ def main():
         ("Sistema de Lesões", check_injury_system),
         ("Integrações", check_integrations)
     ]
+
 
     results = []
 

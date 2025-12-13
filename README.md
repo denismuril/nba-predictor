@@ -13,6 +13,17 @@ Sistema profissional de análise quantitativa e previsão de jogos da NBA usando
 
 ---
 
+## 🎉 Destaques v21.12 (13 Dez 2025) - **Health Check Enhanced**
+
+### 🏥 Monitoramento de Integridade Completo
+
+- ✅ **Full System Scan:** O `health_check.py` agora cobre 100% das novas integrações (Playwright, PBPStats, Odds Scraper).
+- ✅ **Integration Validation:** Validação automática de dependências críticas antes da execução em produção.
+- ✅ **Linting & Standards:** Código de monitoramento padronizado e livre de erros de estilo.
+- ✅ **Stability:** Garantia de que todos os subsistemas essenciais estão operacionais antes do início do pipeline.
+
+---
+
 ## 🎉 Destaques v21.11 (13 Dez 2025) - **Scraping First Strategy**
 
 ### 🕷️ Odds Gratuits com Scraper Web
@@ -421,11 +432,11 @@ Este software é para fins educacionais e de pesquisa. O autor não se responsab
 
 ## 📞 Suporte
 
-**Versão:** v21.9 (Web Performance Fix)  
+**Versão:** v21.12 (Health Check Enhanced)  
 **Status:** ✅ Production Ready  
 **Temporada:** 2025-26  
 **Última Atualização:** 13 Dezembro 2025  
-**Novidades:** Correção de duplicação na UI de Performance e estabilidade.
+**Novidades:** Health Check abrangente de novas integrações de scraping e stats.
 
 **Documentação Adicional:**
 

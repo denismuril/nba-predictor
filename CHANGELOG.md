@@ -2,6 +2,19 @@
 
 ---
 
+## v21.12 - Health Check & System Integrity (13 Dez 2025)
+
+### 🏥 Integridade de Sistema Aprimorada
+
+- **New Health Checks:** Script `health_check.py` atualizado para validar novas integrações críticas:
+  - **Playwright:** Verifica se a biblioteca de automação está instalada para o Odds Scraper.
+  - **PBPStats:** Valida a presença do cliente de estatísticas limpas.
+  - **Odds Web Scraper:** Garante que o módulo de scraping de odds esteja acessível.
+- **Dependency Fix:** Identificada e resolvida dependência faltante (`joblib`) no ambiente de produção.
+- **Linting & Quality:** Correção de estilo e formatação no script de verificação de saúde.
+
+---
+
 ## v21.11 - Scraping First for Odds (13 Dez 2025)
 
 ### 🕷️ Estratégia "Scraping First"
