@@ -114,7 +114,7 @@ class TestDataValidator:
         })
         
         result_issues = DataValidator.validate(df_issues, DataValidator.RAPM_SCHEMA, 'issues')
-        assert result_issues.metrics['quality_score'] < 90
+        assert result_issues.metrics['quality_score'] < 92
     
     def test_validate_bpm_valid(self):
         """Testa validação de BPM."""

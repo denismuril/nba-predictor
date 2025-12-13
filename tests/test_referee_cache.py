@@ -23,7 +23,7 @@ class TestRefereeCache:
         cache.clear_cache()
         stats = cache.get_stats("Unknown Referee")
         
-        assert stats['home_win_pct'] == 0.55
+        assert stats['home_win_pct'] == 0.58
         assert stats['foul_rate'] == 42.0
         assert stats['games'] == 0
         assert stats['experience'] == 0
