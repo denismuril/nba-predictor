@@ -209,11 +209,11 @@ def train_ensemble_model_v6():
     # Quando superestrelas descansam, a prob. de vitória cai - modelo precisa saber disso
     df = load_historical_data(seasons=ML_SEASONS, enable_player_features=True)
 
-    # 2.1 APLICAR FEATURE ENGINEERING V4 (Pace, Matchup, Volatility, Shooting Luck - MODULAR)
+    # 2.1 APLICAR FEATURE ENGINEERING V2 AVANÇADO (Pace, Matchup, Volatility, Shooting Luck)
     try:
-        from ml_pipeline.feature_pipeline_v4 import prepare_advanced_features_only
+        from ml_pipeline.feature_engineering_v2 import prepare_advanced_features_only
         df = prepare_advanced_features_only(df)
-        logger.info("✅ Feature Pipeline V4 Modular (Steps 8-11) aplicado!")
+        logger.info("✅ Feature Engineering V2 Avançado (Steps 8-11) aplicado!")
     except Exception as e:
         logger.warning(f"⚠️ Feature Pipeline V4 Modular falhou: {e}")
 

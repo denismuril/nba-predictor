@@ -317,11 +317,11 @@ def predict_next_games(date=None):
         except Exception as e:
             logger.warning(f"   ⚠️ Player features failed: {e}")
 
-        # V4: Advanced Pace, Matchup, Volatility & Shooting Luck (MODULAR)
+        # V4: Advanced Pace, Matchup, Volatility & Shooting Luck (MIGRADO para V2)
         try:
-            from ml_pipeline.feature_pipeline_v4 import prepare_advanced_features_only
+            from ml_pipeline.feature_engineering_v2 import prepare_advanced_features_only
             df_full = prepare_advanced_features_only(df_full)
-            logger.info("   ✅ Feature Pipeline V4 Modular (Pace, Matchup, Volatility, Shooting Luck) added")
+            logger.info("   ✅ Advanced Features V2 (Pace, Matchup, Volatility, Shooting Luck) added")
         except Exception as e:
             logger.warning(f"   ⚠️ Feature Pipeline V4 Modular failed: {e}")
 

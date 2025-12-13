@@ -37,41 +37,16 @@ def load_and_prepare_data():
     history_file = DATA_DIR / "player_boxscores_history.csv"
     
     if not history_file.exists():
-        logger.warning(f"⚠️  Arquivo de histórico {history_file} não encontrado.")
-        logger.info("🛠️  Gerando dados sintéticos para treinamento inicial...")
-        
-        # Gerar dados sintéticos
-        import numpy as np
-        from datetime import timedelta
-        
-        players = [
-            ('LeBron James', 'LAL'), ('Anthony Davis', 'LAL'),
-            ('Jayson Tatum', 'BOS'), ('Jaylen Brown', 'BOS'),
-            ('Stephen Curry', 'GSW'), ('Kevin Durant', 'PHX'),
-            ('Nikola Jokic', 'DEN'), ('Jimmy Butler', 'MIA'),
-            ('Luka Doncic', 'DAL'), ('Giannis Antetokounmpo', 'MIL')
-        ]
-        
-        data = []
-        start_date = datetime.now() - timedelta(days=90)
-        for i in range(30): # 30 jogos por jogador
-            date = start_date + timedelta(days=i*3)
-            for p, team in players:
-                data.append({
-                    'Player': p, 'Team': team, 'Date': date,
-                    'PTS': np.random.normal(25, 8),
-                    'REB': np.random.normal(8, 4),
-                    'AST': np.random.normal(6, 3),
-                    'MIN': np.random.normal(34, 5),
-                    'Location': 'Home' if i % 2 == 0 else 'Away',
-                    'Opponent': 'OPP'
-                })
-        
-        df = pd.DataFrame(data)
-        df.to_csv(history_file, index=False)
-        logger.info(f"✅ Dados sintéticos salvos em {history_file}")
-    else:
-        df = pd.read_csv(history_file)
+        # FASE 5 FIX: Um sistema de apostas NUNCA deve treinar com dados sintéticos/falsos!
+        # Isso criaria um modelo que "parece funcionar" mas é inútil em produção.
+        raise FileNotFoundError(
+            f"❌ Histórico de jogadores não encontrado em: {history_file}\n"
+            "📥 Execute o scraper primeiro para coletar dados reais:\n"
+            "   python -m data.scrapers.player_boxscores_scraper\n\n"
+            "⚠️  Um sistema de apostas NUNCA deve treinar com dados sintéticos."
+        )
+
+    df = pd.read_csv(history_file)
         
     df['Date'] = pd.to_datetime(df['Date'])
     df = df.sort_values(['Player', 'Date'])

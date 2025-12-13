@@ -54,6 +54,77 @@ def get_league_default(col: str) -> float:
     """
     return LEAGUE_DEFAULTS.get(col, 0.0)
 
+
+def calculate_league_averages(df: pd.DataFrame, window: int = 100) -> dict:
+    """
+    FASE 4 FIX: Calcula médias da liga dinamicamente baseado nos últimos N jogos.
+    
+    Isso elimina "magic numbers" hardcoded e torna o sistema adaptável a
+    mudanças no estilo de jogo da NBA (pace, scoring, etc.).
+    
+    Args:
+        df: DataFrame com histórico de jogos
+        window: Número de jogos recentes para calcular média (default: 100)
+        
+    Returns:
+        Dict com médias calculadas. Usa LEAGUE_DEFAULTS como fallback se dados insuficientes.
+        
+    Exemplo:
+        >>> averages = calculate_league_averages(df_historico, window=100)
+        >>> pace_atual = averages['pace']  # Calculado dinamicamente
+    """
+    if df is None or len(df) < window:
+        logger.warning(
+            f"⚠️ Dados insuficientes ({len(df) if df is not None else 0} < {window}). "
+            "Usando LEAGUE_DEFAULTS."
+        )
+        return LEAGUE_DEFAULTS.copy()
+    
+    # Usar os últimos N jogos (ordenados por data se disponível)
+    if 'date' in df.columns:
+        df_sorted = df.sort_values('date', ascending=False)
+    else:
+        df_sorted = df
+    
+    recent = df_sorted.head(window)
+    calculated = {}
+    
+    # Mapeamento de colunas alternativas (o dataset pode ter nomes diferentes)
+    col_mappings = {
+        'pts': ['pts', 'home_score', 'total_points'],
+        'pace': ['pace', 'home_pace'],
+        'off_rating': ['off_rating', 'home_off_rating', 'ortg'],
+        'def_rating': ['def_rating', 'home_def_rating', 'drtg'],
+        'efg_pct': ['efg_pct', 'home_efg_pct', 'home_efg'],
+        'ts_pct': ['ts_pct', 'home_ts_pct', 'home_ts'],
+        'tov_pct': ['tov_pct', 'home_tov_pct'],
+        'oreb_pct': ['oreb_pct', 'home_oreb_pct', 'home_orb_pct'],
+        'ft_rate': ['ft_rate', 'home_ft_rate', 'home_ftr'],
+        'pie': ['pie', 'home_pie'],
+        'win': ['win', 'home_win']
+    }
+    
+    for key, default in LEAGUE_DEFAULTS.items():
+        found = False
+        
+        # Tentar encontrar coluna correspondente
+        possible_cols = col_mappings.get(key, [key])
+        for col in possible_cols:
+            if col in recent.columns:
+                val = recent[col].mean()
+                if pd.notna(val):
+                    calculated[key] = float(val)
+                    found = True
+                    break
+        
+        # Fallback para o default se não encontrou
+        if not found:
+            calculated[key] = default
+    
+    logger.info(f"📊 Médias calculadas (últimos {window} jogos): pace={calculated.get('pace', 0):.1f}, pts={calculated.get('pts', 0):.1f}")
+    
+    return calculated
+
 # =============================================================================
 # REFEREE STATS - TIME-AWARE IMPLEMENTATION (NO LEAKAGE)
 # =============================================================================
@@ -754,4 +825,175 @@ def add_contextual_rolling_features(df, window=10, use_ewm=True):
 
     logger.info(f"✅ Contextual rolling features calculated ({len(context_features)} cols)")
 
+    return df
+
+
+# =============================================================================
+# ADVANCED FEATURES (MIGRADO DE feature_pipeline_v4.py)
+# =============================================================================
+# Funções para features avançados: Pace, Matchup Efficiency, Volatility, Shooting Luck
+
+def add_advanced_pace_features(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Add advanced pace metrics.
+    
+    Generates:
+    - projected_pace: Average of both teams' rolling pace
+    - pace_mismatch: Absolute difference in pace
+    """
+    if 'home_rolling_10_pace' not in df.columns:
+        logger.warning("⚠️ Base pace features missing. Skipping advanced pace.")
+        return df
+        
+    df['projected_pace'] = (df['home_rolling_10_pace'] + df['away_rolling_10_pace']) / 2
+    df['pace_mismatch'] = (df['home_rolling_10_pace'] - df['away_rolling_10_pace']).abs()
+    
+    return df
+
+
+def add_matchup_efficiency_features(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Add matchup efficiency features (Off vs Def).
+    
+    Generates:
+    - off_matchup_home: Home Off Rtg - Away Def Rtg
+    - off_matchup_away: Away Off Rtg - Home Def Rtg  
+    - eff_sum: Sum of Offensive Ratings
+    - def_sum: Sum of Defensive Ratings
+    """
+    required = ['home_rolling_10_off_rating', 'away_rolling_10_def_rating', 
+                'away_rolling_10_off_rating', 'home_rolling_10_def_rating']
+                
+    if not all(col in df.columns for col in required):
+        logger.warning("⚠️ Four Factors missing. Skipping matchup efficiency.")
+        return df
+        
+    df['off_matchup_home'] = df['home_rolling_10_off_rating'] - df['away_rolling_10_def_rating']
+    df['off_matchup_away'] = df['away_rolling_10_off_rating'] - df['home_rolling_10_def_rating']
+    df['eff_sum'] = df['home_rolling_10_off_rating'] + df['away_rolling_10_off_rating']
+    df['def_sum'] = df['home_rolling_10_def_rating'] + df['away_rolling_10_def_rating']
+    
+    return df
+
+
+def add_volatility_features(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Add volatility (standard deviation) features.
+    
+    Generates:
+    - home_scoring_std_10: Std Dev of Home points (last 10)
+    - away_scoring_std_10: Std Dev of Away points (last 10)
+    """
+    df = df.sort_values('date')
+    
+    home_games = df[['date', 'home_team', 'home_score']].rename(
+        columns={'home_team': 'team', 'home_score': 'pts'}
+    )
+    away_games = df[['date', 'away_team', 'away_score']].rename(
+        columns={'away_team': 'team', 'away_score': 'pts'}
+    )
+    
+    team_stats = pd.concat([home_games, away_games]).sort_values('date')
+    
+    team_stats['pts_std_10'] = team_stats.groupby('team')['pts'].transform(
+        lambda x: x.rolling(window=10, min_periods=5).std().shift(1)
+    )
+    
+    home_std = team_stats[['date', 'team', 'pts_std_10']].rename(
+        columns={'team': 'home_team', 'pts_std_10': 'home_scoring_std_10'}
+    ).drop_duplicates(subset=['date', 'home_team'])
+    
+    away_std = team_stats[['date', 'team', 'pts_std_10']].rename(
+        columns={'team': 'away_team', 'pts_std_10': 'away_scoring_std_10'}
+    ).drop_duplicates(subset=['date', 'away_team'])
+    
+    df = pd.merge(df, home_std, on=['date', 'home_team'], how='left')
+    df = pd.merge(df, away_std, on=['date', 'away_team'], how='left')
+    
+    df['home_scoring_std_10'] = df['home_scoring_std_10'].fillna(10.0)
+    df['away_scoring_std_10'] = df['away_scoring_std_10'].fillna(10.0)
+    
+    return df
+
+
+def add_shooting_luck_features(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Add Shooting Luck features (Mean Reversion Detection).
+    
+    Generates:
+    - home_shooting_luck_ts/efg: Short-term - Long-term shooting %
+    - away_shooting_luck_ts/efg: Same for away team
+    - home_shooting_luck: Composite luck score
+    - away_shooting_luck: Composite luck score
+    """
+    ts_cols = ['home_rolling_5_ts_pct', 'home_rolling_30_ts_pct',
+               'away_rolling_5_ts_pct', 'away_rolling_30_ts_pct']
+    efg_cols = ['home_rolling_5_efg_pct', 'home_rolling_30_efg_pct',
+                'away_rolling_5_efg_pct', 'away_rolling_30_efg_pct']
+    
+    if all(col in df.columns for col in ts_cols):
+        df['home_shooting_luck_ts'] = (
+            df['home_rolling_5_ts_pct'].fillna(0) - df['home_rolling_30_ts_pct'].fillna(0)
+        )
+        df['away_shooting_luck_ts'] = (
+            df['away_rolling_5_ts_pct'].fillna(0) - df['away_rolling_30_ts_pct'].fillna(0)
+        )
+    else:
+        df['home_shooting_luck_ts'] = 0.0
+        df['away_shooting_luck_ts'] = 0.0
+    
+    if all(col in df.columns for col in efg_cols):
+        df['home_shooting_luck_efg'] = (
+            df['home_rolling_5_efg_pct'].fillna(0) - df['home_rolling_30_efg_pct'].fillna(0)
+        )
+        df['away_shooting_luck_efg'] = (
+            df['away_rolling_5_efg_pct'].fillna(0) - df['away_rolling_30_efg_pct'].fillna(0)
+        )
+    else:
+        df['home_shooting_luck_efg'] = 0.0
+        df['away_shooting_luck_efg'] = 0.0
+    
+    df['home_shooting_luck'] = (
+        (df['home_shooting_luck_ts'] + df['home_shooting_luck_efg']) / 2
+    ).fillna(0)
+    df['away_shooting_luck'] = (
+        (df['away_shooting_luck_ts'] + df['away_shooting_luck_efg']) / 2
+    ).fillna(0)
+    
+    return df
+
+
+def prepare_advanced_features_only(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Modular Feature Engineering - ADVANCED STEPS ONLY.
+    
+    Assumes BASE features (Pace, Four Factors, Rolling Stats) are already present.
+    
+    Adds:
+    - Advanced Pace (projected_pace, pace_mismatch)
+    - Matchup Efficiency (off_matchup_*, eff_sum)
+    - Volatility (scoring_std_10)
+    - Shooting Luck (regression to mean detection)
+    """
+    logger.info("⚡ Applying ADVANCED Features Only...")
+    
+    initial_cols = df.shape[1]
+    
+    steps = [
+        ("8️⃣ Advanced Pace", add_advanced_pace_features),
+        ("9️⃣ Matchup Efficiency", add_matchup_efficiency_features),
+        ("🔟 Volatility & Trends", add_volatility_features),
+        ("1️⃣1️⃣ Shooting Luck", add_shooting_luck_features),
+    ]
+    
+    for step_name, step_func in steps:
+        logger.info(f"   {step_name}")
+        try:
+            df = step_func(df)
+        except Exception as e:
+            logger.error(f"      ❌ FAILED: {e}")
+    
+    added = df.shape[1] - initial_cols
+    logger.info(f"   ✅ Added {added} advanced features (total: {df.shape[1]})")
+    
     return df

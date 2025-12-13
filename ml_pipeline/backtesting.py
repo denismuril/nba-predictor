@@ -6,6 +6,9 @@ from ml_pipeline.train_model import train_and_save_model
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 import joblib
 
+# FASE 3 FIX: Importar parâmetros centralizados (Single Source of Truth)
+from config.model_config import RF_PARAMS
+
 # Configurar logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -83,8 +86,9 @@ def run_backtest(test_days=14):
     X_test = X_test[X_train.columns]
     
     # Treinar Modelo
+    # FASE 3 FIX: Usar RF_PARAMS centralizado (idêntico ao train_model.py)
     from sklearn.ensemble import RandomForestClassifier
-    model = RandomForestClassifier(n_estimators=200, max_depth=8, random_state=42, n_jobs=-1)
+    model = RandomForestClassifier(**RF_PARAMS)
     model.fit(X_train, y_train)
     
     # Avaliar

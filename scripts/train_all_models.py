@@ -43,17 +43,16 @@ def train_moneyline():
         return None
 
 def train_spread():
+    """
+    NOTA: Modelo Spread desabilitado na limpeza de código (v21.7).
+    O arquivo train_spread_real.py foi removido por ser obsoleto.
+    O spread agora é calculado probabilisticamente a partir do Moneyline.
+    """
     logger.info("\n" + "="*60)
-    logger.info("📏 2. TREINANDO MODELO SPREAD (HANDICAP)")
+    logger.info("📏 2. MODELO SPREAD (DESABILITADO)")
     logger.info("="*60)
-    try:
-        from ml_pipeline.train_spread_real import train_spread_model_real
-        model, mae, rmse = train_spread_model_real()
-        logger.info(f"✅ Spread concluído! MAE: {mae:.2f}")
-        return mae
-    except Exception as e:
-        logger.error(f"❌ Erro no Spread: {e}")
-        return None
+    logger.info("ℹ️  Spread agora é calculado probabilisticamente (não precisa de modelo separado)")
+    return None  # Não treina mais, usa cálculo probabilístico
 
 def train_totals():
     logger.info("\n" + "="*60)
@@ -96,7 +95,7 @@ def main():
     if spread_mae:
         logger.info(f"✅ Spread MAE: {spread_mae:.2f} pontos")
     else:
-        logger.info(f"❌ Spread: Falhou")
+        logger.info("ℹ️  Spread: Desabilitado (cálculo probabilístico)")
         
     if totals_mae:
         logger.info(f"✅ Totals MAE: {totals_mae:.2f} pontos")
