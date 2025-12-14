@@ -20,7 +20,7 @@ from betting.web_ui import render_bankroll_management
 
 # Configuração da Página
 st.set_page_config(
-    page_title="NBA Predictor v21.6 - Telegram Bot Fix",
+    page_title="NBA Predictor v22.0 - Enterprise Edition",
     page_icon="🏀",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -28,7 +28,7 @@ st.set_page_config(
 
 # Sidebar
 with st.sidebar:
-    st.header("🏀 NBA Predictor")
+    st.header("🏀 NBA Predictor v22.0")
 
     # Status do Sistema
     st.subheader("🖥️ Status do Sistema")
@@ -37,7 +37,7 @@ with st.sidebar:
     with col1:
         st.metric("Banco de Dados", "Online", delta_color="normal")
     with col2:
-        st.metric("Modelos V6/V18", "Ativos", delta_color="normal")
+        st.metric("Modelos", "v22.0 ✓", delta_color="normal")
 
     last_update = datetime.now().strftime("%H:%M")
     st.text(f"Última Atualização: {last_update}")

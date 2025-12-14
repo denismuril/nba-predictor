@@ -1,16 +1,58 @@
-# 🏀 NBA Predictor v22.0 - Enterprise Edition
+# 🏀 NBA Predictor v23.0 - Grande Integração Enterprise
 
 [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-orange.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/status-production-brightgreen.svg)]()
 [![ML](https://img.shields.io/badge/ML-Ensemble%20V6-purple.svg)]()
 [![Bot](https://img.shields.io/badge/Telegram-Sniper%20Bot-blue.svg)]()
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Ready-blue.svg)]()
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue.svg)]()
 [![Redis](https://img.shields.io/badge/Redis-7.0-red.svg)]()
-[![Docker](https://img.shields.io/badge/docker-ready-blue.svg)](Dockerfile)
+[![Prefect](https://img.shields.io/badge/Prefect-2.0-blue.svg)]()
+[![MLflow](https://img.shields.io/badge/MLflow-Tracking-green.svg)]()
+[![Docker](https://img.shields.io/badge/docker-compose-blue.svg)](docker-compose.yml)
 [![Season](https://img.shields.io/badge/Season-2025--26-orange.svg)]()
 
-Sistema profissional de análise quantitativa e previsão de jogos da NBA usando **Advanced Machine Learning (Ensemble V6)**, **PostgreSQL + Redis**, **Circuit Breakers**, **Rate Limiters**, **NLP Sentiment Analysis**, **PBP Clean Metrics**, **Bot Sniper com Alertas EV** e **SafeKelly Bankroll Management**.
+Sistema profissional de análise quantitativa e previsão de jogos da NBA usando **Advanced Machine Learning (Ensemble V6)**, **PostgreSQL + Redis**, **Prefect + MLflow**, **Sniper Engine (Monitor de Odds em Tempo Real)**, **Circuit Breakers**, **Rate Limiters**, **NLP Sentiment Analysis**, **PBP Clean Metrics**, **Bot Sniper com Alertas EV** e **SafeKelly Bankroll Management**.
+
+---
+
+## 🎉 Destaques v23.0 (14 Dez 2025) - **Grande Integração Enterprise**
+
+### 🚀 A Grande Fusão
+
+A infraestrutura Enterprise foi totalmente integrada ao fluxo principal. O sistema agora opera como uma verdadeira **House Grade System**.
+
+### ✅ O Que Mudou
+
+| Antes (v22) | Depois (v23) |
+|-------------|--------------|
+| subprocess.run para scripts | Prefect flows nativos |
+| db_manager síncrono | AsyncDataManager async |
+| Cache em JSON/CSV | Redis com TTLs |
+| Sem monitoramento | Sniper Engine 24/7 |
+
+### 🎯 Sniper Engine - Detecção de Valor em Tempo Real
+
+```python
+# Novo: betting/sniper_engine.py
+# - Monitora Redis a cada 30 segundos
+# - Detecta Edge > 5%  → Alerta via Telegram
+# - Calcula Fair Price via FeatureStore
+# - Stake recomendado via Kelly Criterion
+```
+
+### 🐳 Docker Compose Full Stack
+
+```bash
+docker-compose up -d
+# Serviços: PostgreSQL | Redis | Prefect | MLflow | Web | Sniper | Telegram
+```
+
+| Serviço | Porta | Descrição |
+|---------|-------|-----------|
+| Web (Streamlit) | 8501 | Dashboard principal |
+| Prefect UI | 4200 | Orquestração de workflows |
+| MLflow | 5000 | Tracking de modelos |
 
 ---
 
@@ -460,11 +502,11 @@ Este software é para fins educacionais e de pesquisa. O autor não se responsab
 
 ## 📞 Suporte
 
-**Versão:** v22.0 (Enterprise Edition)  
+**Versão:** v23.0 (Grande Integração Enterprise)  
 **Status:** ✅ Production Ready  
 **Temporada:** 2025-26  
 **Última Atualização:** 14 Dezembro 2025  
-**Novidades:** Infraestrutura Enterprise com PostgreSQL, Redis, Circuit Breakers e Rate Limiters.
+**Novidades:** Orchestrator async com Prefect nativo, Sniper Engine para monitoramento de odds em tempo real, Docker Compose com PostgreSQL + Redis + Prefect + MLflow.
 
 **Documentação Adicional:**
 

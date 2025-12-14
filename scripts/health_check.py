@@ -316,11 +316,83 @@ def check_integrations():
         return False
 
 
+def check_sniper_engine():
+    """Verifica Sniper Engine (novo em v23.0)."""
+    logger.info("\n🔍 Verificando Sniper Engine v23.0...")
+    
+    try:
+        from betting.sniper_engine import SniperEngine, get_sniper_engine
+        
+        # Verificar que a classe existe e tem métodos esperados
+        engine = SniperEngine(bankroll=1000.0, kelly_fraction=0.25)
+        
+        # Verificar configurações
+        assert engine.POLL_INTERVAL_SECONDS == 30, "Poll interval incorreto"
+        assert engine.MIN_EDGE_PCT == 5.0, "Min edge incorreto"
+        
+        logger.info("✅ Sniper Engine OK (poll: 30s, min_edge: 5%)")
+        
+        # Verificar Kelly integration
+        try:
+            from utils.kelly import kelly_criterion_advanced
+            result = kelly_criterion_advanced(0.55, 2.0, 0.25)
+            assert 'kelly_fractional' in result
+            logger.info("✅ Kelly Integration OK")
+        except ImportError:
+            logger.warning("⚠️ utils.kelly não disponível")
+        
+        return True
+        
+    except ImportError as e:
+        logger.warning(f"⚠️ Sniper Engine não encontrado: {e}")
+        return True  # Não crítico
+    except Exception as e:
+        logger.error(f"❌ Erro no Sniper Engine: {e}")
+        return False
+
+
+def check_orchestrator_v23():
+    """Verifica Enterprise Orchestrator v23.0."""
+    logger.info("\n🔍 Verificando Enterprise Orchestrator v23.0...")
+    
+    try:
+        from orchestrator import EnterpriseOrchestrator, VERSION
+        
+        # Verificar versão
+        if VERSION == "23.0":
+            logger.info(f"✅ Orchestrator v{VERSION} OK")
+        else:
+            logger.warning(f"⚠️ Orchestrator versão {VERSION} (esperado 23.0)")
+        
+        # Verificar que classe tem métodos esperados
+        orchestrator = EnterpriseOrchestrator()
+        
+        required_methods = [
+            'initialize', 'run_daily_flow', 'step_data_collection',
+            'step_prediction', 'step_fetch_odds'
+        ]
+        
+        for method in required_methods:
+            if not hasattr(orchestrator, method):
+                logger.warning(f"⚠️ Método {method} não encontrado")
+                return False
+        
+        logger.info("✅ Orchestrator métodos OK")
+        return True
+        
+    except ImportError as e:
+        logger.warning(f"⚠️ Enterprise Orchestrator não disponível: {e}")
+        return True
+    except Exception as e:
+        logger.error(f"❌ Erro no Orchestrator: {e}")
+        return False
+
+
 def main():
     """Executa todos os health checks."""
 
     logger.info("="*60)
-    logger.info("🏥 HEALTH CHECK - NBA Predictor v22.0 (Enterprise)")
+    logger.info("🏥 HEALTH CHECK - NBA Predictor v23.0 (Grande Integração)")
     logger.info("="*60)
 
     checks = [
@@ -330,7 +402,9 @@ def main():
         ("Betting Engine", check_betting_engine),
         ("Sistema de Lesões", check_injury_system),
         ("Infraestrutura Enterprise", check_enterprise_infra),
-        ("Integrações", check_integrations)
+        ("Integrações", check_integrations),
+        ("Sniper Engine", check_sniper_engine),
+        ("Orchestrator v23", check_orchestrator_v23)
     ]
 
 

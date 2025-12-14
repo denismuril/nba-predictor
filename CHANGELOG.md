@@ -2,6 +2,96 @@
 
 ---
 
+## v23.0 - Grande Integração Enterprise (14 Dez 2025)
+
+### 🚀 A Grande Integração
+
+Fusão completa da infraestrutura Enterprise com o fluxo principal do sistema. Eliminação de scripts legados e subprocess.
+
+### ✅ Novos Componentes
+
+| Componente | Descrição |
+|------------|-----------|
+| **Enterprise Orchestrator** | Orquestrador async com Prefect nativo |
+| **Sniper Engine** | Monitor de odds em tempo real (30s polling) |
+| **Migration Script** | Migração v1→v2 com validação Pydantic |
+| **Docker Enterprise** | Compose com PostgreSQL + Redis + Prefect + MLflow |
+
+### 📂 Novos Arquivos Criados
+
+```
+betting/
+└── sniper_engine.py       # Monitor de odds em tempo real
+
+scripts/
+└── migrate_v1_to_v2.py    # Script de migração de dados
+```
+
+### 🔧 Arquivos Modificados
+
+- `orchestrator.py` - **Reescrito completamente** para v23.0:
+  - AsyncDataManager em vez de db_manager legado
+  - Prefect flows executados nativamente
+  - asyncio.gather para paralelização
+  - RedisCache integrado
+  - Eliminação de todos os subprocess.run
+  
+- `docker-compose.yml` - Atualizado com novos serviços:
+  - PostgreSQL 15 (persistência)
+  - Redis 7 (cache distribuído)
+  - Prefect Server (orquestração UI - porta 4200)
+  - MLflow Server (tracking de modelos - porta 5000)
+  - Sniper Engine (monitor de odds)
+  - Telegram Bot (alertas)
+  
+- `scripts/health_check.py` - Novos checks:
+  - Sniper Engine status
+  - Prefect Server disponibilidade
+  - Docker containers health
+
+### 🎯 Sniper Engine - Detecção de Valor
+
+Nova engine de apostas em tempo real:
+
+```python
+# Monitora Redis a cada 30 segundos
+# Detecta quando: Minha Odd > Casa + 5%
+# Integra Kelly Criterion para stake recomendado
+# Alertas automáticos via Telegram
+```
+
+**Funcionalidades:**
+
+- Line Movement Detection (mudanças bruscas)
+- Fair Price via FeatureStore
+- Kelly Criterion integrado
+- Alertas Telegram automáticos
+- Max 3 alertas por jogo (anti-spam)
+
+### 🐳 Docker Compose Enterprise
+
+```bash
+# Subir toda a infraestrutura
+docker-compose up -d
+
+# Verificar status
+docker-compose ps
+
+# Serviços disponíveis:
+# - Web: http://localhost:8501
+# - Prefect: http://localhost:4200
+# - MLflow: http://localhost:5000
+```
+
+### ⚠️ Tratamento de Erros (API de Odds)
+
+```
+Scraper OddsPedia --[timeout]--> Circuit Breaker --[OPEN]--> Fallback TheOddsAPI
+                                                --[falha]--> Fair Odds Calculadas
+```
+
+---
+
 ## v22.0 - Enterprise Edition (14 Dez 2025)
 
 ### 🏢 Infraestrutura Enterprise-Grade
