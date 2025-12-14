@@ -40,6 +40,16 @@ plotly>=5.17.0
 
 # Database
 sqlalchemy>=2.0.0
+asyncpg>=0.29.0
+aiosqlite>=0.19.0
+redis>=5.0.0
+psycopg2-binary>=2.9.0
+
+# Validation
+pydantic>=2.5.0
+
+# Orchestration (opcional)
+prefect>=2.14.0
 
 # Configuration
 python-dotenv>=1.0.0

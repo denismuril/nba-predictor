@@ -2,15 +2,73 @@
 
 ---
 
+## v22.0 - Enterprise Edition (14 Dez 2025)
+
+### 🏢 Infraestrutura Enterprise-Grade
+
+A maior atualização do sistema! Migração completa para arquitetura distribuída com PostgreSQL, Redis e padrões de resiliência.
+
+### ✅ Novos Componentes
+
+| Componente | Descrição |
+|------------|-----------|
+| **PostgreSQL** | Banco de dados principal (2820 jogos migrados) |
+| **Redis 7.0** | Cache distribuído para lesões, bankroll e rate limiting |
+| **AsyncDataManager** | Operações assíncronas com SQLAlchemy + asyncpg |
+| **Circuit Breakers** | 3 registrados para resiliência de APIs |
+| **Rate Limiters** | 6 APIs com controle de taxa via Redis |
+| **Logs Estruturados** | Formato JSON para observabilidade |
+| **Feature Store** | Point-in-time correctness para ML |
+| **Dead Letter Queue** | Tratamento de falhas de validação |
+
+### 📂 Novos Arquivos Criados
+
+```
+infrastructure/
+├── __init__.py
+├── database.py          # AsyncDataManager
+├── redis_cache.py       # RedisCache
+├── circuit_breaker.py   # CircuitBreaker
+├── rate_limiter.py      # DistributedRateLimiter
+└── logging_config.py    # Logs JSON
+
+feature_store/
+├── __init__.py
+└── store.py             # FeatureStore
+
+etl/
+├── __init__.py
+├── schemas/__init__.py  # Pydantic Schemas
+├── dead_letter_queue.py # DLQ
+└── flows/daily_data_flow.py
+```
+
+### 🔧 Arquivos Modificados
+
+- `orchestrator.py` - Integrado logs estruturados e Circuit Breakers
+- `scripts/health_check.py` - Adicionado `check_enterprise_infra()`
+- `data/scrapers/odds_scraper.py` - Integrado Rate Limiter
+- `requirements.txt` - Novas deps: asyncpg, aiosqlite, redis, pydantic, prefect
+- `.env` - Configurações de PostgreSQL e Redis
+
+### 🗑️ Limpeza Realizada
+
+- Removidos bancos SQLite antigos (`nba_predictor.db`, `data/nba_games.db`)
+- Removida pasta `deprecated/` e backup
+- Removidos 38 modelos antigos de `data/models/backup_old/`
+- Removidos arquivos `.bak` de modelos
+
+---
+
 ## v21.13 - OddsPedia Scraper Stability Fix (13 Dez 2025)
 
 ### 🕷️ Correção de Scraper
+
 - **Timeout Fix:** Aumentado timeout de navegação para 60s e alterada estratégia de espera para `domcontentloaded` para evitar erros de `Timeout 30000ms exceeded`.
 - **Robustez:** Adicionado `wait_for_selector` explícito para garantir que o conteúdo dinâmico (jogos) foi carregado antes da extração.
 - **Debug:** Implementado dump automático de HTML (`debug_oddspedia.html`) quando nenhum jogo é encontrado, facilitando diagnóstico de falhas de seletor.
 
 ---
-
 
 ### 🏥 Integridade de Sistema Aprimorada
 

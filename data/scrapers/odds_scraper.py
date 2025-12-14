@@ -5,11 +5,14 @@ Hierarquia:
 1. TheOddsAPI (se API key disponível)
 2. Odds Shark scraping (backup)
 3. Default 1.90 (último recurso com WARNING)
+
+v22.0: Integração com Rate Limiter distribuído
 """
 
 import os
 import logging
 import requests
+import asyncio
 from typing import Dict, Optional, Any, List
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
@@ -25,6 +28,13 @@ except ImportError:
     logger = logging.getLogger(__name__)
     # Logger será definido abaixo, ignorar aqui
 
+# Rate Limiter Enterprise (v22.0)
+try:
+    from infrastructure.rate_limiter import get_rate_limiter
+    RATE_LIMITER_AVAILABLE = True
+except ImportError:
+    RATE_LIMITER_AVAILABLE = False
+
 # CRITICAL: Carregar .env no escopo global
 # Isso garante que as variáveis estejam disponíveis independente de quem importou
 load_dotenv()
@@ -33,6 +43,25 @@ logger = logging.getLogger(__name__)
 
 # Mapeamento inverso para converter abreviações para nomes completos
 ABBREV_TO_FULL = {v: k for k, v in TEAM_ABBREV_MAP.items()}
+
+
+async def _acquire_rate_limit(api_name: str) -> bool:
+    """Tenta adquirir permissão do rate limiter."""
+    if not RATE_LIMITER_AVAILABLE:
+        return True
+    try:
+        limiter = await get_rate_limiter()
+        return await limiter.wait_and_acquire(api_name, max_wait=10)
+    except Exception:
+        return True  # Se falhar, permitir requisição
+
+
+def acquire_rate_limit_sync(api_name: str) -> bool:
+    """Wrapper síncrono para rate limiting."""
+    try:
+        return asyncio.run(_acquire_rate_limit(api_name))
+    except Exception:
+        return True
 
 
 class OddsValidator:

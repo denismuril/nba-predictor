@@ -1,11 +1,16 @@
 """
-NBA Predictor Orchestrator
+NBA Predictor Orchestrator v22.0 (Enterprise)
 Gerencia o fluxo diário de execução:
 1. Coleta de Dados (Async)
 2. Validação
 3. Treinamento (Opcional)
 4. Previsão
 5. Atualização de Dashboard
+
+NOVIDADES v22.0:
+- Integração com Circuit Breaker
+- Logging estruturado
+- Rate Limiter para APIs
 """
 import sys
 import logging
@@ -22,16 +27,28 @@ from data.repositories.db_manager import get_db_manager
 from data.scrapers.stats_scraper import obter_player_stats
 from data.scrapers.async_scraper import AsyncScraper
 
-# Configuração de Logs
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler("logs/orchestrator.log"),
-        logging.StreamHandler()
-    ]
-)
+# Configuração de Logs (com fallback para enterprise)
+try:
+    from infrastructure.logging_config import setup_structured_logging
+    setup_structured_logging(level="INFO", json_file="logs/orchestrator.jsonl")
+except ImportError:
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        handlers=[
+            logging.FileHandler("logs/orchestrator.log"),
+            logging.StreamHandler()
+        ]
+    )
 logger = logging.getLogger("Orchestrator")
+
+# Circuit Breaker (opcional)
+try:
+    from infrastructure.circuit_breaker import CircuitBreakerRegistry
+    CIRCUIT_BREAKER_ENABLED = True
+except ImportError:
+    CIRCUIT_BREAKER_ENABLED = False
+
 
 class PipelineOrchestrator:
     def __init__(self):

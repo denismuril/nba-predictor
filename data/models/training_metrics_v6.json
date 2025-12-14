@@ -1,7 +1,7 @@
 {
-  "cv_accuracy_mean": 0.6786355475763016,
-  "cv_accuracy_std": 0.13572995921889427,
-  "calibrated_accuracy": 0.6714285714285714,
+  "cv_accuracy_mean": 0.8272890484739678,
+  "cv_accuracy_std": 0.09356006147871224,
+  "calibrated_accuracy": 0.6619047619047619,
   "n_features": 127,
   "n_samples_train": 3132,
   "n_samples_calib": 210,

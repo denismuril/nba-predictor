@@ -189,6 +189,98 @@ def check_injury_system():
         logger.error(f"❌ Erro no sistema de lesões: {e}")
         return False
 
+def check_enterprise_infra():
+    """Verifica infraestrutura enterprise (PostgreSQL, Redis, Circuit Breaker)."""
+    logger.info("\n🔍 Verificando infraestrutura enterprise v22.0...")
+    
+    all_ok = True
+    
+    # 1. Async Database Manager
+    try:
+        import asyncio
+        from infrastructure.database import get_async_db
+        
+        async def test_db():
+            db = await get_async_db()
+            return await db.health_check()
+        
+        health = asyncio.run(test_db())
+        
+        if health['status'] == 'healthy':
+            logger.info(f"✅ AsyncDataManager OK ({health.get('db_type', 'N/A')})")
+        else:
+            logger.warning(f"⚠️ AsyncDataManager: {health.get('error', 'Erro desconhecido')}")
+            all_ok = False
+    except ImportError:
+        logger.info("ℹ️  infrastructure.database não instalado (opcional)")
+    except Exception as e:
+        logger.warning(f"⚠️ AsyncDataManager: {e}")
+        all_ok = False
+    
+    # 2. Redis Cache
+    try:
+        import asyncio
+        from infrastructure.redis_cache import get_redis
+        
+        async def test_redis():
+            redis = await get_redis()
+            return await redis.health_check()
+        
+        health = asyncio.run(test_redis())
+        
+        if health['status'] == 'healthy':
+            logger.info(f"✅ Redis OK (v{health.get('redis_version', 'N/A')}, {health.get('keys_count', 0)} keys)")
+        elif health['status'] == 'disconnected':
+            logger.info("ℹ️  Redis não conectado (opcional, usando fallback local)")
+        else:
+            logger.warning(f"⚠️ Redis: {health.get('message', 'Erro')}")
+    except ImportError:
+        logger.info("ℹ️  infrastructure.redis_cache não instalado (opcional)")
+    except Exception as e:
+        logger.info(f"ℹ️  Redis não disponível (opcional): {e}")
+    
+    # 3. Circuit Breaker Registry
+    try:
+        from infrastructure.circuit_breaker import CircuitBreakerRegistry
+        
+        stats = CircuitBreakerRegistry.get_all_stats()
+        open_circuits = [name for name, s in stats.items() if s.get('state') == 'open']
+        
+        if open_circuits:
+            logger.warning(f"⚠️ Circuits ABERTOS: {open_circuits}")
+            all_ok = False
+        else:
+            logger.info(f"✅ Circuit Breakers OK ({len(stats)} registrados)")
+    except ImportError:
+        logger.info("ℹ️  infrastructure.circuit_breaker não instalado (opcional)")
+    except Exception as e:
+        logger.warning(f"⚠️ Circuit Breakers: {e}")
+    
+    # 4. Rate Limiter
+    try:
+        from infrastructure.rate_limiter import get_rate_limiter
+        import asyncio
+        
+        async def test_limiter():
+            limiter = await get_rate_limiter()
+            return limiter.get_stats()
+        
+        stats = asyncio.run(test_limiter())
+        logger.info(f"✅ Rate Limiter OK ({len(stats)} APIs configuradas)")
+    except ImportError:
+        logger.info("ℹ️  infrastructure.rate_limiter não instalado (opcional)")
+    except Exception as e:
+        logger.info(f"ℹ️  Rate Limiter não disponível: {e}")
+    
+    # 5. Prefect (opcional)
+    try:
+        import prefect
+        logger.info(f"✅ Prefect instalado (v{prefect.__version__})")
+    except ImportError:
+        logger.info("ℹ️  Prefect não instalado (opcional)")
+    
+    return all_ok
+
 
 def check_integrations():
     """Verifica integrações externas e novos módulos."""
@@ -226,7 +318,7 @@ def main():
     """Executa todos os health checks."""
 
     logger.info("="*60)
-    logger.info("🏥 HEALTH CHECK - NBA Predictor v21.5")
+    logger.info("🏥 HEALTH CHECK - NBA Predictor v22.0 (Enterprise)")
     logger.info("="*60)
 
     checks = [
@@ -235,6 +327,7 @@ def main():
         ("Fórmulas NBA", check_formulas),
         ("Betting Engine", check_betting_engine),
         ("Sistema de Lesões", check_injury_system),
+        ("Infraestrutura Enterprise", check_enterprise_infra),
         ("Integrações", check_integrations)
     ]
 

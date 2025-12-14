@@ -1,30 +1,45 @@
-# 🏀 NBA Predictor v21.11 - Scraping First
+# 🏀 NBA Predictor v22.0 - Enterprise Edition
 
 [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-orange.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/status-production-brightgreen.svg)]()
 [![ML](https://img.shields.io/badge/ML-Ensemble%20V6-purple.svg)]()
 [![Bot](https://img.shields.io/badge/Telegram-Sniper%20Bot-blue.svg)]()
-[![PBP](https://img.shields.io/badge/PBP-Clean%20Metrics-red.svg)]()
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Ready-blue.svg)]()
+[![Redis](https://img.shields.io/badge/Redis-7.0-red.svg)]()
 [![Docker](https://img.shields.io/badge/docker-ready-blue.svg)](Dockerfile)
 [![Season](https://img.shields.io/badge/Season-2025--26-orange.svg)]()
 
-Sistema profissional de análise quantitativa e previsão de jogos da NBA usando **Advanced Machine Learning (Ensemble V6)**, **NLP Sentiment Analysis**, **PBP Clean Metrics (No Garbage Time)**, **Bot Sniper com Alertas EV**, **SafeKelly Bankroll Management** e **Multi-source data validation**.
+Sistema profissional de análise quantitativa e previsão de jogos da NBA usando **Advanced Machine Learning (Ensemble V6)**, **PostgreSQL + Redis**, **Circuit Breakers**, **Rate Limiters**, **NLP Sentiment Analysis**, **PBP Clean Metrics**, **Bot Sniper com Alertas EV** e **SafeKelly Bankroll Management**.
+
+---
+
+## 🎉 Destaques v22.0 (14 Dez 2025) - **Enterprise Edition**
+
+### 🏢 Infraestrutura Enterprise-Grade
+
+- ✅ **PostgreSQL:** Migração completa do SQLite para PostgreSQL (2820 jogos migrados).
+- ✅ **Redis Cache:** Cache distribuído v7.0 para lesões, bankroll e rate limiting.
+- ✅ **Circuit Breakers:** 3 circuit breakers registrados para resiliência de APIs externas.
+- ✅ **Rate Limiters:** 6 APIs configuradas com controle de taxa distribuído via Redis.
+- ✅ **Logs Estruturados:** Formato JSON para observabilidade em produção.
+- ✅ **AsyncDataManager:** Operações de banco de dados completamente assíncronas.
+
+### 📦 Novos Módulos
+
+| Módulo | Descrição |
+|--------|-----------|
+| `infrastructure/database.py` | AsyncDataManager com SQLAlchemy + asyncpg |
+| `infrastructure/redis_cache.py` | Cache Redis com TTLs configuráveis |
+| `infrastructure/circuit_breaker.py` | Padrão Circuit Breaker para resiliência |
+| `infrastructure/rate_limiter.py` | Rate Limiter distribuído (Token Bucket) |
+| `infrastructure/logging_config.py` | Logs estruturados em JSON |
+| `feature_store/store.py` | Feature Store com point-in-time correctness |
+| `etl/dead_letter_queue.py` | DLQ para falhas de validação |
 
 ---
 
 ## 🎉 Destaques v21.12 (13 Dez 2025) - **Health Check Enhanced**
-
-### 🏥 Monitoramento de Integridade Completo
-
-- ✅ **Full System Scan:** O `health_check.py` agora cobre 100% das novas integrações (Playwright, PBPStats, Odds Scraper).
-- ✅ **Integration Validation:** Validação automática de dependências críticas antes da execução em produção.
-- ✅ **Linting & Standards:** Código de monitoramento padronizado e livre de erros de estilo.
-- ✅ **Stability:** Garantia de que todos os subsistemas essenciais estão operacionais antes do início do pipeline.
-
----
-
-## 🎉 Destaques v21.11 (13 Dez 2025) - **Scraping First Strategy**
 
 ### 🕷️ Odds Gratuits com Scraper Web
 
@@ -331,6 +346,18 @@ nba-predictor/
 ├── data/                      # Dados, Scrapers e Repositórios
 │   ├── scrapers/              # Coleta de dados (NBA API, ESPN, Odds)
 │   └── models/                # Modelos treinados (.joblib)
+├── infrastructure/            # 🏢 Enterprise v22.0
+│   ├── database.py            # AsyncDataManager (PostgreSQL/SQLite)
+│   ├── redis_cache.py         # RedisCache com TTLs
+│   ├── circuit_breaker.py     # Circuit Breaker para resiliência
+│   ├── rate_limiter.py        # Rate Limiter distribuído
+│   └── logging_config.py      # Logs estruturados JSON
+├── feature_store/             # Feature Store
+│   └── store.py               # Point-in-time correctness
+├── etl/                       # ETL Pipeline
+│   ├── schemas/               # Pydantic Schemas
+│   ├── dead_letter_queue.py   # DLQ para falhas
+│   └── flows/                 # Prefect Flows
 ├── ml_pipeline/               # Pipeline de Machine Learning
 │   ├── train_ensemble_v6.py   # ⭐ Modelo Principal (V6)
 │   ├── train_spread_real.py   # Modelo de Spread
@@ -341,6 +368,7 @@ nba-predictor/
 ├── interfaces/                # Outras interfaces (CLI)
 ├── utils/                     # Utilitários (Kelly, Logs, Validação)
 ├── nba_predictor_web.py       # Dashboard Streamlit
+├── orchestrator.py            # Pipeline Orquestrador
 ├── main.py                    # Entry point CLI
 └── requirements.txt
 ```
@@ -432,11 +460,11 @@ Este software é para fins educacionais e de pesquisa. O autor não se responsab
 
 ## 📞 Suporte
 
-**Versão:** v21.12 (Health Check Enhanced)  
+**Versão:** v22.0 (Enterprise Edition)  
 **Status:** ✅ Production Ready  
 **Temporada:** 2025-26  
-**Última Atualização:** 13 Dezembro 2025  
-**Novidades:** Health Check abrangente de novas integrações de scraping e stats.
+**Última Atualização:** 14 Dezembro 2025  
+**Novidades:** Infraestrutura Enterprise com PostgreSQL, Redis, Circuit Breakers e Rate Limiters.
 
 **Documentação Adicional:**
 
