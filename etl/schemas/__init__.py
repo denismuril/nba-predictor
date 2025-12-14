@@ -4,10 +4,10 @@ Schemas Pydantic - Validação de Dados de Entrada
 Schemas para validação robusta de dados da NBA.
 Dados inválidos são rejeitados e vão para Dead Letter Queue.
 
-Autor: NBA Predictor v22.0
+Autor: NBA Predictor v23.0 (Pydantic v2)
 """
 
-from pydantic import BaseModel, Field, validator, root_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 from typing import Optional, List, Dict, Any
 from datetime import date, datetime
 from enum import Enum
@@ -16,9 +16,14 @@ from enum import Enum
 # ============= CONSTANTES =============
 
 VALID_NBA_TEAMS = {
+    # Times oficiais
     'ATL', 'BOS', 'BKN', 'CHA', 'CHI', 'CLE', 'DAL', 'DEN', 'DET', 'GSW',
     'HOU', 'IND', 'LAC', 'LAL', 'MEM', 'MIA', 'MIL', 'MIN', 'NOP', 'NYK',
-    'OKC', 'ORL', 'PHI', 'PHX', 'POR', 'SAC', 'SAS', 'TOR', 'UTA', 'WAS'
+    'OKC', 'ORL', 'PHI', 'PHX', 'POR', 'SAC', 'SAS', 'TOR', 'UTA', 'WAS',
+    # Aliases alternativos (ESPN, Basketball Reference, etc.)
+    'BRK',  # Brooklyn Nets (alias de BKN)
+    'CHO',  # Charlotte Hornets (alias de CHA) 
+    'PHO',  # Phoenix Suns (alias de PHX)
 }
 
 
@@ -68,16 +73,18 @@ class GameSchema(BaseModel):
     status: GameStatus = Field(default=GameStatus.SCHEDULED)
     season: Optional[str] = Field(None, pattern=r'^\d{4}-\d{2}$')
     
-    @validator('home_team', 'away_team')
-    def validate_team(cls, v):
+    @field_validator('home_team', 'away_team')
+    @classmethod
+    def validate_team(cls, v: str) -> str:
         """Valida se o time é uma equipe válida da NBA"""
         v = v.upper().strip()
         if v not in VALID_NBA_TEAMS:
             raise ValueError(f"Time inválido: '{v}'. Deve ser um dos: {', '.join(sorted(VALID_NBA_TEAMS))}")
         return v
     
-    @validator('date')
-    def validate_date(cls, v):
+    @field_validator('date')
+    @classmethod
+    def validate_date(cls, v: str) -> str:
         """Valida se a data é uma data válida"""
         try:
             datetime.strptime(v, '%Y-%m-%d')
@@ -85,16 +92,12 @@ class GameSchema(BaseModel):
             raise ValueError(f"Data inválida: '{v}'. Formato esperado: YYYY-MM-DD")
         return v
     
-    @root_validator
-    def validate_scores(cls, values):
+    @model_validator(mode='after')
+    def validate_scores(self):
         """Valida que se um placar existe, os dois devem existir"""
-        home = values.get('home_score')
-        away = values.get('away_score')
-        
-        if (home is None) != (away is None):
+        if (self.home_score is None) != (self.away_score is None):
             raise ValueError("Ambos os placares devem ser fornecidos ou nenhum")
-        
-        return values
+        return self
     
     class Config:
         use_enum_values = True
@@ -124,8 +127,9 @@ class OddsSchema(BaseModel):
     source: str = Field(default="unknown", description="Fonte das odds")
     timestamp: Optional[datetime] = Field(default_factory=datetime.utcnow)
     
-    @validator('home_odds', 'away_odds')
-    def validate_odds(cls, v):
+    @field_validator('home_odds', 'away_odds')
+    @classmethod
+    def validate_odds(cls, v: float) -> float:
         """Valida odds dentro de limites realistas"""
         if v <= 1.0:
             raise ValueError(f"Odd inválida: {v}. Deve ser maior que 1.0")
@@ -133,21 +137,18 @@ class OddsSchema(BaseModel):
             raise ValueError(f"Odd muito alta: {v}. Máximo permitido: 100.0")
         return round(v, 2)
     
-    @root_validator
-    def validate_market_consistency(cls, values):
+    @model_validator(mode='after')
+    def validate_market_consistency(self):
         """Valida consistência do mercado (overround razoável)"""
-        home = values.get('home_odds')
-        away = values.get('away_odds')
-        
-        if home and away:
+        if self.home_odds and self.away_odds:
             # Calcula overround (margem da casa)
-            overround = (1/home + 1/away) * 100 - 100
+            overround = (1/self.home_odds + 1/self.away_odds) * 100 - 100
             
             # Overround típico: 2-10%
             if overround < -5 or overround > 30:
                 raise ValueError(f"Overround suspeito: {overround:.1f}%. Odds podem estar erradas")
         
-        return values
+        return self
     
     class Config:
         json_encoders = {
@@ -171,26 +172,23 @@ class PredictionSchema(BaseModel):
     confidence: Optional[str] = Field(None)
     predicted_spread: Optional[float] = Field(None, ge=-50.0, le=50.0)
     predicted_total: Optional[float] = Field(None, ge=150.0, le=300.0)
-    model_version: str = Field(default="v22.0")
+    model_version: str = Field(default="v23.0")
     
-    @validator('home_team', 'away_team')
-    def validate_team(cls, v):
+    @field_validator('home_team', 'away_team')
+    @classmethod
+    def validate_team(cls, v: str) -> str:
         v = v.upper().strip()
         if v not in VALID_NBA_TEAMS:
             raise ValueError(f"Time inválido: '{v}'")
         return v
     
-    @root_validator
-    def validate_probabilities(cls, values):
+    @model_validator(mode='after')
+    def validate_probabilities(self):
         """Valida que probabilidades somam ~100%"""
-        home = values.get('prob_home', 0)
-        away = values.get('prob_away', 0)
-        
-        total = home + away
+        total = self.prob_home + self.prob_away
         if not (0.98 <= total <= 1.02):
             raise ValueError(f"Probabilidades devem somar ~100%: {total*100:.1f}%")
-        
-        return values
+        return self
 
 
 # ============= SCHEMAS DE APOSTAS =============
@@ -213,15 +211,17 @@ class BetSchema(BaseModel):
     ev_pct: float = Field(..., ge=-100.0, le=500.0, description="Expected Value %")
     result: BetResult = Field(default=BetResult.PENDING)
     
-    @validator('stake_pct')
-    def validate_stake(cls, v):
+    @field_validator('stake_pct')
+    @classmethod
+    def validate_stake(cls, v: float) -> float:
         """Limite de stake para gestão de risco"""
         if v > 0.25:
             raise ValueError(f"Stake muito alto: {v*100:.1f}%. Máximo: 25%")
         return v
     
-    @validator('ev_pct')
-    def validate_ev(cls, v):
+    @field_validator('ev_pct')
+    @classmethod
+    def validate_ev(cls, v: float) -> float:
         """Valida que EV está em range razoável"""
         if v < -10:
             raise ValueError(f"EV muito negativo: {v:.1f}%. Aposta não recomendada")
@@ -246,8 +246,9 @@ class InjurySchema(BaseModel):
     source: str = Field(default="unknown")
     updated_at: Optional[datetime] = Field(default_factory=datetime.utcnow)
     
-    @validator('team')
-    def validate_team(cls, v):
+    @field_validator('team')
+    @classmethod
+    def validate_team(cls, v: str) -> str:
         v = v.upper().strip()
         if v not in VALID_NBA_TEAMS:
             raise ValueError(f"Time inválido: '{v}'")
@@ -268,16 +269,12 @@ class FeatureSchema(BaseModel):
     valid_to: Optional[datetime] = Field(None)
     version: str = Field(default="1.0")
     
-    @root_validator
-    def validate_dates(cls, values):
+    @model_validator(mode='after')
+    def validate_dates(self):
         """Valida que valid_from < valid_to"""
-        from_date = values.get('valid_from')
-        to_date = values.get('valid_to')
-        
-        if from_date and to_date and from_date >= to_date:
+        if self.valid_from and self.valid_to and self.valid_from >= self.valid_to:
             raise ValueError("valid_from deve ser anterior a valid_to")
-        
-        return values
+        return self
 
 
 # ============= HELPERS DE VALIDAÇÃO =============

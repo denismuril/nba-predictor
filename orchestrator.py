@@ -193,8 +193,8 @@ class EnterpriseOrchestrator:
         # Paralelizar coleta
         async def fetch_games():
             try:
-                from data.scrapers.schedule_scraper import get_todays_games
-                games = await asyncio.to_thread(get_todays_games, date)
+                from data.scrapers.schedule_scraper import obter_schedule
+                games = await asyncio.to_thread(obter_schedule, date)
                 return games or []
             except Exception as e:
                 logger.warning(f"Erro ao buscar jogos: {e}")
@@ -211,9 +211,17 @@ class EnterpriseOrchestrator:
         
         async def fetch_injuries():
             try:
-                from data.scrapers.injury_scraper_v2 import get_all_injuries
-                injuries = await asyncio.to_thread(get_all_injuries)
-                return injuries or {}
+                from data.scrapers.injury_scraper_v2 import InjuryManager
+                manager = InjuryManager()
+                injuries_list = await asyncio.to_thread(manager.get_latest_injuries)
+                # Agrupar por time
+                injuries = {}
+                for inj in injuries_list:
+                    team = inj.team if hasattr(inj, 'team') else inj.get('team', 'UNK')
+                    if team not in injuries:
+                        injuries[team] = []
+                    injuries[team].append(inj.to_dict() if hasattr(inj, 'to_dict') else inj)
+                return injuries
             except Exception as e:
                 logger.warning(f"Erro ao buscar lesões: {e}")
                 return {}
@@ -302,7 +310,7 @@ class EnterpriseOrchestrator:
             
             try:
                 # Treinar modelos de forma assíncrona
-                from ml_pipeline.train_all import train_all_models
+                from scripts.train_all_models import main as train_all_models
                 
                 await asyncio.to_thread(train_all_models)
                 
@@ -332,37 +340,44 @@ class EnterpriseOrchestrator:
         logger.info("🔮 Gerando previsões com ML (V18/V6)...")
         
         try:
-            from interfaces.cli import run_predictions
+            # Usar interfaces.cli.main diretamente
+            from interfaces.cli import main as run_cli_main
+            import sys
             
-            predictions = await asyncio.to_thread(run_predictions, use_ml=True)
+            # Salvar args originais
+            original_args = sys.argv
+            sys.argv = ['main.py', '--ml']  # Simular commando CLI
             
-            if predictions:
-                self.stats['predictions_generated'] = len(predictions)
-                logger.info(f"✅ {len(predictions)} previsões geradas")
-                
-                # Salvar no banco async se disponível
-                if self.db and hasattr(self.db, 'save_predictions'):
-                    await self.db.save_predictions(predictions)
-                
-                # Cachear no Redis
-                if self.redis:
-                    today = datetime.now().strftime('%Y-%m-%d')
-                    await self.redis.set_predictions(today, predictions)
-            
-            return predictions or []
-            
-        except ImportError:
-            logger.warning("⚠️ CLI não disponível - usando main.py direto")
-            # Fallback para execução direta
             try:
-                from core.prediction_engine import PredictionEngine
-                engine = PredictionEngine()
-                predictions = await asyncio.to_thread(engine.generate_predictions)
-                self.stats['predictions_generated'] = len(predictions) if predictions else 0
-                return predictions or []
-            except Exception as e:
-                logger.error(f"❌ Erro na predição: {e}")
-                return []
+                await asyncio.to_thread(run_cli_main)
+                logger.info("✅ Pipeline de predição executado")
+                
+                # Ler previsões geradas do arquivo CSV
+                predictions_file = Path('results') / f"predictions_{datetime.now().strftime('%Y-%m-%d')}.csv"
+                if predictions_file.exists():
+                    import pandas as pd
+                    df = pd.read_csv(predictions_file)
+                    predictions = df.to_dict('records')
+                    self.stats['predictions_generated'] = len(predictions)
+                    logger.info(f"✅ {len(predictions)} previsões carregadas")
+                    
+                    # Salvar no Redis se disponível
+                    if self.redis:
+                        today = datetime.now().strftime('%Y-%m-%d')
+                        await self.redis.set_predictions(today, predictions)
+                    
+                    return predictions
+            finally:
+                sys.argv = original_args
+            
+            return []
+            
+        except ImportError as e:
+            logger.warning(f"⚠️ CLI não disponível: {e}")
+            return []
+        except Exception as e:
+            logger.error(f"❌ Erro na predição: {e}")
+            return []
     
     async def step_fetch_odds(self) -> Dict[str, Any]:
         """
@@ -424,14 +439,20 @@ class EnterpriseOrchestrator:
         logger.info("⛹️ Gerando Player Props...")
         
         try:
-            from scripts.generate_player_props_quick import generate_props
+            # O script não tem função, é executado diretamente
+            # Usar exec para rodar o script
+            import runpy
             
-            result = await asyncio.to_thread(generate_props)
+            await asyncio.to_thread(
+                runpy.run_path,
+                'scripts/generate_player_props_quick.py',
+                run_name='__main__'
+            )
             logger.info("✅ Player props gerados com sucesso")
             return True
             
-        except ImportError:
-            logger.warning("⚠️ generate_player_props_quick não disponível")
+        except FileNotFoundError:
+            logger.warning("⚠️ generate_player_props_quick.py não encontrado")
             return True
         except Exception as e:
             logger.warning(f"⚠️ Erro ao gerar player props (não crítico): {e}")
@@ -526,11 +547,10 @@ class EnterpriseOrchestrator:
             # Inicialização
             await self.initialize()
             
-            # Pipeline principal
-            await self.run_step("Twitter Sentiment", self.step_twitter_collection)
+            # Pipeline principal (v23.0 - sem dependência de APIs pagas)
+            # NOTE: Twitter e Odds APIs removidos (requerem contratação)
             await self.run_step("Data Collection (ETL)", self.step_data_collection)
             await self.run_step("Model Training", self.step_model_training)
-            await self.run_step("Fetch Real Odds", self.step_fetch_odds)
             await self.run_step("Prediction Generation", self.step_prediction)
             await self.run_step("Player Props", self.step_generate_player_props)
             await self.run_step("Feature Store Update", self.step_update_feature_store)

@@ -64,9 +64,9 @@ async def fetch_games(date: str) -> List[Dict[str, Any]]:
     log.info(f"📅 Buscando jogos para {date}...")
     
     try:
-        from data.scrapers.schedule_scraper import get_todays_games
+        from data.scrapers.schedule_scraper import obter_schedule
         
-        games = get_todays_games(date)
+        games = obter_schedule(date)
         
         if not games:
             log.warning(f"⚠️ Nenhum jogo encontrado para {date}")
@@ -92,6 +92,7 @@ async def validate_games(games: List[Dict[str, Any]]) -> tuple:
     
     from etl.schemas import GameSchema
     from etl.dead_letter_queue import get_dlq
+    from datetime import datetime
     
     dlq = await get_dlq()
     valid_games = []
@@ -99,12 +100,19 @@ async def validate_games(games: List[Dict[str, Any]]) -> tuple:
     
     for game in games:
         try:
-            # Normalizar dados
+            # Normalizar dados primeiro
+            date_val = game.get('date', game.get('Data', datetime.now().strftime('%Y-%m-%d')))
+            home_team = game.get('home_team', game.get('home', game.get('Casa', '')))
+            away_team = game.get('away_team', game.get('away', game.get('Visitante', '')))
+            
+            # Gerar game_id com valores normalizados
+            game_id = game.get('game_id') or f"{date_val}_{home_team}_{away_team}"
+            
             normalized = {
-                'game_id': game.get('game_id', f"{game.get('date', '')}_{game.get('home_team', '')}_{game.get('away_team', '')}"),
-                'date': game.get('date', game.get('Data', '')),
-                'home_team': game.get('home_team', game.get('home', game.get('Casa', ''))),
-                'away_team': game.get('away_team', game.get('away', game.get('Visitante', ''))),
+                'game_id': game_id,
+                'date': date_val,
+                'home_team': home_team,
+                'away_team': away_team,
                 'home_score': game.get('home_score'),
                 'away_score': game.get('away_score'),
                 'status': game.get('status', 'scheduled'),
@@ -133,20 +141,18 @@ async def fetch_odds(games: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     1. OddsPedia (scraping gratuito)
     2. TheOddsAPI (pago)
     3. SportsDataIO (pago)
+    
+    NOTE: APIs de odds estão desabilitadas temporariamente (keys expiradas)
     """
     log = get_run_logger() if PREFECT_AVAILABLE else logger
     log.info(f"💰 Buscando odds para {len(games)} jogos...")
     
     try:
-        from data.scrapers.odds_scraper import get_today_odds
-        from infrastructure.rate_limiter import get_rate_limiter
+        from data.scrapers.odds_scraper import get_odds_for_date
+        from datetime import datetime
         
-        limiter = await get_rate_limiter()
-        
-        # Rate limiting
-        await limiter.wait_and_acquire('oddspedia', max_wait=30)
-        
-        odds_data = await asyncio.to_thread(get_today_odds)
+        today = datetime.now().strftime('%Y-%m-%d')
+        odds_data = await asyncio.to_thread(get_odds_for_date, today)
         
         if not odds_data:
             log.warning("⚠️ Nenhuma odd encontrada")
@@ -195,13 +201,24 @@ async def fetch_injuries() -> Dict[str, List[Dict[str, Any]]]:
     log.info("🏥 Buscando relatório de lesões...")
     
     try:
-        from data.scrapers.injury_scraper_v2 import get_all_injuries
+        from data.scrapers.injury_scraper_v2 import InjuryManager
         
-        injuries = await asyncio.to_thread(get_all_injuries)
+        manager = InjuryManager()
+        injuries_list = await asyncio.to_thread(manager.get_latest_injuries)
         
-        total = sum(len(v) for v in injuries.values())
-        log.info(f"✅ {total} lesões encontradas em {len(injuries)} times")
-        return injuries
+        # Agrupa por time
+        injuries_by_team = {}
+        for injury in injuries_list:
+            team = getattr(injury, 'team', None) or injury.get('team', 'UNKNOWN')
+            if team not in injuries_by_team:
+                injuries_by_team[team] = []
+            injuries_by_team[team].append(
+                injury.dict() if hasattr(injury, 'dict') else injury
+            )
+        
+        total = sum(len(v) for v in injuries_by_team.values())
+        log.info(f"✅ {total} lesões encontradas em {len(injuries_by_team)} times")
+        return injuries_by_team
         
     except Exception as e:
         log.warning(f"⚠️ Erro ao buscar lesões: {e}")

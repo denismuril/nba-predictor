@@ -247,21 +247,31 @@ class FeatureStore:
             return None
         
         async with self.db.get_session() as session:
-            from sqlalchemy import select, func
+            from sqlalchemy import select, func, text
             from infrastructure.database import Game, GameStats
             
-            # Buscar últimos N jogos ANTES de as_of_date
+            # Usar raw SQL para subquery correta
+            # PostgreSQL exige que ORDER BY/LIMIT esteja em subquery para AVG
+            query = text("""
+                SELECT AVG(sub.pts) as avg_pts
+                FROM (
+                    SELECT gs.pts, g.date
+                    FROM game_stats gs
+                    JOIN games g ON g.game_id = gs.game_id
+                    WHERE gs.team_id = :team_id
+                    AND g.date < :as_of_date
+                    ORDER BY g.date DESC
+                    LIMIT :window
+                ) sub
+            """)
+            
             result = await session.execute(
-                select(func.avg(GameStats.pts))
-                .join(Game, Game.game_id == GameStats.game_id)
-                .where(GameStats.team_id == team_id)
-                .where(Game.date < str(as_of_date))
-                .order_by(Game.date.desc())
-                .limit(window)
+                query,
+                {"team_id": team_id, "as_of_date": str(as_of_date), "window": window}
             )
             
-            avg = result.scalar()
-            return float(avg) if avg else None
+            row = result.fetchone()
+            return float(row[0]) if row and row[0] else None
     
     async def _compute_win_rate(self, team_id: str, as_of_date: date, window: int = 10) -> float:
         """Calcula taxa de vitória nos últimos N jogos"""
@@ -269,29 +279,35 @@ class FeatureStore:
             return None
         
         async with self.db.get_session() as session:
-            from sqlalchemy import select, case, func
-            from infrastructure.database import Game
+            from sqlalchemy import text
             
-            # Subquery para jogos em casa
-            home_wins = select(
-                func.sum(case((Game.winner == 'HOME', 1), else_=0)).label('wins'),
-                func.count().label('games')
-            ).where(
-                Game.home_team == team_id,
-                Game.date < str(as_of_date)
-            ).limit(window)
+            query = text("""
+                SELECT 
+                    COALESCE(
+                        SUM(CASE WHEN 
+                            (home_team = :team_id AND winner = 'HOME') OR 
+                            (away_team = :team_id AND winner = 'AWAY') 
+                        THEN 1 ELSE 0 END)::float / NULLIF(COUNT(*), 0),
+                        0.5
+                    ) as win_rate
+                FROM (
+                    SELECT home_team, away_team, winner, date
+                    FROM games
+                    WHERE (home_team = :team_id OR away_team = :team_id)
+                    AND date < :as_of_date
+                    AND winner IS NOT NULL
+                    ORDER BY date DESC
+                    LIMIT :window
+                ) sub
+            """)
             
-            # Subquery para jogos fora
-            away_wins = select(
-                func.sum(case((Game.winner == 'AWAY', 1), else_=0)).label('wins'),
-                func.count().label('games')
-            ).where(
-                Game.away_team == team_id,
-                Game.date < str(as_of_date)
-            ).limit(window)
+            result = await session.execute(
+                query,
+                {"team_id": team_id, "as_of_date": str(as_of_date), "window": window}
+            )
             
-            # Por simplicidade, retorna estimativa
-            return 0.5  # Placeholder
+            row = result.fetchone()
+            return float(row[0]) if row and row[0] else 0.5
     
     async def _compute_off_rating_avg(self, team_id: str, as_of_date: date, window: int = 10) -> float:
         """Calcula Offensive Rating médio"""
@@ -299,21 +315,29 @@ class FeatureStore:
             return None
         
         async with self.db.get_session() as session:
-            from sqlalchemy import select, func
-            from infrastructure.database import Game, GameStats
+            from sqlalchemy import text
+            
+            query = text("""
+                SELECT AVG(sub.off_rating) as avg_off
+                FROM (
+                    SELECT gs.off_rating, g.date
+                    FROM game_stats gs
+                    JOIN games g ON g.game_id = gs.game_id
+                    WHERE gs.team_id = :team_id
+                    AND g.date < :as_of_date
+                    AND gs.off_rating > 0
+                    ORDER BY g.date DESC
+                    LIMIT :window
+                ) sub
+            """)
             
             result = await session.execute(
-                select(func.avg(GameStats.off_rating))
-                .join(Game, Game.game_id == GameStats.game_id)
-                .where(GameStats.team_id == team_id)
-                .where(Game.date < str(as_of_date))
-                .where(GameStats.off_rating > 0)
-                .order_by(Game.date.desc())
-                .limit(window)
+                query,
+                {"team_id": team_id, "as_of_date": str(as_of_date), "window": window}
             )
             
-            avg = result.scalar()
-            return float(avg) if avg else None
+            row = result.fetchone()
+            return float(row[0]) if row and row[0] else None
     
     async def _compute_def_rating_avg(self, team_id: str, as_of_date: date, window: int = 10) -> float:
         """Calcula Defensive Rating médio"""
@@ -321,21 +345,29 @@ class FeatureStore:
             return None
         
         async with self.db.get_session() as session:
-            from sqlalchemy import select, func
-            from infrastructure.database import Game, GameStats
+            from sqlalchemy import text
+            
+            query = text("""
+                SELECT AVG(sub.def_rating) as avg_def
+                FROM (
+                    SELECT gs.def_rating, g.date
+                    FROM game_stats gs
+                    JOIN games g ON g.game_id = gs.game_id
+                    WHERE gs.team_id = :team_id
+                    AND g.date < :as_of_date
+                    AND gs.def_rating > 0
+                    ORDER BY g.date DESC
+                    LIMIT :window
+                ) sub
+            """)
             
             result = await session.execute(
-                select(func.avg(GameStats.def_rating))
-                .join(Game, Game.game_id == GameStats.game_id)
-                .where(GameStats.team_id == team_id)
-                .where(Game.date < str(as_of_date))
-                .where(GameStats.def_rating > 0)
-                .order_by(Game.date.desc())
-                .limit(window)
+                query,
+                {"team_id": team_id, "as_of_date": str(as_of_date), "window": window}
             )
             
-            avg = result.scalar()
-            return float(avg) if avg else None
+            row = result.fetchone()
+            return float(row[0]) if row and row[0] else None
     
     # ============= PERSISTÊNCIA =============
     
