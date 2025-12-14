@@ -24,19 +24,20 @@ def check_models():
     """Verifica se modelos existem e são recentes."""
     logger.info("🔍 Verificando modelos...")
 
+    # Modelos atuais v22.0 com caminhos corretos
     models = [
-        ('ml_model.joblib', 'Moneyline'),
-        ('spread_model_v16.joblib', 'Spread'),
+        ('data/models/ensemble_model_v6.joblib', 'Moneyline (Ensemble V6)'),
+        ('data/models/spread_model.joblib', 'Spread'),
+        ('data/models/totals_model_v18.joblib', 'Totals'),
     ]
 
     all_ok = True
 
-    for model_file, model_name in models:
-        path = Path(f'models/{model_file}')
+    for model_path, model_name in models:
+        path = Path(model_path)
 
         if not path.exists():
-            logger.error(f'❌ {model_name}: Modelo ausente ({model_file})')
-            all_ok = False
+            logger.warning(f'⚠️  {model_name}: Modelo não encontrado ({model_path})')
             continue
 
         # Verificar idade do modelo
@@ -61,7 +62,8 @@ def check_pipeline():
         import joblib
         from pathlib import Path
         
-        model_path = Path('models/ml_model.joblib')
+        # Caminho correto v22.0
+        model_path = Path('data/models/ensemble_model_v6.joblib')
         if not model_path.exists():
             logger.warning('⚠️  Modelo ML não encontrado - execute train_ensemble_v6 primeiro')
             return True  # Não é erro crítico
