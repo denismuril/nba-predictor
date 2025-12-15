@@ -34,22 +34,23 @@ class SafeKellyResult:
 
 class SafeKellyStrategy:
     """
-    AUDIT FIX: Estratégia Kelly com proteções contra ruína.
+    AUDIT FIX: Estratégia Kelly Conservadora com proteções contra ruína.
     
     Proteções implementadas:
-    1. Stop-loss diário: Máx 10% da banca por dia
-    2. Ajuste por perdas consecutivas: Reduz 20% a cada 3 perdas
-    3. Hard cap dinâmico: Reduz proporcional ao drawdown
-    4. Validação de odds: Rejeita odds estimadas
-    5. Edge mínimo: Requer 5% de edge para apostar
+    1. Kelly/8 (0.125) - Fração conservadora para minimizar variância
+    2. Stop-loss diário: Máx 10% da banca por dia
+    3. Ajuste por perdas consecutivas: Reduz 20% a cada 3 perdas
+    4. Hard cap dinâmico 3%: Reduz proporcional ao drawdown
+    5. Edge mínimo 3%: Filtro rígido de ruído
+    6. Validação de odds: Rejeita odds estimadas
     """
     
     def __init__(
         self,
         bankroll: float,
-        kelly_fraction: float = 0.25,
+        kelly_fraction: float = 0.125,       # Kelly/8 (era 0.25)
         daily_stop_loss_pct: float = 0.10,
-        min_edge_pct: float = 0.05,
+        min_edge_pct: float = 0.03,           # 3% edge mínimo (era 0.05)
         min_confidence: float = 0.60,
         hard_cap_pct: float = 0.03,
     ):
@@ -251,25 +252,25 @@ class SafeKellyStrategy:
         return adjusted_bets
 
 
-def render_bankroll_management(daily_games, bankroll, kelly_fraction=0.25):
+def render_bankroll_management(daily_games, bankroll, kelly_fraction=0.125):
     """
     Renderiza seção completa de gestão de banca no Streamlit.
     
     Args:
         daily_games: DataFrame com jogos do dia
         bankroll: Banca atual (float)
-        kelly_fraction: Fração do Kelly a usar (default: 0.25)
+        kelly_fraction: Fração do Kelly (default: 0.125 = Kelly/8)
     """
     st.header("💰 Gestão de Banca Profissional")
     
-    # AUDIT FIX: Usar SafeKellyStrategy
+    # AUDIT FIX: Usar SafeKellyStrategy com parâmetros conservadores (Kelly/8)
     safe_strategy = SafeKellyStrategy(
         bankroll=bankroll,
-        kelly_fraction=kelly_fraction,
+        kelly_fraction=kelly_fraction,  # Default agora é 0.125 (Kelly/8)
         daily_stop_loss_pct=0.10,
-        min_edge_pct=0.05,
+        min_edge_pct=0.03,              # 3% edge mínimo (filtro rígido)
         min_confidence=0.60,
-        hard_cap_pct=0.03
+        hard_cap_pct=0.03               # 3% hard cap
     )
     
     # Métricas de configuração com proteções

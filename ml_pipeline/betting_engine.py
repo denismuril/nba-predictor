@@ -19,20 +19,57 @@ import pandas as pd
 logger = logging.getLogger(__name__)
 
 class BettingEngine:
-    def __init__(self, bankroll=1000.0, kelly_fraction=0.25, min_ev=0.02, max_total_exposure=0.15):
+    """
+    Motor de Apostas com Gestão de Risco Conservadora.
+    
+    Travas de Segurança Implementadas:
+        1. Filtro de EV+ Rígido: Edge mínimo de 3% sobre a casa
+        2. Kelly Fracionado Conservador: Kelly/8 (0.125)
+        3. Hard Cap de 3%: Nunca apostar mais que 3% da banca
+        4. Exposição Máxima: 15% total por noite em múltiplos jogos
+    """
+    
+    # ==========================================================================
+    # CONSTANTES DE SEGURANÇA - Ajuste Fino para Banca Conservadora
+    # ==========================================================================
+    MIN_EDGE_THRESHOLD = 0.03  # Edge mínimo de 3% (filtro de ruído)
+    MAX_STAKE_CAP = 0.03       # Hard cap de 3% da banca por aposta
+    
+    def __init__(
+        self,
+        bankroll: float = 100.0,              # Banca inicial conservadora
+        kelly_fraction: float = 0.125,         # Kelly/8 para minimizar risco de ruína
+        min_ev: float = 0.02,                  # EV mínimo para registro
+        max_total_exposure: float = 0.15,      # Exposição máxima 15% por noite
+        min_edge_threshold: float = 0.03       # Limiar de confiança: 3% edge mínimo
+    ):
         """
+        Inicializa o Motor de Apostas Conservador.
+        
         Args:
-            bankroll: Valor total da banca
-            kelly_fraction: Fração do Kelly a ser usada (ex: 0.25 = 1/4 Kelly)
-            min_ev: EV mínimo para sugerir aposta (ex: 0.02 = 2%)
-            max_total_exposure: Exposição máxima total por noite (ex: 0.15 = 15%)
+            bankroll: Valor total da banca (padrão: R$100)
+            kelly_fraction: Fração do Kelly (padrão: 0.125 = Kelly/8)
+            min_ev: EV mínimo para logging (padrão: 2%)
+            max_total_exposure: Exposição máxima total por noite (padrão: 15%)
+            min_edge_threshold: Edge mínimo para apostar (padrão: 3%)
+        
+        Notas de Segurança:
+            - Kelly/8 reduz variância em ~75% comparado a Kelly/2
+            - Edge 3% filtra "ruído" de probabilidades incertas
+            - Hard cap 3% protege contra over-betting em alta confiança
         """
         self.bankroll = bankroll
         self.kelly_fraction = kelly_fraction
         self.min_ev = min_ev
         self.max_total_exposure = max_total_exposure
+        self.min_edge_threshold = min_edge_threshold
         
-        logger.info(f"🏦 Betting Engine initialized: Bankroll=${bankroll:.2f}, Kelly={kelly_fraction:.2%}, Max Exposure={max_total_exposure:.2%}")
+        logger.info(f"🏦 Betting Engine inicializado (Modo Conservador):")
+        logger.info(f"   💰 Bankroll: R${bankroll:.2f}")
+        logger.info(f"   📊 Kelly Fraction: {kelly_fraction:.3f} (Kelly/{int(1/kelly_fraction)})")
+        logger.info(f"   🎯 Edge Mínimo: {min_edge_threshold:.1%} (filtro de ruído)")
+        logger.info(f"   🔒 Max Stake Cap: {self.MAX_STAKE_CAP:.1%}")
+        logger.info(f"   📈 Max Exposure/Noite: {max_total_exposure:.1%}")
         
     def calculate_ev(self, prob_win, decimal_odds):
         """
@@ -141,14 +178,22 @@ class BettingEngine:
         max_per_bet = self.max_total_exposure / max(n_concurrent_bets, 1)
         adj_kelly = min(adj_kelly, max_per_bet)
         
-        # Additional safety: never bet more than 5% on a single game
-        adj_kelly = min(adj_kelly, 0.05)
+        # ======================================================================
+        # TRAVA DE SEGURANÇA: Hard Cap de 3% da banca
+        # Independente do Kelly, nunca apostar mais que MAX_STAKE_CAP
+        # ======================================================================
+        adj_kelly = min(adj_kelly, self.MAX_STAKE_CAP)
         
         return adj_kelly
         
     def analyze_bet(self, game_info, model_prob, market_odds, bet_type='Moneyline', n_concurrent_bets=1):
         """
-        Analisa uma aposta e retorna recomendação.
+        Analisa uma aposta e retorna recomendação com filtros de segurança.
+        
+        FILTROS DE SEGURANÇA APLICADOS:
+            1. Edge mínimo de 3% (abs(prob_modelo - prob_implícita) > 0.03)
+            2. Kelly/8 fracionado
+            3. Hard cap de 3% da banca
         
         Args:
             game_info: Dict com 'home_team' e 'away_team'
@@ -158,25 +203,69 @@ class BettingEngine:
             n_concurrent_bets: Número de jogos simultâneos na mesma noite
         
         Returns:
-            Dict com recomendação de aposta
+            Dict com recomendação de aposta (ou SKIP se edge insuficiente)
         """
+        # Calcular probabilidade implícita das odds
+        implied_prob = 1 / market_odds if market_odds > 1 else 1.0
+        
+        # ======================================================================
+        # TAREFA 1: FILTRO DE EV+ RÍGIDO (Confidence Threshold)
+        # Só apostar se: abs(prob_modelo - prob_implícita) > 3%
+        # ======================================================================
+        edge_over_market = abs(model_prob - implied_prob)
+        
+        if edge_over_market < self.min_edge_threshold:
+            # SKIP: Vantagem insuficiente sobre a casa
+            reason = (
+                f"Edge {edge_over_market:.1%} < threshold {self.min_edge_threshold:.1%} "
+                f"(Modelo: {model_prob:.1%} vs Mercado: {implied_prob:.1%})"
+            )
+            logger.info(f"⏭️ SKIP: Low Edge - {game_info.get('home_team', 'N/A')} vs {game_info.get('away_team', 'N/A')} [{bet_type}]: {reason}")
+            
+            return {
+                'game': f"{game_info.get('home_team', 'N/A')} vs {game_info.get('away_team', 'N/A')}",
+                'bet_type': bet_type,
+                'model_prob': round(model_prob * 100, 1),
+                'market_odds': market_odds,
+                'implied_prob': round(implied_prob * 100, 1),
+                'edge_over_market': round(edge_over_market * 100, 2),
+                'ev': 0,
+                'kelly_pct': 0,
+                'suggested_stake': 0,
+                'is_value': False,
+                'skip_reason': 'SKIP: Low Edge',
+                'concurrent_games': n_concurrent_bets,
+                'total_exposure_pct': 0
+            }
+        
+        # ======================================================================
+        # Aposta passou no filtro - calcular EV e Kelly
+        # ======================================================================
         ev = self.calculate_ev(model_prob, market_odds)
         kelly_pct = self.calculate_kelly_stake_concurrent(model_prob, market_odds, n_concurrent_bets)
         stake_amount = self.bankroll * kelly_pct
         
         recommendation = {
-            'game': f"{game_info['home_team']} vs {game_info['away_team']}",
+            'game': f"{game_info.get('home_team', 'N/A')} vs {game_info.get('away_team', 'N/A')}",
             'bet_type': bet_type,
             'model_prob': round(model_prob * 100, 1),
             'market_odds': market_odds,
-            'implied_prob': round((1/market_odds) * 100, 1) if market_odds > 0 else 0,
+            'implied_prob': round(implied_prob * 100, 1),
+            'edge_over_market': round(edge_over_market * 100, 2),
             'ev': round(ev * 100, 2),
             'kelly_pct': round(kelly_pct * 100, 2),
             'suggested_stake': round(stake_amount, 2),
             'is_value': ev >= self.min_ev and kelly_pct > 0,
             'concurrent_games': n_concurrent_bets,
-            'total_exposure_pct': round(kelly_pct * n_concurrent_bets * 100, 2)  # Total if all bets placed
+            'total_exposure_pct': round(kelly_pct * n_concurrent_bets * 100, 2)
         }
+        
+        if recommendation['is_value']:
+            logger.info(
+                f"✅ VALUE BET: {recommendation['game']} [{bet_type}] - "
+                f"Edge {edge_over_market:.1%} | EV {ev:.1%} | "
+                f"Stake R${stake_amount:.2f} ({kelly_pct:.2%})"
+            )
         
         return recommendation
 

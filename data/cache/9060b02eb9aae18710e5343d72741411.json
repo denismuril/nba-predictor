@@ -1,61 +1,52 @@
 {
   "value": {
     "Boston Celtics vs Detroit Pistons": {
-      "home_odds": 1.79,
-      "away_odds": 2.08,
+      "home_odds": 1.9,
+      "away_odds": 1.9,
       "home_team": "Boston Celtics",
       "away_team": "Detroit Pistons",
-      "source": "theoddsapi_fanduel",
-      "timestamp": "2025-12-16T00:10:00Z",
+      "source": "oddspedia_scraper",
+      "timestamp": "2025-12-15T18:37:32.478758",
       "validated": true
     },
     "Miami Heat vs Toronto Raptors": {
-      "home_odds": 1.44,
-      "away_odds": 2.88,
+      "home_odds": 1.9,
+      "away_odds": 1.9,
       "home_team": "Miami Heat",
       "away_team": "Toronto Raptors",
-      "source": "theoddsapi_fanduel",
-      "timestamp": "2025-12-16T00:40:00Z",
+      "source": "oddspedia_scraper",
+      "timestamp": "2025-12-15T18:37:32.478804",
       "validated": true
     },
     "Utah Jazz vs Dallas Mavericks": {
-      "home_odds": 2.02,
-      "away_odds": 1.83,
+      "home_odds": 1.9,
+      "away_odds": 1.9,
       "home_team": "Utah Jazz",
       "away_team": "Dallas Mavericks",
-      "source": "theoddsapi_fanduel",
-      "timestamp": "2025-12-16T02:10:00Z",
+      "source": "oddspedia_scraper",
+      "timestamp": "2025-12-15T18:37:32.478816",
       "validated": true
     },
     "Denver Nuggets vs Houston Rockets": {
-      "home_odds": 1.86,
-      "away_odds": 1.98,
+      "home_odds": 1.9,
+      "away_odds": 1.9,
       "home_team": "Denver Nuggets",
       "away_team": "Houston Rockets",
-      "source": "theoddsapi_fanduel",
-      "timestamp": "2025-12-16T02:40:00Z",
+      "source": "oddspedia_scraper",
+      "timestamp": "2025-12-15T18:37:32.478825",
       "validated": true
     },
     "Los Angeles Clippers vs Memphis Grizzlies": {
-      "home_odds": 1.58,
-      "away_odds": 2.44,
+      "home_odds": 1.9,
+      "away_odds": 1.9,
       "home_team": "Los Angeles Clippers",
       "away_team": "Memphis Grizzlies",
-      "source": "theoddsapi_fanduel",
-      "timestamp": "2025-12-16T03:40:00Z",
-      "validated": true
-    },
-    "New York Knicks vs San Antonio Spurs": {
-      "home_odds": 1.74,
-      "away_odds": 2.14,
-      "home_team": "New York Knicks",
-      "away_team": "San Antonio Spurs",
-      "source": "theoddsapi_draftkings",
-      "timestamp": "2025-12-17T01:40:00Z",
+      "source": "oddspedia_scraper",
+      "timestamp": "2025-12-15T18:37:32.478833",
       "validated": true
     }
   },
-  "cached_at": "2025-12-15T14:59:16.279730",
-  "expires_at": "2025-12-15T15:09:16.279734",
+  "cached_at": "2025-12-15T18:37:33.941966",
+  "expires_at": "2025-12-15T18:47:33.941974",
   "ttl_seconds": 600
 }

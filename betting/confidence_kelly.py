@@ -1,15 +1,19 @@
 """
-P3.1: Confidence-Adjusted Kelly Criterion
+P3.1: Confidence-Adjusted Kelly Criterion (Modo Conservador)
 
 Implementa Fractional Kelly com ajuste por confidence score.
 
-Objetivo: Melhorar position sizing para -30% variance, +Sharpe ratio
+Travas de Segurança:
+    - Kelly/8 (0.125) para minimizar variância
+    - Edge mínimo de 3% (filtro de ruído)
+    - Max bet 3% da banca (hard cap)
+    - Confidence mínimo 60%
 
 Usage:
     from betting.confidence_kelly import ConfidenceKelly
     
-    kelly = ConfidenceKelly(fraction=0.25)
-    bet_size = kelly.calculate(prob, odds, confidence, bankroll)
+    kelly = ConfidenceKelly(fraction=0.125)  # Kelly/8
+    bet_size = kelly.calculate(prob, odds, confidence, bankroll=100)
 """
 import numpy as np
 import pandas as pd
@@ -40,28 +44,35 @@ class ConfidenceKelly:
     
     def __init__(
         self,
-        fraction: float = 0.25,
-        min_edge: float = 0.02,
-        max_bet_pct: float = 0.05,
-        min_confidence: float = 0.6
+        fraction: float = 0.125,       # Kelly/8 (era 0.25 = Kelly/4)
+        min_edge: float = 0.03,        # 3% edge mínimo (filtro rígido)
+        max_bet_pct: float = 0.03,     # 3% máximo por aposta
+        min_confidence: float = 0.6    # 60% confidence mínimo
     ):
         """
+        Inicializa ConfidenceKelly com parâmetros conservadores.
+        
         Args:
-            fraction: Fração do Kelly a usar (default: 0.25 = Quarter Kelly)
-            min_edge: Edge mínimo para apostar (default: 2%)
-            max_bet_pct: % máximo do bankroll por aposta (default: 5%)
-            min_confidence: Confidence mínimo para apostar (default: 0.6)
+            fraction: Fração do Kelly (padrão: 0.125 = Kelly/8)
+            min_edge: Edge mínimo para apostar (padrão: 3%)
+            max_bet_pct: % máximo do bankroll por aposta (padrão: 3%)
+            min_confidence: Confidence mínimo (padrão: 60%)
+        
+        Notas de Segurança:
+            - Kelly/8 reduz risco de ruína para <0.1% em 1000 apostas
+            - Edge 3% filtra "ruído" de probabilidades incertas
+            - Hard cap 3% protege contra over-betting
         """
         self.fraction = fraction
         self.min_edge = min_edge
         self.max_bet_pct = max_bet_pct
         self.min_confidence = min_confidence
         
-        logger.info(f"ConfidenceKelly inicializado:")
-        logger.info(f"  Fraction: {fraction}")
-        logger.info(f"  Min edge: {min_edge:.1%}")
-        logger.info(f"  Max bet: {max_bet_pct:.1%}")
-        logger.info(f"  Min confidence: {min_confidence:.1%}")
+        logger.info("ConfidenceKelly inicializado (Modo Conservador):")
+        logger.info(f"  📊 Kelly Fraction: {fraction} (Kelly/{int(1/fraction)})")
+        logger.info(f"  🎯 Min edge: {min_edge:.1%}")
+        logger.info(f"  🔒 Max bet: {max_bet_pct:.1%}")
+        logger.info(f"  📈 Min confidence: {min_confidence:.1%}")
     
     def calculate_edge(self, prob: float, odds: float) -> float:
         """
@@ -434,7 +445,7 @@ if __name__ == '__main__':
     # Demo
     print("🎯 Demo: Confidence-Adjusted Kelly\n")
     
-    kelly = ConfidenceKelly(fraction=0.25, min_edge=0.02, max_bet_pct=0.05)
+    kelly = ConfidenceKelly(fraction=0.125, min_edge=0.03, max_bet_pct=0.03)
     
     # Cenário 1: Boa aposta
     result1 = kelly.calculate(

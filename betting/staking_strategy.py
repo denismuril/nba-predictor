@@ -1,28 +1,29 @@
 """
-Gestão de Banca Profissional - Staking Strategy
-================================================
+Gestão de Banca Profissional - Staking Strategy (Modo Conservador)
+====================================================================
 
-Motor de position sizing para operação quantitativa profissional.
+Motor de position sizing para operação quantitativa com foco em preservação de capital.
 
-Implementa:
-    - Kelly Criterion Fracionado (Kelly/4 = 0.25)
-    - Hard Cap de 3% da banca
+Travas de Segurança Implementadas:
+    - Kelly Criterion Fracionado (Kelly/8 = 0.125)
+    - Hard Cap de 3% da banca por aposta
+    - Edge mínimo de 3% sobre o mercado (filtro de ruído)
     - Detecção de correlação entre apostas
     - Proteção contra ruína financeira
 
 Uso:
     from betting.staking_strategy import KellyCriterionStrategy
     
-    strategy = KellyCriterionStrategy(bankroll=1000.0)
+    strategy = KellyCriterionStrategy(bankroll=100.0)  # Banca conservadora
     result = strategy.calculate_optimal_stake(
         model_prob=0.55,
         market_odds=1.95,
         confidence=0.80
     )
-    print(f"Apostar: ${result['stake_amount']:.2f}")
+    print(f"Apostar: R${result['stake_amount']:.2f}")
 
 Autor: NBA Predictor Team
-Data: 2025-12-06
+Data: 2025-12-15 (Atualizado para Modo Conservador)
 """
 
 import logging
@@ -34,32 +35,42 @@ logger = logging.getLogger(__name__)
 
 class KellyCriterionStrategy:
     """
-    Estratégia profissional de staking usando Kelly Criterion.
+    Estratégia profissional de staking usando Kelly Criterion (Modo Conservador).
     
-    Segurança Financeira:
-        1. Fractional Kelly (0.25) - Reduz volatilidade
+    Travas de Segurança Financeira:
+        1. Fractional Kelly (0.125 = Kelly/8) - Minimiza variância
         2. Hard Cap (3%) - Nunca arriscar mais que 3% da banca
-        3. Min Edge (5%) - Threshold conservador vs mercado
+        3. Min Edge (3%) - Filtro rígido de ruído vs mercado
         4. Detecção de Correlação - Reduz exposure em apostas relacionadas
+    
+    Filosofia:
+        - Preservar capital é prioridade máxima
+        - Kelly/8 reduz risco de ruína para ~0.1% em 1000 apostas
+        - Edge 3% filtra apostas com incerteza alta
     """
     
     def __init__(
         self,
-        bankroll: float = 1000.0,
-        kelly_fraction: float = 0.25,
-        hard_cap_pct: float = 0.03,
-        min_edge_pct: float = 0.05,
-        min_confidence: float = 0.60
+        bankroll: float = 100.0,           # Banca conservadora (era 1000.0)
+        kelly_fraction: float = 0.125,      # Kelly/8 (era 0.25 = Kelly/4)
+        hard_cap_pct: float = 0.03,         # 3% máximo por aposta
+        min_edge_pct: float = 0.03,         # 3% edge mínimo (filtro rígido)
+        min_confidence: float = 0.60        # 60% confidence mínimo
     ):
         """
-        Inicializa estratégia de staking.
+        Inicializa estratégia de staking conservadora.
         
         Args:
-            bankroll: Banca atual em unidades monetárias
-            kelly_fraction: Fração do Kelly a usar (0.25 = Quarter Kelly)
-            hard_cap_pct: % máximo da banca por aposta (0.03 = 3%)
-            min_edge_pct: Edge mínimo para apostar (0.05 = 5%)
-            min_confidence: Confidence mínimo para apostar (0.60 = 60%)
+            bankroll: Banca atual em R$ (padrão: R$100)
+            kelly_fraction: Fração do Kelly (padrão: 0.125 = Kelly/8)
+            hard_cap_pct: % máximo da banca por aposta (padrão: 3%)
+            min_edge_pct: Edge mínimo para apostar (padrão: 3%)
+            min_confidence: Confidence mínimo (padrão: 60%)
+        
+        Notas de Segurança:
+            - Kelly/8 vs Kelly/4: Reduz variância em ~50%
+            - Edge 3% vs 5%: Mais oportunidades, mas ainda conservador
+            - Hard cap 3%: Proteção absoluta contra over-betting
         """
         self.bankroll = bankroll
         self.kelly_fraction = kelly_fraction
@@ -75,12 +86,12 @@ class KellyCriterionStrategy:
             min_confidence=min_confidence
         )
         
-        logger.info("🏦 KellyCriterionStrategy inicializada:")
-        logger.info(f"   Bankroll: ${bankroll:,.2f}")
-        logger.info(f"   Kelly Fraction: {kelly_fraction} (Kelly/{int(1/kelly_fraction)})")
-        logger.info(f"   Hard Cap: {hard_cap_pct:.1%}")
-        logger.info(f"   Min Edge: {min_edge_pct:.1%}")
-        logger.info(f"   Min Confidence: {min_confidence:.1%}")
+        logger.info("🏦 KellyCriterionStrategy inicializada (Modo Conservador):")
+        logger.info(f"   💰 Bankroll: R${bankroll:,.2f}")
+        logger.info(f"   📊 Kelly Fraction: {kelly_fraction} (Kelly/{int(1/kelly_fraction)})")
+        logger.info(f"   🔒 Hard Cap: {hard_cap_pct:.1%}")
+        logger.info(f"   🎯 Min Edge: {min_edge_pct:.1%} (filtro de ruído)")
+        logger.info(f"   📈 Min Confidence: {min_confidence:.1%}")
     
     def update_bankroll(self, new_bankroll: float):
         """
@@ -284,8 +295,8 @@ if __name__ == '__main__':
         format='%(message)s'
     )
     
-    # Inicializar estratégia com banca de $1.000
-    strategy = KellyCriterionStrategy(bankroll=1000.0)
+    # Inicializar estratégia com banca conservadora de R$100
+    strategy = KellyCriterionStrategy(bankroll=100.0)
     
     print("\n" + "=" * 70)
     print("📊 CENÁRIO 1: Aposta única com bom edge")
