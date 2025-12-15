@@ -1,4 +1,6 @@
 name: NBA Predictor CI/CD
+permissions:
+  contents: read
 
 on:
   push:
