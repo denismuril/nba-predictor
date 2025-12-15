@@ -862,3 +862,201 @@ def _render_multi_team_parlays(all_combos):
                 st.info("Nenhum parlay de 4 times encontrado.")
     else:
         st.info("Nenhum parlay multi-time encontrado. Verifique se há jogos suficientes disponíveis.")
+
+
+# =============================================================================
+# SHADOW MODE: Profit Dashboard
+# =============================================================================
+def render_profit_dashboard():
+    """
+    Renderiza dashboard de lucro acumulado para Shadow Mode.
+    
+    Lê dados de:
+    1. data/betting_log.csv (preferencial)
+    2. data/backtest_bets.db (fallback)
+    3. data/bet_tracking.csv (fallback 2)
+    """
+    st.header("📈 Dashboard de Lucro - Shadow Mode")
+    st.caption("Acompanhe o desempenho simulado em tempo real")
+    
+    # Tentar carregar dados de várias fontes
+    df_bets = None
+    source = None
+    
+    # Fonte 1: betting_log.csv
+    log_file = Path('data/betting_log.csv')
+    if log_file.exists():
+        try:
+            df_bets = pd.read_csv(log_file)
+            source = 'betting_log.csv'
+        except Exception as e:
+            logger.debug(f"Erro lendo betting_log: {e}")
+    
+    # Fonte 2: backtest_bets.db
+    if df_bets is None:
+        db_file = Path('data/backtest_bets.db')
+        if db_file.exists():
+            try:
+                import sqlite3
+                conn = sqlite3.connect(str(db_file))
+                df_bets = pd.read_sql("SELECT * FROM bets ORDER BY date", conn)
+                conn.close()
+                source = 'backtest_bets.db'
+            except Exception as e:
+                logger.debug(f"Erro lendo backtest_bets.db: {e}")
+    
+    # Fonte 3: bet_tracking.csv
+    if df_bets is None:
+        tracking_file = Path('data/bet_tracking.csv')
+        if tracking_file.exists():
+            try:
+                df_bets = pd.read_csv(tracking_file)
+                source = 'bet_tracking.csv'
+            except Exception as e:
+                logger.debug(f"Erro lendo bet_tracking: {e}")
+    
+    if df_bets is None or df_bets.empty:
+        st.info("📊 Nenhum dado de apostas encontrado.")
+        st.caption("Execute o backtest ou faça apostas simuladas para ver o dashboard.")
+        st.code("python ml_pipeline/backtest_betting.py", language="bash")
+        return
+    
+    st.caption(f"📁 Fonte: {source}")
+    
+    # Preparar dados
+    if 'date' in df_bets.columns:
+        df_bets['date'] = pd.to_datetime(df_bets['date'])
+        df_bets = df_bets.sort_values('date')
+    
+    # Calcular lucro acumulado
+    profit_col = None
+    for col in ['profit', 'pnl', 'result', 'return']:
+        if col in df_bets.columns:
+            profit_col = col
+            break
+    
+    if profit_col:
+        df_bets['cumulative_profit'] = df_bets[profit_col].cumsum()
+    else:
+        st.warning("⚠️ Coluna de lucro não encontrada no arquivo.")
+        return
+    
+    # Métricas principais
+    total_bets = len(df_bets)
+    total_profit = df_bets[profit_col].sum()
+    win_rate = 0
+    
+    if 'won' in df_bets.columns:
+        wins = df_bets['won'].sum()
+        win_rate = (wins / total_bets * 100) if total_bets > 0 else 0
+    elif profit_col:
+        wins = (df_bets[profit_col] > 0).sum()
+        win_rate = (wins / total_bets * 100) if total_bets > 0 else 0
+    
+    # Peak e Drawdown
+    peak = df_bets['cumulative_profit'].cummax()
+    drawdown = df_bets['cumulative_profit'] - peak
+    max_drawdown = drawdown.min()
+    
+    # Métricas
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        st.metric(
+            "Lucro Total",
+            f"R$ {total_profit:+,.2f}",
+            delta="Positivo" if total_profit > 0 else "Negativo",
+            delta_color="normal" if total_profit >= 0 else "inverse"
+        )
+    with col2:
+        st.metric("Total Apostas", f"{total_bets}")
+    with col3:
+        st.metric("Win Rate", f"{win_rate:.1f}%")
+    with col4:
+        st.metric(
+            "Max Drawdown",
+            f"R$ {max_drawdown:,.2f}",
+            delta_color="inverse" if max_drawdown < 0 else "normal"
+        )
+    
+    st.markdown("---")
+    
+    # Gráfico de lucro acumulado
+    st.subheader("📈 Lucro Acumulado")
+    
+    fig = px.line(
+        df_bets,
+        x='date' if 'date' in df_bets.columns else df_bets.index,
+        y='cumulative_profit',
+        title='Evolução do Lucro (Shadow Mode)'
+    )
+    
+    # Colorir baseado em positivo/negativo
+    fig.update_traces(
+        line=dict(color='#4ade80', width=2),
+        fill='tozeroy',
+        fillcolor='rgba(74, 222, 128, 0.1)'
+    )
+    
+    # Linha de referência no zero
+    fig.add_hline(y=0, line_dash="dash", line_color="gray", opacity=0.5)
+    
+    # Layout
+    fig.update_layout(
+        xaxis_title="Data",
+        yaxis_title="Lucro Acumulado (R$)",
+        template="plotly_dark",
+        showlegend=False,
+        height=400
+    )
+    
+    st.plotly_chart(fig, use_container_width=True)
+    
+    # Estatísticas adicionais
+    st.subheader("📊 Estatísticas Detalhadas")
+    
+    col_s1, col_s2, col_s3 = st.columns(3)
+    
+    with col_s1:
+        if 'stake' in df_bets.columns:
+            total_staked = df_bets['stake'].sum()
+            roi = (total_profit / total_staked * 100) if total_staked > 0 else 0
+            st.metric("ROI", f"{roi:+.2f}%")
+        
+        avg_profit = total_profit / total_bets if total_bets > 0 else 0
+        st.metric("Lucro Médio/Aposta", f"R$ {avg_profit:+.2f}")
+    
+    with col_s2:
+        if 'odds' in df_bets.columns:
+            avg_odds = df_bets['odds'].mean()
+            st.metric("Odds Média", f"{avg_odds:.2f}")
+        
+        # Sharpe simplificado
+        if len(df_bets) > 1:
+            returns = df_bets[profit_col]
+            sharpe = (returns.mean() / returns.std()) * (252 ** 0.5) if returns.std() > 0 else 0
+            st.metric("Sharpe Ratio", f"{sharpe:.2f}")
+    
+    with col_s3:
+        # Melhor e pior resultado
+        best = df_bets[profit_col].max()
+        worst = df_bets[profit_col].min()
+        st.metric("Melhor Aposta", f"R$ {best:+.2f}")
+        st.metric("Pior Aposta", f"R$ {worst:+.2f}")
+    
+    # Tabela de apostas recentes
+    st.markdown("---")
+    st.subheader("🕐 Apostas Recentes")
+    
+    display_cols = [c for c in ['date', 'home_team', 'away_team', 'side', 'odds', 'stake', profit_col, 'won'] 
+                   if c in df_bets.columns]
+    
+    if display_cols:
+        st.dataframe(
+            df_bets[display_cols].tail(10).sort_index(ascending=False),
+            use_container_width=True,
+            hide_index=True
+        )
+    
+    # Auto-refresh hint
+    st.caption("💡 Dica: Clique em 'Rerun' no canto superior direito para atualizar os dados.")
+

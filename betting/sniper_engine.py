@@ -189,6 +189,7 @@ class SniperEngine:
     LINE_MOVEMENT_THRESHOLD = 0.10  # 10% de mudança = movimento significativo
     TRAP_PUBLIC_THRESHOLD = 0.70  # 70% public = trap territory
     TRAP_MOVEMENT_THRESHOLD = -0.03  # Line moved 3% against public = trap
+    MAX_ODDS_AGE_SECONDS = 300  # 5 minutes - SAFETY LOCK
     
     def __init__(self, bankroll: float = 1000.0, kelly_fraction: float = 0.25):
         """
@@ -370,6 +371,62 @@ class SniperEngine:
         """
         alerts = []
         
+        # ========== SAFETY LOCK: Data Freshness Check ==========
+        odd_timestamp = odds.get('timestamp', odds.get('updated_at', odds.get('fetched_at')))
+        if odd_timestamp:
+            try:
+                if isinstance(odd_timestamp, str):
+                    from datetime import datetime as dt
+                    # Try multiple formats
+                    for fmt in ['%Y-%m-%dT%H:%M:%S', '%Y-%m-%d %H:%M:%S', '%Y-%m-%dT%H:%M:%S.%f']:
+                        try:
+                            odd_time = dt.strptime(odd_timestamp, fmt)
+                            break
+                        except ValueError:
+                            continue
+                    else:
+                        odd_time = datetime.now()  # Fallback if no format matches
+                elif isinstance(odd_timestamp, (int, float)):
+                    odd_time = datetime.fromtimestamp(odd_timestamp)
+                else:
+                    odd_time = odd_timestamp
+                
+                age_seconds = (datetime.now() - odd_time).total_seconds()
+                
+                if age_seconds > self.MAX_ODDS_AGE_SECONDS:
+                    logger.warning(
+                        f"⚠️ SAFETY LOCK: Odd expirada para {game_id}! "
+                        f"Idade: {age_seconds:.0f}s (max: {self.MAX_ODDS_AGE_SECONDS}s) - Ignorando aposta"
+                    )
+                    return alerts
+                    
+            except Exception as e:
+                logger.debug(f"Erro verificando timestamp: {e}")
+        
+        # ========== TRAP ODDS CHECK ==========
+        public_pct_home = odds.get('public_pct', odds.get('public_home_pct', 0.5))
+        if isinstance(public_pct_home, (int, float)) and 0 < public_pct_home <= 1:
+            trap_check_home = detect_trap_odds(
+                public_pct_home, 
+                line_movement.get('home', 0),
+                self.TRAP_PUBLIC_THRESHOLD,
+                self.TRAP_MOVEMENT_THRESHOLD
+            )
+            trap_check_away = detect_trap_odds(
+                1 - public_pct_home,
+                line_movement.get('away', 0),
+                self.TRAP_PUBLIC_THRESHOLD,
+                self.TRAP_MOVEMENT_THRESHOLD
+            )
+            
+            if trap_check_home.is_trap:
+                logger.warning(f"🪤 TRAP detectada em HOME {game_id}: {trap_check_home.reason}")
+            if trap_check_away.is_trap:
+                logger.warning(f"🪤 TRAP detectada em AWAY {game_id}: {trap_check_away.reason}")
+        else:
+            trap_check_home = TrapOddsCheck(False, 0.5, 0, "")
+            trap_check_away = TrapOddsCheck(False, 0.5, 0, "")
+        
         # Verificar limite de alertas
         alerts_count = self._alerts_sent.get(game_id, 0)
         if alerts_count >= self.MAX_ALERTS_PER_GAME:
@@ -392,9 +449,9 @@ class SniperEngine:
             # Fallback: usar implied probabilities
             fair_home, fair_away = self._implied_fair_odds(home_odds, away_odds)
         
-        # Verificar valor em HOME
+        # Verificar valor em HOME (skip se TRAP)
         home_edge = self._calculate_edge(fair_home, home_odds)
-        if home_edge >= self.MIN_EDGE_PCT:
+        if home_edge >= self.MIN_EDGE_PCT and not trap_check_home.is_trap:
             kelly_stake = self._calculate_kelly_stake(1/fair_home, home_odds)
             confidence = self._get_confidence_level(home_edge, line_movement.get('home', 0))
             
@@ -412,9 +469,9 @@ class SniperEngine:
                 reason=self._get_reason(home_edge, line_movement.get('home', 0))
             ))
         
-        # Verificar valor em AWAY
+        # Verificar valor em AWAY (skip se TRAP)
         away_edge = self._calculate_edge(fair_away, away_odds)
-        if away_edge >= self.MIN_EDGE_PCT:
+        if away_edge >= self.MIN_EDGE_PCT and not trap_check_away.is_trap:
             kelly_stake = self._calculate_kelly_stake(1/fair_away, away_odds)
             confidence = self._get_confidence_level(away_edge, line_movement.get('away', 0))
             
