@@ -10,8 +10,8 @@
       "validated": true
     },
     "Miami Heat vs Toronto Raptors": {
-      "home_odds": 1.43,
-      "away_odds": 2.94,
+      "home_odds": 1.44,
+      "away_odds": 2.88,
       "home_team": "Miami Heat",
       "away_team": "Toronto Raptors",
       "source": "theoddsapi_fanduel",
@@ -28,8 +28,8 @@
       "validated": true
     },
     "Denver Nuggets vs Houston Rockets": {
-      "home_odds": 1.89,
-      "away_odds": 1.96,
+      "home_odds": 1.86,
+      "away_odds": 1.98,
       "home_team": "Denver Nuggets",
       "away_team": "Houston Rockets",
       "source": "theoddsapi_fanduel",
@@ -55,7 +55,7 @@
       "validated": true
     }
   },
-  "cached_at": "2025-12-15T14:04:18.299814",
-  "expires_at": "2025-12-15T14:14:18.299816",
+  "cached_at": "2025-12-15T14:59:16.279730",
+  "expires_at": "2025-12-15T15:09:16.279734",
   "ttl_seconds": 600
 }

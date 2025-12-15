@@ -173,6 +173,228 @@ def calculate_league_averages(df: pd.DataFrame, window: int = 100) -> dict:
     
     return calculated
 
+
+# =============================================================================
+# V22.0: SCHEDULE FATIGUE FEATURES
+# =============================================================================
+# Math-Context: Times em back-to-back (B2B) ou 3-em-4 noites têm performance
+# reduzida devido à fadiga. Estudos mostram ~2-3 pontos de desvantagem.
+# Fonte: NBA Analytics research (Teramoto et al. 2018)
+# =============================================================================
+
+
+def add_schedule_fatigue_features(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Adiciona features de fadiga baseadas no calendário.
+
+    Lógica V22.0:
+    1. Calcula dias de descanso desde o último jogo
+    2. Detecta back-to-back (B2B) quando rest_days = 0
+    3. Detecta 3-em-4 noites (terceiro jogo em 4 dias)
+
+    Math: Fadiga tem efeito não-linear:
+    - 0 dias (B2B): Penalidade severa (~3pts)
+    - 1 dia: Neutro (padrão NBA)
+    - 2+ dias: Leve vantagem (bem descansado)
+
+    Args:
+        df: DataFrame com jogos (precisa de 'date', 'home_team', 'away_team')
+
+    Returns:
+        DataFrame com colunas adicionais:
+        - home_rest_days / away_rest_days: Dias desde último jogo
+        - home_is_b2b / away_is_b2b: Flag back-to-back (0/1)
+        - home_games_in_4_days / away_games_in_4_days: Jogos nos últimos 4 dias
+        - home_is_3_in_4 / away_is_3_in_4: Flag 3-em-4 noites (0/1)
+    """
+    logger.info("🗓️ Calculando Schedule Fatigue Features...")
+
+    if 'date' not in df.columns:
+        logger.warning("⚠️ Coluna 'date' não encontrada. Pulando fatigue features.")
+        return df
+
+    df = df.copy()
+    df['date'] = pd.to_datetime(df['date'])
+
+    # Função auxiliar: calcular rest days para um time
+    def calculate_team_rest(team_df: pd.DataFrame, team_col: str) -> pd.DataFrame:
+        """Calcula métricas de descanso para um time."""
+        # Criar DataFrame com todas as aparições do time (home ou away)
+        home_games = df[['date', 'home_team']].rename(columns={'home_team': 'team'})
+        away_games = df[['date', 'away_team']].rename(columns={'away_team': 'team'})
+        all_games = pd.concat([home_games, away_games]).sort_values(['team', 'date'])
+        all_games = all_games.reset_index(drop=True)
+
+        # Calcular dias desde último jogo
+        all_games['prev_game_date'] = all_games.groupby('team')['date'].shift(1)
+        all_games['rest_days'] = (
+            all_games['date'] - all_games['prev_game_date']
+        ).dt.days.fillna(7)  # 7 dias para primeiro jogo
+
+        # Contar jogos nos últimos 4 dias usando rolling com janela de tempo
+        # Simplificação: calcular baseado em rest_days
+        # Se rest_days <= 1 nos últimos jogos, aumenta games_in_4_days
+        all_games['games_in_4_days'] = 1  # O jogo atual conta
+
+        # Simular contagem: para cada time, contar jogos recentes
+        for team in all_games['team'].unique():
+            mask = all_games['team'] == team
+            team_games = all_games[mask].copy()
+            counts = []
+            for idx in range(len(team_games)):
+                current_date = team_games.iloc[idx]['date']
+                window_start = current_date - pd.Timedelta(days=4)
+                # Contar jogos anteriores na janela
+                prev_games = team_games.iloc[:idx]
+                count = (prev_games['date'] > window_start).sum()
+                counts.append(count)
+            all_games.loc[mask, 'games_in_4_days'] = counts
+
+        # Flags derivadas
+        all_games['is_b2b'] = (all_games['rest_days'] <= 1).astype(int)
+        all_games['is_3_in_4'] = (all_games['games_in_4_days'] >= 2).astype(int)
+
+        return all_games.drop_duplicates(subset=['date', 'team'])
+
+    # Calcular para todos os times
+    all_rest = calculate_team_rest(df, 'team')
+
+    # Merge para home
+    home_rest = all_rest[['date', 'team', 'rest_days', 'is_b2b', 'games_in_4_days', 'is_3_in_4']].copy()
+    home_rest.columns = ['date', 'home_team', 'home_rest_days', 'home_is_b2b',
+                         'home_games_in_4_days', 'home_is_3_in_4']
+    df = df.merge(home_rest, on=['date', 'home_team'], how='left')
+
+    # Merge para away
+    away_rest = all_rest[['date', 'team', 'rest_days', 'is_b2b', 'games_in_4_days', 'is_3_in_4']].copy()
+    away_rest.columns = ['date', 'away_team', 'away_rest_days', 'away_is_b2b',
+                         'away_games_in_4_days', 'away_is_3_in_4']
+    df = df.merge(away_rest, on=['date', 'away_team'], how='left')
+
+    # Preencher NaN com valores default (bem descansado)
+    for col in ['home_rest_days', 'away_rest_days']:
+        df[col] = df[col].fillna(2)
+    for col in ['home_is_b2b', 'away_is_b2b', 'home_is_3_in_4', 'away_is_3_in_4']:
+        df[col] = df[col].fillna(0).astype(int)
+    for col in ['home_games_in_4_days', 'away_games_in_4_days']:
+        df[col] = df[col].fillna(1).astype(int)
+
+    # Feature derivada: Vantagem de descanso
+    df['rest_advantage'] = df['home_rest_days'] - df['away_rest_days']
+
+    # Estatísticas de debug
+    b2b_count = df['home_is_b2b'].sum() + df['away_is_b2b'].sum()
+    three_in_4 = df['home_is_3_in_4'].sum() + df['away_is_3_in_4'].sum()
+    logger.info(f"✅ Fatigue Features: {b2b_count} B2B games, {three_in_4} 3-in-4 games")
+
+    return df
+
+
+# =============================================================================
+# V22.0: SPECIFIC MATCHUP FEATURES
+# =============================================================================
+# Math-Context: Estilos de jogo importam! Um time que chuta muitas bolas de 3
+# contra uma defesa que não contesta bem do perímetro tem vantagem.
+# =============================================================================
+
+
+def add_specific_matchup_features(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Adiciona features de matchup estilo-vs-estilo.
+
+    Lógica V22.0:
+    1. 3-Point Matchup: Taxa de tentativas de 3 vs qualidade da defesa de 3
+    2. Rebounding Mismatch: ORB% ofensivo vs DRB% defensivo
+
+    Math:
+    - three_pt_matchup_delta > 0: Time ataca bem de 3 contra defesa fraca
+    - rebound_advantage > 0: Time tem vantagem em segundas chances
+
+    Args:
+        df: DataFrame com jogos e métricas rolling
+
+    Returns:
+        DataFrame com colunas adicionais:
+        - three_pt_matchup_delta: home_3pa_rate - away_3p_defense
+        - rebound_advantage: home_orb_pct - away_drb_pct
+    """
+    logger.info("🎯 Calculando Specific Matchup Features...")
+
+    # Feature 1: 3-Point Matchup
+    # Verificar se temos as colunas necessárias
+    three_pt_cols_home = ['home_rolling_10_efg_pct', 'home_3p_attempt_rate', 'home_3pa_rate']
+    three_pt_cols_away = ['away_rolling_10_def_rating', 'away_3p_defense_rating']
+
+    # Tentar encontrar proxies para 3P attempt rate
+    if 'home_3pa_rate' not in df.columns and 'home_rolling_10_efg_pct' in df.columns:
+        # Estimar: times com alto eFG% tendem a chutar mais 3s na NBA moderna
+        df['home_3pa_rate_est'] = df.get('home_rolling_10_efg_pct', 0.55)
+        df['away_3pa_rate_est'] = df.get('away_rolling_10_efg_pct', 0.55)
+    else:
+        df['home_3pa_rate_est'] = df.get('home_3pa_rate', 0.40)
+        df['away_3pa_rate_est'] = df.get('away_3pa_rate', 0.40)
+
+    # Para defesa de 3, usar DefRtg como proxy (menor = melhor defesa)
+    if 'away_rolling_10_def_rating' in df.columns:
+        # Inverter: DefRtg alto = defesa ruim = bom para ataque
+        df['away_3p_defense_weakness'] = (
+            df['away_rolling_10_def_rating'] - LEAGUE_DEFAULTS['def_rating']
+        ) / 10  # Normalizar
+        df['home_3p_defense_weakness'] = (
+            df['home_rolling_10_def_rating'] - LEAGUE_DEFAULTS['def_rating']
+        ) / 10
+    else:
+        df['away_3p_defense_weakness'] = 0.0
+        df['home_3p_defense_weakness'] = 0.0
+
+    # Calcular matchup: time que ataca bem de 3 vs defesa fraca
+    df['three_pt_matchup_home'] = (
+        df['home_3pa_rate_est'] + df['away_3p_defense_weakness']
+    )
+    df['three_pt_matchup_away'] = (
+        df['away_3pa_rate_est'] + df['home_3p_defense_weakness']
+    )
+    df['three_pt_matchup_delta'] = (
+        df['three_pt_matchup_home'] - df['three_pt_matchup_away']
+    )
+
+    # Feature 2: Rebounding Mismatch
+    # ORB% do ataque vs DRB% implícito da defesa
+    orb_cols = ['home_rolling_10_oreb_pct', 'home_oreb_pct', 'home_orb_pct']
+    drb_default = 1 - LEAGUE_DEFAULTS['oreb_pct']  # DRB = 1 - ORB da liga
+
+    home_orb = None
+    away_orb = None
+
+    for col in orb_cols:
+        if col in df.columns:
+            home_orb = df[col].fillna(LEAGUE_DEFAULTS['oreb_pct'])
+            break
+    if home_orb is None:
+        home_orb = LEAGUE_DEFAULTS['oreb_pct']
+
+    for col in [c.replace('home', 'away') for c in orb_cols]:
+        if col in df.columns:
+            away_orb = df[col].fillna(LEAGUE_DEFAULTS['oreb_pct'])
+            break
+    if away_orb is None:
+        away_orb = LEAGUE_DEFAULTS['oreb_pct']
+
+    # Vantagem de rebote: ORB alto + oponente com DRB baixo
+    df['home_orb_rating'] = home_orb if isinstance(home_orb, pd.Series) else home_orb
+    df['away_orb_rating'] = away_orb if isinstance(away_orb, pd.Series) else away_orb
+    df['rebound_advantage'] = df['home_orb_rating'] - df['away_orb_rating']
+
+    # Cleanup colunas temporárias
+    temp_cols = ['home_3pa_rate_est', 'away_3pa_rate_est',
+                 'away_3p_defense_weakness', 'home_3p_defense_weakness',
+                 'three_pt_matchup_home', 'three_pt_matchup_away']
+    df = df.drop(columns=[c for c in temp_cols if c in df.columns], errors='ignore')
+
+    logger.info("✅ Matchup Features calculadas: three_pt_matchup_delta, rebound_advantage")
+
+    return df
+
 # =============================================================================
 # REFEREE STATS - TIME-AWARE IMPLEMENTATION (NO LEAKAGE)
 # =============================================================================
