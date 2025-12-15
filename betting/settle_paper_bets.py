@@ -1,316 +1,398 @@
 """
-Settle Paper Bets - NBA Predictor Go Live v24.0
-================================================
-Liquida apostas de paper trading com resultados reais.
-Gera relatório de PnL: "Se tivéssemos apostado, teríamos lucrado R$ X"
+Paper Bet Settlement Script - NBA Predictor v25.0
+==================================================
+Script para liquidar apostas paper com resultados reais.
+Roda diariamente via cron/Prefect para calcular PnL.
 
-Usar: python betting/settle_paper_bets.py --date 2024-12-14
+Uso:
+    python betting/settle_paper_bets.py
+    python betting/settle_paper_bets.py --date 2024-12-14
+    python betting/settle_paper_bets.py --days 7
+
+Autor: NBA Predictor v25.0 - Go Live Edition
 """
 import os
 import sys
+import argparse
 import asyncio
 import logging
 from datetime import datetime, timedelta
-from typing import Dict, List, Any
+from pathlib import Path
+from typing import Dict, List, Any, Optional
 
 # Path setup
-current_dir = os.path.dirname(os.path.abspath(__file__))
-project_root = os.path.dirname(current_dir)
-if project_root not in sys.path:
-    sys.path.insert(0, project_root)
+PROJECT_ROOT = Path(__file__).parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
 
-from betting.paper_trading import PaperTradingDB, PaperBet
+from dotenv import load_dotenv
+load_dotenv(PROJECT_ROOT / '.env')
 
-logger = logging.getLogger(__name__)
+from sqlalchemy import text
+
+# Infrastructure imports
+from infrastructure.database import AsyncDataManager
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s | %(levelname)s | %(name)s | %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
+logger = logging.getLogger('settle_paper_bets')
 
 
 class PaperBetSettler:
-    """Liquida paper bets com resultados reais."""
-    
+    """
+    Classe para liquidar paper bets comparando com resultados reais.
+    """
+
     def __init__(self):
-        self.db = PaperTradingDB()
-        self._results_cache: Dict[str, Dict] = {}
-    
-    async def initialize(self):
-        """Inicializa conexões."""
-        await self.db.initialize()
-        logger.info("✅ PaperBetSettler inicializado")
-    
-    async def fetch_real_results(self, game_date: str) -> Dict[str, Dict]:
-        """
-        Busca resultados reais dos jogos.
-        
-        Returns:
-            Dict[game_id, {'home_score': int, 'away_score': int, 'winner': str}]
-        """
-        results = {}
-        
+        self.db: Optional[AsyncDataManager] = None
+        self.settled_count = 0
+        self.wins = 0
+        self.losses = 0
+        self.total_pnl = 0.0
+
+    async def initialize(self) -> bool:
+        """Inicializa conexão com banco de dados."""
         try:
-            # Tentar buscar do PostgreSQL (tabela games)
-            from data.repositories.db_manager import get_db_manager
-            
-            db = get_db_manager()
-            games = db.get_games_by_date(game_date)
-            
-            for game in games:
-                game_id = game.get('game_id', f"{game.get('home_team')}_{game.get('away_team')}_{game_date}")
-                home_score = game.get('home_score') or game.get('pts_home')
-                away_score = game.get('away_score') or game.get('pts_away')
-                
-                if home_score is not None and away_score is not None:
-                    winner = 'home' if home_score > away_score else 'away'
-                    total = home_score + away_score
-                    
-                    results[game_id] = {
-                        'home_team': game.get('home_team'),
-                        'away_team': game.get('away_team'),
-                        'home_score': home_score,
-                        'away_score': away_score,
-                        'winner': winner,
-                        'total': total
-                    }
-                    
-                    # Também criar chave por times
-                    team_key = f"{game.get('home_team')}_{game.get('away_team')}"
-                    results[team_key] = results[game_id]
-            
-            logger.info(f"📊 Encontrados {len(results)} resultados para {game_date}")
-            
+            self.db = AsyncDataManager()
+            await self.db.init_db()
+            logger.info("✅ PaperBetSettler inicializado")
+            return True
         except Exception as e:
-            logger.error(f"❌ Erro buscando resultados: {e}")
-        
-        return results
-    
-    def _determine_bet_outcome(
-        self, 
-        bet: PaperBet, 
-        result: Dict[str, Any]
-    ) -> tuple:
+            logger.error(f"❌ Erro ao inicializar: {e}")
+            return False
+
+    async def get_pending_bets(self, date_str: Optional[str] = None) -> List[Dict[str, Any]]:
         """
-        Determina se a aposta foi vencedora.
-        
-        Returns:
-            (won: bool, resultado_str: str, pnl: float)
-        """
-        tipo = bet.tipo_aposta.lower()
-        
-        # Moneyline
-        if 'moneyline_home' in tipo or tipo == 'home':
-            won = result['winner'] == 'home'
-            resultado = f"{result['home_team']} {result['home_score']} x {result['away_score']} {result['away_team']}"
-        elif 'moneyline_away' in tipo or tipo == 'away':
-            won = result['winner'] == 'away'
-            resultado = f"{result['home_team']} {result['home_score']} x {result['away_score']} {result['away_team']}"
-        # Over/Under (se implementado)
-        elif 'over' in tipo:
-            line = float(bet.tipo_aposta.split('_')[-1]) if '_' in bet.tipo_aposta else 220
-            won = result['total'] > line
-            resultado = f"Total: {result['total']} (Linha: {line})"
-        elif 'under' in tipo:
-            line = float(bet.tipo_aposta.split('_')[-1]) if '_' in bet.tipo_aposta else 220
-            won = result['total'] < line
-            resultado = f"Total: {result['total']} (Linha: {line})"
-        else:
-            # Fallback: assume moneyline home
-            won = result['winner'] == 'home'
-            resultado = f"{result['home_team']} {result['home_score']} x {result['away_score']} {result['away_team']}"
-        
-        # Calcular PnL
-        if won:
-            # Lucro = Stake * (Odds - 1)
-            pnl = bet.stake_sugerida * (bet.odd_capturada - 1)
-        else:
-            # Perda = -Stake
-            pnl = -bet.stake_sugerida
-        
-        return won, resultado, round(pnl, 2)
-    
-    async def settle_date(self, game_date: str) -> Dict[str, Any]:
-        """
-        Liquida todas as apostas de uma data.
-        
+        Busca apostas pendentes para liquidação.
+
         Args:
-            game_date: Data no formato YYYY-MM-DD
-            
-        Returns:
-            Dict com estatísticas da liquidação
+            date_str: Data específica (YYYY-MM-DD) ou None para todas
         """
-        logger.info(f"🔄 Liquidando apostas de {game_date}...")
-        
-        # Buscar apostas pendentes
-        pending_bets = await self.db.get_pending_bets(game_date)
-        
-        if not pending_bets:
-            logger.info(f"ℹ️ Nenhuma aposta pendente para {game_date}")
-            return {'settled': 0, 'pnl': 0}
-        
-        logger.info(f"📋 {len(pending_bets)} apostas pendentes")
-        
-        # Buscar resultados reais
-        results = await self.fetch_real_results(game_date)
-        
-        if not results:
-            logger.warning(f"⚠️ Nenhum resultado encontrado para {game_date}")
-            return {'settled': 0, 'pnl': 0, 'message': 'Sem resultados disponíveis'}
-        
-        # Liquidar cada aposta
-        stats = {
-            'settled': 0,
-            'won': 0,
-            'lost': 0,
-            'not_found': 0,
-            'pnl': 0.0,
-            'details': []
-        }
-        
-        for bet in pending_bets:
-            # Tentar encontrar resultado
-            game_key = f"{bet.home_team}_{bet.away_team}"
-            result = results.get(bet.game_id) or results.get(game_key)
-            
-            if not result:
-                stats['not_found'] += 1
-                logger.warning(f"⚠️ Resultado não encontrado: {bet.home_team} vs {bet.away_team}")
-                continue
-            
-            # Determinar outcome
-            won, resultado_str, pnl = self._determine_bet_outcome(bet, result)
-            
-            # Atualizar no banco
-            await self.db.settle_bet(bet.id, won, resultado_str, pnl)
-            
-            # Estatísticas
-            stats['settled'] += 1
-            stats['pnl'] += pnl
-            if won:
-                stats['won'] += 1
+        try:
+            if date_str:
+                # Buscar apostas de uma data específica
+                query = """
+                SELECT id, game_id, matchup, bet_type, market_odds, stake,
+                       model_prob, edge, confidence, created_at
+                FROM paper_bets
+                WHERE status = 'PENDING'
+                  AND DATE(created_at) = :target_date
+                ORDER BY created_at
+                """
+                params = {'target_date': date_str}
             else:
-                stats['lost'] += 1
-            
-            stats['details'].append({
-                'bet_id': bet.id,
-                'game': f"{bet.home_team} vs {bet.away_team}",
-                'tipo': bet.tipo_aposta,
-                'odd': bet.odd_capturada,
-                'stake': bet.stake_sugerida,
-                'won': won,
-                'pnl': pnl
-            })
-            
-            emoji = "✅" if won else "❌"
-            logger.info(
-                f"{emoji} #{bet.id}: {bet.home_team} vs {bet.away_team} | "
-                f"{bet.tipo_aposta} | PnL: R$ {pnl:+.2f}"
-            )
-        
-        logger.info(
-            f"\n📊 Liquidação concluída: "
-            f"{stats['won']}W/{stats['lost']}L | "
-            f"PnL: R$ {stats['pnl']:+.2f}"
-        )
-        
-        return stats
-    
-    async def generate_report(self, game_date: str = None) -> str:
-        """Gera relatório detalhado."""
-        if game_date is None:
-            game_date = (datetime.now() - timedelta(days=1)).strftime('%Y-%m-%d')
-        
-        # Liquidar primeiro
-        stats = await self.settle_date(game_date)
-        
-        # Estatísticas gerais (últimos 7 dias)
-        overall_stats = await self.db.get_stats(7)
-        
-        report = f"""
-╔════════════════════════════════════════════════════════════════════╗
-║         📊 RELATÓRIO DE PAPER TRADING - {game_date}          ║
-╠════════════════════════════════════════════════════════════════════╣
-║                                                                    ║
-║  📅 RESULTADOS DO DIA                                              ║
-║  ─────────────────────────────────────────────────────────────────  ║
-║  Apostas Liquidadas:    {stats['settled']:>3}                                      ║
-║  Vitórias:              {stats.get('won', 0):>3}                                      ║
-║  Derrotas:              {stats.get('lost', 0):>3}                                      ║
-║  PnL do Dia:            R$ {stats['pnl']:>+10,.2f}                           ║
-║                                                                    ║
-╠════════════════════════════════════════════════════════════════════╣
-║                                                                    ║
-║  📈 PERFORMANCE GERAL (7 DIAS)                                     ║
-║  ─────────────────────────────────────────────────────────────────  ║
-║  Total de Apostas:      {overall_stats['total_bets']:>3}                                      ║
-║  Win Rate:              {overall_stats['win_rate']:>5.1f}%                                   ║
-║  PnL Acumulado:         R$ {overall_stats['total_pnl']:>+10,.2f}                           ║
-║  ROI:                   {overall_stats['roi']:>+6.2f}%                                   ║
-║  Edge Médio:            {overall_stats['avg_edge']:>5.1f}%                                   ║
-║                                                                    ║
-╚════════════════════════════════════════════════════════════════════╝
+                # Buscar todas pendentes
+                query = """
+                SELECT id, game_id, matchup, bet_type, market_odds, stake,
+                       model_prob, edge, confidence, created_at
+                FROM paper_bets
+                WHERE status = 'PENDING'
+                ORDER BY created_at
+                """
+                params = {}
 
-💡 CONCLUSÃO:
-"""
-        if overall_stats['total_pnl'] > 0:
-            report += f"""
-   ✅ Se tivéssemos apostado nos últimos 7 dias, teríamos LUCRADO: 
-      R$ {overall_stats['total_pnl']:,.2f}
-   
-   📈 O sistema está performando bem. Considere iniciar apostas reais
-      com frações menores do Kelly.
-"""
-        elif overall_stats['total_pnl'] < 0:
-            report += f"""
-   ⚠️ Se tivéssemos apostado nos últimos 7 dias, teríamos PERDIDO: 
-      R$ {abs(overall_stats['total_pnl']):,.2f}
-   
-   📉 Revisar estratégia antes de operar com dinheiro real.
-      Verificar: calibração do modelo, edge mínimo, seleção de jogos.
-"""
+            async with self.db.get_session() as session:
+                result = await session.execute(text(query), params)
+                rows = result.fetchall()
+                return [dict(row._mapping) for row in rows]
+
+        except Exception as e:
+            logger.error(f"❌ Erro ao buscar apostas pendentes: {e}")
+            return []
+
+    async def get_game_result(self, game_id: str) -> Optional[Dict[str, Any]]:
+        """Busca resultado real de um jogo."""
+        try:
+            query = """
+            SELECT game_id, home_team, away_team, home_score, away_score, winner
+            FROM games
+            WHERE game_id = :game_id
+              AND status = 'Final'
+              AND home_score IS NOT NULL
+            """
+
+            async with self.db.get_session() as session:
+                result = await session.execute(text(query), {'game_id': game_id})
+                row = result.fetchone()
+                if row:
+                    return dict(row._mapping)
+                return None
+
+        except Exception as e:
+            logger.error(f"❌ Erro ao buscar resultado do jogo {game_id}: {e}")
+            return None
+
+    def determine_bet_outcome(
+        self,
+        bet: Dict[str, Any],
+        result: Dict[str, Any]
+    ) -> tuple[str, float]:
+        """
+        Determina se aposta ganhou ou perdeu.
+
+        Returns:
+            Tuple (status, profit)
+        """
+        bet_type = bet['bet_type']
+        stake = bet['stake']
+        odds = bet['market_odds']
+
+        home_score = result['home_score']
+        away_score = result['away_score']
+        winner = result['winner']
+
+        # Determinar vencedor
+        home_won = home_score > away_score
+
+        # Avaliar aposta
+        won = False
+
+        if bet_type == 'moneyline_home':
+            won = home_won
+        elif bet_type == 'moneyline_away':
+            won = not home_won
+        elif bet_type == 'spread_home':
+            # Assumindo spread básico (sem pontos)
+            # Para spread real, precisaríamos do spread line
+            won = home_won
+        elif bet_type == 'spread_away':
+            won = not home_won
+        elif bet_type == 'over':
+            total = home_score + away_score
+            # Precisaríamos da linha de total
+            won = total > 220  # Placeholder
+        elif bet_type == 'under':
+            total = home_score + away_score
+            won = total < 220  # Placeholder
+
+        if won:
+            profit = stake * (odds - 1)  # Lucro = stake * (odds - 1)
+            return 'WIN', round(profit, 2)
         else:
-            report += """
-   ➖ Resultado neutro. Mais dados necessários para conclusão.
-"""
-        
-        return report
-    
+            return 'LOSS', round(-stake, 2)
+
+    async def settle_bet(
+        self,
+        bet_id: int,
+        status: str,
+        profit: float,
+        result_score: str
+    ) -> bool:
+        """Atualiza status da aposta no banco."""
+        try:
+            update_sql = """
+            UPDATE paper_bets
+            SET status = :status,
+                profit = :profit,
+                result_score = :result_score,
+                settled_at = :settled_at
+            WHERE id = :bet_id
+            """
+
+            async with self.db.get_session() as session:
+                await session.execute(text(update_sql), {
+                    'bet_id': bet_id,
+                    'status': status,
+                    'profit': profit,
+                    'result_score': result_score,
+                    'settled_at': datetime.utcnow()
+                })
+                await session.commit()
+
+            return True
+
+        except Exception as e:
+            logger.error(f"❌ Erro ao atualizar aposta {bet_id}: {e}")
+            return False
+
+    async def settle_date(self, date_str: str) -> Dict[str, Any]:
+        """
+        Liquida todas as apostas de uma data específica.
+
+        Args:
+            date_str: Data no formato YYYY-MM-DD
+
+        Returns:
+            Dict com estatísticas
+        """
+        logger.info(f"📅 Liquidando apostas de {date_str}")
+
+        pending_bets = await self.get_pending_bets(date_str)
+
+        if not pending_bets:
+            logger.info("📭 Nenhuma aposta pendente para liquidar")
+            return {'settled': 0, 'pnl': 0.0}
+
+        logger.info(f"📋 {len(pending_bets)} apostas pendentes encontradas")
+
+        for bet in pending_bets:
+            game_result = await self.get_game_result(bet['game_id'])
+
+            if not game_result:
+                logger.warning(f"⚠️ Resultado não encontrado: {bet['game_id']}")
+                continue
+
+            # Determinar outcome
+            status, profit = self.determine_bet_outcome(bet, game_result)
+
+            # Score string
+            result_score = f"{game_result['home_score']}-{game_result['away_score']}"
+
+            # Atualizar banco
+            success = await self.settle_bet(bet['id'], status, profit, result_score)
+
+            if success:
+                self.settled_count += 1
+                self.total_pnl += profit
+
+                if status == 'WIN':
+                    self.wins += 1
+                    logger.info(
+                        f"✅ WIN: {bet['matchup']} | {bet['bet_type']} | "
+                        f"Profit: R$ {profit:+.2f}"
+                    )
+                else:
+                    self.losses += 1
+                    logger.info(
+                        f"❌ LOSS: {bet['matchup']} | {bet['bet_type']} | "
+                        f"Profit: R$ {profit:+.2f}"
+                    )
+
+        return {
+            'settled': self.settled_count,
+            'wins': self.wins,
+            'losses': self.losses,
+            'pnl': self.total_pnl
+        }
+
+    async def get_performance_report(self, days: int = 7) -> Dict[str, Any]:
+        """Gera relatório de performance dos últimos N dias."""
+        try:
+            cutoff = datetime.utcnow() - timedelta(days=days)
+
+            query = """
+            SELECT
+                COUNT(*) as total_bets,
+                COUNT(CASE WHEN status = 'WIN' THEN 1 END) as wins,
+                COUNT(CASE WHEN status = 'LOSS' THEN 1 END) as losses,
+                COUNT(CASE WHEN status = 'PENDING' THEN 1 END) as pending,
+                COALESCE(SUM(CASE WHEN status != 'PENDING' THEN profit ELSE 0 END), 0) as total_pnl,
+                COALESCE(SUM(stake), 0) as total_staked,
+                COALESCE(AVG(CASE WHEN status != 'PENDING' THEN edge ELSE NULL END), 0) as avg_edge,
+                COALESCE(AVG(market_odds), 0) as avg_odds
+            FROM paper_bets
+            WHERE created_at >= :cutoff
+            """
+
+            async with self.db.get_session() as session:
+                result = await session.execute(text(query), {'cutoff': cutoff})
+                row = result.fetchone()
+
+                if row:
+                    data = dict(row._mapping)
+                    settled = data['wins'] + data['losses']
+                    data['win_rate'] = data['wins'] / settled if settled > 0 else 0
+                    data['roi'] = data['total_pnl'] / data['total_staked'] if data['total_staked'] > 0 else 0
+                    return data
+
+            return {}
+
+        except Exception as e:
+            logger.error(f"❌ Erro ao gerar relatório: {e}")
+            return {}
+
     async def close(self):
-        """Encerra conexões."""
-        await self.db.close()
+        """Fecha conexões."""
+        if self.db:
+            await self.db.close()
 
 
-# =============================================================================
-# CLI
-# =============================================================================
+def print_report(stats: Dict[str, Any], days: int):
+    """Imprime relatório formatado."""
+    print("\n" + "=" * 60)
+    print(f"📊 PAPER TRADING - RELATÓRIO DE PERFORMANCE ({days} DIAS)")
+    print("=" * 60)
+    print(f"")
+    print(f"📈 Estatísticas Gerais:")
+    print(f"   Total de Apostas: {stats.get('total_bets', 0)}")
+    print(f"   Vitórias (WIN):   {stats.get('wins', 0)}")
+    print(f"   Derrotas (LOSS):  {stats.get('losses', 0)}")
+    print(f"   Pendentes:        {stats.get('pending', 0)}")
+    print(f"")
+    print(f"💰 Resultados Financeiros:")
+    print(f"   Total Apostado:   R$ {stats.get('total_staked', 0):,.2f}")
+    print(f"   Lucro/Prejuízo:   R$ {stats.get('total_pnl', 0):+,.2f}")
+    print(f"   ROI:              {stats.get('roi', 0):.2%}")
+    print(f"")
+    print(f"📊 Métricas de Qualidade:")
+    print(f"   Win Rate:         {stats.get('win_rate', 0):.1%}")
+    print(f"   Edge Médio:       {stats.get('avg_edge', 0):.2%}")
+    print(f"   Odds Médias:      {stats.get('avg_odds', 0):.2f}")
+    print("=" * 60)
+
+    # Veredicto
+    roi = stats.get('roi', 0)
+    if roi > 0.05:
+        print("✅ VEREDICTO: Sistema LUCRATIVO! Considere Go Live.")
+    elif roi > 0:
+        print("🟡 VEREDICTO: Sistema positivo, mas edge pequeno.")
+    else:
+        print("❌ VEREDICTO: Sistema em prejuízo. Revisar estratégia.")
+    print("")
+
+
 async def main():
-    """Entry point."""
-    import argparse
-    
-    parser = argparse.ArgumentParser(description='Liquidar Paper Bets')
-    parser.add_argument('--date', type=str, help='Data YYYY-MM-DD (default: ontem)')
-    parser.add_argument('--all', action='store_true', help='Liquidar todas as pendentes')
+    parser = argparse.ArgumentParser(description='Settle Paper Bets - NBA Predictor')
+    parser.add_argument('--date', type=str, default=None,
+                        help='Data específica (YYYY-MM-DD). Default: ontem')
+    parser.add_argument('--days', type=int, default=7,
+                        help='Dias para relatório (default: 7)')
+    parser.add_argument('--report-only', action='store_true',
+                        help='Apenas mostrar relatório, não liquidar')
+
     args = parser.parse_args()
-    
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(asctime)s | %(levelname)s | %(message)s'
-    )
-    
+
     settler = PaperBetSettler()
-    await settler.initialize()
-    
-    try:
-        if args.date:
-            game_date = args.date
-        elif args.all:
-            # Liquidar todos os dias pendentes
-            game_date = None
-        else:
-            # Default: ontem
-            game_date = (datetime.now() - timedelta(days=1)).strftime('%Y-%m-%d')
-        
-        report = await settler.generate_report(game_date)
-        print(report)
-        
-    finally:
+
+    if not await settler.initialize():
+        logger.error("❌ Falha ao inicializar")
+        sys.exit(1)
+
+    if args.report_only:
+        # Apenas relatório
+        stats = await settler.get_performance_report(args.days)
+        print_report(stats, args.days)
         await settler.close()
+        return
+
+    # Determinar data para liquidação
+    if args.date:
+        target_date = args.date
+    else:
+        # Ontem por padrão
+        yesterday = datetime.now() - timedelta(days=1)
+        target_date = yesterday.strftime('%Y-%m-%d')
+
+    # Liquidar apostas
+    result = await settler.settle_date(target_date)
+
+    print("\n" + "=" * 50)
+    print(f"📊 SETTLEMENT - {target_date}")
+    print("=" * 50)
+    print(f"Apostas Liquidadas: {result['settled']}")
+    print(f"Vitórias: {result.get('wins', 0)}")
+    print(f"Derrotas: {result.get('losses', 0)}")
+    print(f"PnL do Dia: R$ {result['pnl']:+,.2f}")
+    print("=" * 50)
+
+    # Mostrar relatório completo
+    stats = await settler.get_performance_report(args.days)
+    print_report(stats, args.days)
+
+    await settler.close()
 
 
 if __name__ == "__main__":

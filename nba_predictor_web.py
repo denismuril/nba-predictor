@@ -2131,33 +2131,117 @@ with tab7:
     # Paper Trading Stats
     st.subheader("📊 Paper Trading Status")
     try:
-        from betting.paper_trading import PaperTradingDB
-        import asyncio
+        db = get_db_manager()
 
-        async def get_paper_stats():
-            db = PaperTradingDB()
-            await db.initialize()
-            stats = await db.get_stats(7)
-            await db.close()
-            return stats
+        # Get paper trading stats (using direct SQL for sync compatibility)
+        import psycopg2
+        conn_str = os.getenv('DATABASE_URL', 'postgresql://nba:nba@localhost:5432/nba_predictor')
 
-        stats = asyncio.run(get_paper_stats())
+        try:
+            import psycopg2
+            conn = psycopg2.connect(conn_str)
+            cur = conn.cursor()
 
-        col_p1, col_p2, col_p3, col_p4 = st.columns(4)
-        with col_p1:
-            st.metric("Apostas (7d)", stats['total_bets'])
-        with col_p2:
-            st.metric("Win Rate", f"{stats['win_rate']:.1f}%")
-        with col_p3:
-            pnl_color = "normal" if stats['total_pnl'] >= 0 else "inverse"
-            st.metric("PnL", f"R$ {stats['total_pnl']:+,.2f}", delta_color=pnl_color)
-        with col_p4:
-            st.metric("ROI", f"{stats['roi']:+.1f}%")
+            # Get 7-day stats
+            cur.execute("""
+                SELECT
+                    COUNT(*) as total_bets,
+                    COUNT(CASE WHEN status = 'WIN' THEN 1 END) as wins,
+                    COUNT(CASE WHEN status = 'LOSS' THEN 1 END) as losses,
+                    COALESCE(SUM(CASE WHEN status != 'PENDING' THEN profit ELSE 0 END), 0) as total_pnl,
+                    COALESCE(SUM(stake), 0) as total_staked
+                FROM paper_bets
+                WHERE created_at >= NOW() - INTERVAL '7 days'
+            """)
+            row = cur.fetchone()
+
+            if row and row[0] > 0:
+                total_bets, wins, losses, total_pnl, total_staked = row
+                settled = wins + losses
+                win_rate = (wins / settled * 100) if settled > 0 else 0
+                roi = (total_pnl / total_staked * 100) if total_staked > 0 else 0
+
+                col_p1, col_p2, col_p3, col_p4 = st.columns(4)
+                with col_p1:
+                    st.metric("Apostas (7d)", total_bets)
+                with col_p2:
+                    st.metric("Win Rate", f"{win_rate:.1f}%")
+                with col_p3:
+                    pnl_color = "normal" if total_pnl >= 0 else "inverse"
+                    st.metric("PnL", f"R$ {total_pnl:+,.2f}", delta_color=pnl_color)
+                with col_p4:
+                    st.metric("ROI", f"{roi:+.1f}%")
+
+                # PnL Chart - Daily evolution
+                st.markdown("#### 📈 Evolução do PnL (Últimos 30 dias)")
+                cur.execute("""
+                    SELECT
+                        DATE(created_at) as date,
+                        SUM(CASE WHEN status != 'PENDING' THEN profit ELSE 0 END) as daily_pnl
+                    FROM paper_bets
+                    WHERE created_at >= NOW() - INTERVAL '30 days'
+                    GROUP BY DATE(created_at)
+                    ORDER BY date
+                """)
+                pnl_data = cur.fetchall()
+
+                if pnl_data:
+                    dates = [row[0] for row in pnl_data]
+                    daily_pnl = [float(row[1]) for row in pnl_data]
+                    cumulative_pnl = []
+                    running = 0
+                    for p in daily_pnl:
+                        running += p
+                        cumulative_pnl.append(running)
+
+                    fig = go.Figure()
+                    fig.add_trace(go.Scatter(
+                        x=dates,
+                        y=cumulative_pnl,
+                        mode='lines+markers',
+                        name='PnL Acumulado',
+                        line=dict(color='green' if cumulative_pnl[-1] >= 0 else 'red', width=2)
+                    ))
+                    fig.update_layout(
+                        height=300,
+                        margin=dict(l=20, r=20, t=30, b=20),
+                        xaxis_title="Data",
+                        yaxis_title="PnL Acumulado (R$)"
+                    )
+                    st.plotly_chart(fig, use_container_width=True)
+
+                # Recent Bets Table
+                st.markdown("#### 📋 Últimas 10 Apostas")
+                cur.execute("""
+                    SELECT matchup, bet_type, market_odds, stake, status, profit, created_at
+                    FROM paper_bets
+                    ORDER BY created_at DESC
+                    LIMIT 10
+                """)
+                recent_bets = cur.fetchall()
+
+                if recent_bets:
+                    df_bets = pd.DataFrame(recent_bets, columns=[
+                        'Matchup', 'Tipo', 'Odds', 'Stake', 'Status', 'Profit', 'Data'
+                    ])
+                    df_bets['Odds'] = df_bets['Odds'].apply(lambda x: f"{x:.2f}")
+                    df_bets['Stake'] = df_bets['Stake'].apply(lambda x: f"R$ {x:.2f}")
+                    df_bets['Profit'] = df_bets['Profit'].apply(lambda x: f"R$ {x:+.2f}")
+                    df_bets['Data'] = pd.to_datetime(df_bets['Data']).dt.strftime('%d/%m %H:%M')
+                    st.dataframe(df_bets, use_container_width=True, hide_index=True)
+
+            else:
+                st.info("📊 Nenhuma aposta paper registrada ainda.")
+
+            conn.close()
+
+        except ImportError:
+            st.info("📊 Paper trading não disponível (psycopg2 não instalado)")
+        except Exception as e:
+            st.info(f"📊 Paper trading não inicializado: {str(e)[:50]}")
 
     except Exception as e:
         st.info("📊 Paper trading não inicializado. Execute: python betting/paper_trading.py")
-
-    st.markdown("---")
 
     # Panic Button
     st.subheader("🚨 Controle de Emergência")

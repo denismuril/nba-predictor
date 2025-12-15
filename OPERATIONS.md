@@ -1,8 +1,8 @@
 # 📋 OPERATIONS.md - Runbook de Operação Diária
 
-## 🎯 NBA Predictor v24.0 - Go Live Operations
+## 🎯 NBA Predictor v25.0 - Go Live Operations
 
-Este documento descreve a rotina operacional ideal para operar o sistema NBA Predictor em modo de produção.
+Este documento descreve a rotina operacional para operar o sistema em modo de produção com Paper Trading.
 
 ---
 
@@ -45,11 +45,13 @@ http://localhost:4200
 prefect deployment run 'NBA Daily Pipeline/daily-pipeline'
 
 # Rodar settlement para data específica
-python flows/daily_pipeline.py settle --date 2024-12-14
+python betting/settle_paper_bets.py --date 2024-12-14
 
 # Ver logs de um flow
 prefect flow-run logs <flow-run-id>
 ```
+
+---
 
 ## 🕐 Considerações de Fuso Horário
 
@@ -69,13 +71,13 @@ prefect flow-run logs <flow-run-id>
 
 ---
 
-## 📊 Mode de Operação
+## 📊 Modo de Operação
 
 ### 1️⃣ Paper Trading (Primeiros 7 Dias)
 
 ```bash
-# Iniciar simulação
-python betting/paper_trading.py --bankroll 1000
+# Iniciar daemon
+python betting/paper_trading.py --bankroll 1000 --daemon
 
 # Verificar apostas registradas
 python betting/paper_trading.py --report
@@ -163,6 +165,20 @@ touch data/.STOP_ALL_BETS
 rm data/.STOP_ALL_BETS
 ```
 
+### Verificar Logs
+
+```bash
+# Logs do daemon paper trading
+tail -f logs/paper_trading.log
+
+# Logs do Prefect
+prefect flow-run logs <FLOW_ID>
+
+# Docker logs (se usando containers)
+docker logs nba-predictor-web
+docker logs nba-predictor-sniper
+```
+
 ### Redis Down
 
 ```bash
@@ -171,8 +187,6 @@ redis-cli ping
 
 # Reiniciar
 sudo systemctl restart redis
-
-# Fallback: sistema opera sem cache
 ```
 
 ### PostgreSQL Down
@@ -192,7 +206,7 @@ sudo systemctl restart postgresql
 ### Segunda-feira (Manhã)
 
 - [ ] Revisar performance da semana anterior
-- [ ] Executar relatório: `python betting/paper_trading.py --report --days 7`
+- [ ] Executar relatório: `python betting/settle_paper_bets.py --report-only --days 7`
 - [ ] Verificar calibração do modelo
 - [ ] Limpar cache antigo
 
@@ -220,6 +234,7 @@ sudo systemctl restart postgresql
 
 - **Telegram Alertas**: @nba_tigrinho_bot
 - **Dashboard**: <http://localhost:8501>
+- **Prefect UI**: <http://localhost:4200>
 - **Logs**: `logs/orchestrator.log`
 
 ---
@@ -228,5 +243,5 @@ sudo systemctl restart postgresql
 
 | Data | Mudança | Responsável |
 |------|---------|-------------|
-| 2024-12-14 | Go Live v24.0 - Paper Trading | Sistema |
+| 2024-12-14 | Go Live v25.0 - Paper Trading | Sistema |
 | - | - | - |
