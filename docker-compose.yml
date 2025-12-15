@@ -1,283 +1,267 @@
-version: '3.8'
-
-# ============================================
-# NBA Predictor v23.0 - Enterprise Edition
-# ============================================
-# Serviços:
-# - PostgreSQL: Banco de dados principal
-# - Redis: Cache distribuído
-# - Prefect: Orquestração de workflows
-# - MLflow: Rastreamento de modelos
-# - Web: Dashboard Streamlit
-# - Scheduler: Orchestrator cron
-# - Sniper: Monitor de odds em tempo real
+# =============================================================================
+# NBA Predictor v25.0 - Production Docker Compose
+# =============================================================================
+# Features:
+# - Restart policies robustas (sempre reinicia)
+# - Health checks para todos os serviços
+# - Logging centralizado
+# - Rede isolada
+# - Volumes persistentes
+# =============================================================================
 
 services:
-  # ============= INFRAESTRUTURA =============
-  
+  # =========================================================================
   # PostgreSQL - Banco de dados principal
+  # =========================================================================
   postgres:
     image: postgres:15-alpine
-    container_name: nba-predictor-postgres
+    container_name: nba-postgres
+    restart: always
     environment:
-      POSTGRES_USER: nba_admin
-      POSTGRES_PASSWORD: ${DB_PASS:-nba_secure_pass_2025}
-      POSTGRES_DB: nba_predictor_db
+      POSTGRES_USER: ${POSTGRES_USER:-nba_admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-nba_predictor_db}
       PGDATA: /var/lib/postgresql/data/pgdata
-    ports:
-      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./scripts/init_db.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "5432:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U nba_admin -d nba_predictor_db"]
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-nba_admin} -d ${POSTGRES_DB:-nba_predictor_db}" ]
       interval: 10s
       timeout: 5s
       retries: 5
-    restart: unless-stopped
+      start_period: 30s
     networks:
       - nba-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
-  # Redis - Cache distribuído
+  # =========================================================================
+  # Redis - Cache de alta velocidade
+  # =========================================================================
   redis:
     image: redis:7-alpine
-    container_name: nba-predictor-redis
+    container_name: nba-redis
+    restart: always
     command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
-    ports:
-      - "6379:6379"
     volumes:
       - redis_data:/data
+    ports:
+      - "6379:6379"
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: [ "CMD", "redis-cli", "ping" ]
       interval: 10s
       timeout: 5s
       retries: 5
-    restart: unless-stopped
     networks:
       - nba-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
-  # ============= ORQUESTRAÇÃO =============
-  
-  # Prefect Server - Orquestração de Workflows (UI)
-  prefect:
-    image: prefecthq/prefect:2-python3.10
-    container_name: nba-predictor-prefect
-    command: prefect server start --host 0.0.0.0
-    environment:
-      PREFECT_SERVER_API_HOST: 0.0.0.0
-      PREFECT_API_DATABASE_CONNECTION_URL: postgresql+asyncpg://nba_admin:${DB_PASS:-nba_secure_pass_2025}@postgres:5432/nba_predictor_db
-    ports:
-      - "4200:4200"
-    depends_on:
-      postgres:
-        condition: service_healthy
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:4200/api/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-    restart: unless-stopped
-    networks:
-      - nba-network
-
-  # MLflow Server - Rastreamento de Modelos
-  mlflow:
-    image: ghcr.io/mlflow/mlflow:latest
-    container_name: nba-predictor-mlflow
-    command: >
-      mlflow server 
-        --backend-store-uri postgresql://nba_admin:${DB_PASS:-nba_secure_pass_2025}@postgres:5432/nba_predictor_db
-        --default-artifact-root /mlflow/artifacts
-        --host 0.0.0.0
-        --port 5000
-    environment:
-      MLFLOW_TRACKING_URI: http://mlflow:5000
-    ports:
-      - "5000:5000"
-    volumes:
-      - mlflow_artifacts:/mlflow/artifacts
-    depends_on:
-      postgres:
-        condition: service_healthy
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-    restart: unless-stopped
-    networks:
-      - nba-network
-
-  # ============= APLICAÇÃO =============
-  
-  # Web Interface (Streamlit Dashboard)
+  # =========================================================================
+  # Streamlit Web - Dashboard principal
+  # =========================================================================
   web:
-    build: 
-      context: .
-      dockerfile: Dockerfile
-    container_name: nba-predictor-web
-    ports:
-      - "8501:8501"
-    environment:
-      - PYTHONUNBUFFERED=1
-      - TZ=America/Sao_Paulo
-      - DB_TYPE=postgres
-      - DB_HOST=postgres
-      - DB_PORT=5432
-      - DB_NAME=nba_predictor_db
-      - DB_USER=nba_admin
-      - DB_PASS=${DB_PASS:-nba_secure_pass_2025}
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-      - MLFLOW_TRACKING_URI=http://mlflow:5000
-      - PREFECT_API_URL=http://prefect:4200/api
-    env_file:
-      - .env
-    volumes:
-      - ./data:/app/data
-      - ./models:/app/models
-      - ./logs:/app/logs
-      - ./results:/app/results
-      - ./monitoring:/app/monitoring
-    depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-    restart: unless-stopped
-    command: streamlit run nba_predictor_web.py --server.port=8501 --server.address=0.0.0.0
-    networks:
-      - nba-network
-
-  # Daily Orchestrator (Scheduler)
-  scheduler:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: nba-predictor-scheduler
+    container_name: nba-web
+    restart: always
     environment:
-      - PYTHONUNBUFFERED=1
-      - TZ=America/Sao_Paulo
-      - DB_TYPE=postgres
-      - DB_HOST=postgres
-      - DB_PORT=5432
-      - DB_NAME=nba_predictor_db
-      - DB_USER=nba_admin
-      - DB_PASS=${DB_PASS:-nba_secure_pass_2025}
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=${POSTGRES_USER:-nba_admin}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB:-nba_predictor_db}
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-      - MLFLOW_TRACKING_URI=http://mlflow:5000
-      - PREFECT_API_URL=http://prefect:4200/api
-    env_file:
-      - .env
-    volumes:
-      - ./data:/app/data
-      - ./models:/app/models
-      - ./logs:/app/logs
-      - ./results:/app/results
-      - ./monitoring:/app/monitoring
+      - ODDS_API_KEY=${ODDS_API_KEY}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
+    ports:
+      - "8501:8501"
     depends_on:
       postgres:
         condition: service_healthy
       redis:
         condition: service_healthy
-      prefect:
-        condition: service_healthy
-    restart: unless-stopped
-    # Cron: Rodar orchestrator às 12:30 (horário de Brasília)
-    command: >
-      sh -c "
-      echo '30 12 * * * cd /app && python orchestrator.py >> /app/logs/cron.log 2>&1' | crontab -
-      && echo '0 9 * * 1 cd /app && python scripts/health_check.py >> /app/logs/health.log 2>&1' | crontab -
-      && cron -f
-      "
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8501/_stcore/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./models:/app/models
     networks:
       - nba-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
 
-  # Sniper Engine - Monitor de Odds em Tempo Real
+  # =========================================================================
+  # Orchestrator - Pipeline diário (sempre reinicia)
+  # =========================================================================
+  orchestrator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nba-orchestrator
+    restart: always
+    command: python orchestrator.py
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=${POSTGRES_USER:-nba_admin}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB:-nba_predictor_db}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - ODDS_API_KEY=${ODDS_API_KEY}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
+      - SNIPER_ENABLED=${SNIPER_ENABLED:-false}
+      - NEWS_FILTER_ENABLED=${NEWS_FILTER_ENABLED:-true}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./models:/app/models
+    networks:
+      - nba-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
+
+  # =========================================================================
+  # Paper Trading Daemon - Simulação 24/7
+  # =========================================================================
+  paper-trading:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nba-paper-trading
+    restart: always
+    command: python betting/paper_trading.py --bankroll 1000 --daemon
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=${POSTGRES_USER:-nba_admin}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB:-nba_predictor_db}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    networks:
+      - nba-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+
+  # =========================================================================
+  # Sniper Engine - Monitoramento de odds em tempo real (opcional)
+  # =========================================================================
   sniper:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: nba-predictor-sniper
+    container_name: nba-sniper
+    restart: always
+    command: python betting/sniper_engine.py --mode monitor
     environment:
-      - PYTHONUNBUFFERED=1
-      - TZ=America/Sao_Paulo
-      - DB_TYPE=postgres
-      - DB_HOST=postgres
-      - DB_PORT=5432
-      - DB_NAME=nba_predictor_db
-      - DB_USER=nba_admin
-      - DB_PASS=${DB_PASS:-nba_secure_pass_2025}
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=${POSTGRES_USER:-nba_admin}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB:-nba_predictor_db}
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-    env_file:
-      - .env
-    volumes:
-      - ./data:/app/data
-      - ./logs:/app/logs
+      - ODDS_API_KEY=${ODDS_API_KEY}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
     depends_on:
       postgres:
         condition: service_healthy
       redis:
         condition: service_healthy
-    restart: unless-stopped
-    command: python -m betting.sniper_engine
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
     networks:
       - nba-network
+    profiles:
+      - sniper # Só roda com: docker-compose --profile sniper up
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
 
-  # Telegram Bot
-  telegram:
+  # =========================================================================
+  # DB Maintenance - Manutenção semanal (cron dentro do container)
+  # =========================================================================
+  maintenance:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: nba-predictor-telegram
+    container_name: nba-maintenance
+    restart: "no" # Não reinicia após execução
+    command: python scripts/db_maintenance.py --execute
     environment:
-      - PYTHONUNBUFFERED=1
-      - TZ=America/Sao_Paulo
-      - DB_TYPE=postgres
-      - DB_HOST=postgres
-      - DB_PORT=5432
-      - DB_NAME=nba_predictor_db
-      - DB_USER=nba_admin
-      - DB_PASS=${DB_PASS:-nba_secure_pass_2025}
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-    env_file:
-      - .env
-    volumes:
-      - ./data:/app/data
-      - ./models:/app/models
-      - ./logs:/app/logs
-      - ./results:/app/results
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=${POSTGRES_USER:-nba_admin}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB:-nba_predictor_db}
     depends_on:
       postgres:
         condition: service_healthy
-      redis:
-        condition: service_healthy
-    restart: unless-stopped
-    command: python telegram_bot/nba_tigrinho_bot.py
+    volumes:
+      - ./logs:/app/logs
     networks:
       - nba-network
+    profiles:
+      - maintenance # Só roda com: docker-compose --profile maintenance run maintenance
 
-# ============= REDE =============
-
+# =============================================================================
+# Networks
+# =============================================================================
 networks:
   nba-network:
-    name: nba-predictor-network
     driver: bridge
 
-# ============= VOLUMES =============
-
+# =============================================================================
+# Volumes
+# =============================================================================
 volumes:
   postgres_data:
-    name: nba-predictor-postgres-data
+    driver: local
   redis_data:
-    name: nba-predictor-redis-data
-  mlflow_artifacts:
-    name: nba-predictor-mlflow-artifacts
+    driver: local

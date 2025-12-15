@@ -31,6 +31,16 @@ def add_domain_expert_features(df: pd.DataFrame) -> pd.DataFrame:
     """
     logger.info("🎯 Adicionando Domain Expert Features...")
     
+    # ========== PACE FEATURES (Dean Oliver) ==========
+    # Importar e usar PaceCalculator para rolling features
+    try:
+        from ml_pipeline.pace_calculator import add_pace_features, add_rolling_pace_features
+        df = add_pace_features(df)
+        df = add_rolling_pace_features(df, windows=[5, 10])
+        logger.info("✅ Pace features (rolling) adicionadas via PaceCalculator")
+    except Exception as e:
+        logger.warning(f"⚠️ PaceCalculator falhou, usando fallback: {e}")
+    
     # Grupo 1: Matchup-Specific
     df = add_pace_differential(df)
     df = add_defensive_rating_matchup(df)
