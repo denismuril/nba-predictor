@@ -2,6 +2,44 @@
 
 ---
 
+## v23.1 - Correções de Imports e Validação (14 Dez 2025)
+
+### 🔧 Correções Críticas
+
+| Correção | Descrição |
+|----------|-----------|
+| **Import Errors** | Corrigidos imports obsoletos no orchestrator e ETL flow |
+| **GameSchema Validation** | Corrigida geração de `game_id` e adicionados aliases de times |
+| **APIs Removidas** | Removidas etapas de Twitter e Odds (keys expiradas) do pipeline |
+
+### 📂 Arquivos Modificados
+
+- `orchestrator.py`:
+  - `get_todays_games` → `obter_schedule`
+  - `get_all_injuries` → `InjuryManager().get_latest_injuries`
+  - Removidas etapas Twitter Sentiment e Fetch Real Odds (APIs pagas)
+
+- `etl/flows/daily_data_flow.py`:
+  - `get_todays_games` → `obter_schedule`
+  - `get_today_odds` → `obter_odds`
+  - `get_all_injuries` → `InjuryManager().get_latest_injuries`
+  - Corrigida geração de `game_id` (normaliza antes de gerar)
+
+- `etl/schemas/__init__.py`:
+  - Adicionados aliases de times: `BRK`, `CHO`, `PHO`
+  - Migrados decorators Pydantic v1 → v2 (`@model_validator`, `@field_validator`)
+
+- `feature_store/store.py`:
+  - Corrigidas 4 queries SQL para PostgreSQL (GROUP BY com AVG)
+
+### ✅ Verificação
+
+- Health check: ✅ Passou
+- Pytest: ✅ Todos os testes passaram
+- Pipeline: ✅ 8 jogos, 19 lesões, 8 previsões geradas
+
+---
+
 ## v23.0 - Grande Integração Enterprise (14 Dez 2025)
 
 ### 🚀 A Grande Integração

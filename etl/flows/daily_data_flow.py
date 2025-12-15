@@ -148,18 +148,18 @@ async def fetch_odds(games: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     log.info(f"💰 Buscando odds para {len(games)} jogos...")
     
     try:
-        from data.scrapers.odds_scraper import get_odds_for_date
-        from datetime import datetime
+        from data.scrapers.odds_scraper import obter_odds
         
-        today = datetime.now().strftime('%Y-%m-%d')
-        odds_data = await asyncio.to_thread(get_odds_for_date, today)
+        odds_data = await asyncio.to_thread(obter_odds)
         
         if not odds_data:
             log.warning("⚠️ Nenhuma odd encontrada")
             return []
         
-        log.info(f"✅ Odds coletadas para {len(odds_data)} jogos")
-        return odds_data
+        # Converter dict para lista
+        odds_list = list(odds_data.values()) if isinstance(odds_data, dict) else odds_data
+        log.info(f"✅ Odds coletadas para {len(odds_list)} jogos")
+        return odds_list
         
     except Exception as e:
         log.error(f"❌ Erro ao buscar odds: {e}")
