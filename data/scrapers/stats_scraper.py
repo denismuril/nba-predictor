@@ -489,37 +489,101 @@ def get_shot_quality_data():
         
         # Buscar dados de arremesso por zona
         shot_locs = leaguedashteamshotlocations.LeagueDashTeamShotLocations(
-            season='2025-26',  # Ajustado para temporada atual
-            distance_range='5ft Range'
+            season='2025-26',
+            distance_range='By Zone'
         ).get_data_frames()[0]
         
-        # O DataFrame retornado tem MultiIndex nas colunas. Precisamos achatar ou acessar corretamente.
-        # Estrutura típica: ('Restricted Area', 'FGM'), ('Restricted Area', 'FGA'), ...
+        if shot_locs.empty:
+            logger.warning("⚠️ Shot Locations retornou vazio")
+            return {}
         
-        # Simplificação: Usar zonas gerais
-        # Zonas: Restricted Area, In The Paint (Non-RA), Mid-Range, Left Corner 3, Right Corner 3, Above the Break 3
+        # Flatten columns se MultiIndex
+        if isinstance(shot_locs.columns, pd.MultiIndex):
+            shot_locs.columns = ['_'.join(col).strip() for col in shot_locs.columns]
         
-        # Como a API retorna colunas complexas, vamos simplificar usando um endpoint mais direto se possível,
-        # ou processar este dataframe com cuidado.
+        # Zonas típicas e seus valores esperados de eFG%
+        # Baseado em médias históricas da NBA
+        ZONE_EXPECTED_EFG = {
+            'Restricted Area': 0.63,      # Layups/dunks
+            'In The Paint (Non-RA)': 0.40,  # Floaters
+            'Mid-Range': 0.40,              # Midrange jumpers
+            'Left Corner 3': 0.40,          # Corner 3
+            'Right Corner 3': 0.40,         # Corner 3
+            'Above the Break 3': 0.37,      # Top of key 3
+            'Backcourt': 0.10               # Heaves
+        }
         
-        # Alternativa mais robusta: Usar dados gerais de arremesso e calcular xEFG baseado em perfil de arremesso
-        # Mas vamos tentar processar o retorno do endpoint primeiro.
+        result = {}
         
-        # Calcular médias da liga por zona (FGA% e FG%)
-        # Para simplificar e evitar erros de parsing de colunas complexas agora,
-        # vamos usar uma heurística baseada em 4 Factors que já temos ou retornar um mock inteligente
-        # se a API falhar.
+        # Procurar colunas de team
+        team_col = None
+        for col in shot_locs.columns:
+            if 'TEAM' in col.upper() and 'ABBREVIATION' in col.upper():
+                team_col = col
+                break
+            elif col.upper() == 'TEAM_ABBREVIATION':
+                team_col = col
+                break
         
-        # MOCK INTELIGENTE (Temporário até validar estrutura exata da API em runtime)
-        # Em produção, isso seria substituído pelo cálculo real iterando as colunas.
-        # Por enquanto, vamos retornar vazio para não quebrar, mas com log de implementação.
+        if not team_col:
+            # Fallback: usar primeira coluna como identificador
+            team_col = shot_locs.columns[0]
         
-        # TODO: Implementar parser completo de ShotLocations
-        logger.warning("⚠️  Shot Quality: Parser completo ainda não implementado. Retornando dados neutros.")
-        return {}
+        # Procurar colunas de FGM/FGA por zona
+        fgm_cols = [c for c in shot_locs.columns if 'FGM' in c.upper()]
+        fga_cols = [c for c in shot_locs.columns if 'FGA' in c.upper()]
+        
+        if not fgm_cols or not fga_cols:
+            logger.warning("⚠️ Colunas FGM/FGA não encontradas no formato esperado")
+            return {}
+        
+        for _, row in shot_locs.iterrows():
+            team = str(row[team_col])[:3].upper()  # Normalizar para 3 letras
+            
+            total_fga = 0
+            weighted_xefg = 0
+            actual_fgm = 0
+            
+            # Calcular xEFG ponderado por zona
+            for fgm_col, fga_col in zip(fgm_cols, fga_cols):
+                try:
+                    fgm = float(row.get(fgm_col, 0) or 0)
+                    fga = float(row.get(fga_col, 0) or 0)
+                    
+                    if fga > 0:
+                        # Identificar zona pelo nome da coluna
+                        zone_efg = 0.45  # Default
+                        for zone, efg in ZONE_EXPECTED_EFG.items():
+                            if zone.lower().replace(' ', '') in fgm_col.lower().replace(' ', ''):
+                                zone_efg = efg
+                                break
+                        
+                        total_fga += fga
+                        weighted_xefg += fga * zone_efg
+                        actual_fgm += fgm
+                except (ValueError, TypeError):
+                    continue
+            
+            if total_fga > 0:
+                xefg = weighted_xefg / total_fga
+                actual_efg = actual_fgm / total_fga
+                sq_score = actual_efg / xefg if xefg > 0 else 1.0
+                
+                result[team] = {
+                    'sq_score': round(sq_score, 3),
+                    'xEFG': round(xefg, 3),
+                    'actual_EFG': round(actual_efg, 3)
+                }
+        
+        if result:
+            logger.info(f"✅ Shot Quality calculado para {len(result)} times")
+        else:
+            logger.warning("⚠️ Shot Quality: Nenhum time processado")
+            
+        return result
 
     except Exception as e:
-        logger.warning(f"⚠️  Erro ao buscar Shot Quality data: {e}")
+        logger.warning(f"⚠️ Erro ao buscar Shot Quality data: {e}")
         return {} 
 
 def obter_game_log(team_abbr, season='2025-26'):

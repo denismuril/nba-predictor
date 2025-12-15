@@ -592,6 +592,15 @@ def load_historical_data(seasons=None, apply_weights=False, weight_config=None, 
     from ml_pipeline.feature_engineering_v2 import add_rolling_four_factors
     df = add_rolling_four_factors(df, windows=[5, 10, 30])
 
+    # 3.0.1 v25.0: Adicionar Pace Volatility Features (Totals model)
+    # Math-Context: Volatilidade de pace prediz variância em totals
+    try:
+        from ml_pipeline.pace_volatility import add_pace_volatility_features
+        df = add_pace_volatility_features(df, windows=[5, 10])
+        logger.info("   ✅ v25.0 Pace Volatility features added")
+    except Exception as e:
+        logger.warning(f"   ⚠️ Pace Volatility features failed: {e}")
+
     # 3.1 v19.0: Adicionar Context-Aware Rolling Features (Home vs Away)
     try:
         from ml_pipeline.feature_engineering_v2 import add_contextual_rolling_features
