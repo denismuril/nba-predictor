@@ -5,7 +5,7 @@
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-15T09:08:58.260786"
+    "updated_at": "2025-12-15T10:38:00.649077"
   },
   {
     "player_name": "Tyler Herro",
@@ -13,7 +13,7 @@
     "status": "AVAILABLE",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-15T09:08:58.260824"
+    "updated_at": "2025-12-15T10:38:00.649103"
   },
   {
     "player_name": "Anthony Davis",
@@ -21,7 +21,7 @@
     "status": "QUESTIONABLE",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-15T09:08:58.260834"
+    "updated_at": "2025-12-15T10:38:00.649110"
   },
   {
     "player_name": "Elijah Harkless",
@@ -29,7 +29,7 @@
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-15T09:08:58.260841"
+    "updated_at": "2025-12-15T10:38:00.649116"
   },
   {
     "player_name": "Tari Eason",
@@ -37,7 +37,7 @@
     "status": "QUESTIONABLE",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-15T09:08:58.260848"
+    "updated_at": "2025-12-15T10:38:00.649121"
   },
   {
     "player_name": "Tamar Bates",
@@ -45,7 +45,7 @@
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-15T09:08:58.260855"
+    "updated_at": "2025-12-15T10:38:00.649125"
   },
   {
     "player_name": "Brandon Clarke",
@@ -53,7 +53,7 @@
     "status": "DOUBTFUL",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-15T09:08:58.260861"
+    "updated_at": "2025-12-15T10:38:00.649130"
   },
   {
     "player_name": "Nicolas Batum",
@@ -61,6 +61,6 @@
     "status": "QUESTIONABLE",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-15T09:08:58.260867"
+    "updated_at": "2025-12-15T10:38:00.649135"
   }
 ]

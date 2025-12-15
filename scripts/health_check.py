@@ -318,7 +318,7 @@ def check_integrations():
 
 def check_sniper_engine():
     """Verifica Sniper Engine (novo em v23.0)."""
-    logger.info("\n🔍 Verificando Sniper Engine v23.0...")
+    logger.info("\n🔍 Verificando Sniper Engine v25.0...")
     
     try:
         from betting.sniper_engine import SniperEngine, get_sniper_engine
@@ -351,18 +351,18 @@ def check_sniper_engine():
         return False
 
 
-def check_orchestrator_v23():
-    """Verifica Enterprise Orchestrator v23.0."""
-    logger.info("\n🔍 Verificando Enterprise Orchestrator v23.0...")
+def check_orchestrator_v25():
+    """Verifica Enterprise Orchestrator v25.0 (Go Live Edition)."""
+    logger.info("\n🔍 Verificando Enterprise Orchestrator v25.0...")
     
     try:
         from orchestrator import EnterpriseOrchestrator, VERSION
         
-        # Verificar versão
-        if VERSION == "23.0":
+        # Verificar versão (aceita 24.0 ou 25.0)
+        if VERSION in ["24.0", "25.0"]:
             logger.info(f"✅ Orchestrator v{VERSION} OK")
         else:
-            logger.warning(f"⚠️ Orchestrator versão {VERSION} (esperado 23.0)")
+            logger.warning(f"⚠️ Orchestrator versão {VERSION} (esperado 25.0)")
         
         # Verificar que classe tem métodos esperados
         orchestrator = EnterpriseOrchestrator()
@@ -392,7 +392,7 @@ def main():
     """Executa todos os health checks."""
 
     logger.info("="*60)
-    logger.info("🏥 HEALTH CHECK - NBA Predictor v23.0 (Grande Integração)")
+    logger.info("🏥 HEALTH CHECK - NBA Predictor v25.0 (Go Live Edition)")
     logger.info("="*60)
 
     checks = [
@@ -404,7 +404,7 @@ def main():
         ("Infraestrutura Enterprise", check_enterprise_infra),
         ("Integrações", check_integrations),
         ("Sniper Engine", check_sniper_engine),
-        ("Orchestrator v23", check_orchestrator_v23)
+        ("Orchestrator v25", check_orchestrator_v25)
     ]
 
 
