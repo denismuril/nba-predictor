@@ -1,6 +1,6 @@
 {
-  "hits": 100,
+  "hits": 102,
   "misses": 93,
-  "expired": 66,
-  "cached_items": 71
+  "expired": 70,
+  "cached_items": 75
 }

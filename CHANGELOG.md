@@ -2,6 +2,69 @@
 
 ---
 
+## v26.0 - Odds Module Refactoring (15 Dez 2025)
+
+### 🔄 Arquitetura Multi-Provider para Odds
+
+Refatoração completa do módulo de coleta de odds para priorizar **Web Scraping gratuito** sobre APIs pagas, com padrão Chain of Responsibility.
+
+### ✅ Novos Componentes
+
+| Componente | Descrição |
+|------------|-----------|
+| **OddsProvider Interface** | Interface abstrata para padronizar provedores |
+| **SBRScraper** | Scraper do Sportsbook Review (TIER 1) |
+| **OddsPediaProvider** | Adaptador para OddsPedia com JSON-LD (TIER 2) |
+| **TheOddsAPIProvider** | API paga com controle de cota via Redis (TIER 3) |
+| **OddsDataManager** | Orquestrador Chain of Responsibility |
+| **QuotaExceededException** | Exceção para controle de cota da API |
+
+### 📂 Novos Arquivos Criados
+
+```
+data/
+├── interfaces/
+│   └── odds_provider.py      # Interface OddsProvider + GameOdds dataclass
+├── providers/
+│   ├── sbr_scraper.py        # Scraper SBR (Playwright + stealth)
+│   ├── oddspedia_provider.py # Adaptador OddsPedia
+│   └── the_odds_api.py       # API paga com quota Redis
+└── odds_manager.py           # OddsDataManager orchestrator
+
+exceptions/
+└── odds_exceptions.py        # QuotaExceededException
+```
+
+### 🔧 Arquivos Modificados
+
+- `data/scrapers/odds_web_scraper.py` - Adicionado `_extract_from_json_ld()` para extração confiável via dados estruturados
+- `Dockerfile` - Adicionado Playwright install em stages builder e runtime
+
+### 🎯 Hierarquia de Fallback
+
+```
+SBRScraper (TIER 1, Gratuito)
+    ↓ falha
+OddsPediaProvider (TIER 2, Gratuito + JSON-LD)
+    ↓ falha
+TheOddsAPIProvider (TIER 3, Pago + Quota Control)
+```
+
+### 💰 Economia de Créditos
+
+- **Controle de Cota:** Redis-based counter limita uso da API paga a 450/500 chamadas diárias
+- **Prioridade Gratuita:** Scrapers gratuitos são tentados primeiro
+- **JSON-LD Extraction:** Método mais confiável que seletores CSS
+
+### 🐳 Docker Ready
+
+```bash
+# Dockerfile já inclui Playwright
+docker-compose up -d
+```
+
+---
+
 ## v25.0 - Go Live Edition (14 Dez 2025)
 
 ### 🚀 Paper Trading & Shadow Mode

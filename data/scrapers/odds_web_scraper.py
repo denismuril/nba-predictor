@@ -208,13 +208,19 @@ class OddsPediaScraper:
         odds_dict = {}
         soup = BeautifulSoup(html, 'lxml')
         
-        # Tentar diferentes seletores (site pode mudar)
+        # PRIORIDADE 1: Tentar extrair de JSON-LD (mais confiável)
+        json_ld_games = self._extract_from_json_ld(soup)
+        if json_ld_games:
+            logger.info(f"✅ Extraídos {len(json_ld_games)} jogos via JSON-LD")
+            return json_ld_games
+        
+        # PRIORIDADE 2: Tentar diferentes seletores CSS (site pode mudar)
         selectors = [
+            '[class*="game-list-item"]',
+            '.match-row',
             'div[class*="match"]',
             'div[class*="event"]',
             'div[class*="game"]',
-            'article[class*="match"]',
-            'li[class*="match"]',
         ]
         
         games = []
@@ -237,6 +243,75 @@ class OddsPediaScraper:
                     odds_dict[game_key] = game_data
             except Exception as e:
                 logger.debug(f"Erro ao extrair jogo: {e}")
+                continue
+        
+        return odds_dict
+
+    def _extract_from_json_ld(self, soup: BeautifulSoup) -> Dict:
+        """
+        Extrai dados de jogos do JSON-LD estruturado na página.
+        
+        O JSON-LD é mais confiável que seletores CSS pois é dado estruturado.
+        
+        Args:
+            soup: Objeto BeautifulSoup da página
+            
+        Returns:
+            Dict com jogos extraídos
+        """
+        import json
+        odds_dict = {}
+        
+        scripts = soup.select('script[type="application/ld+json"]')
+        
+        for script in scripts:
+            try:
+                content = script.string
+                if not content or 'SportsEvent' not in content:
+                    continue
+                    
+                data = json.loads(content)
+                
+                # Verifica se é um SportsEvent
+                if data.get('@type') != 'SportsEvent':
+                    continue
+                
+                # Extrai times
+                hometeam = data.get('hometeam', [])
+                awayteam = data.get('awayteam', [])
+                
+                if not hometeam or not awayteam:
+                    continue
+                
+                home_name = hometeam[0].get('name') if hometeam else None
+                away_name = awayteam[0].get('name') if awayteam else None
+                
+                if not home_name or not away_name:
+                    continue
+                
+                # Normaliza nomes
+                home_team = self._normalize_team_name(home_name)
+                away_team = self._normalize_team_name(away_name)
+                
+                if not home_team or not away_team:
+                    continue
+                
+                # Gera chave e dados
+                game_key = f"{home_team} vs {away_team}"
+                game_data = {
+                    "home_team": home_team,
+                    "away_team": away_team,
+                    "home_odds": 1.90,  # Odds default - JSON-LD não tem odds
+                    "away_odds": 1.90,
+                    "source": "oddspedia_scraper",
+                    "timestamp": datetime.now().isoformat(),
+                    "start_date": data.get('startDate'),
+                }
+                
+                odds_dict[game_key] = game_data
+                
+            except (json.JSONDecodeError, KeyError, TypeError) as e:
+                logger.debug(f"Erro ao parsear JSON-LD: {e}")
                 continue
         
         return odds_dict

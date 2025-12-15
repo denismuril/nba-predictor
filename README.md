@@ -1,4 +1,4 @@
-# 🏀 NBA Predictor v25.0 - Go Live Edition
+# 🏀 NBA Predictor v26.0 - Odds Module Refactoring
 
 [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-orange.svg)](LICENSE)
@@ -13,6 +13,30 @@
 [![Season](https://img.shields.io/badge/Season-2025--26-orange.svg)]()
 
 Sistema profissional de análise quantitativa e previsão de jogos da NBA usando **Advanced Machine Learning (Ensemble V6)**, **PostgreSQL + Redis**, **Prefect Orchestration**, **Paper Trading**, **Sniper Engine**, **SafeKelly Bankroll Management** e **Shadow Mode** para validação antes do Go Live.
+
+---
+
+## 🎉 Destaques v26.0 (15 Dez 2025) - **Odds Module Refactoring**
+
+### 🔄 Arquitetura Multi-Provider para Odds
+
+Refatoração completa do módulo de coleta de odds priorizando **Web Scraping gratuito** sobre APIs pagas.
+
+### ✅ Novidades
+
+| Feature | Descrição |
+|---------|-----------|
+| **OddsProvider Interface** | Interface abstrata para padronizar provedores |
+| **OddsDataManager** | Orquestrador com Chain of Responsibility |
+| **JSON-LD Extraction** | Extração confiável via dados estruturados |
+| **Quota Control** | Redis-based counter para API paga |
+| **Multi-Provider Fallback** | SBR → OddsPedia → TheOddsAPI |
+
+### 🎯 Hierarquia de Fallback
+
+```
+SBRScraper (TIER 1, Gratuito) → OddsPediaProvider (TIER 2, JSON-LD) → TheOddsAPIProvider (TIER 3, Pago)
+```
 
 ---
 
@@ -501,11 +525,11 @@ Este software é para fins educacionais e de pesquisa. O autor não se responsab
 
 ## 📞 Suporte
 
-**Versão:** v25.0 (Go Live Edition)
+**Versão:** v26.0 (Odds Module Refactoring)
 **Status:** ✅ Production Ready
 **Temporada:** 2025-26
-**Última Atualização:** 14 Dezembro 2025
-**Novidades:** Paper Trading, Settlement Script, System Health Dashboard, Prefect Orchestration, STOP ALL BETS panic button.
+**Última Atualização:** 15 Dezembro 2025
+**Novidades:** Multi-Provider Odds Architecture, JSON-LD Extraction, Quota Control, Chain of Responsibility Pattern.
 
 **Documentação Adicional:**
 

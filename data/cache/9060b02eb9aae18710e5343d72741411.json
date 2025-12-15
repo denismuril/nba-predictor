@@ -19,8 +19,8 @@
       "validated": true
     },
     "Utah Jazz vs Dallas Mavericks": {
-      "home_odds": 2.04,
-      "away_odds": 1.82,
+      "home_odds": 2.02,
+      "away_odds": 1.83,
       "home_team": "Utah Jazz",
       "away_team": "Dallas Mavericks",
       "source": "theoddsapi_fanduel",
@@ -37,8 +37,8 @@
       "validated": true
     },
     "Los Angeles Clippers vs Memphis Grizzlies": {
-      "home_odds": 1.54,
-      "away_odds": 2.56,
+      "home_odds": 1.58,
+      "away_odds": 2.44,
       "home_team": "Los Angeles Clippers",
       "away_team": "Memphis Grizzlies",
       "source": "theoddsapi_fanduel",
@@ -46,8 +46,8 @@
       "validated": true
     },
     "New York Knicks vs San Antonio Spurs": {
-      "home_odds": 1.77,
-      "away_odds": 2.1,
+      "home_odds": 1.74,
+      "away_odds": 2.14,
       "home_team": "New York Knicks",
       "away_team": "San Antonio Spurs",
       "source": "theoddsapi_draftkings",
@@ -55,7 +55,7 @@
       "validated": true
     }
   },
-  "cached_at": "2025-12-15T11:44:17.760394",
-  "expires_at": "2025-12-15T11:54:17.760398",
+  "cached_at": "2025-12-15T14:04:18.299814",
+  "expires_at": "2025-12-15T14:14:18.299816",
   "ttl_seconds": 600
 }
