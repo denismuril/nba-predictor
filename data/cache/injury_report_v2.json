@@ -5,7 +5,7 @@
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-14T20:49:15.570180"
+    "updated_at": "2025-12-14T21:42:00.287703"
   },
   {
     "player_name": "Tony Bradley",
@@ -13,7 +13,7 @@
     "status": "AVAILABLE",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-14T20:49:15.570192"
+    "updated_at": "2025-12-14T21:42:00.287726"
   },
   {
     "player_name": "Jarrett Allen",
@@ -21,7 +21,7 @@
     "status": "AVAILABLE",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-14T20:49:15.570197"
+    "updated_at": "2025-12-14T21:42:00.287733"
   },
   {
     "player_name": "Alex Antetokounmpo",
@@ -29,7 +29,7 @@
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-14T20:49:15.570201"
+    "updated_at": "2025-12-14T21:42:00.287739"
   },
   {
     "player_name": "Haywood Highsmith",
@@ -37,7 +37,7 @@
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-14T20:49:15.570204"
+    "updated_at": "2025-12-14T21:42:00.287745"
   },
   {
     "player_name": "Johni Broome",
@@ -45,7 +45,7 @@
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-14T20:49:15.570208"
+    "updated_at": "2025-12-14T21:42:00.287750"
   },
   {
     "player_name": "Trey Alexander",
@@ -53,7 +53,7 @@
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-14T20:49:15.570211"
+    "updated_at": "2025-12-14T21:42:00.287755"
   },
   {
     "player_name": "Ayo Dosunmu",
@@ -61,7 +61,7 @@
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-14T20:49:15.570214"
+    "updated_at": "2025-12-14T21:42:00.287759"
   },
   {
     "player_name": "Keon Ellis",
@@ -69,7 +69,7 @@
     "status": "AVAILABLE",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-14T20:49:15.570217"
+    "updated_at": "2025-12-14T21:42:00.287764"
   },
   {
     "player_name": "Joan Beringer",
@@ -77,7 +77,7 @@
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-14T20:49:15.570220"
+    "updated_at": "2025-12-14T21:42:00.287769"
   },
   {
     "player_name": "Bronny James",
@@ -85,15 +85,15 @@
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-14T20:49:15.570223"
+    "updated_at": "2025-12-14T21:42:00.287774"
   },
   {
     "player_name": "Devin Booker",
     "team": "PHX",
-    "status": "QUESTIONABLE",
+    "status": "AVAILABLE",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-14T20:49:15.570226"
+    "updated_at": "2025-12-14T21:42:00.287778"
   },
   {
     "player_name": "Seth Curry",
@@ -101,15 +101,15 @@
     "status": "QUESTIONABLE",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-14T20:49:15.570229"
+    "updated_at": "2025-12-14T21:42:00.287782"
   },
   {
     "player_name": "Donovan Clingan",
     "team": "POR",
-    "status": "QUESTIONABLE",
+    "status": "AVAILABLE",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-14T20:49:15.570232"
+    "updated_at": "2025-12-14T21:42:00.287787"
   },
   {
     "player_name": "Isaac Jones",
@@ -117,7 +117,7 @@
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-14T20:49:15.570235"
+    "updated_at": "2025-12-14T21:42:00.287791"
   },
   {
     "player_name": "Tyler Herro",
@@ -125,7 +125,7 @@
     "status": "AVAILABLE",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-14T20:49:15.570238"
+    "updated_at": "2025-12-14T21:42:00.287795"
   },
   {
     "player_name": "Anthony Davis",
@@ -133,7 +133,15 @@
     "status": "QUESTIONABLE",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-14T20:49:15.570241"
+    "updated_at": "2025-12-14T21:42:00.287799"
+  },
+  {
+    "player_name": "Elijah Harkless",
+    "team": "UTA",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-14T21:42:00.287803"
   },
   {
     "player_name": "Tari Eason",
@@ -141,7 +149,7 @@
     "status": "QUESTIONABLE",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-14T20:49:15.570243"
+    "updated_at": "2025-12-14T21:42:00.287807"
   },
   {
     "player_name": "Tamar Bates",
@@ -149,6 +157,6 @@
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-14T20:49:15.570246"
+    "updated_at": "2025-12-14T21:42:00.287810"
   }
 ]

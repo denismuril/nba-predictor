@@ -100,3 +100,8 @@ ratelimit>=2.2.0
 
 # Timezone
 tzdata>=2023.3
+
+# Quant Edge v24.0
+
+feedparser>=6.0.0
+websockets>=11.0

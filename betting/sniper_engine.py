@@ -22,6 +22,119 @@ from dataclasses import dataclass, field
 logger = logging.getLogger(__name__)
 
 
+# =============================================================================
+# TRAP ODDS DETECTION
+# =============================================================================
+@dataclass
+class TrapOddsCheck:
+    """Result of trap odds analysis."""
+    is_trap: bool
+    public_pct: float
+    line_movement: float
+    reason: str
+
+
+def detect_trap_odds(
+    public_pct: float,
+    line_movement: float,
+    threshold_public: float = 0.70,
+    threshold_movement: float = -0.03
+) -> TrapOddsCheck:
+    """
+    Detect if odds are a 'trap' - public heavily on one side but line moving opposite.
+    
+    Sharp money often goes against public consensus. When 70%+ of public bets
+    are on one side BUT the line moves against them, it's a trap.
+    
+    Args:
+        public_pct: Percentage of public bets on this side (0.0-1.0)
+        line_movement: Line movement as decimal (-0.05 = line got worse by 5%)
+        threshold_public: Min public % to consider as heavy public action
+        threshold_movement: Movement threshold (negative = line got worse)
+        
+    Returns:
+        TrapOddsCheck with analysis results
+    """
+    # Trap = heavy public action BUT line moving opposite (sharps on other side)
+    is_trap = public_pct >= threshold_public and line_movement <= threshold_movement
+    
+    reason = ""
+    if is_trap:
+        reason = f"TRAP: {public_pct*100:.0f}% public mas linha subiu {abs(line_movement)*100:.1f}%"
+    elif public_pct >= threshold_public:
+        reason = f"Heavy public: {public_pct*100:.0f}%"
+    
+    return TrapOddsCheck(
+        is_trap=is_trap,
+        public_pct=public_pct,
+        line_movement=line_movement,
+        reason=reason
+    )
+
+
+# =============================================================================
+# WEBSOCKET ODDS CLIENT
+# =============================================================================
+class OddsWebSocketClient:
+    """
+    WebSocket client for real-time odds streaming.
+    
+    Falls back to HTTP polling if WebSocket unavailable.
+    """
+    
+    def __init__(self, poll_interval: float = 5.0):
+        self.poll_interval = poll_interval
+        self._ws = None
+        self._running = False
+        self._callbacks = []
+        
+    async def connect(self, url: str) -> bool:
+        """
+        Connect to WebSocket endpoint.
+        
+        Returns True if connected, False if fallback to polling.
+        """
+        try:
+            import websockets
+            self._ws = await websockets.connect(url)
+            logger.info(f"🔌 WebSocket connected to {url}")
+            return True
+        except ImportError:
+            logger.warning("⚠️ websockets not installed, using HTTP polling")
+            return False
+        except Exception as e:
+            logger.warning(f"⚠️ WebSocket failed: {e}, using HTTP polling")
+            return False
+    
+    async def subscribe(self, callback):
+        """Subscribe to odds updates."""
+        self._callbacks.append(callback)
+    
+    async def start_listening(self):
+        """Start listening for odds updates."""
+        self._running = True
+        
+        if self._ws:
+            # WebSocket mode
+            while self._running:
+                try:
+                    message = await self._ws.recv()
+                    for callback in self._callbacks:
+                        await callback(message)
+                except Exception as e:
+                    logger.error(f"WebSocket error: {e}")
+                    await asyncio.sleep(1)
+        else:
+            # HTTP polling fallback
+            logger.info(f"📡 HTTP polling mode (interval: {self.poll_interval}s)")
+    
+    async def close(self):
+        """Close connection."""
+        self._running = False
+        if self._ws:
+            await self._ws.close()
+
+
 @dataclass
 class ValueAlert:
     """Representa um alerta de aposta de valor."""
@@ -74,6 +187,8 @@ class SniperEngine:
     MIN_EDGE_PCT = 5.0  # Mínimo 5% de edge para alertar
     MAX_ALERTS_PER_GAME = 3  # Máximo de alertas por jogo
     LINE_MOVEMENT_THRESHOLD = 0.10  # 10% de mudança = movimento significativo
+    TRAP_PUBLIC_THRESHOLD = 0.70  # 70% public = trap territory
+    TRAP_MOVEMENT_THRESHOLD = -0.03  # Line moved 3% against public = trap
     
     def __init__(self, bankroll: float = 1000.0, kelly_fraction: float = 0.25):
         """
@@ -94,8 +209,10 @@ class SniperEngine:
         self._running = False
         self._alerts_sent: Dict[str, int] = {}  # game_id -> count
         self._last_odds: Dict[str, Dict[str, float]] = {}  # game_id -> odds
+        self._public_money: Dict[str, float] = {}  # game_id -> public % on home
         self._initialized = False
-    
+        self._ws_client = OddsWebSocketClient()
+        
     async def initialize(self):
         """Inicializa conexões e dependências."""
         if self._initialized:

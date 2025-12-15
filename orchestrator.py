@@ -48,7 +48,12 @@ except ImportError:
 logger = logging.getLogger("Orchestrator")
 
 # Versão do sistema
-VERSION = "23.0"
+VERSION = "24.0"  # Quant Edge
+
+# Environment flags for new features
+import os
+SNIPER_ENABLED = os.getenv('SNIPER_ENABLED', 'false').lower() == 'true'
+NEWS_FILTER_ENABLED = os.getenv('NEWS_FILTER_ENABLED', 'true').lower() == 'true'
 
 
 class EnterpriseOrchestrator:
@@ -72,6 +77,7 @@ class EnterpriseOrchestrator:
             'odds_fetched': 0,
             'injuries_fetched': 0,
             'predictions_generated': 0,
+            'news_adjustments': 0,
             'errors': []
         }
         
@@ -485,6 +491,95 @@ class EnterpriseOrchestrator:
             logger.warning(f"⚠️ Erro na Feature Store: {e}")
         
         return True
+
+    async def step_news_filter(self, predictions: List[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
+        """
+        Filter predictions based on breaking news (injuries, rest).
+        
+        Uses ml_pipeline.news_filter to adjust confidence when star players
+        are suddenly OUT or DOUBTFUL.
+        """
+        if not NEWS_FILTER_ENABLED:
+            logger.info("⏭️ News filter disabled via env")
+            return predictions or []
+        
+        logger.info("📰 Filtering predictions by breaking news...")
+        
+        try:
+            from ml_pipeline.news_filter import NewsFilter, filter_predictions_by_news
+            
+            if predictions:
+                filtered = filter_predictions_by_news(predictions, zero_on_star_out=True)
+                
+                # Count adjustments
+                adjustments = sum(
+                    1 for orig, filt in zip(predictions, filtered)
+                    if orig.get('confidence', 1) != filt.get('confidence', 1)
+                )
+                
+                self.stats['news_adjustments'] = adjustments
+                
+                if adjustments > 0:
+                    logger.warning(f"🚨 {adjustments} predictions adjusted by breaking news!")
+                else:
+                    logger.info("✅ No breaking news affecting predictions")
+                
+                return filtered
+            else:
+                # Just check for news (informational)
+                news_filter = NewsFilter()
+                teams = ['LAL', 'BOS', 'GSW', 'MIA', 'PHX', 'DEN']
+                news = news_filter.check_breaking_news(teams)
+                
+                total_news = sum(len(v) for v in news.values())
+                if total_news > 0:
+                    logger.info(f"📰 Found {total_news} breaking news items")
+                
+                return []
+                
+        except ImportError:
+            logger.info("ℹ️ news_filter not available")
+            return predictions or []
+        except Exception as e:
+            logger.warning(f"⚠️ News filter error (non-critical): {e}")
+            return predictions or []
+
+    async def step_start_sniper(self) -> bool:
+        """
+        Start Sniper Engine as background task for real-time value detection.
+        
+        Only runs if SNIPER_ENABLED=true and Redis is available.
+        """
+        if not SNIPER_ENABLED:
+            logger.info("⏭️ Sniper Engine disabled via env")
+            return True
+        
+        if not self.redis:
+            logger.warning("⚠️ Sniper requires Redis - skipping")
+            return True
+        
+        logger.info("🎯 Starting Sniper Engine as background task...")
+        
+        try:
+            from betting.sniper_engine import get_sniper_engine
+            
+            sniper = await get_sniper_engine(bankroll=1000.0)
+            
+            # Start as background task (non-blocking)
+            asyncio.create_task(sniper.start())
+            
+            logger.info("✅ Sniper Engine running in background")
+            logger.info("   - Will poll Redis every 30s for odds")
+            logger.info("   - Alerts via Telegram when value detected")
+            
+            return True
+            
+        except ImportError:
+            logger.info("ℹ️ Sniper Engine not available")
+            return True
+        except Exception as e:
+            logger.warning(f"⚠️ Failed to start Sniper: {e}")
+            return True
     
     async def step_send_summary(self) -> bool:
         """Envia resumo do pipeline via Telegram."""
@@ -551,9 +646,19 @@ class EnterpriseOrchestrator:
             # NOTE: Twitter e Odds APIs removidos (requerem contratação)
             await self.run_step("Data Collection (ETL)", self.step_data_collection)
             await self.run_step("Model Training", self.step_model_training)
-            await self.run_step("Prediction Generation", self.step_prediction)
+            predictions = await self.run_step("Prediction Generation", self.step_prediction)
+            
+            # Quant Edge v24.0: News filter before player props
+            if NEWS_FILTER_ENABLED and predictions:
+                predictions = await self.run_step("News Filter", self.step_news_filter, predictions)
+            
             await self.run_step("Player Props", self.step_generate_player_props)
             await self.run_step("Feature Store Update", self.step_update_feature_store)
+            
+            # Quant Edge v24.0: Start Sniper as background task
+            if SNIPER_ENABLED:
+                await self.run_step("Sniper Engine", self.step_start_sniper)
+            
             await self.run_step("Send Summary", self.step_send_summary)
             
             total_time = time.time() - self.start_time
