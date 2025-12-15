@@ -1,4 +1,4 @@
-# 🏀 NBA Predictor v23.0 - Grande Integração Enterprise
+# 🏀 NBA Predictor v25.0 - Go Live Edition
 
 [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-orange.svg)](LICENSE)
@@ -7,52 +7,51 @@
 [![Bot](https://img.shields.io/badge/Telegram-Sniper%20Bot-blue.svg)]()
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue.svg)]()
 [![Redis](https://img.shields.io/badge/Redis-7.0-red.svg)]()
-[![Prefect](https://img.shields.io/badge/Prefect-2.0-blue.svg)]()
+[![Prefect](https://img.shields.io/badge/Prefect-2.14-blue.svg)]()
 [![MLflow](https://img.shields.io/badge/MLflow-Tracking-green.svg)]()
 [![Docker](https://img.shields.io/badge/docker-compose-blue.svg)](docker-compose.yml)
 [![Season](https://img.shields.io/badge/Season-2025--26-orange.svg)]()
 
-Sistema profissional de análise quantitativa e previsão de jogos da NBA usando **Advanced Machine Learning (Ensemble V6)**, **PostgreSQL + Redis**, **Prefect + MLflow**, **Sniper Engine (Monitor de Odds em Tempo Real)**, **Circuit Breakers**, **Rate Limiters**, **NLP Sentiment Analysis**, **PBP Clean Metrics**, **Bot Sniper com Alertas EV** e **SafeKelly Bankroll Management**.
+Sistema profissional de análise quantitativa e previsão de jogos da NBA usando **Advanced Machine Learning (Ensemble V6)**, **PostgreSQL + Redis**, **Prefect Orchestration**, **Paper Trading**, **Sniper Engine**, **SafeKelly Bankroll Management** e **Shadow Mode** para validação antes do Go Live.
 
 ---
 
-## 🎉 Destaques v23.0 (14 Dez 2025) - **Grande Integração Enterprise**
+## 🎉 Destaques v25.0 (14 Dez 2025) - **Go Live Edition**
 
-### 🚀 A Grande Fusão
+### 🚀 Paper Trading & Shadow Mode
 
-A infraestrutura Enterprise foi totalmente integrada ao fluxo principal. O sistema agora opera como uma verdadeira **House Grade System**.
+O sistema agora permite **validação sem risco** antes de apostar dinheiro real. Rode 7 dias em paper trading para validar performance.
 
-### ✅ O Que Mudou
+### ✅ Novidades
 
-| Antes (v22) | Depois (v23) |
-|-------------|--------------|
-| subprocess.run para scripts | Prefect flows nativos |
-| db_manager síncrono | AsyncDataManager async |
-| Cache em JSON/CSV | Redis com TTLs |
-| Sem monitoramento | Sniper Engine 24/7 |
+| Feature | Descrição |
+|---------|-----------|
+| **Paper Trading** | Simula apostas sem dinheiro real (PostgreSQL) |
+| **Settlement Script** | Liquida bets com resultados reais + PnL |
+| **System Health Tab** | Monitoramento de Redis, PostgreSQL, APIs |
+| **STOP ALL BETS** | Botão de pânico para emergências |
+| **Prefect Flows** | Orquestração profissional (substitui cron) |
+| **Operations Runbook** | OPERATIONS.md com rotina diária |
 
-### 🎯 Sniper Engine - Detecção de Valor em Tempo Real
-
-```python
-# Novo: betting/sniper_engine.py
-# - Monitora Redis a cada 30 segundos
-# - Detecta Edge > 5%  → Alerta via Telegram
-# - Calcula Fair Price via FeatureStore
-# - Stake recomendado via Kelly Criterion
-```
-
-### 🐳 Docker Compose Full Stack
+### 🎯 Prefect Orchestration
 
 ```bash
-docker-compose up -d
-# Serviços: PostgreSQL | Redis | Prefect | MLflow | Web | Sniper | Telegram
+# Setup inicial
+bash scripts/setup_prefect.sh
+
+# Terminal 1: Servidor
+prefect server start
+
+# Terminal 2: Worker
+prefect worker start --pool default-agent-pool
 ```
 
-| Serviço | Porta | Descrição |
-|---------|-------|-----------|
-| Web (Streamlit) | 8501 | Dashboard principal |
-| Prefect UI | 4200 | Orquestração de workflows |
-| MLflow | 5000 | Tracking de modelos |
+| Horário (BRT) | Flow | Descrição |
+|---------------|------|-----------|
+| 08:00 | `health-check` | Verificação matinal |
+| 09:00 | `settlement` | Liquidar paper bets |
+| 17:00 | `daily-pipeline` | Previsões + Alertas |
+| 18:00 | `paper-trading` | Capturar sinais |
 
 ---
 
@@ -502,11 +501,11 @@ Este software é para fins educacionais e de pesquisa. O autor não se responsab
 
 ## 📞 Suporte
 
-**Versão:** v23.0 (Grande Integração Enterprise)  
-**Status:** ✅ Production Ready  
-**Temporada:** 2025-26  
-**Última Atualização:** 14 Dezembro 2025  
-**Novidades:** Orchestrator async com Prefect nativo, Sniper Engine para monitoramento de odds em tempo real, Docker Compose com PostgreSQL + Redis + Prefect + MLflow.
+**Versão:** v25.0 (Go Live Edition)
+**Status:** ✅ Production Ready
+**Temporada:** 2025-26
+**Última Atualização:** 14 Dezembro 2025
+**Novidades:** Paper Trading, Settlement Script, System Health Dashboard, Prefect Orchestration, STOP ALL BETS panic button.
 
 **Documentação Adicional:**
 

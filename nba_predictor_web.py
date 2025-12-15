@@ -749,7 +749,11 @@ def render_injury_impact_alert(injury_adjustments: list):
 
 # --- MAIN CONTENT ---
 
-tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["📊 Dashboard", "💰 Gestão de Banca", "⛹️ Player Props", "📈 Performance", "🔍 Saúde do Modelo", "🧪 Análise de Backtest"])
+tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
+    "📊 Dashboard", "💰 Gestão de Banca", "⛹️ Player Props",
+    "📈 Performance", "🔍 Saúde do Modelo", "🧪 Análise de Backtest",
+    "🖥️ System Health"
+])
 
 # --- TAB 1: DASHBOARD (GAME CARDS) ---
 with tab1:
@@ -2030,3 +2034,175 @@ with tab6:
                         st.caption(f"⚠️ {skipped} jogos ignorados por falta de resultado confirmado.")
                 else:
                     st.warning(f"Nenhum jogo com resultado confirmado encontrado para backtest. (Skipped: {skipped})")
+
+# --- TAB 7: SYSTEM HEALTH ---
+with tab7:
+    st.header("🖥️ System Health - Go Live Dashboard")
+    st.caption("Monitoramento em tempo real do sistema para operação segura")
+
+    # Status file for panic button
+    STOP_FILE = Path('data/.STOP_ALL_BETS')
+
+    # Check if system is stopped
+    is_stopped = STOP_FILE.exists()
+
+    if is_stopped:
+        st.error("🚨 SISTEMA PARADO - Apostas desativadas pelo botão de pânico")
+        if st.button("✅ Reativar Sistema", type="primary"):
+            STOP_FILE.unlink()
+            st.success("Sistema reativado!")
+            st.rerun()
+    else:
+        st.success("✅ Sistema Online")
+
+    st.markdown("---")
+
+    # Health checks
+    col_h1, col_h2, col_h3 = st.columns(3)
+
+    # PostgreSQL Status
+    with col_h1:
+        st.subheader("🐘 PostgreSQL")
+        try:
+            db = get_db_manager()
+            # Simple query to check connection
+            games_count = len(db.get_comprehensive_history())
+            st.metric("Status", "🟢 Online")
+            st.metric("Jogos no DB", f"{games_count:,}")
+        except Exception as e:
+            st.metric("Status", "🔴 Offline")
+            st.error(f"Erro: {str(e)[:50]}")
+
+    # Redis Status
+    with col_h2:
+        st.subheader("📮 Redis Cache")
+        try:
+            import redis
+            r = redis.from_url(os.getenv('REDIS_URL', 'redis://localhost:6379'))
+            r.ping()
+
+            # Check odds freshness
+            keys = r.keys('odds:*')
+            fresh_keys = 0
+            for key in keys[:10]:  # Sample
+                ttl = r.ttl(key)
+                if ttl > 0:
+                    fresh_keys += 1
+
+            if len(keys) > 0 and fresh_keys < len(keys) / 2:
+                st.metric("Status", "🟡 Stale Data")
+                st.warning("Odds podem estar desatualizadas (TTL baixo)")
+            else:
+                st.metric("Status", "🟢 Online")
+
+            st.metric("Odds em Cache", len(keys))
+        except Exception as e:
+            st.metric("Status", "🔴 Offline")
+            st.caption(f"Redis indisponível: {str(e)[:30]}")
+
+    # Odds API Status
+    with col_h3:
+        st.subheader("📊 API de Odds")
+        try:
+            # Check last odds fetch
+            odds_log = Path('data/cache/odds_last_fetch.txt')
+            if odds_log.exists():
+                last_fetch = datetime.fromtimestamp(odds_log.stat().st_mtime)
+                age_minutes = (datetime.now() - last_fetch).total_seconds() / 60
+
+                if age_minutes > 120:  # 2 hours
+                    st.metric("Status", "🟡 Stale")
+                    st.warning(f"Última atualização: {age_minutes:.0f} min atrás")
+                elif age_minutes > 30:
+                    st.metric("Status", "🟡 Check")
+                    st.caption(f"Última atualização: {age_minutes:.0f} min")
+                else:
+                    st.metric("Status", "🟢 Fresh")
+                    st.caption(f"{age_minutes:.0f} min atrás")
+            else:
+                st.metric("Status", "🟡 Desconhecido")
+                st.caption("Sem registro de fetch")
+        except Exception as e:
+            st.metric("Status", "🔴 Erro")
+            st.caption(str(e)[:30])
+
+    st.markdown("---")
+
+    # Paper Trading Stats
+    st.subheader("📊 Paper Trading Status")
+    try:
+        from betting.paper_trading import PaperTradingDB
+        import asyncio
+
+        async def get_paper_stats():
+            db = PaperTradingDB()
+            await db.initialize()
+            stats = await db.get_stats(7)
+            await db.close()
+            return stats
+
+        stats = asyncio.run(get_paper_stats())
+
+        col_p1, col_p2, col_p3, col_p4 = st.columns(4)
+        with col_p1:
+            st.metric("Apostas (7d)", stats['total_bets'])
+        with col_p2:
+            st.metric("Win Rate", f"{stats['win_rate']:.1f}%")
+        with col_p3:
+            pnl_color = "normal" if stats['total_pnl'] >= 0 else "inverse"
+            st.metric("PnL", f"R$ {stats['total_pnl']:+,.2f}", delta_color=pnl_color)
+        with col_p4:
+            st.metric("ROI", f"{stats['roi']:+.1f}%")
+
+    except Exception as e:
+        st.info("📊 Paper trading não inicializado. Execute: python betting/paper_trading.py")
+
+    st.markdown("---")
+
+    # Panic Button
+    st.subheader("🚨 Controle de Emergência")
+
+    col_panic, col_info = st.columns([1, 2])
+
+    with col_panic:
+        if not is_stopped:
+            if st.button("🛑 STOP ALL BETS", type="primary", use_container_width=True):
+                # Create stop file
+                STOP_FILE.parent.mkdir(parents=True, exist_ok=True)
+                STOP_FILE.touch()
+                st.error("🚨 SISTEMA PARADO!")
+                st.rerun()
+        else:
+            st.info("Sistema já está parado")
+
+    with col_info:
+        st.markdown("""
+        **O que o STOP ALL BETS faz:**
+        - Para imediatamente o Sniper Engine
+        - Bloqueia novos sinais de aposta
+        - Não afeta apostas já registradas
+        - Use para pausar operação em emergências
+        """)
+
+    # System Commands Reference
+    st.markdown("---")
+    st.subheader("📋 Comandos de Operação")
+
+    with st.expander("Ver comandos úteis"):
+        st.code("""
+# Iniciar Paper Trading
+python betting/paper_trading.py --bankroll 1000
+
+# Liquidar apostas de ontem
+python betting/settle_paper_bets.py
+
+# Ver relatório de 7 dias
+python betting/paper_trading.py --report --days 7
+
+# Rodar orquestrador completo
+python orchestrator.py
+
+# Atualizar dados
+python scripts/fetch_todays_games.py
+        """, language="bash")
+

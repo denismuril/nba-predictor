@@ -1,0 +1,106 @@
+# Prefect Deployment Configuration
+# NBA Predictor v24.0
+
+# Deploy all flows: prefect deploy --all
+# Start server: prefect server start
+
+name: nba-predictor
+prefect-version: "2.0"
+
+# Build configuration
+build: null
+
+# Push configuration (for remote storage)
+push: null
+
+# Pull configuration
+pull:
+  - prefect.deployments.steps.set_working_directory:
+      directory: /home/denis/nba-predictor
+
+# Deployments
+deployments:
+  # ============================================
+  # Daily Pipeline - Main prediction flow
+  # ============================================
+  - name: daily-pipeline
+    version: "24.0"
+    tags: ["production", "daily"]
+    description: |
+      Pipeline diário completo: fetch games → fetch odds → predictions → Telegram alerts
+    entrypoint: flows/daily_pipeline.py:daily_pipeline
+    parameters: {}
+    work_pool:
+      name: default-agent-pool
+      work_queue_name: default
+    schedules:
+      - cron: "0 17 * * *"  # 17:00 BRT diariamente
+        timezone: "America/Sao_Paulo"
+        active: true
+
+  # ============================================
+  # Paper Trading Flow - Signal capture
+  # ============================================
+  - name: paper-trading
+    version: "24.0"
+    tags: ["production", "paper-trading"]
+    description: |
+      Captura sinais do Sniper durante janela pré-jogo para paper trading
+    entrypoint: flows/daily_pipeline.py:paper_trading_flow
+    parameters: {}
+    work_pool:
+      name: default-agent-pool
+      work_queue_name: default
+    schedules:
+      - cron: "0 18 * * *"  # 18:00 BRT (1h antes dos jogos)
+        timezone: "America/Sao_Paulo"
+        active: true
+
+  # ============================================
+  # Settlement Flow - Bet settlement
+  # ============================================
+  - name: settlement
+    version: "24.0"
+    tags: ["production", "settlement"]
+    description: |
+      Liquida paper bets do dia anterior e calcula PnL
+    entrypoint: flows/daily_pipeline.py:settlement_flow
+    parameters: {}
+    work_pool:
+      name: default-agent-pool
+      work_queue_name: default
+    schedules:
+      - cron: "0 9 * * *"  # 09:00 BRT diariamente
+        timezone: "America/Sao_Paulo"
+        active: true
+
+  # ============================================
+  # Morning Health Check
+  # ============================================
+  - name: health-check
+    version: "24.0"
+    tags: ["monitoring"]
+    description: |
+      Verificação matinal de saúde do sistema
+    entrypoint: flows/daily_pipeline.py:morning_health_flow
+    parameters: {}
+    work_pool:
+      name: default-agent-pool
+      work_queue_name: default
+    schedules:
+      - cron: "0 8 * * *"  # 08:00 BRT diariamente
+        timezone: "America/Sao_Paulo"
+        active: true
+
+  # ============================================
+  # Manual Runs (no schedule)
+  # ============================================
+  - name: daily-pipeline-manual
+    version: "24.0"
+    tags: ["manual"]
+    description: "Pipeline manual para testes"
+    entrypoint: flows/daily_pipeline.py:daily_pipeline
+    parameters: {}
+    work_pool:
+      name: default-agent-pool
+    schedules: []  # No automatic schedule

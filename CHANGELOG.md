@@ -2,6 +2,78 @@
 
 ---
 
+## v25.0 - Go Live Edition (14 Dez 2025)
+
+### 🚀 Paper Trading & Shadow Mode
+
+Sistema completo para validação sem risco antes de operar com dinheiro real.
+
+### ✅ Novos Componentes
+
+| Componente | Descrição |
+|------------|-----------|
+| **Paper Trading Engine** | Simula apostas com registro em PostgreSQL |
+| **Settlement Script** | Liquida bets com resultados reais + PnL |
+| **System Health Tab** | Novo tab no Streamlit com monitoramento |
+| **STOP ALL BETS** | Botão de pânico para emergências |
+| **Prefect Flows** | Orquestração profissional (substitui cron) |
+| **Operations Runbook** | OPERATIONS.md com rotina diária |
+
+### 📂 Novos Arquivos Criados
+
+```
+betting/
+├── paper_trading.py     # Engine de paper trading
+└── settle_paper_bets.py # Liquidação com PnL
+
+flows/
+├── daily_pipeline.py    # 4 Prefect flows
+└── schedules.py         # Configuração de schedules
+
+scripts/
+└── setup_prefect.sh     # Setup automático
+
+prefect.yaml             # Deploy config
+OPERATIONS.md            # Runbook operacional
+```
+
+### 🔧 Arquivos Modificados
+
+- `nba_predictor_web.py` - Novo tab "System Health" com:
+  - Status PostgreSQL, Redis, Odds API
+  - Paper Trading stats
+  - Botão STOP ALL BETS
+  
+- `requirements.txt` - Adicionado:
+  - `prefect>=2.14.0`
+  - `prefect-shell>=0.2.0`
+
+### ⏰ Flows Agendados (BRT)
+
+| Horário | Flow | Descrição |
+|---------|------|-----------|
+| 08:00 | health-check | Verificação matinal |
+| 09:00 | settlement | Liquidar paper bets |
+| 17:00 | daily-pipeline | Previsões + Alertas |
+| 18:00 | paper-trading | Capturar sinais |
+
+### 🎯 Como Usar
+
+```bash
+# 1. Setup Prefect
+bash scripts/setup_prefect.sh
+
+# 2. Iniciar servidor + worker
+prefect server start
+prefect worker start --pool default-agent-pool
+
+# 3. Acessar UIs
+# Prefect: http://localhost:4200
+# Streamlit: http://localhost:8501
+```
+
+---
+
 ## v23.1 - Correções de Imports e Validação (14 Dez 2025)
 
 ### 🔧 Correções Críticas
