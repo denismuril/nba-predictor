@@ -30,6 +30,10 @@ COPY requirements.txt .
 # Instalar dependências em diretório isolado
 RUN pip install --no-cache-dir --prefix=/install -r requirements.txt
 
+# Instalar Playwright e dependências do browser para scraping
+RUN pip install --no-cache-dir --prefix=/install playwright \
+    && /install/bin/playwright install chromium --with-deps
+
 # ----- STAGE 2: Runtime (imagem final limpa) -----
 FROM python:3.12-slim AS runtime
 
@@ -45,10 +49,29 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     TZ=America/Sao_Paulo
 
 # Apenas runtime dependencies (sem compiladores)
+# Inclui dependências do Playwright para execução de browser headless
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libpq5 \
     curl \
     tzdata \
+    # Dependências do Playwright/Chromium
+    libnss3 \
+    libnspr4 \
+    libatk1.0-0 \
+    libatk-bridge2.0-0 \
+    libcups2 \
+    libdrm2 \
+    libdbus-1-3 \
+    libxkbcommon0 \
+    libxcomposite1 \
+    libxdamage1 \
+    libxfixes3 \
+    libxrandr2 \
+    libgbm1 \
+    libpango-1.0-0 \
+    libcairo2 \
+    libasound2 \
+    libatspi2.0-0 \
     && rm -rf /var/lib/apt/lists/* \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime
 

@@ -38,3 +38,33 @@ class OddsValidationError(OddsException):
         self.message = message
         self.odds_data = odds_data
         super().__init__(self.message)
+
+
+class QuotaExceededException(OddsException):
+    """
+    Exceção lançada quando a cota de requisições da API foi atingida.
+    
+    Esta exceção é usada como trava de segurança para evitar chamadas
+    à API quando o limite diário está próximo de ser atingido.
+    
+    Atributos:
+        current_usage: Número atual de requisições feitas hoje
+        limit: Limite máximo de requisições permitidas
+        message: Mensagem descritiva do erro
+    """
+    
+    def __init__(
+        self, 
+        current_usage: int = 0, 
+        limit: int = 500, 
+        message: str = None
+    ):
+        self.current_usage = current_usage
+        self.limit = limit
+        self.message = message or (
+            f"Cota da API atingida: {current_usage}/{limit} requisições. "
+            f"Restantes: {max(0, limit - current_usage)}. "
+            "A API não será chamada para preservar a cota."
+        )
+        super().__init__(self.message)
+
