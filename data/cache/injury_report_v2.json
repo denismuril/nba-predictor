@@ -1,0 +1,42 @@
+[
+  {
+    "player_name": "Chris Livingston",
+    "team": "CLE",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-17T16:55:41.863568"
+  },
+  {
+    "player_name": "Ayo Dosunmu",
+    "team": "CHI",
+    "status": "QUESTIONABLE",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-17T16:55:41.863588"
+  },
+  {
+    "player_name": "Brandon Clarke",
+    "team": "MEM",
+    "status": "QUESTIONABLE",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-17T16:55:41.863594"
+  },
+  {
+    "player_name": "Joan Beringer",
+    "team": "MIN",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-17T16:55:41.863598"
+  },
+  {
+    "player_name": "Tyler Herro",
+    "team": "MIA",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-17T16:55:41.863601"
+  }
+]

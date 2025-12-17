@@ -494,49 +494,32 @@ def add_travel_km_last_3_days(df: pd.DataFrame) -> pd.DataFrame:
             return team_name
         
         # Calcular distância para cada jogo (da cidade anterior para a atual)
-        travel_distances = []
+        # PERFORMANCE: Usar operações vetorizadas ao invés de loops
         
-        for team in all_games['team'].unique():
-            team_df = all_games[all_games['team'] == team].copy()
-            team_code = get_team_code(team)
-            
-            for i in range(len(team_df)):
-                if i == 0:
-                    # Primeiro jogo da temporada: assume saindo de casa
-                    team_home_coords = NBA_CITIES.get(team_code)
-                    game_city_code = get_team_code(team_df.iloc[i]['game_city'])
-                    game_coords = NBA_CITIES.get(game_city_code)
-                    
-                    if team_home_coords and game_coords:
-                        dist = haversine_distance(
-                            team_home_coords[0], team_home_coords[1],
-                            game_coords[0], game_coords[1]
-                        )
-                    else:
-                        dist = 0
-                else:
-                    # Distância do jogo anterior para este
-                    prev_city_code = get_team_code(team_df.iloc[i-1]['game_city'])
-                    curr_city_code = get_team_code(team_df.iloc[i]['game_city'])
-                    
-                    prev_coords = NBA_CITIES.get(prev_city_code)
-                    curr_coords = NBA_CITIES.get(curr_city_code)
-                    
-                    if prev_coords and curr_coords:
-                        dist = haversine_distance(
-                            prev_coords[0], prev_coords[1],
-                            curr_coords[0], curr_coords[1]
-                        )
-                    else:
-                        dist = 0
-                
-                travel_distances.append({
-                    'date': team_df.iloc[i]['date'],
-                    'team': team,
-                    'travel_km': dist
-                })
+        # Obter cidade anterior para cada jogo (shift)
+        all_games['prev_city'] = all_games.groupby('team')['game_city'].shift(1)
+        # Primeiro jogo de cada time: assume casa
+        all_games['prev_city'] = all_games['prev_city'].fillna(all_games['team'])
         
-        travel_df = pd.DataFrame(travel_distances)
+        # Normalizar códigos de time
+        all_games['prev_city_code'] = all_games['prev_city'].apply(get_team_code)
+        all_games['curr_city_code'] = all_games['game_city'].apply(get_team_code)
+        
+        # Calcular distância usando apply vetorizado (muito mais rápido que loops)
+        def calc_distance(row):
+            prev_coords = NBA_CITIES.get(row['prev_city_code'])
+            curr_coords = NBA_CITIES.get(row['curr_city_code'])
+            if prev_coords and curr_coords:
+                return haversine_distance(
+                    prev_coords[0], prev_coords[1],
+                    curr_coords[0], curr_coords[1]
+                )
+            return 0.0
+        
+        all_games['travel_km'] = all_games.apply(calc_distance, axis=1)
+        
+        travel_df = all_games[['date', 'team', 'travel_km']].copy()
+
         
         # 3. Calcular soma rolling de 3 dias (com shift para evitar leakage)
         travel_df = travel_df.sort_values(['team', 'date'])

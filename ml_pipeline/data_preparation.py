@@ -640,10 +640,20 @@ def load_historical_data(seasons=None, apply_weights=False, weight_config=None, 
 
     # 3.4 v21.7 FASE 70%+: Fatigue Score (Travel Distance + B2B + Schedule Density)
     # Math-Context: Times em road trip longa (>3000km/semana) perdem ~3% win rate
+    # ⚠️ DISABLED v27.0: calculate_schedule_fatigue causa OOM (Exit Code 137)
+    # TODO: Usar add_travel_km_last_3_days de advanced_features.py que é otimizado
     try:
-        from core.travel_calculator import calculate_schedule_fatigue
-        df = calculate_schedule_fatigue(df)
-        logger.info("   ✅ v21.7 Fatigue Score features added (travel + b2b + density)")
+        # TEMPORARIAMENTE DESABILITADO - causa OOM em datasets grandes
+        # from core.travel_calculator import calculate_schedule_fatigue
+        # df = calculate_schedule_fatigue(df)
+        # logger.info("   ✅ v21.7 Fatigue Score features added (travel + b2b + density)")
+        
+        # Fallback: adicionar placeholders neutros (features de travel vêm via add_domain_expert_features)
+        df['home_fatigue_score'] = 0.0
+        df['away_fatigue_score'] = 0.0
+        df['home_distance_km'] = 0.0
+        df['away_distance_km'] = 0.0
+        logger.info("   ⏭️ Fatigue Score: usando fallback (v27.0 travel features via add_domain_expert_features)")
     except Exception as e:
         logger.warning(f"   ⚠️ Fatigue Score features failed: {e}")
         # Fallback: adicionar placeholders neutros

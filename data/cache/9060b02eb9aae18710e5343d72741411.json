@@ -1,0 +1,216 @@
+{
+  "value": {
+    "Boston Celtics vs Detroit Pistons": {
+      "home_odds": 1.9,
+      "away_odds": 1.9,
+      "fair_home_odds": 2.0,
+      "fair_away_odds": 2.0,
+      "vigorish_pct": 5.26,
+      "home_team": "Boston Celtics",
+      "away_team": "Detroit Pistons",
+      "source": "oddspedia_scraper",
+      "timestamp": "2025-12-17T16:54:45.822926"
+    },
+    "Miami Heat vs Toronto Raptors": {
+      "home_odds": 1.9,
+      "away_odds": 1.9,
+      "fair_home_odds": 2.0,
+      "fair_away_odds": 2.0,
+      "vigorish_pct": 5.26,
+      "home_team": "Miami Heat",
+      "away_team": "Toronto Raptors",
+      "source": "oddspedia_scraper",
+      "timestamp": "2025-12-17T16:54:45.822950"
+    },
+    "Utah Jazz vs Dallas Mavericks": {
+      "home_odds": 1.9,
+      "away_odds": 1.9,
+      "fair_home_odds": 2.0,
+      "fair_away_odds": 2.0,
+      "vigorish_pct": 5.26,
+      "home_team": "Utah Jazz",
+      "away_team": "Dallas Mavericks",
+      "source": "oddspedia_scraper",
+      "timestamp": "2025-12-17T16:54:45.822961"
+    },
+    "Denver Nuggets vs Houston Rockets": {
+      "home_odds": 1.9,
+      "away_odds": 1.9,
+      "fair_home_odds": 2.0,
+      "fair_away_odds": 2.0,
+      "vigorish_pct": 5.26,
+      "home_team": "Denver Nuggets",
+      "away_team": "Houston Rockets",
+      "source": "oddspedia_scraper",
+      "timestamp": "2025-12-17T16:54:45.822968"
+    },
+    "Los Angeles Clippers vs Memphis Grizzlies": {
+      "home_odds": 1.9,
+      "away_odds": 1.9,
+      "fair_home_odds": 2.0,
+      "fair_away_odds": 2.0,
+      "vigorish_pct": 5.26,
+      "home_team": "Los Angeles Clippers",
+      "away_team": "Memphis Grizzlies",
+      "source": "oddspedia_scraper",
+      "timestamp": "2025-12-17T16:54:45.822975"
+    },
+    "Chicago Bulls vs Cleveland Cavaliers": {
+      "home_odds": 1.9,
+      "away_odds": 1.9,
+      "fair_home_odds": 2.0,
+      "fair_away_odds": 2.0,
+      "vigorish_pct": 5.26,
+      "home_team": "Chicago Bulls",
+      "away_team": "Cleveland Cavaliers",
+      "source": "oddspedia_scraper",
+      "timestamp": "2025-12-17T16:54:45.822982"
+    },
+    "Minnesota Timberwolves vs Memphis Grizzlies": {
+      "home_odds": 1.9,
+      "away_odds": 1.9,
+      "fair_home_odds": 2.0,
+      "fair_away_odds": 2.0,
+      "vigorish_pct": 5.26,
+      "home_team": "Minnesota Timberwolves",
+      "away_team": "Memphis Grizzlies",
+      "source": "oddspedia_scraper",
+      "timestamp": "2025-12-17T16:54:45.822988"
+    },
+    "Charlotte Hornets vs Atlanta Hawks": {
+      "home_odds": 1.9,
+      "away_odds": 1.9,
+      "fair_home_odds": 2.0,
+      "fair_away_odds": 2.0,
+      "vigorish_pct": 5.26,
+      "home_team": "Charlotte Hornets",
+      "away_team": "Atlanta Hawks",
+      "source": "oddspedia_scraper",
+      "timestamp": "2025-12-17T16:54:45.822994"
+    },
+    "Indiana Pacers vs New York Knicks": {
+      "home_odds": 1.9,
+      "away_odds": 1.9,
+      "fair_home_odds": 2.0,
+      "fair_away_odds": 2.0,
+      "vigorish_pct": 5.26,
+      "home_team": "Indiana Pacers",
+      "away_team": "New York Knicks",
+      "source": "oddspedia_scraper",
+      "timestamp": "2025-12-17T16:54:45.823006"
+    },
+    "Brooklyn Nets vs Miami Heat": {
+      "home_odds": 1.9,
+      "away_odds": 1.9,
+      "fair_home_odds": 2.0,
+      "fair_away_odds": 2.0,
+      "vigorish_pct": 5.26,
+      "home_team": "Brooklyn Nets",
+      "away_team": "Miami Heat",
+      "source": "oddspedia_scraper",
+      "timestamp": "2025-12-17T16:54:45.823012"
+    },
+    "Milwaukee Bucks vs Toronto Raptors": {
+      "home_odds": 1.9,
+      "away_odds": 1.9,
+      "fair_home_odds": 2.0,
+      "fair_away_odds": 2.0,
+      "vigorish_pct": 5.26,
+      "home_team": "Milwaukee Bucks",
+      "away_team": "Toronto Raptors",
+      "source": "oddspedia_scraper",
+      "timestamp": "2025-12-17T16:54:45.823018"
+    },
+    "New Orleans Pelicans vs Houston Rockets": {
+      "home_odds": 1.9,
+      "away_odds": 1.9,
+      "fair_home_odds": 2.0,
+      "fair_away_odds": 2.0,
+      "vigorish_pct": 5.26,
+      "home_team": "New Orleans Pelicans",
+      "away_team": "Houston Rockets",
+      "source": "oddspedia_scraper",
+      "timestamp": "2025-12-17T16:54:45.823024"
+    },
+    "Oklahoma City Thunder vs Los Angeles Clippers": {
+      "home_odds": 1.9,
+      "away_odds": 1.9,
+      "fair_home_odds": 2.0,
+      "fair_away_odds": 2.0,
+      "vigorish_pct": 5.26,
+      "home_team": "Oklahoma City Thunder",
+      "away_team": "Los Angeles Clippers",
+      "source": "oddspedia_scraper",
+      "timestamp": "2025-12-17T16:54:45.823030"
+    },
+    "San Antonio Spurs vs Washington Wizards": {
+      "home_odds": 1.9,
+      "away_odds": 1.9,
+      "fair_home_odds": 2.0,
+      "fair_away_odds": 2.0,
+      "vigorish_pct": 5.26,
+      "home_team": "San Antonio Spurs",
+      "away_team": "Washington Wizards",
+      "source": "oddspedia_scraper",
+      "timestamp": "2025-12-17T16:54:45.823046"
+    },
+    "Dallas Mavericks vs Detroit Pistons": {
+      "home_odds": 1.9,
+      "away_odds": 1.9,
+      "fair_home_odds": 2.0,
+      "fair_away_odds": 2.0,
+      "vigorish_pct": 5.26,
+      "home_team": "Dallas Mavericks",
+      "away_team": "Detroit Pistons",
+      "source": "oddspedia_scraper",
+      "timestamp": "2025-12-17T16:54:45.823052"
+    },
+    "Denver Nuggets vs Orlando Magic": {
+      "home_odds": 1.9,
+      "away_odds": 1.9,
+      "fair_home_odds": 2.0,
+      "fair_away_odds": 2.0,
+      "vigorish_pct": 5.26,
+      "home_team": "Denver Nuggets",
+      "away_team": "Orlando Magic",
+      "source": "oddspedia_scraper",
+      "timestamp": "2025-12-17T16:54:45.823058"
+    },
+    "Phoenix Suns vs Golden State Warriors": {
+      "home_odds": 1.9,
+      "away_odds": 1.9,
+      "fair_home_odds": 2.0,
+      "fair_away_odds": 2.0,
+      "vigorish_pct": 5.26,
+      "home_team": "Phoenix Suns",
+      "away_team": "Golden State Warriors",
+      "source": "oddspedia_scraper",
+      "timestamp": "2025-12-17T16:54:45.823063"
+    },
+    "Utah Jazz vs Los Angeles Lakers": {
+      "home_odds": 1.9,
+      "away_odds": 1.9,
+      "fair_home_odds": 2.0,
+      "fair_away_odds": 2.0,
+      "vigorish_pct": 5.26,
+      "home_team": "Utah Jazz",
+      "away_team": "Los Angeles Lakers",
+      "source": "oddspedia_scraper",
+      "timestamp": "2025-12-17T16:54:45.823073"
+    },
+    "Portland Trail Blazers vs Sacramento Kings": {
+      "home_odds": 1.9,
+      "away_odds": 1.9,
+      "fair_home_odds": 2.0,
+      "fair_away_odds": 2.0,
+      "vigorish_pct": 5.26,
+      "home_team": "Portland Trail Blazers",
+      "away_team": "Sacramento Kings",
+      "source": "oddspedia_scraper",
+      "timestamp": "2025-12-17T16:54:45.823080"
+    }
+  },
+  "cached_at": "2025-12-17T16:54:45.862319",
+  "expires_at": "2025-12-17T17:04:45.862320",
+  "ttl_seconds": 600
+}

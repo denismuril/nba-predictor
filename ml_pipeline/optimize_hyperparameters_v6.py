@@ -47,6 +47,7 @@ if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
 from ml_pipeline.data_preparation import load_historical_data, calculate_sample_weights
+from ml_pipeline.data_cache import load_historical_data_cached
 
 # Logging
 logging.basicConfig(
@@ -111,7 +112,8 @@ def load_optimization_data():
     """Carrega e prepara dados para otimização."""
     logger.info("📊 Carregando dados para otimização V6...")
     
-    df = load_historical_data(seasons=ML_SEASONS)
+    # v27.0: Usar cache para evitar OOM do calculate_schedule_fatigue
+    df = load_historical_data_cached(seasons=ML_SEASONS)
     df = df.sort_values('date').reset_index(drop=True)
     
     # Calcular sample weights
