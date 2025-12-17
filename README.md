@@ -1,4 +1,4 @@
-# 🏀 NBA Predictor v26.0 - Odds Module Refactoring
+# 🏀 NBA Predictor v26.1 - Elo Calibration & Anti-Leakage
 
 [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-orange.svg)](LICENSE)
@@ -13,6 +13,29 @@
 [![Season](https://img.shields.io/badge/Season-2025--26-orange.svg)]()
 
 Sistema profissional de análise quantitativa e previsão de jogos da NBA usando **Advanced Machine Learning (Ensemble V6)**, **PostgreSQL + Redis**, **Prefect Orchestration**, **Paper Trading**, **Sniper Engine**, **SafeKelly Bankroll Management** e **Shadow Mode** para validação antes do Go Live.
+
+---
+
+## 🎉 Destaques v26.1 (17 Dez 2025) - **Elo Calibration & Anti-Leakage**
+
+### 🎯 Calibração do Sistema Elo (NBA Moderna)
+
+Ajustes finos conforme auditoria técnica para refletir tendências da NBA moderna.
+
+### ✅ Novidades
+
+| Feature | Descrição |
+|---------|-----------|
+| **HCA Reduzido** | 100→70 Elo (~2.1 pts) corrigindo superestimação de favoritos em casa |
+| **Penalidade B2B** | 50 Elo (~1.5 pts) para times em Back-to-Back |
+| **DEPRECATION Warning** | Aviso em ALL_STARS_2025 para migrar para métricas dinâmicas |
+| **Allowlist Reforçada** | Segunda camada de proteção anti-leakage no train_ensemble_v6.py |
+
+### 🔧 Impacto
+
+- **Spreads mais precisos** em jogos em casa
+- **Captura fadiga** de times em sequência
+- **Segurança reforçada** contra novas colunas vazarem dados do futuro
 
 ---
 
@@ -525,11 +548,11 @@ Este software é para fins educacionais e de pesquisa. O autor não se responsab
 
 ## 📞 Suporte
 
-**Versão:** v26.0 (Odds Module Refactoring)
+**Versão:** v26.1 (Elo Calibration & Anti-Leakage)
 **Status:** ✅ Production Ready
 **Temporada:** 2025-26
-**Última Atualização:** 15 Dezembro 2025
-**Novidades:** Multi-Provider Odds Architecture, JSON-LD Extraction, Quota Control, Chain of Responsibility Pattern.
+**Última Atualização:** 17 Dezembro 2025
+**Novidades:** HCA reduzido para NBA Moderna, Penalidade B2B, DEPRECATION Warning, Allowlist Anti-Leakage Reforçada.
 
 **Documentação Adicional:**
 

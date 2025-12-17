@@ -2,6 +2,58 @@
 
 ---
 
+## v26.1 - Elo System Calibration & Anti-Leakage Reinforcement (17 Dez 2025)
+
+### 🎯 Calibração do Sistema Elo (NBA Moderna)
+
+Ajustes finos nos parâmetros Elo conforme auditoria técnica para refletir as tendências da NBA moderna.
+
+### ✅ Mudanças em `ml_pipeline/elo_system.py`
+
+| Parâmetro | Antes | Depois | Impacto |
+|-----------|-------|--------|---------|
+| `HCA_ELO` | 100 (~3.0 pts) | **70** (~2.1 pts) | Corrige superestimação de favoritos em casa |
+| `B2B_PENALTY` | N/A | **50** (~1.5 pts) | Penaliza times em Back-to-Back |
+
+### 🔧 Novos Métodos/Parâmetros
+
+- `calcular_vitoria_esperada(is_b2b=False)` - Aceita flag de Back-to-Back
+- `prever_jogo(home_is_b2b, away_is_b2b)` - Retorna spread ajustado por fadiga
+- Normalização de probabilidades quando ambos times têm ajustes B2B
+
+### ⚠️ DEPRECATION WARNING em `config/constants.py`
+
+Adicionado aviso de depreciação acima de `ALL_STARS_2025` sugerindo migração para métricas dinâmicas:
+
+- USG% (Usage Rate) > 25%
+- PER (Player Efficiency Rating) > 20
+- Minutos jogados > 28 MPG
+
+### 🛡️ Reforço Anti-Leakage em `ml_pipeline/train_ensemble_v6.py`
+
+Implementada **segunda camada de proteção** com allowlist por prefixo explícito:
+
+```python
+SAFE_PREFIXES = ('feat_', 'roll_', 'rolling_', 'elo_', 'rest_', 
+                 'interaction_', 'referee_', 'h2h_')
+```
+
+**Benefícios:**
+
+- Filtragem dupla (1ª em `data_preparation.py`, 2ª em `train_ensemble_v6.py`)
+- Colunas não permitidas são descartadas silenciosamente com log de warning
+- Validação final contra features perigosas com `raise ValueError` se vazamento detectado
+
+### 📊 Impacto Esperado na Precisão
+
+| Ajuste | Impacto Esperado |
+|--------|------------------|
+| HCA reduzido | Spreads mais precisos em jogos em casa |
+| Penalidade B2B | Captura fadiga de times em sequência |
+| Allowlist reforçada | Elimina risco de novas colunas vazarem dados do futuro |
+
+---
+
 ## v26.0 - Odds Module Refactoring (15 Dez 2025)
 
 ### 🔄 Arquitetura Multi-Provider para Odds
