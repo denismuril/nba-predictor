@@ -261,6 +261,95 @@ def train_ensemble_model_v6():
     X, y_temp = prepare_data_for_training(df, target='winner')
     X = X.fillna(0)
     
+    # =========================================================================
+    # 🛡️ SECURITY FIX v22.1: SEGUNDA CAMADA DE PROTEÇÃO - ALLOWLIST POR PREFIXO
+    # =========================================================================
+    # AUDITORIA TÉCNICA: Reforçando segurança com filtragem explícita por prefixo.
+    # Mesmo que prepare_data_for_training falhe em bloquear algo, esta camada
+    # garante que APENAS colunas com prefixos seguros entrem no modelo.
+    #
+    # PREFIXOS SEGUROS (Allowlist):
+    #   - feat_    : Features de engenharia explícitas
+    #   - roll_    : Médias móveis (variação curta)
+    #   - rolling_ : Médias móveis (variação completa)
+    #   - elo_     : Dados Elo pré-jogo
+    #   - rest_    : Dias de descanso
+    #   - interaction_ : Features de interação (derivadas de rolling)
+    #   - referee_ : Stats de árbitros históricos
+    #   - h2h_     : Head-to-head histórico
+    #   - home_rolling_, away_rolling_ : Rolling features por time
+    #   - home_elo, away_elo : Elo por time
+    #   - home_rest_, away_rest_ : Descanso por time
+    #   - home_win_streak, away_win_streak : Sequências de vitória
+    #   - home_sos_, away_sos_ : Strength of Schedule
+    #   - home_net_rating_trend, away_net_rating_trend : Tendências históricas
+    # =========================================================================
+    
+    SAFE_PREFIXES = (
+        'feat_',        # Features de engenharia explícitas
+        'roll_',        # Médias móveis (short form)
+        'rolling_',     # Médias móveis (full form)
+        'elo_',         # Elo ratings base
+        'rest_',        # Descanso
+        'interaction_', # Features de interação
+        'referee_',     # Árbitros
+        'h2h_',         # Head-to-head
+    )
+    
+    # Colunas específicas permitidas (não seguem prefixo mas são seguras)
+    SAFE_EXACT_COLS = {
+        'home_elo', 'away_elo', 'elo_diff',
+        'home_rest_days', 'away_rest_days', 'rest_diff',
+        'home_is_back_to_back', 'away_is_back_to_back',
+        'home_b2b', 'away_b2b',
+        'home_games_in_7d', 'away_games_in_7d',
+        'home_net_rating_trend', 'away_net_rating_trend',
+        'home_sos_10', 'away_sos_10',
+        'home_altitude_advantage', 'away_altitude_advantage',
+        'home_win_streak', 'away_win_streak',
+        'home_fatigue_score', 'away_fatigue_score',
+        'home_distance_km', 'away_distance_km',
+        'injury_impact_home', 'injury_impact_away', 'injury_impact_net',
+    }
+    
+    # Padrões seguros (contidos em qualquer posição)
+    SAFE_CONTAINS = (
+        '_rolling_',    # home_rolling_10_points, away_rolling_5_efg
+        '_elo',         # home_elo, away_elo
+        '_rest_',       # variações de rest
+        '_b2b',         # back-to-back
+        '_sos_',        # strength of schedule
+        '_streak',      # win_streak
+        '_trend',       # tendências
+    )
+    
+    def is_safe_column(col: str) -> bool:
+        """Verifica se coluna é segura via allowlist."""
+        # Check prefixo
+        if any(col.startswith(prefix) for prefix in SAFE_PREFIXES):
+            return True
+        # Check exata
+        if col in SAFE_EXACT_COLS:
+            return True
+        # Check padrão contido
+        if any(pattern in col for pattern in SAFE_CONTAINS):
+            return True
+        return False
+    
+    # Aplicar filtro allowlist
+    original_cols = X.columns.tolist()
+    safe_cols = [col for col in original_cols if is_safe_column(col)]
+    dropped_cols = [col for col in original_cols if col not in safe_cols]
+    
+    X = X[safe_cols]
+    
+    if dropped_cols:
+        logger.warning(f"🛡️ ALLOWLIST FILTER: {len(dropped_cols)} colunas descartadas silenciosamente:")
+        for col in dropped_cols[:10]:  # Mostrar apenas primeiras 10
+            logger.warning(f"   ❌ {col}")
+        if len(dropped_cols) > 10:
+            logger.warning(f"   ... e mais {len(dropped_cols) - 10} colunas")
+    
     # 🛡️ VALIDAÇÃO DE SEGURANÇA: Confirmar que features perigosas foram removidas
     DANGEROUS_FEATURES = [
         'home_efg', 'away_efg', 'home_pace', 'away_pace',  # Four Factors RAW
@@ -273,7 +362,7 @@ def train_ensemble_model_v6():
         raise ValueError(f"Data Leakage: {leaked_features}")
     
     # Verificação final de segurança
-    logger.info(f"✅ Features preparadas via WHITELIST: {len(X.columns)} colunas")
+    logger.info(f"✅ Features preparadas via ALLOWLIST: {len(X.columns)} colunas (de {len(original_cols)} originais)")
     logger.info(f"🛡️ Validação anti-leakage: PASSOU (0 features perigosas)")
 
     feature_names = X.columns.tolist()

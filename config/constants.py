@@ -49,6 +49,20 @@ TEAMS_MAP = {
     "new orleans": "New Orleans Pelicans", "pelicans": "New Orleans Pelicans",
 }
 
+# ==============================================================================
+# ⚠️ DEPRECATION WARNING (v22.1+)
+# ==============================================================================
+# Esta lista estática está DEPRECIADA. Jogadores podem se lesionar ou cair de
+# produção durante a temporada, gerando ruído nas features de impacto de estrelas.
+#
+# TODO (Sprint futura): Substituir por lógica dinâmica baseada em:
+#   1. USG% (Usage Rate) > 25% nos últimos 15 jogos
+#   2. PER (Player Efficiency Rating) > 20 na temporada
+#   3. Minutos jogados > 28 MPG
+#
+# Isso garantirá que apenas jogadores ATUALMENTE em alta forma sejam considerados
+# "estrelas" para fins de cálculo de impacto em lesões.
+# ==============================================================================
 ALL_STARS_2025 = [
     "LeBron James", "Stephen Curry", "Kevin Durant", "Giannis Antetokounmpo", "Nikola Jokic",
     "Luka Doncic", "Jayson Tatum", "Joel Embiid", "Shai Gilgeous-Alexander", "Anthony Edwards",

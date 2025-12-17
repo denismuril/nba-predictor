@@ -25,7 +25,8 @@ logger = logging.getLogger(__name__)
 # Constantes Elo
 ELO_INICIAL = 1500  # Rating médio da liga
 K_FACTOR_BASE = 20  # Taxa de aprendizado base
-HCA_ELO = 100       # Vantagem de casa em pontos Elo (~3 pontos no spread)
+HCA_ELO = 70        # Vantagem de casa em pontos Elo (~2.1 pontos no spread) - NBA Moderna
+B2B_PENALTY = 50    # Penalidade para times em Back-to-Back (~1.5 pontos)
 
 
 class NBAEloSystem:
@@ -58,7 +59,7 @@ class NBAEloSystem:
             self.ratings[team] = ELO_INICIAL
         logger.info(f"✅ {len(teams)} times inicializados com Elo {ELO_INICIAL}")
     
-    def calcular_vitoria_esperada(self, elo_time, elo_oponente, is_home=False):
+    def calcular_vitoria_esperada(self, elo_time, elo_oponente, is_home=False, is_b2b=False):
         """
         Calcula probabilidade de vitória baseada em diferença Elo.
         
@@ -68,11 +69,18 @@ class NBAEloSystem:
             elo_time: Elo do time
             elo_oponente: Elo do oponente
             is_home: Se o time está jogando em casa
+            is_b2b: Se o time está em Back-to-Back (jogou ontem)
             
         Returns:
             Probabilidade de vitória (0-1)
         """
+        # Ajuste HCA (Home Court Advantage)
         elo_ajustado = elo_time + (self.hca if is_home else 0)
+        
+        # Ajuste B2B (Penalidade por fadiga) - NBA Moderna: ~1.5 pts de desvantagem
+        if is_b2b:
+            elo_ajustado -= B2B_PENALTY
+        
         diff = elo_oponente - elo_ajustado
         
         win_prob = 1 / (1 + 10 ** (diff / 400))
@@ -180,22 +188,40 @@ class NBAEloSystem:
         """Retorna rating Elo de um time."""
         return self.ratings.get(team, ELO_INICIAL)
     
-    def prever_jogo(self, home_team, away_team):
+    def prever_jogo(self, home_team, away_team, home_is_b2b=False, away_is_b2b=False):
         """
         Prevê resultado de um jogo baseado em Elo.
         
+        Args:
+            home_team: Time da casa
+            away_team: Time visitante
+            home_is_b2b: Se o time da casa está em Back-to-Back
+            away_is_b2b: Se o time visitante está em Back-to-Back
+        
         Returns:
-            Dict com prob_home, prob_away, spread_implícito
+            Dict com prob_home, prob_away, spread_implícito, ajustes B2B
         """
         elo_home = self.get_rating(home_team)
         elo_away = self.get_rating(away_team)
         
-        prob_home = self.calcular_vitoria_esperada(elo_home, elo_away, is_home=True)
-        prob_away = 1 - prob_home
+        prob_home = self.calcular_vitoria_esperada(
+            elo_home, elo_away, is_home=True, is_b2b=home_is_b2b
+        )
+        prob_away = self.calcular_vitoria_esperada(
+            elo_away, elo_home, is_home=False, is_b2b=away_is_b2b
+        )
+        
+        # Normalizar probabilidades (podem não somar 1.0 devido aos ajustes B2B)
+        total_prob = prob_home + prob_away
+        prob_home = prob_home / total_prob
+        prob_away = prob_away / total_prob
         
         # Spread implícito: ~0.03 pontos por ponto Elo
-        elo_diff = (elo_home + self.hca) - elo_away
-        spread_implicito = elo_diff * 0.03
+        # Inclui ajustes de HCA e B2B no cálculo
+        elo_home_adjusted = elo_home + self.hca - (B2B_PENALTY if home_is_b2b else 0)
+        elo_away_adjusted = elo_away - (B2B_PENALTY if away_is_b2b else 0)
+        elo_diff_adjusted = elo_home_adjusted - elo_away_adjusted
+        spread_implicito = elo_diff_adjusted * 0.03
         
         return {
             'prob_home': prob_home,
@@ -203,7 +229,9 @@ class NBAEloSystem:
             'spread_implicito': spread_implicito,
             'elo_home': elo_home,
             'elo_away': elo_away,
-            'elo_diff': elo_home - elo_away
+            'elo_diff': elo_home - elo_away,
+            'home_is_b2b': home_is_b2b,
+            'away_is_b2b': away_is_b2b
         }
     
     def salvar(self, filepath='data/models/elo_ratings.pkl'):
