@@ -839,6 +839,10 @@ def prepare_data_for_training(df, target='winner'):
         'injury_impact_home', 'injury_impact_away', 'injury_impact_net',
         'home_injury_impact', 'away_injury_impact', 'total_injury_impact',
         'fatigue_index',
+        # ✅ V27.0 ENTERPRISE: Granular Rest Advantage features
+        'net_rest_days', 'rest_advantage',
+        'rest_disadvantage_home', 'rest_disadvantage_away',
+        'home_travel_km_3d', 'away_travel_km_3d', 'travel_km_advantage',
         # ❌ REMOVIDO (LEAKAGE): home_efg, home_pace, home_ftr, home_orb_pct, home_tov_pct
         # ❌ REMOVIDO (LEAKAGE): home_off_rating, home_def_rating, home_pie
         # Estas features são calculadas do BOX SCORE do jogo atual (pós-jogo)

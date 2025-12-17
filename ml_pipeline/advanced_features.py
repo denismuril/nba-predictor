@@ -51,6 +51,7 @@ def add_domain_expert_features(df: pd.DataFrame) -> pd.DataFrame:
     # Grupo 2: Situational
     df = add_clutch_performance(df)
     df = add_travel_fatigue(df)
+    df = add_travel_km_last_3_days(df)  # V27.0 Enterprise: Cumulative travel
     df = add_schedule_density(df)
     df = add_playoff_contention(df)
     df = add_injury_impact(df)
@@ -390,10 +391,201 @@ def add_travel_fatigue(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
+def add_travel_km_last_3_days(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    V27.0 ENTERPRISE: Travel Distance Acumulada nos Últimos 3 Dias
+    
+    Calcula a distância total viajada por cada time nos últimos 3 dias,
+    capturando o desgaste acumulado de road trips.
+    
+    Math-Context:
+    - Times em road trips longas (ex: Eastern team fazendo West Coast swing)
+      acumulam fadiga que uma única distância de jogo não captura.
+    - Exemplo: BOS joga em LAL (4200km), depois LAC (0km mesmo dia), 
+      depois PHX (590km) = 4790km em 3 dias.
+    
+    Anti-Leakage: Usa apenas jogos ANTERIORES ao jogo atual (shift).
+    
+    Features geradas:
+    - home_travel_km_3d: Distância acumulada pelo home team (normalmente baixa)
+    - away_travel_km_3d: Distância acumulada pelo away team
+    - travel_km_advantage: away_travel - home_travel (positivo = vantagem home)
+    """
+    logger.info("✈️ Calculando Travel KM Last 3 Days (Enterprise Feature)...")
+    
+    try:
+        # Coordenadas das cidades das arenas
+        NBA_CITIES = {
+            'LAL': (34.0430, -118.2673), 'LAC': (34.0430, -118.2673),
+            'GSW': (37.7680, -122.3878), 'BOS': (42.3662, -71.0621),
+            'MIA': (25.7814, -80.1870), 'PHX': (33.4457, -112.0712),
+            'MIL': (43.0439, -87.9172), 'DEN': (39.7487, -105.0076),
+            'DAL': (32.7904, -96.8104), 'PHI': (39.9012, -75.1720),
+            'CLE': (41.4964, -81.6879), 'NYK': (40.7505, -73.9934),
+            'BKN': (40.6828, -73.9754), 'CHI': (41.8807, -87.6742),
+            'ATL': (33.7573, -84.3963), 'TOR': (43.6435, -79.3791),
+            'DET': (42.3408, -83.0553), 'IND': (39.7640, -86.1555),
+            'CHA': (35.2251, -80.8391), 'WAS': (38.8992, -77.0211),
+            'ORL': (28.5392, -81.3839), 'MIN': (44.9795, -93.2760),
+            'OKC': (35.4634, -97.5151), 'POR': (45.5316, -122.6668),
+            'UTA': (40.7683, -111.9011), 'SAC': (38.5801, -121.4997),
+            'SAS': (29.4271, -98.4375), 'MEM': (35.1382, -90.0506),
+            'NOP': (29.9489, -90.0821), 'HOU': (29.7508, -95.3621),
+        }
+        
+        def haversine_distance(lat1, lon1, lat2, lon2):
+            from math import radians, sin, cos, sqrt, atan2
+            R = 6371  # km
+            lat1, lon1, lat2, lon2 = map(radians, [lat1, lon1, lat2, lon2])
+            dlat = lat2 - lat1
+            dlon = lon2 - lon1
+            a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlon/2)**2
+            c = 2 * atan2(sqrt(a), sqrt(1-a))
+            return R * c
+        
+        # Verificar requisitos
+        if 'date' not in df.columns:
+            logger.warning("⚠️ Sem coluna 'date', usando travel_km_3d = 0")
+            df['home_travel_km_3d'] = 0.0
+            df['away_travel_km_3d'] = 0.0
+            df['travel_km_advantage'] = 0.0
+            return df
+        
+        if 'home_team' not in df.columns or 'away_team' not in df.columns:
+            raise ValueError("Sem colunas home_team/away_team")
+        
+        # Normalizar times
+        try:
+            from utils.team_normalization import normalize_team
+            use_normalize = True
+        except ImportError:
+            use_normalize = False
+        
+        df = df.copy()
+        df['date'] = pd.to_datetime(df['date'])
+        df = df.sort_values('date').reset_index(drop=True)
+        
+        # Criar histórico de viagens por time
+        # Para cada jogo, calcular distância viajada (cidade anterior -> cidade do jogo)
+        
+        # 1. Criar DataFrame de todas as aparições (home e away)
+        home_games = df[['date', 'home_team', 'away_team']].copy()
+        home_games['team'] = home_games['home_team']
+        home_games['game_city'] = home_games['home_team']  # Joga em casa
+        home_games['is_away'] = 0
+        
+        away_games = df[['date', 'home_team', 'away_team']].copy()
+        away_games['team'] = away_games['away_team']
+        away_games['game_city'] = away_games['home_team']  # Joga na cidade do home
+        away_games['is_away'] = 1
+        
+        all_games = pd.concat([
+            home_games[['date', 'team', 'game_city', 'is_away']],
+            away_games[['date', 'team', 'game_city', 'is_away']]
+        ]).sort_values(['team', 'date']).reset_index(drop=True)
+        
+        # 2. Calcular distância de viagem para cada jogo
+        def get_team_code(team_name):
+            if use_normalize:
+                try:
+                    return normalize_team(team_name)
+                except:
+                    return team_name
+            return team_name
+        
+        # Calcular distância para cada jogo (da cidade anterior para a atual)
+        travel_distances = []
+        
+        for team in all_games['team'].unique():
+            team_df = all_games[all_games['team'] == team].copy()
+            team_code = get_team_code(team)
+            
+            for i in range(len(team_df)):
+                if i == 0:
+                    # Primeiro jogo da temporada: assume saindo de casa
+                    team_home_coords = NBA_CITIES.get(team_code)
+                    game_city_code = get_team_code(team_df.iloc[i]['game_city'])
+                    game_coords = NBA_CITIES.get(game_city_code)
+                    
+                    if team_home_coords and game_coords:
+                        dist = haversine_distance(
+                            team_home_coords[0], team_home_coords[1],
+                            game_coords[0], game_coords[1]
+                        )
+                    else:
+                        dist = 0
+                else:
+                    # Distância do jogo anterior para este
+                    prev_city_code = get_team_code(team_df.iloc[i-1]['game_city'])
+                    curr_city_code = get_team_code(team_df.iloc[i]['game_city'])
+                    
+                    prev_coords = NBA_CITIES.get(prev_city_code)
+                    curr_coords = NBA_CITIES.get(curr_city_code)
+                    
+                    if prev_coords and curr_coords:
+                        dist = haversine_distance(
+                            prev_coords[0], prev_coords[1],
+                            curr_coords[0], curr_coords[1]
+                        )
+                    else:
+                        dist = 0
+                
+                travel_distances.append({
+                    'date': team_df.iloc[i]['date'],
+                    'team': team,
+                    'travel_km': dist
+                })
+        
+        travel_df = pd.DataFrame(travel_distances)
+        
+        # 3. Calcular soma rolling de 3 dias (com shift para evitar leakage)
+        travel_df = travel_df.sort_values(['team', 'date'])
+        
+        # Usar rolling sum dos últimos 3 jogos (não inclui o atual)
+        travel_df['travel_km_3d'] = travel_df.groupby('team')['travel_km'].transform(
+            lambda x: x.shift(1).rolling(window=3, min_periods=1).sum()
+        ).fillna(0)
+        
+        # 4. Merge de volta para o DataFrame original
+        # Para home team
+        home_travel = travel_df[['date', 'team', 'travel_km_3d']].copy()
+        home_travel.columns = ['date', 'home_team', 'home_travel_km_3d']
+        df = df.merge(home_travel, on=['date', 'home_team'], how='left')
+        
+        # Para away team
+        away_travel = travel_df[['date', 'team', 'travel_km_3d']].copy()
+        away_travel.columns = ['date', 'away_team', 'away_travel_km_3d']
+        df = df.merge(away_travel, on=['date', 'away_team'], how='left')
+        
+        # Preencher NaN com 0
+        df['home_travel_km_3d'] = df['home_travel_km_3d'].fillna(0)
+        df['away_travel_km_3d'] = df['away_travel_km_3d'].fillna(0)
+        
+        # Vantagem de viagem (positivo = home viajou menos = vantagem home)
+        df['travel_km_advantage'] = df['away_travel_km_3d'] - df['home_travel_km_3d']
+        
+        # Stats de debug
+        avg_home = df['home_travel_km_3d'].mean()
+        avg_away = df['away_travel_km_3d'].mean()
+        max_away = df['away_travel_km_3d'].max()
+        logger.info(
+            f"✅ Travel KM 3D: avg home={avg_home:.0f}km, "
+            f"avg away={avg_away:.0f}km, max away={max_away:.0f}km"
+        )
+        
+    except Exception as e:
+        logger.warning(f"⚠️ Erro ao calcular travel_km_3d: {e}")
+        df['home_travel_km_3d'] = 0.0
+        df['away_travel_km_3d'] = 0.0
+        df['travel_km_advantage'] = 0.0
+
+    return df
+
+
 def add_schedule_density(df: pd.DataFrame) -> pd.DataFrame:
     """
     Feature 8: Schedule Density
-    
+
     Densidade de jogos (back-to-back, 3 em 4 dias, etc).
     """
     try:

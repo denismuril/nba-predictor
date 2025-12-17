@@ -168,6 +168,96 @@ class NBAEloSystem:
             'elo_away': elo_away
         }
     
+    def prever_jogo_enterprise(
+        self, 
+        home_team: str, 
+        away_team: str,
+        home_rest_days: int = 2,
+        away_rest_days: int = 2,
+        home_travel_km_3d: float = 0.0,
+        away_travel_km_3d: float = 0.0
+    ) -> dict:
+        """
+        V27.0 ENTERPRISE: Previsão com rest days e travel km granulares.
+        
+        Args:
+            home_team: Time da casa
+            away_team: Time visitante
+            home_rest_days: Dias de descanso do home (0 = B2B)
+            away_rest_days: Dias de descanso do away (0 = B2B)
+            home_travel_km_3d: KM viajados pelo home nos últimos 3 jogos
+            away_travel_km_3d: KM viajados pelo away nos últimos 3 jogos
+            
+        Returns:
+            Dict com prob_home, prob_away, spread_implicito, adjustments breakdown
+        """
+        elo_home = self.get_rating(home_team)
+        elo_away = self.get_rating(away_team)
+        
+        # =====================================================================
+        # REST ADVANTAGE PENALTY SCALE
+        # =====================================================================
+        # Baseado em: NBA Schedule Research (Teramoto et al. 2018)
+        # B2B = ~3 pontos de desvantagem, cada dia extra de descanso ~1 ponto
+        # =====================================================================
+        
+        REST_PENALTY_PER_DAY = 15  # Elo points per rest day difference
+        MAX_REST_PENALTY = 60     # Cap at 60 Elo (~1.8 pontos spread)
+        
+        net_rest = home_rest_days - away_rest_days
+        rest_adjustment = np.clip(net_rest * REST_PENALTY_PER_DAY, -MAX_REST_PENALTY, MAX_REST_PENALTY)
+        
+        # Bônus extra se adversário é B2B e você está bem descansado
+        if away_rest_days == 0 and home_rest_days >= 2:
+            rest_adjustment += 20  # Bônus "fresh vs exhausted"
+        elif home_rest_days == 0 and away_rest_days >= 2:
+            rest_adjustment -= 20
+        
+        # =====================================================================
+        # TRAVEL FATIGUE PENALTY
+        # =====================================================================
+        # Cross-country flights (>2500km) causam jet lag significativo
+        # Escala: ~6 Elo por 1000km viajados
+        # =====================================================================
+        
+        TRAVEL_PENALTY_PER_1000KM = 6  # Elo points per 1000km
+        MAX_TRAVEL_PENALTY = 40        # Cap at 40 Elo
+        
+        net_travel_km = away_travel_km_3d - home_travel_km_3d
+        travel_adjustment = np.clip(
+            (net_travel_km / 1000) * TRAVEL_PENALTY_PER_1000KM, 
+            -MAX_TRAVEL_PENALTY, 
+            MAX_TRAVEL_PENALTY
+        )
+        
+        # =====================================================================
+        # CALCULATE FINAL PROBABILITIES
+        # =====================================================================
+        
+        total_adjustment = rest_adjustment + travel_adjustment
+        
+        elo_final_home = elo_home + self.hca + total_adjustment
+        elo_final_away = elo_away
+        
+        elo_diff = elo_final_home - elo_final_away
+        
+        # Probabilidade usando fórmula Elo
+        prob_home = 1 / (1 + 10 ** (-elo_diff / 400))
+        
+        return {
+            'prob_home': prob_home,
+            'prob_away': 1 - prob_home,
+            'spread_implicito': elo_diff * 0.03,
+            'elo_home': elo_home,
+            'elo_away': elo_away,
+            # Enterprise breakdown
+            'rest_adjustment_elo': rest_adjustment,
+            'travel_adjustment_elo': travel_adjustment,
+            'total_adjustment_elo': total_adjustment,
+            'net_rest_days': net_rest,
+            'net_travel_km': net_travel_km
+        }
+
     def salvar(self, filepath='data/models/elo_ratings.pkl'):
         """Salva ratings Elo em arquivo pickle."""
         filepath = Path(filepath)

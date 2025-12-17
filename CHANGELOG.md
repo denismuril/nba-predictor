@@ -2,6 +2,49 @@
 
 ---
 
+## v27.0 - Enterprise Rest Advantage Features (17 Dez 2025)
+
+### 🎯 Granular Rest & Travel Fatigue Features
+
+Implementação de features avançadas de descanso e fadiga de viagem para capturar nuances além de simples detecção de Back-to-Back.
+
+### ✅ Novas Features em `ml_pipeline/feature_engineering_v2.py`
+
+| Feature | Descrição |
+|---------|-----------|
+| `net_rest_days` | Alias formal para `rest_advantage` (home - away) |
+| `rest_disadvantage_home` | Flag: home em B2B enquanto away descansou 2+ dias |
+| `rest_disadvantage_away` | Flag: away em B2B enquanto home descansou 2+ dias |
+
+### ✅ Novas Features em `ml_pipeline/advanced_features.py`
+
+| Feature | Descrição |
+|---------|-----------|
+| `home_travel_km_3d` | Km acumulados pelo home nos últimos 3 jogos |
+| `away_travel_km_3d` | Km acumulados pelo away nos últimos 3 jogos |
+| `travel_km_advantage` | `away_travel - home_travel` (positivo = home vantagem) |
+
+**Anti-Leakage:** Implementado com `shift(1)` para evitar vazamento de dados do jogo atual.
+
+### ✅ Novo Método em `ml_pipeline/elo_system.py`
+
+Adicionado `prever_jogo_enterprise()` com penalidades granulares:
+
+| Parâmetro | Valor | Impacto |
+|-----------|-------|---------|
+| `REST_PENALTY_PER_DAY` | 15 Elo | Por dia de diferença |
+| `MAX_REST_PENALTY` | 60 Elo | Cap (~1.8 pts spread) |
+| `TRAVEL_PENALTY_PER_1000KM` | 6 Elo | Por 1000km viajados |
+| `MAX_TRAVEL_PENALTY` | 40 Elo | Cap para extremos |
+| Fresh vs Exhausted bonus | ±20 Elo | Se adversário B2B e você descansado |
+
+### 🔧 Integração no Pipeline
+
+- `data_preparation.py` - Adicionadas features ao `SAFE_EXACT_COLS` whitelist
+- `advanced_features.py` - `add_travel_km_last_3_days()` integrado em `add_domain_expert_features()`
+
+---
+
 ## v26.2 - Critical Security & Logic Fixes (17 Dez 2025)
 
 ### 🔒 Correções de Segurança e Lógica Crítica

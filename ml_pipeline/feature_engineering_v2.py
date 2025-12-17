@@ -309,11 +309,35 @@ def add_schedule_fatigue_features(df: pd.DataFrame) -> pd.DataFrame:
 
     # Feature derivada: Vantagem de descanso
     df['rest_advantage'] = df['home_rest_days'] - df['away_rest_days']
+    
+    # ==========================================================================
+    # V27.0 ENTERPRISE: Granular Rest Advantage Features
+    # ==========================================================================
+    # Math-Context: A diferença exata de dias de descanso é mais preditiva que
+    # flags binárias. Times com vantagem de 2+ dias têm ~3-4 pts de edge.
+    # Fonte: NBA Schedule Analysis (Entine & Small, 2008)
+    # ==========================================================================
+    
+    # Alias formal para clareza (semanticamente idêntico a rest_advantage)
+    df['net_rest_days'] = df['rest_advantage']
+    
+    # Rest Disadvantage Flags: Captura cenários de fadiga severa
+    # Ex: Home jogou ontem (B2B), Away descansou 3 dias
+    df['rest_disadvantage_home'] = (
+        (df['home_rest_days'] < df['away_rest_days']) & 
+        (df['home_rest_days'] <= 1)
+    ).astype(int)
+    
+    df['rest_disadvantage_away'] = (
+        (df['away_rest_days'] < df['home_rest_days']) & 
+        (df['away_rest_days'] <= 1)
+    ).astype(int)
 
     # Estatísticas de debug
     b2b_count = df['home_is_b2b'].sum() + df['away_is_b2b'].sum()
     three_in_4 = df['home_is_3_in_4'].sum() + df['away_is_3_in_4'].sum()
-    logger.info(f"✅ Fatigue Features: {b2b_count} B2B games, {three_in_4} 3-in-4 games")
+    rest_disadv = df['rest_disadvantage_home'].sum() + df['rest_disadvantage_away'].sum()
+    logger.info(f"✅ Fatigue Features: {b2b_count} B2B, {three_in_4} 3-in-4, {rest_disadv} rest disadvantage games")
 
     return df
 
