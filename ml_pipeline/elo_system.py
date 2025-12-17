@@ -39,7 +39,7 @@ class NBAEloSystem:
     - Vegas power ratings
     """
     
-    def __init__(self, k_factor=20, hca=100, elo_floor=1000, elo_ceiling=2000):
+    def __init__(self, k_factor=20, hca=HCA_ELO, elo_floor=1000, elo_ceiling=2000):
         """
         Args:
             k_factor: Taxa de aprendizado (maior = mais volátil)
@@ -281,7 +281,7 @@ def calcular_elo_ratings_historico(df: pd.DataFrame) -> pd.DataFrame:
     df = df.sort_values('date').reset_index(drop=True)
     
     # Inicializar sistema Elo
-    sistema = NBAEloSystem(k_factor=20, hca=100)
+    sistema = NBAEloSystem(k_factor=20, hca=HCA_ELO)
     
     # Obter todos os times
     todos_times = set(df['home_team'].unique()) | set(df['away_team'].unique())

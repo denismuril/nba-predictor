@@ -56,10 +56,22 @@ async def _acquire_rate_limit(api_name: str) -> bool:
         return True  # Se falhar, permitir requisição
 
 
-# REMOVIDO v26.1: acquire_rate_limit_sync causava Deadlock
-# Problema: asyncio.run() dentro de loop de eventos existente causa RuntimeError.
-# Solução: Usar apenas a versão async _acquire_rate_limit() diretamente.
-# Referência: https://docs.python.org/3/library/asyncio-eventloop.html#asyncio.run
+def acquire_rate_limit_sync(api_name: str) -> bool:
+    """
+    Versão segura contra Deadlock/RuntimeError.
+    Se já houver um loop rodando, permite a requisição (Fail Open) para não travar o sistema.
+    """
+    try:
+        # Verifica se já estamos num loop assíncrono
+        asyncio.get_running_loop()
+        # Se sim, NÃO podemos criar outro. Retornamos True para prosseguir sem travar.
+        return True 
+    except RuntimeError:
+        # Se não há loop, é seguro criar um novo
+        try:
+            return asyncio.run(_acquire_rate_limit(api_name))
+        except Exception:
+            return True
 
 
 class OddsValidator:
