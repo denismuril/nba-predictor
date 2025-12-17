@@ -1,0 +1,13 @@
+[Unit]
+Description=NBA Predictor Weekly Update (cache + retrain)
+
+[Service]
+Type=oneshot
+User=denis
+WorkingDirectory=/home/denis/nba-predictor
+ExecStart=/home/denis/nba-predictor/scripts/weekly_update.sh
+StandardOutput=append:/home/denis/nba-predictor/logs/weekly_update.log
+StandardError=append:/home/denis/nba-predictor/logs/weekly_update.log
+
+[Install]
+WantedBy=multi-user.target

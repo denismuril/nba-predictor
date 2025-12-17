@@ -1,0 +1,15 @@
+[Unit]
+Description=NBA Predictor Weekly Cache Update
+After=network.target
+
+[Service]
+Type=oneshot
+User=denis
+WorkingDirectory=/home/denis/nba-predictor
+ExecStart=/home/denis/nba-predictor/scripts/weekly_update.sh
+StandardOutput=append:/home/denis/nba-predictor/logs/weekly_update.log
+StandardError=append:/home/denis/nba-predictor/logs/weekly_update.log
+Environment="PATH=/home/denis/nba-predictor/venv/bin:/usr/local/bin:/usr/bin:/bin"
+
+[Install]
+WantedBy=multi-user.target

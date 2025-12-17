@@ -61,13 +61,20 @@ def train_totals_model():
     logger.info("🏀 Totals Model Training - v18.0 (Com Volatilidade de Pace)")
     logger.info("="*60)
     
-    # 1. Carregar Dados via pipeline (inclui rolling pace features)
+    # 1. Carregar Dados via pipeline (usa CACHE para evitar recálculo)
     try:
+        from ml_pipeline.data_cache import load_historical_data_cached
+        df = load_historical_data_cached(seasons=['2023-24', '2024-25', '2025-26'])
+        if df is None or df.empty:
+            raise ValueError("Nenhum dado retornado")
+        logger.info(f"✅ {len(df)} games carregados via CACHE")
+    except ImportError:
+        # Fallback sem cache
         from ml_pipeline.data_preparation import load_historical_data
         df = load_historical_data(seasons=['2023-24', '2024-25', '2025-26'])
         if df is None or df.empty:
             raise ValueError("Nenhum dado retornado")
-        logger.info(f"✅ {len(df)} games carregados via load_historical_data")
+        logger.info(f"✅ {len(df)} games carregados (sem cache)")
     except Exception as e:
         logger.warning(f"⚠️ Fallback para CSV: {e}")
         try:

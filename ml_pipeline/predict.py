@@ -485,8 +485,13 @@ def predict_next_games(date=None):
             # CRITICAL FIX: Propagar features rolling do historico para jogos de hoje
             # Problema: jogos futuros tem features zeradas porque nao tem score ainda
             # Solucao: copiar features do ultimo jogo de cada time
-            # IMPORTANTE: df_full usa raw=True (sem features), entao carregamos processado
-            df_hist_processed = load_historical_data()  # raw=False = com features
+            # IMPORTANTE: Usa CACHE para evitar recálculo pesado (8h -> 10s)
+            try:
+                from ml_pipeline.data_cache import load_historical_data_cached
+                df_hist_processed = load_historical_data_cached()  # COM CACHE
+            except ImportError:
+                df_hist_processed = load_historical_data()  # Fallback sem cache
+            
             df_today = propagate_features_from_history(
                 df_hist_processed,  # Historico COM features
                 df_today,

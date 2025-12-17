@@ -204,10 +204,15 @@ def train_ensemble_model_v6():
     # 1. Carregar Hiperparâmetros (V6 prioritário, fallback V5)
     rf_params, xgb_params, extra_params, lgbm_params, hist_params = load_best_params()
 
-    # 2. Carregar dados COM player features (RAPM/BPM para capturar impacto de lesões)
+    # 2. Carregar dados (COM CACHE para evitar recálculo de features)
     # Math-Context: RAPM isola impacto individual, BPM aproxima via box scores
-    # Quando superestrelas descansam, a prob. de vitória cai - modelo precisa saber disso
-    df = load_historical_data(seasons=ML_SEASONS, enable_player_features=True)
+    try:
+        from ml_pipeline.data_cache import load_historical_data_cached
+        df = load_historical_data_cached(seasons=ML_SEASONS)
+        logger.info(f"✅ Dados carregados via CACHE: {len(df)} jogos")
+    except ImportError:
+        df = load_historical_data(seasons=ML_SEASONS, enable_player_features=True)
+        logger.info(f"✅ Dados carregados (sem cache): {len(df)} jogos")
 
     # 2.1 APLICAR FEATURE ENGINEERING V2 AVANÇADO (Pace, Matchup, Volatility, Shooting Luck)
     try:

@@ -1,66 +1,34 @@
 [
   {
-    "player_name": "Isaac Jones",
-    "team": "DET",
+    "player_name": "Chris Livingston",
+    "team": "CLE",
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-15T18:37:37.337670"
+    "updated_at": "2025-12-17T08:53:30.673371"
   },
   {
-    "player_name": "Tyler Herro",
-    "team": "MIA",
-    "status": "AVAILABLE",
-    "description": "Via NBA Official PDF",
-    "source": "NBA_Official",
-    "updated_at": "2025-12-15T18:37:37.337695"
-  },
-  {
-    "player_name": "Anthony Davis",
-    "team": "DAL",
+    "player_name": "Ayo Dosunmu",
+    "team": "CHI",
     "status": "QUESTIONABLE",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-15T18:37:37.337702"
-  },
-  {
-    "player_name": "Elijah Harkless",
-    "team": "UTA",
-    "status": "OUT",
-    "description": "Via NBA Official PDF",
-    "source": "NBA_Official",
-    "updated_at": "2025-12-15T18:37:37.337707"
-  },
-  {
-    "player_name": "Tari Eason",
-    "team": "HOU",
-    "status": "QUESTIONABLE",
-    "description": "Via NBA Official PDF",
-    "source": "NBA_Official",
-    "updated_at": "2025-12-15T18:37:37.337712"
-  },
-  {
-    "player_name": "Tamar Bates",
-    "team": "DEN",
-    "status": "OUT",
-    "description": "Via NBA Official PDF",
-    "source": "NBA_Official",
-    "updated_at": "2025-12-15T18:37:37.337717"
+    "updated_at": "2025-12-17T08:53:30.673538"
   },
   {
     "player_name": "Brandon Clarke",
     "team": "MEM",
-    "status": "DOUBTFUL",
-    "description": "Via NBA Official PDF",
-    "source": "NBA_Official",
-    "updated_at": "2025-12-15T18:37:37.337722"
-  },
-  {
-    "player_name": "Nicolas Batum",
-    "team": "UNK",
     "status": "QUESTIONABLE",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-15T18:37:37.337726"
+    "updated_at": "2025-12-17T08:53:30.673556"
+  },
+  {
+    "player_name": "Joan Beringer",
+    "team": "MIN",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-17T08:53:30.673565"
   }
 ]

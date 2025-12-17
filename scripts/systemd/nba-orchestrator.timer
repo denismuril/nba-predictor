@@ -1,0 +1,9 @@
+[Unit]
+Description=NBA Predictor Daily Orchestrator Timer - Todo dia às 10h
+
+[Timer]
+OnCalendar=*-*-* 10:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

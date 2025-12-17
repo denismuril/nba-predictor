@@ -1,0 +1,9 @@
+[Unit]
+Description=NBA Predictor Weekly Update Timer - Segunda às 10h
+
+[Timer]
+OnCalendar=Mon *-*-* 10:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

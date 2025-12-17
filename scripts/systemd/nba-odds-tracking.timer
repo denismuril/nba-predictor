@@ -1,0 +1,9 @@
+[Unit]
+Description=NBA Predictor Odds Tracking Timer - A cada 2 horas (8h-18h)
+
+[Timer]
+OnCalendar=*-*-* 08,10,12,14,16,18:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

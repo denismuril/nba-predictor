@@ -162,13 +162,21 @@ def train_ensemble_blending(use_calibration: bool = True,
     logger.info(f"   📏 Calibração: {use_calibration} ({calibration_method})")
     logger.info(f"   🔧 Otimização: {optimize_hyperparams}")
 
-    # 1. Carregar Dados
-    df = load_historical_data(
-        seasons=['2023-24', '2024-25', '2025-26'],
-        apply_weights=False
-    )
-    df = add_rolling_features(df)
-    df = add_advanced_features(df)
+    # 1. Carregar Dados (com CACHE para evitar recálculo)
+    try:
+        from ml_pipeline.data_cache import load_historical_data_cached
+        df = load_historical_data_cached(
+            seasons=['2023-24', '2024-25', '2025-26'],
+            apply_weights=False
+        )
+    except ImportError:
+        # Fallback para método sem cache
+        df = load_historical_data(
+            seasons=['2023-24', '2024-25', '2025-26'],
+            apply_weights=False
+        )
+        df = add_rolling_features(df)
+        df = add_advanced_features(df)
 
     # Features
     try:
@@ -182,6 +190,25 @@ def train_ensemble_blending(use_calibration: bool = True,
 
     X = df[features].fillna(0)
     y = df['winner']
+
+    # V22.0 FIX: Limpar valores None/NaN na coluna winner
+    valid_mask = y.notna()
+    if not valid_mask.all():
+        n_invalid = (~valid_mask).sum()
+        logger.warning(f"⚠️ Removendo {n_invalid} jogos com winner=None")
+        X = X[valid_mask]
+        y = y[valid_mask]
+
+    # Converter winner para numérico (HOME=1, AWAY=0)
+    if y.dtype == 'object':
+        logger.info("   Convertendo winner: HOME=1, AWAY=0")
+        y = y.map({'HOME': 1, 'AWAY': 0, 1: 1, 0: 0}).fillna(0).astype(int)
+    else:
+        y = y.astype(int)
+
+    # Reset index para evitar KeyError no OOF predictions
+    X = X.reset_index(drop=True)
+    y = y.reset_index(drop=True)
 
     logger.info(f"   📊 Dataset: {len(X)} jogos, {len(features)} features")
 
