@@ -1,4 +1,4 @@
-# 🏀 NBA Predictor v26.2 - Critical Security Fixes
+# 🏀 NBA Predictor v27.0 - Enterprise Rest Advantage
 
 [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-orange.svg)](LICENSE)
@@ -16,15 +16,18 @@ Sistema profissional de análise quantitativa e previsão de jogos da NBA usando
 
 ---
 
-## 🎉 Destaques v26.2 (17 Dez 2025) - **Critical Fixes**
+## 🎉 Destaques v27.0 (17 Dez 2025) - **Enterprise Rest Advantage**
 
-### 🔒 Segurança e Lógica Reforçada
+### 🎯 Granular Rest & Travel Fatigue Features
 
-- **Elo System:** HCA fixado em 70 e lógica B2B implementada.
-- **Anti-Leakage:** Allowlist rígida (Whitelist) substitui Blacklist no treinamento.
-- **Estabilidade:** Correção de deadlock no Odds Scraper.
+- **net_rest_days:** Diferença exata de descanso entre times
+- **rest_disadvantage_home/away:** Flags para fadiga severa (B2B vs descansado)
+- **travel_km_3d:** Distância acumulada nos últimos 3 jogos
+- **Elo Enterprise:** `prever_jogo_enterprise()` com penalidades granulares
 
 ---
+
+## 🎉 Destaques v26.2 (17 Dez 2025) - **Critical Fixes**
 
 ## 🎉 Destaques v26.1 (17 Dez 2025) - **Elo Calibration & Anti-Leakage**
 
@@ -558,11 +561,11 @@ Este software é para fins educacionais e de pesquisa. O autor não se responsab
 
 ## 📞 Suporte
 
-**Versão:** v26.2 (Critical Security & Logic Fixes)
+**Versão:** v27.0 (Enterprise Rest Advantage)
 **Status:** ✅ Production Ready
 **Temporada:** 2025-26
 **Última Atualização:** 17 Dezembro 2025
-**Novidades:** Elo HCA=70, B2B Logic, Strict Allowlist, Async Scraper Fix.
+**Novidades:** Granular Rest Days, Travel KM 3D, Elo Enterprise, net_rest_days.
 
 **Documentação Adicional:**
 
