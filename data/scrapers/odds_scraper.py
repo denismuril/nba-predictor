@@ -54,13 +54,17 @@ async def _acquire_rate_limit(api_name: str) -> bool:
 
 def acquire_rate_limit_sync(api_name: str) -> bool:
     """
-    Versão segura contra Deadlock/RuntimeError.
-    Se já houver um loop rodando, permite a requisição (Fail Open).
+    Versão segura que evita 'RuntimeError: This event loop is already running'.
+    Retorna True (permite a request) se não conseguir gerir o loop.
     """
     try:
+        # Verifica se já existe um loop rodando
         asyncio.get_running_loop()
-        return True # Já existe loop, não bloqueia
+        # Se chegamos aqui, estamos dentro de um loop async.
+        # NÃO podemos usar asyncio.run(). Retornamos True para não travar.
+        return True 
     except RuntimeError:
+        # Sem loop rodando, seguro criar um novo
         try:
             return asyncio.run(_acquire_rate_limit(api_name))
         except Exception:

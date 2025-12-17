@@ -184,28 +184,31 @@ def train_ensemble_model_v6():
     X, y_temp = prepare_data_for_training(df, target='winner')
     X = X.fillna(0)
     
-    # REMOVENDO base_drop_cols...
-    # INICIANDO LOGICA DE ALLOWLIST RÍGIDA
-    logger.info("🛡️ Aplicando Allowlist de Features (Segurança Máxima Anti-Leakage)...")
-    
+    # 3. Pré-processamento Base - SEGURANÇA MÁXIMA (Allowlist)
+    logger.info("🛡️ Aplicando Allowlist de Features (Anti-Leakage V2)...")
+
+    # Prefixos PERMITIDOS (Dados conhecidos ANTES do jogo)
     SAFE_PREFIXES = [
-        'rolling_',      # Médias históricas
-        'elo_',          # Ratings anteriores
+        'rolling_',      # Médias móveis passadas
+        'elo_',          # Elo Ratings pré-jogo
         'rest_',         # Dias de descanso
         'is_b2b',        # Flag de fadiga
-        'feat_',         # Features calculadas
-        'encoded_'       # Categorias
+        'feat_',         # Features calculadas explicitamente
+        'encoded_'       # Variáveis categóricas tratadas
     ]
-    
+
+    # Colunas específicas permitidas
     SAFE_COLS = ['home_elo', 'away_elo', 'home_rest_days', 'away_rest_days']
-    
+
+    # Filtrar: Só manter se começar com prefixo seguro OU estiver na lista segura
     input_cols = [c for c in X.columns if any(c.startswith(p) for p in SAFE_PREFIXES) or c in SAFE_COLS]
-    
-    # Trava final
+
+    # Trava de segurança extra: Remover vazamentos óbvios se passarem pelo filtro
     final_features = [c for c in input_cols if not any(x in c for x in ['score', 'winner', 'pts', 'odds', 'correct'])]
-    
+
+    # Aplicar filtro
     X = X[final_features]
-    logger.info(f"✅ Features Blindadas Selecionadas: {len(X.columns)}")
+    logger.info(f"✅ Features seguras mantidas: {len(X.columns)}")
 
     # Salvar lista de features
     joblib.dump(final_features, 'data/models/feature_names_v6.joblib')

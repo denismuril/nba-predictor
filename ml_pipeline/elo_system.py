@@ -39,7 +39,7 @@ class NBAEloSystem:
     - Vegas power ratings
     """
     
-    def __init__(self, k_factor=20, hca=HCA_ELO, elo_floor=1000, elo_ceiling=2000):
+    def __init__(self, k_factor=20, hca=70, elo_floor=1000, elo_ceiling=2000): # FIX: HCA=70
         """
         Args:
             k_factor: Taxa de aprendizado (maior = mais volátil)
@@ -59,33 +59,17 @@ class NBAEloSystem:
             self.ratings[team] = ELO_INICIAL
         logger.info(f"✅ {len(teams)} times inicializados com Elo {ELO_INICIAL}")
     
+    # FIX: Adicionado suporte a is_b2b
     def calcular_vitoria_esperada(self, elo_time, elo_oponente, is_home=False, is_b2b=False):
         """
         Calcula probabilidade de vitória baseada em diferença Elo, considerando fadiga (B2B).
         
         Formula: P(win) = 1 / (1 + 10^((Elo_Opp - Elo_Team) / 400))
-        
-        Args:
-            elo_time: Elo do time
-            elo_oponente: Elo do oponente
-            is_home: Se o time está jogando em casa
-            is_b2b: Se o time está em Back-to-Back (jogou ontem)
-            
-        Returns:
-            Probabilidade de vitória (0-1)
         """
-        # Ajuste HCA (Home Court Advantage)
-        elo_ajustado = elo_time + (self.hca if is_home else 0)
-        
-        # Ajuste B2B (Penalidade por fadiga)
-        if is_b2b:
-            elo_ajustado -= B2B_PENALTY
-        
+        B2B_PENALTY = 50 
+        elo_ajustado = elo_time + (self.hca if is_home else 0) - (B2B_PENALTY if is_b2b else 0)
         diff = elo_oponente - elo_ajustado
-        
-        win_prob = 1 / (1 + 10 ** (diff / 400))
-        
-        return win_prob
+        return 1 / (1 + 10 ** (diff / 400))
     
     def multiplicador_margin(self, margin, elo_vencedor, elo_perdedor):
         """
@@ -160,39 +144,28 @@ class NBAEloSystem:
         """Retorna rating Elo de um time."""
         return self.ratings.get(team, ELO_INICIAL)
     
-    def prever_jogo(self, home_team, away_team, home_is_b2b=False, away_is_b2b=False):
+    def prever_jogo(self, home_team, away_team, home_b2b=False, away_b2b=False):
         """
         Prevê resultado de um jogo baseado em Elo.
         """
         elo_home = self.get_rating(home_team)
         elo_away = self.get_rating(away_team)
         
-        # Passar flags para o cálculo de probabilidade
-        prob_home = self.calcular_vitoria_esperada(
-            elo_home, elo_away, is_home=True, is_b2b=home_is_b2b
-        )
-        prob_away = self.calcular_vitoria_esperada(
-            elo_away, elo_home, is_home=False, is_b2b=away_is_b2b
-        )
+        # Passar flags de fadiga
+        prob_home = self.calcular_vitoria_esperada(elo_home, elo_away, is_home=True, is_b2b=home_b2b)
         
-        # Normalizar probabilidades
-        total_prob = prob_home + prob_away
-        prob_home = prob_home / total_prob
-        prob_away = prob_away / total_prob
+        # Ajuste spread
+        elo_final_home = elo_home + self.hca - (50 if home_b2b else 0)
+        elo_final_away = elo_away - (50 if away_b2b else 0)
         
-        # Spread implícito
-        elo_final_home = elo_home + self.hca - (B2B_PENALTY if home_is_b2b else 0)
-        elo_final_away = elo_away - (B2B_PENALTY if away_is_b2b else 0)
         elo_diff = elo_final_home - elo_final_away
-        spread_implicito = elo_diff * 0.03
         
         return {
             'prob_home': prob_home,
-            'prob_away': prob_away,
-            'spread_implicito': spread_implicito,
+            'prob_away': 1 - prob_home,
+            'spread_implicito': elo_diff * 0.03,
             'elo_home': elo_home,
-            'elo_away': elo_away,
-            'elo_diff': elo_home - elo_away
+            'elo_away': elo_away
         }
     
     def salvar(self, filepath='data/models/elo_ratings.pkl'):
