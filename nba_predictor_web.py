@@ -1650,16 +1650,26 @@ with tab4:
             all_preds['away_team_abbr'] = all_preds['away_team'].map(TEAM_MAP).fillna(all_preds['away_team'])
 
             # Criar chave única para ambos os dataframes usando ABBR
+            # CRITICAL: Normalizar data para formato YYYY-MM-DD (evita mismatch datetime vs string)
+            all_preds['date_norm'] = pd.to_datetime(all_preds['date']).dt.strftime('%Y-%m-%d')
             all_preds['join_key'] = (
-                all_preds['date'].astype(str) +
+                all_preds['date_norm'] +
                 all_preds['home_team_abbr'].astype(str) +
                 all_preds['away_team_abbr'].astype(str)
             )
 
+            # Normalizar abreviações Legacy (PHO->PHX, BRK->BKN, etc)
+            # Criar mapa reverso para normalizar abreviações inconsistentes
+            ABBR_NORMALIZE = {'PHO': 'PHX', 'BRK': 'BKN', 'CHO': 'CHA', 'NOR': 'NOP', 'NO': 'NOP', 
+                              'NY': 'NYK', 'GS': 'GSW', 'WSH': 'WAS', 'UTAH': 'UTA'}
+            df_confirmed['home_team_norm'] = df_confirmed['home_team'].map(ABBR_NORMALIZE).fillna(df_confirmed['home_team'])
+            df_confirmed['away_team_norm'] = df_confirmed['away_team'].map(ABBR_NORMALIZE).fillna(df_confirmed['away_team'])
+            
+            df_confirmed['date_norm'] = pd.to_datetime(df_confirmed['date']).dt.strftime('%Y-%m-%d')
             df_confirmed['join_key'] = (
-                df_confirmed['date'].astype(str) +
-                df_confirmed['home_team'].astype(str) +
-                df_confirmed['away_team'].astype(str)
+                df_confirmed['date_norm'] +
+                df_confirmed['home_team_norm'].astype(str) +
+                df_confirmed['away_team_norm'].astype(str)
             )
 
             # --- DEDUPLICATION FIX ---
@@ -1679,6 +1689,13 @@ with tab4:
                 how='left',
                 suffixes=('_pred', '_real')
             )
+            
+            # DEBUG: Diagnóstico de merge para troubleshooting
+            matched_count = merged['winner'].notna().sum() if 'winner' in merged.columns else 0
+            if 'winner_real' in merged.columns:
+                matched_count = merged['winner_real'].notna().sum()
+            pending_count = len(merged) - matched_count
+            st.caption(f"📊 Resultados: {matched_count} confirmados | {pending_count} aguardando")
 
             # Identificar coluna de vencedor real
             col_winner = 'winner'
