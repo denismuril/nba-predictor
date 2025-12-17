@@ -235,69 +235,46 @@ def train_ensemble_model_v6():
         sample_weights = sample_weights[-500:]
         logger.warning(f"🔥 Dataset reduzido para {len(df)} jogos (Smoke Test)")
 
-    # 3. Pré-processamento Base
-    # 🚨 CRÍTICO: Remover TODAS as colunas que contêm dados do jogo atual (leakage)
-    base_drop_cols = [
-        # Resultado direto do jogo
-        'winner', 'correct', 'date', 'prediction',
-        'home_score', 'away_score', 'pt_diff', 'point_differential', 'total_points',
+    # =========================================================================
+    # 3. SELEÇÃO DE FEATURES (WHITELIST - Single Source of Truth)
+    # =========================================================================
+    # SECURITY FIX v2.0: Toda lógica de segurança está centralizada em
+    # data_preparation.prepare_data_for_training() que usa abordagem WHITELIST.
+    #
+    # WHITELIST = Apenas features com prefixos seguros são permitidas:
+    #   - rolling_*  : Médias móveis históricas (com shift aplicado)
+    #   - elo_*      : Ratings Elo (snapshot PRE-jogo)
+    #   - rest_*     : Dias de descanso (calculado antes do jogo)
+    #   - interaction_* : Features derivadas de rolling
+    #   - referee_*  : Stats de árbitros (expanding window histórico)
+    #   - h2h_*      : Head-to-head histórico
+    #
+    # BLACKLIST está documentada em data_preparation.py:BLACKLISTED_FEATURES
+    # Inclui: home_efg, closing_odds, line_movement, smart_money_signal, etc.
+    #
+    # 🛡️ POR QUE WHITELIST É MAIS SEGURO QUE BLACKLIST:
+    # - Blacklist: Esquecer de adicionar nova coluna = vazamento
+    # - Whitelist: Nova coluna só entra se explicitamente mapeada = seguro por padrão
+    # =========================================================================
 
-        # 🚨 LEAKAGE FIX: Estatísticas do jogo atual (não disponíveis antes do jogo)
-        'pts', 'opp_pts',
-        'fgm', 'fga', 'fg3m', 'fg3a', 'tov', 'oreb', 'dreb', 'reb',
-        'ast', 'stl', 'blk', 'pf', 'fta', 'ftm',
-        'opp_fgm', 'opp_fga', 'opp_fg3m', 'opp_fg3a', 'opp_tov', 'opp_oreb',
-        'opp_dreb', 'opp_reb', 'opp_ast', 'opp_stl', 'opp_blk', 'opp_pf',
-        'opp_fta', 'opp_ftm',
-
-        # Four Factors do jogo atual (TODAS as variantes!)
-        'home_efg', 'home_efg_pct', 'home_tov_pct', 'home_orb_pct', 'home_ftr',
-        'home_off_rating', 'home_def_rating', 'home_pace', 'home_pie',
-        'home_pos', 'home_ast_ratio', 'home_to_ratio', 'home_ts_pct', 'home_reb_pct',
-        'away_efg', 'away_efg_pct', 'away_tov_pct', 'away_orb_pct', 'away_ftr',
-        'away_off_rating', 'away_def_rating', 'away_pace', 'away_pie',
-        'away_pos', 'away_ast_ratio', 'away_to_ratio', 'away_ts_pct', 'away_reb_pct',
-
-        # 🚨 LEAKAGE FIX: Stats ajustados do jogo atual (calculados APÓS o jogo!)
-        'home_ortg_adj', 'away_ortg_adj', 'home_drtg_adj', 'away_drtg_adj',
-        'liga_ortg_avg', 'liga_drtg_avg',
-
-        # AUDIT FIX #2: Elo ratings REMOVIDOS da blacklist
-        # O sistema Elo em elo_system.py (linha 283-288) salva ratings ANTES de atualizar:
-        #   elo_home_pre = sistema.get_rating(home_team)  # Snapshot PRE-JOGO
-        #   home_elos.append(elo_home_pre)                # Salvo como feature
-        #   ... depois atualiza sistema ...               # Atualização PÓS-JOGO
-        # Portanto, home_elo, away_elo e elo_diff são features SEGURAS.
-
-        # Probabilidades (são outputs, não inputs)
-        'prob_home', 'prob_away',
-
-        # IDs e flags
-        'home_team', 'away_team', 'win', 'opp_win', 'game_id', 'season',
-
-        # 🚨 LEAKAGE BLOCKER: Features derivadas de Closing Odds (DADO DO FUTURO!)
-        # Essas features requerem closing_odds que só existe APÓS o jogo encerrar.
-        # Treinar com elas = look-ahead bias = acurácia fictícia.
-        'line_movement',           # closing_odds - opening_odds
-        'implied_prob_diff',       # Calculado a partir de closing_odds
-        'smart_money_signal',      # Derivado de line_movement
-        'closing_odds',            # Odd de fechamento (pós-jogo)
-        'closing_odds_home',       
-        'closing_odds_away',
-        'opening_odds',            # Pode não existir em inferência
-        'opening_odds_home',
-        'opening_odds_away',
-        'closing_spread',
-        'opening_spread',
-    ]
-
-    # 4. P0-FIX: Seleção de Features via função centralizada (Single Source of Truth)
-    # A função prepare_data_for_training já remove todas as colunas de leakage
+    # 4. Seleção de Features via função centralizada (Single Source of Truth)
     X, y_temp = prepare_data_for_training(df, target='winner')
     X = X.fillna(0)
     
+    # 🛡️ VALIDAÇÃO DE SEGURANÇA: Confirmar que features perigosas foram removidas
+    DANGEROUS_FEATURES = [
+        'home_efg', 'away_efg', 'home_pace', 'away_pace',  # Four Factors RAW
+        'line_movement', 'smart_money_signal', 'closing_odds',  # Closing Odds
+        'home_score', 'away_score', 'winner'  # Resultados
+    ]
+    leaked_features = [f for f in DANGEROUS_FEATURES if f in X.columns]
+    if leaked_features:
+        logger.error(f"🚨 VAZAMENTO DETECTADO! Features perigosas no treino: {leaked_features}")
+        raise ValueError(f"Data Leakage: {leaked_features}")
+    
     # Verificação final de segurança
-    logger.info(f"✅ Features preparadas via prepare_data_for_training: {len(X.columns)} colunas")
+    logger.info(f"✅ Features preparadas via WHITELIST: {len(X.columns)} colunas")
+    logger.info(f"🛡️ Validação anti-leakage: PASSOU (0 features perigosas)")
 
     feature_names = X.columns.tolist()
     logger.info(f"✅ Features selecionadas dinamicamente: {len(feature_names)}")

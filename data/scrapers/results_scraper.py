@@ -21,6 +21,10 @@ TEAM_MAPPING = {
     'NO': 'NOP',   # New Orleans
     'GS': 'GSW',   # Golden State
     'UTAH': 'UTA', # Utah
+    'SA': 'SAS',   # San Antonio (ESPN usa SA, precisamos de SAS)
+    'PHO': 'PHX',  # Phoenix
+    'BRK': 'BKN',  # Brooklyn
+    'CHO': 'CHA',  # Charlotte
 }
 
 

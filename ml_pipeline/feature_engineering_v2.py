@@ -55,20 +55,41 @@ def get_league_default(col: str) -> float:
     return LEAGUE_DEFAULTS.get(col, 0.0)
 
 
-# Cache global para médias dinâmicas (evita recalcular a cada chamada)
-_DYNAMIC_LEAGUE_CACHE = {
+# =============================================================================
+# THREAD-SAFE CACHE (REFACTOR v24.1)
+# =============================================================================
+# PROBLEMA: Cache global dict não é thread-safe em ambiente asyncio.
+# SOLUÇÃO: threading.RLock() para sincronização + hash de DataFrame para invalidação.
+# =============================================================================
+
+import threading
+from functools import lru_cache
+
+_cache_lock = threading.RLock()
+_dynamic_cache = {
     'values': None,
-    'computed_at': None
+    'computed_at': None,
+    'df_hash': None
 }
+
+
+def _compute_df_hash(df: pd.DataFrame) -> str:
+    """Gera hash simples do DataFrame para invalidação de cache."""
+    if df is None:
+        return "none"
+    return f"{len(df)}_{df['date'].max() if 'date' in df.columns else 'no_date'}"
 
 
 def get_dynamic_league_defaults(df: pd.DataFrame = None, window: int = 100) -> dict:
     """
-    FASE 1 REFACTOR: Retorna médias da liga calculadas dinamicamente.
+    REFACTOR v24.1: Versão Thread-Safe com RLock.
+    
+    Retorna médias da liga calculadas dinamicamente.
+    Agora seguro para uso com múltiplos scrapers asyncio em paralelo.
 
     Prioridade:
     1. Se df fornecido e tem dados suficientes → calcula médias dinâmicas
-    2. Se cache válido (calculado nos últimos 100 jogos) → usa cache
+    2. Se cache válido (mesmo hash) → usa cache
     3. Fallback → usa LEAGUE_DEFAULTS estáticos
 
     Args:
@@ -77,30 +98,37 @@ def get_dynamic_league_defaults(df: pd.DataFrame = None, window: int = 100) -> d
 
     Returns:
         Dict com médias da liga (dinâmicas ou estáticas)
-
-    Exemplo:
-        >>> defaults = get_dynamic_league_defaults(df_historico)
-        >>> pace = defaults['pace']  # Calculado dinamicamente
     """
-    global _DYNAMIC_LEAGUE_CACHE
+    global _dynamic_cache
+    
+    # Thread-safe access usando RLock (permite reentrada)
+    with _cache_lock:
+        current_hash = _compute_df_hash(df)
+        
+        # Se temos dados suficientes, calcular dinamicamente
+        if df is not None and len(df) >= window:
+            # Verificar se cache ainda é válido
+            if (_dynamic_cache['values'] is not None and 
+                _dynamic_cache['df_hash'] == current_hash):
+                logger.debug("📊 Cache hit - usando médias dinâmicas em cache")
+                return _dynamic_cache['values'].copy()
+            
+            # Cache miss - recalcular
+            calculated = calculate_league_averages(df, window)
+            _dynamic_cache['values'] = calculated
+            _dynamic_cache['computed_at'] = len(df)
+            _dynamic_cache['df_hash'] = current_hash
+            logger.info(f"📊 Médias dinâmicas calculadas (baseado em {window} jogos)")
+            return calculated.copy()
 
-    # Se temos dados suficientes, calcular dinamicamente
-    if df is not None and len(df) >= window:
-        calculated = calculate_league_averages(df, window)
-        # Atualizar cache
-        _DYNAMIC_LEAGUE_CACHE['values'] = calculated
-        _DYNAMIC_LEAGUE_CACHE['computed_at'] = len(df)
-        logger.info(f"📊 Médias dinâmicas calculadas (baseado em {window} jogos)")
-        return calculated
+        # Se temos cache válido, usar
+        if _dynamic_cache['values'] is not None:
+            logger.debug("📊 Usando cache de médias dinâmicas")
+            return _dynamic_cache['values'].copy()
 
-    # Se temos cache válido, usar
-    if _DYNAMIC_LEAGUE_CACHE['values'] is not None:
-        logger.debug("📊 Usando cache de médias dinâmicas")
-        return _DYNAMIC_LEAGUE_CACHE['values']
-
-    # Fallback: usar constantes estáticas
-    logger.info("📊 Usando LEAGUE_DEFAULTS estáticos (dados insuficientes)")
-    return LEAGUE_DEFAULTS.copy()
+        # Fallback: usar constantes estáticas
+        logger.info("📊 Usando LEAGUE_DEFAULTS estáticos (dados insuficientes)")
+        return LEAGUE_DEFAULTS.copy()
 
 
 def calculate_league_averages(df: pd.DataFrame, window: int = 100) -> dict:

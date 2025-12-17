@@ -144,15 +144,62 @@ class OddsValidator:
         return True
     
     @staticmethod
+    def remove_vigorish(home_odds: float, away_odds: float) -> tuple:
+        """
+        Remove a margem da casa (vigorish) para gerar Fair Odds.
+        
+        REFACTOR v24.1: Normaliza odds de bookmakers Sharp e Recreational
+        para probabilidades implícitas reais.
+        
+        Math:
+        - Probabilidade implícita = 1 / odds
+        - Overround = prob_home + prob_away (tipicamente > 1.0)
+        - Fair prob = implied_prob / overround
+        - Fair odds = 1 / fair_prob
+        
+        Exemplo:
+            Home: 1.90, Away: 2.00
+            Overround = 0.526 + 0.500 = 1.026 (2.6% vig)
+            Fair Home = 0.526/1.026 = 0.513 → 1.95 odds
+            Fair Away = 0.500/1.026 = 0.487 → 2.05 odds
+        
+        Args:
+            home_odds: Odds decimais do mandante
+            away_odds: Odds decimais do visitante
+            
+        Returns:
+            Tuple (fair_home_odds, fair_away_odds, vigorish_pct)
+        """
+        # Calcular probabilidades implícitas
+        prob_home = 1.0 / home_odds
+        prob_away = 1.0 / away_odds
+        overround = prob_home + prob_away
+        
+        # Calcular vigorish %
+        vigorish_pct = (overround - 1.0) * 100
+        
+        # Normalizar para probabilidades reais (soma = 1.0)
+        fair_prob_home = prob_home / overround
+        fair_prob_away = prob_away / overround
+        
+        # Converter de volta para odds
+        fair_home_odds = 1.0 / fair_prob_home
+        fair_away_odds = 1.0 / fair_prob_away
+        
+        return round(fair_home_odds, 3), round(fair_away_odds, 3), round(vigorish_pct, 2)
+    
+    @staticmethod
     def normalize_and_validate(odds_dict: Dict) -> Dict:
         """
-        Valida e normaliza dictionary de odds.
+        Valida, normaliza e remove vigorish de odds.
+        
+        REFACTOR v24.1: Agora gera Fair Odds automaticamente.
         
         Args:
             odds_dict: Dict no formato {game_key: {data}}
             
         Returns:
-            Dict validado e normalizado
+            Dict validado com odds originais + fair odds
         """
         validated = {}
         errors = 0
@@ -167,10 +214,18 @@ class OddsValidator:
                     errors += 1
                     continue
                 
-                # Normalizar formato
+                # Calcular Fair Odds (sem vigorish)
+                fair_home, fair_away, vig_pct = OddsValidator.remove_vigorish(
+                    home_odds, away_odds
+                )
+                
+                # Normalizar formato com fair odds incluídas
                 validated[game_key] = {
                     'home_odds': home_odds,
                     'away_odds': away_odds,
+                    'fair_home_odds': fair_home,  # NOVO: Odds sem margem
+                    'fair_away_odds': fair_away,  # NOVO: Odds sem margem
+                    'vigorish_pct': vig_pct,      # NOVO: % de margem original
                     'home_team': odds_data.get('home_team', ''),
                     'away_team': odds_data.get('away_team', ''),
                     'source': odds_data.get('source', 'unknown'),
@@ -185,6 +240,10 @@ class OddsValidator:
         
         if errors > 0:
             logger.warning(f"⚠️  {errors}/{len(odds_dict)} jogos com odds inválidos removidos")
+        
+        if validated:
+            avg_vig = sum(v['vigorish_pct'] for v in validated.values()) / len(validated)
+            logger.info(f"📊 Vigorish médio removido: {avg_vig:.1f}%")
         
         return validated
 

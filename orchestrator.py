@@ -341,42 +341,42 @@ class EnterpriseOrchestrator:
         """
         Gera previsões para os jogos de hoje usando modelos ML.
         
-        Usa o pipeline de inferência diretamente, sem subprocess.
+        REFACTOR v24.1: Chamada direta de função (sem sys.argv manipulation).
+        - Antes: manipulava sys.argv e chamava main()
+        - Agora: passa argumentos como objeto Python diretamente
+        - Benefício: debugging mais fácil, objetos em memória compartilhados
         """
         logger.info("🔮 Gerando previsões com ML (V18/V6)...")
         
         try:
-            # Usar interfaces.cli.main diretamente
-            from interfaces.cli import main as run_cli_main
-            import sys
+            # Importar função de pipeline diretamente (não main)
+            from interfaces.cli import run_prediction_pipeline
+            import argparse
             
-            # Salvar args originais
-            original_args = sys.argv
-            sys.argv = ['main.py', '--ml']  # Simular commando CLI
+            # Criar objeto de argumentos diretamente (sem sys.argv)
+            args = argparse.Namespace(
+                ml=True,           # Usar modelos ML
+                date=None,         # Data atual (None = hoje)
+                backtest=False,    # Não executar backtest
+                no_ml=False        # Não desativar ML
+            )
             
-            try:
-                await asyncio.to_thread(run_cli_main)
-                logger.info("✅ Pipeline de predição executado")
+            # Chamar função diretamente com argumentos Python
+            predictions = await asyncio.to_thread(run_prediction_pipeline, args)
+            
+            if predictions:
+                self.stats['predictions_generated'] = len(predictions)
+                logger.info(f"✅ {len(predictions)} previsões geradas")
                 
-                # Ler previsões geradas do arquivo CSV
-                predictions_file = Path('results') / f"predictions_{datetime.now().strftime('%Y-%m-%d')}.csv"
-                if predictions_file.exists():
-                    import pandas as pd
-                    df = pd.read_csv(predictions_file)
-                    predictions = df.to_dict('records')
-                    self.stats['predictions_generated'] = len(predictions)
-                    logger.info(f"✅ {len(predictions)} previsões carregadas")
-                    
-                    # Salvar no Redis se disponível
-                    if self.redis:
-                        today = datetime.now().strftime('%Y-%m-%d')
-                        await self.redis.set_predictions(today, predictions)
-                    
-                    return predictions
-            finally:
-                sys.argv = original_args
-            
-            return []
+                # Salvar no Redis se disponível
+                if self.redis:
+                    today = datetime.now().strftime('%Y-%m-%d')
+                    await self.redis.set_predictions(today, predictions)
+                
+                return predictions if isinstance(predictions, list) else []
+            else:
+                logger.warning("⚠️ Pipeline retornou vazio")
+                return []
             
         except ImportError as e:
             logger.warning(f"⚠️ CLI não disponível: {e}")
@@ -441,22 +441,40 @@ class EnterpriseOrchestrator:
             return {}
     
     async def step_generate_player_props(self) -> bool:
-        """Gera player props baseado nos jogos de hoje."""
+        """
+        Gera player props baseado nos jogos de hoje.
+        
+        REFACTOR v24.1: Chamada direta de função (sem runpy.run_path).
+        - Antes: executava script inteiro via runpy
+        - Agora: importa e chama função específica
+        - Benefício: melhor stack trace, objetos em memória
+        """
         logger.info("⛹️ Gerando Player Props...")
         
         try:
-            # O script não tem função, é executado diretamente
-            # Usar exec para rodar o script
-            import runpy
+            # Importar função diretamente do script
+            from scripts.generate_player_props_quick import generate_player_props
             
-            await asyncio.to_thread(
-                runpy.run_path,
-                'scripts/generate_player_props_quick.py',
-                run_name='__main__'
-            )
+            # Chamar função diretamente (não o script inteiro)
+            await asyncio.to_thread(generate_player_props)
             logger.info("✅ Player props gerados com sucesso")
             return True
             
+        except ImportError as e:
+            # Fallback: script não tem função wrapper ainda
+            logger.warning(f"⚠️ Função não disponível ({e}). Usando fallback runpy...")
+            try:
+                import runpy
+                await asyncio.to_thread(
+                    runpy.run_path,
+                    'scripts/generate_player_props_quick.py',
+                    run_name='__main__'
+                )
+                logger.info("✅ Player props gerados (via runpy fallback)")
+                return True
+            except Exception as e2:
+                logger.warning(f"⚠️ Fallback também falhou: {e2}")
+                return True
         except FileNotFoundError:
             logger.warning("⚠️ generate_player_props_quick.py não encontrado")
             return True

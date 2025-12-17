@@ -1,45 +1,23 @@
 #!/usr/bin/env python3
-"""Generate player props based on games in the web app"""
+"""
+Generate player props based on games in the web app.
+
+REFACTOR v24.1: Código encapsulado em função para permitir import direto.
+"""
 import sys
 from pathlib import Path
+
 BASE_DIR = Path(__file__).parent.parent
 sys.path.append(str(BASE_DIR))
 
 import pandas as pd
 import numpy as np
+import logging
 
-from data.repositories.db_manager import get_db_manager
-
-# Get games from predictions table
-try:
-    db = get_db_manager()
-    query = "SELECT DISTINCT date, home_team, away_team FROM predictions ORDER BY date DESC LIMIT 10"
-    with db.get_connection() as conn:
-        games_df = pd.read_sql_query(query, conn)
-
-    if games_df.empty:
-        print("⚠️ Nenhum jogo encontrado no banco de predictions")
-        sys.exit(1)
-
-    print(f"✅ Encontrados {len(games_df)} jogos")
-    print(games_df[['date', 'home_team', 'away_team']])
-
-except Exception as e:
-    print(f"❌ Erro ao ler banco: {e}")
-    print("💡 Usando jogos de exemplo...")
-    # Fallback para jogos de exemplo
-    games_df = pd.DataFrame({
-        'date': ['2025-12-09'] * 3,
-        'home_team': ['Atlanta Hawks', 'Cleveland Cavaliers', 'Philadelphia 76ers'],
-        'away_team': ['New York Knicks', 'Toronto Raptors', 'Detroit Pistons']
-    })
-
-# Collect all teams
-teams = set(games_df['home_team'].tolist() + games_df['away_team'].tolist())
-print(f"\n🏀 Times jogando: {sorted(teams)}")
+logger = logging.getLogger(__name__)
 
 # Player database - add more teams as needed
-team_stars = {
+TEAM_STARS = {
     'Atlanta Hawks': [('Trae Young', 26.0, 3.0, 10.8), ('Dejounte Murray', 19.5, 5.0, 5.5)],
     'New York Knicks': [('Jalen Brunson', 26.5, 3.5, 6.2), ('Julius Randle', 24.0, 9.5, 4.8)],
     'Cleveland Cavaliers': [('Donovan Mitchell', 27.5, 4.5, 5.5), ('Jarrett Allen', 14.5, 10.5, 2.5)],
@@ -54,67 +32,123 @@ team_stars = {
 }
 
 # Team name mapping (abbreviations to full names)
-team_mapping = {
+TEAM_MAPPING = {
     'ATL': 'Atlanta Hawks', 'NYK': 'New York Knicks', 'CLE': 'Cleveland Cavaliers',
     'TOR': 'Toronto Raptors', 'PHI': 'Philadelphia 76ers', 'DET': 'Detroit Pistons',
     'BOS': 'Boston Celtics', 'CHO': 'Charlotte Hornets', 'LAL': 'LA Lakers',
     'PHO': 'Phoenix Suns', 'MIL': 'Milwaukee Bucks'
 }
 
-# Build opponent mapping
-team_opponents = {}
-for _, game in games_df.iterrows():
-    home = game['home_team']
-    away = game['away_team']
-    # Map abbreviations to full names if needed
-    home_full = team_mapping.get(home, home)
-    away_full = team_mapping.get(away, away)
-    team_opponents[home_full] = away_full
-    team_opponents[away_full] = home_full
 
-# Generate props
-predictions = []
-date = games_df['date'].iloc[0] if not games_df.empty else '2025-12-09'
+def generate_player_props() -> pd.DataFrame:
+    """
+    Gera player props baseado nos jogos de hoje.
+    
+    REFACTOR v24.1: Função callable para uso via import direto.
+    
+    Returns:
+        DataFrame com props gerados (também salvo em CSV)
+    """
+    from data.repositories.db_manager import get_db_manager
+    
+    # Get games from predictions table
+    try:
+        db = get_db_manager()
+        query = """
+            SELECT DISTINCT date, home_team, away_team 
+            FROM predictions 
+            ORDER BY date DESC LIMIT 10
+        """
+        with db.get_connection() as conn:
+            games_df = pd.read_sql_query(query, conn)
 
-for team in teams:
-    team_full = team_mapping.get(team, team)
-    if team_full in team_stars:
-        for name, pts, reb, ast in team_stars[team_full]:
-            # PTS props
-            predictions.append({
-                'player': name,
-                'team': team_full,
-                'opponent': team_opponents.get(team_full, 'TBD'),
-                'date': date,
-                'stat_type': 'PTS',
-                'line': round(pts + np.random.uniform(-1, 1), 1),
-                'prob_over': round(np.random.uniform(0.50, 0.65), 2)
-            })
-            # REB props (only if reb > 4)
-            if reb > 4:
+        if games_df.empty:
+            logger.warning("⚠️ Nenhum jogo encontrado no banco de predictions")
+            return pd.DataFrame()
+
+        logger.info(f"✅ Encontrados {len(games_df)} jogos")
+
+    except Exception as e:
+        logger.error(f"❌ Erro ao ler banco: {e}")
+        logger.info("💡 Usando jogos de exemplo...")
+        # Fallback para jogos de exemplo
+        games_df = pd.DataFrame({
+            'date': ['2025-12-09'] * 3,
+            'home_team': ['Atlanta Hawks', 'Cleveland Cavaliers', 'Philadelphia 76ers'],
+            'away_team': ['New York Knicks', 'Toronto Raptors', 'Detroit Pistons']
+        })
+
+    # Collect all teams
+    teams = set(games_df['home_team'].tolist() + games_df['away_team'].tolist())
+    logger.info(f"🏀 Times jogando: {len(teams)}")
+
+    # Build opponent mapping
+    team_opponents = {}
+    for _, game in games_df.iterrows():
+        home = game['home_team']
+        away = game['away_team']
+        home_full = TEAM_MAPPING.get(home, home)
+        away_full = TEAM_MAPPING.get(away, away)
+        team_opponents[home_full] = away_full
+        team_opponents[away_full] = home_full
+
+    # Generate props
+    predictions = []
+    date = games_df['date'].iloc[0] if not games_df.empty else '2025-12-09'
+
+    for team in teams:
+        team_full = TEAM_MAPPING.get(team, team)
+        if team_full in TEAM_STARS:
+            for name, pts, reb, ast in TEAM_STARS[team_full]:
+                # PTS props
                 predictions.append({
                     'player': name,
                     'team': team_full,
                     'opponent': team_opponents.get(team_full, 'TBD'),
                     'date': date,
-                    'stat_type': 'REB',
-                    'line': round(reb + np.random.uniform(-0.5, 0.5), 1),
-                    'prob_over': round(np.random.uniform(0.48, 0.62), 2)
+                    'stat_type': 'PTS',
+                    'line': round(pts + np.random.uniform(-1, 1), 1),
+                    'prob_over': round(np.random.uniform(0.50, 0.65), 2)
                 })
-            # AST props (only if ast > 3)
-            if ast > 3:
-                predictions.append({
-                    'player': name,
-                    'team': team_full,
-                    'opponent': team_opponents.get(team_full, 'TBD'),
-                    'date': date,
-                    'stat_type': 'AST',
-                    'line': round(ast + np.random.uniform(-0.5, 0.5), 1),
-                    'prob_over': round(np.random.uniform(0.48, 0.62), 2)
-                })
+                # REB props (only if reb > 4)
+                if reb > 4:
+                    predictions.append({
+                        'player': name,
+                        'team': team_full,
+                        'opponent': team_opponents.get(team_full, 'TBD'),
+                        'date': date,
+                        'stat_type': 'REB',
+                        'line': round(reb + np.random.uniform(-0.5, 0.5), 1),
+                        'prob_over': round(np.random.uniform(0.48, 0.62), 2)
+                    })
+                # AST props (only if ast > 3)
+                if ast > 3:
+                    predictions.append({
+                        'player': name,
+                        'team': team_full,
+                        'opponent': team_opponents.get(team_full, 'TBD'),
+                        'date': date,
+                        'stat_type': 'AST',
+                        'line': round(ast + np.random.uniform(-0.5, 0.5), 1),
+                        'prob_over': round(np.random.uniform(0.48, 0.62), 2)
+                    })
 
-# Save
-output_path = BASE_DIR / 'results' / 'player_props_predictions.csv'
-pd.DataFrame(predictions).to_csv(output_path, index=False)
-print(f"\n✅ Salvos {len(predictions)} props de {len(set(p['player'] for p in predictions))} jogadores")
-print(f"📁 Arquivo: {output_path}")
+    # Create DataFrame and save
+    df_props = pd.DataFrame(predictions)
+    output_path = BASE_DIR / 'results' / 'player_props_predictions.csv'
+    df_props.to_csv(output_path, index=False)
+    
+    n_players = len(set(p['player'] for p in predictions)) if predictions else 0
+    logger.info(f"✅ Salvos {len(predictions)} props de {n_players} jogadores")
+    logger.info(f"📁 Arquivo: {output_path}")
+    
+    return df_props
+
+
+# CLI entry point (backward compatibility)
+if __name__ == "__main__":
+    logging.basicConfig(
+        level=logging.INFO, 
+        format='%(asctime)s - %(levelname)s - %(message)s'
+    )
+    generate_player_props()
