@@ -1,4 +1,5 @@
 # Constantes compartilhadas do projeto
+SYSTEM_VERSION = "v26.2"
 
 TEAM_ABBREV_MAP = {
     "Indiana Pacers": "IND", "Cleveland Cavaliers": "CLE", "Brooklyn Nets": "BRK",

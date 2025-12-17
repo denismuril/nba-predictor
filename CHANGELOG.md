@@ -2,6 +2,33 @@
 
 ---
 
+## v26.2 - Critical Security & Logic Fixes (17 Dez 2025)
+
+### 🔒 Correções de Segurança e Lógica Crítica
+
+Atualização de emergência para garantir a integridade do sistema, focada em 3 pilares: calibração Elo, estanqueidade de dados (anti-leakage) e estabilidade de coleta de odds.
+
+### ✅ Mudanças em `ml_pipeline/elo_system.py`
+
+- **HCA Corrigido:** Constante `HCA_ELO` ajustada para **70** (antes 100), refletindo vantagem de casa real de ~2.1 pontos.
+- **Fadiga B2B:** Implementada penalidade de **50 pontos Elo** (~1.5 pts) na função `calcular_vitoria_esperada` para times em Back-to-Back.
+
+### 🛡️ Allowlist Rígida em `ml_pipeline/train_ensemble_v6.py`
+
+- **Fim da Blacklist:** Removida a lista de exclusão `base_drop_cols` que era vulnerável a novas colunas.
+- **Allowlist Imutável:** Implementada filtragem positiva estrita. Apenas colunas com prefixos seguros são permitidas:
+
+  ```python
+  SAFE_PREFIXES = ['rolling_', 'elo_', 'rest_', 'is_b2b', 'feat_', 'encoded_']
+  ```
+
+### 🔧 Estabilidade em `data/scrapers/odds_scraper.py`
+
+- **Async Lock Fix:** Função `acquire_rate_limit_sync` reescrita para utilizar `asyncio.get_running_loop()`.
+- **Prevenção de Deadlock:** Estratégia "Fail Open" implementada para evitar que a verificação de rate limit trave loops de eventos existentes.
+
+---
+
 ## v26.1 - Elo System Calibration & Anti-Leakage Reinforcement (17 Dez 2025)
 
 ### 🎯 Calibração do Sistema Elo (NBA Moderna)

@@ -1,4 +1,4 @@
-# 🏀 NBA Predictor v26.1 - Elo Calibration & Anti-Leakage
+# 🏀 NBA Predictor v26.2 - Critical Security Fixes
 
 [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-orange.svg)](LICENSE)
@@ -13,6 +13,16 @@
 [![Season](https://img.shields.io/badge/Season-2025--26-orange.svg)]()
 
 Sistema profissional de análise quantitativa e previsão de jogos da NBA usando **Advanced Machine Learning (Ensemble V6)**, **PostgreSQL + Redis**, **Prefect Orchestration**, **Paper Trading**, **Sniper Engine**, **SafeKelly Bankroll Management** e **Shadow Mode** para validação antes do Go Live.
+
+---
+
+## 🎉 Destaques v26.2 (17 Dez 2025) - **Critical Fixes**
+
+### 🔒 Segurança e Lógica Reforçada
+
+- **Elo System:** HCA fixado em 70 e lógica B2B implementada.
+- **Anti-Leakage:** Allowlist rígida (Whitelist) substitui Blacklist no treinamento.
+- **Estabilidade:** Correção de deadlock no Odds Scraper.
 
 ---
 
@@ -548,11 +558,11 @@ Este software é para fins educacionais e de pesquisa. O autor não se responsab
 
 ## 📞 Suporte
 
-**Versão:** v26.1 (Elo Calibration & Anti-Leakage)
+**Versão:** v26.2 (Critical Security & Logic Fixes)
 **Status:** ✅ Production Ready
 **Temporada:** 2025-26
 **Última Atualização:** 17 Dezembro 2025
-**Novidades:** HCA reduzido para NBA Moderna, Penalidade B2B, DEPRECATION Warning, Allowlist Anti-Leakage Reforçada.
+**Novidades:** Elo HCA=70, B2B Logic, Strict Allowlist, Async Scraper Fix.
 
 **Documentação Adicional:**
 
