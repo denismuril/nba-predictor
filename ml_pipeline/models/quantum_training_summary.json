@@ -1,0 +1,12 @@
+{
+  "trained_at": "2025-12-18 09:50:32.364631",
+  "minutes_mae": 3.989520669497677,
+  "features_minutes": [
+    "min_l5",
+    "is_home"
+  ],
+  "features_rate": [
+    "ppm_l5",
+    "is_home"
+  ]
+}

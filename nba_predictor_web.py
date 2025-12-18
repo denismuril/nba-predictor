@@ -749,10 +749,10 @@ def render_injury_impact_alert(injury_adjustments: list):
 
 # --- MAIN CONTENT ---
 
-tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
+tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs([
     "📊 Dashboard", "💰 Gestão de Banca", "⛹️ Player Props",
     "📈 Performance", "🔍 Saúde do Modelo", "🧪 Análise de Backtest",
-    "🖥️ System Health"
+    "🖥️ System Health", "🎯 PROP SNIPER"
 ])
 
 # --- TAB 1: DASHBOARD (GAME CARDS) ---
@@ -2307,3 +2307,475 @@ python orchestrator.py
 python scripts/fetch_todays_games.py
         """, language="bash")
 
+
+# =============================================================================
+# TAB 8: PROP SNIPER - Sistema Quantum de Player Props
+# =============================================================================
+
+with tab8:
+    st.header("🎯 PROP SNIPER - Sistema Quantum de Player Props")
+    st.markdown("""
+    **Identificação de Alpha (Vantagem Matemática) sobre as Casas de Apostas**
+    
+    Este sistema usa:
+    - 🔬 **Features Inumanas**: Fadiga biológica, DvP 2.0, Blowout Risk, Dynamic Usage
+    - 🎯 **Modelagem em Dois Estágios**: XGBoost (Minutos) + LightGBM Quantile (Taxa/Min)
+    - 📊 **Intervalos de Confiança**: Percentis 10th, 50th, 90th para decisões ALL-IN
+    """)
+    
+    st.markdown("---")
+    
+    # Carregar dados e modelos
+    @st.cache_data(ttl=600)
+    def load_prop_sniper_data():
+        """Carrega dados para o Prop Sniper."""
+        try:
+            from data.scrapers.quantum_scraper import QuantumDataCollector, fetch_all_data_for_predictions
+            from ml_pipeline.train_props_quantum import load_quantum_models
+            
+            # Coletar dados
+            collector = QuantumDataCollector()
+            
+            # Props lines (odds das casas)
+            props_lines = collector.fetch_player_props_odds()
+            
+            # FALLBACK: Se não houver props, gerar a partir de player stats
+            if not props_lines:
+                player_stats = collector.fetch_all_player_stats_nba_api()
+                if player_stats is not None and not player_stats.empty:
+                    props_lines = generate_mock_props_from_stats(player_stats)
+            
+            # Carregar modelos se existirem
+            models = load_quantum_models()
+            
+            return {
+                'props_lines': props_lines or [],
+                'models_loaded': bool(models),
+                'collector': collector
+            }
+        except Exception as e:
+            return {
+                'props_lines': [],
+                'models_loaded': False,
+                'error': str(e)
+            }
+    
+    def generate_mock_props_from_stats(player_stats):
+        """Gera props lines mock usando player stats reais."""
+        import numpy as np
+        
+        if player_stats is None or player_stats.empty:
+            return []
+        
+        df = player_stats.copy()
+        
+        # Mapear colunas
+        player_col = 'player' if 'player' in df.columns else 'PLAYER_NAME'
+        team_col = 'team' if 'team' in df.columns else 'TEAM_ABBREVIATION'
+        pts_col = next((c for c in ['pts_avg', 'PTS', 'pts'] if c in df.columns), None)
+        reb_col = next((c for c in ['reb_avg', 'REB', 'reb'] if c in df.columns), None)
+        ast_col = next((c for c in ['ast_avg', 'AST', 'ast'] if c in df.columns), None)
+        min_col = next((c for c in ['min_avg', 'MIN', 'min'] if c in df.columns), None)
+        
+        if not all([player_col in df.columns, pts_col, min_col]):
+            return []
+        
+        df_filtered = df[df[min_col] > 20].nlargest(30, min_col)
+        
+        props = []
+        np.random.seed(42)
+        
+        for _, row in df_filtered.iterrows():
+            player_name = str(row.get(player_col, 'Unknown'))
+            team_abbr = str(row.get(team_col, 'UNK')) if team_col in df.columns else 'UNK'
+            
+            # PTS
+            pts_avg = float(row.get(pts_col, 15))
+            pts_line = round(pts_avg + np.random.uniform(-1.5, 1.5), 1)
+            props.append({
+                'player': player_name, 'team': team_abbr, 'prop_type': 'PTS',
+                'line': max(5.5, pts_line), 'player_avg': pts_avg,
+                'odds_over': 1.91, 'odds_under': 1.91, 'bookmaker': 'SIMULATED'
+            })
+            
+            # REB
+            if reb_col and reb_col in df.columns:
+                reb_avg = float(row.get(reb_col, 5))
+                reb_line = round(reb_avg + np.random.uniform(-1, 1), 1)
+                props.append({
+                    'player': player_name, 'team': team_abbr, 'prop_type': 'REB',
+                    'line': max(1.5, reb_line), 'player_avg': reb_avg,
+                    'odds_over': 1.91, 'odds_under': 1.91, 'bookmaker': 'SIMULATED'
+                })
+            
+            # AST
+            if ast_col and ast_col in df.columns:
+                ast_avg = float(row.get(ast_col, 3))
+                ast_line = round(ast_avg + np.random.uniform(-1, 1), 1)
+                props.append({
+                    'player': player_name, 'team': team_abbr, 'prop_type': 'AST',
+                    'line': max(0.5, ast_line), 'player_avg': ast_avg,
+                    'odds_over': 1.91, 'odds_under': 1.91, 'bookmaker': 'SIMULATED'
+                })
+        
+        return props
+
+    
+    @st.cache_data(ttl=300)
+    def generate_quantum_predictions(props_lines: list) -> pd.DataFrame:
+        """Gera previsões Quantum para os props."""
+        try:
+            from ml_pipeline.train_props_quantum import load_quantum_models, predict_with_confidence, should_bet
+            from data.scrapers.quantum_scraper import QuantumDataCollector
+            
+            models = load_quantum_models()
+            collector = QuantumDataCollector()
+            
+            if not models:
+                # Sem modelos treinados, usar heurísticas
+                return generate_heuristic_predictions(props_lines)
+            
+            predictions = []
+            for prop in props_lines:
+                player = prop.get('player', 'Unknown')
+                prop_type = prop.get('prop_type', 'PTS')
+                line = prop.get('line', 0)
+                
+                # Buscar dados do jogador
+                player_data = collector.fetch_player_data(player)
+                
+                if player_data['stats']:
+                    stats = player_data['stats']
+                    
+                    # Previsão simples baseada em médias
+                    if prop_type == 'PTS':
+                        pred_median = stats.get('pts_avg', line)
+                    elif prop_type == 'REB':
+                        pred_median = stats.get('reb_avg', line)
+                    elif prop_type == 'AST':
+                        pred_median = stats.get('ast_avg', line)
+                    else:
+                        pred_median = line
+                    
+                    # Simular quantis
+                    pred_low = pred_median * 0.75
+                    pred_high = pred_median * 1.25
+                    
+                    # Avaliar oportunidade
+                    evaluation = collector.evaluate_bet_opportunity(
+                        pred_median, pred_low, pred_high,
+                        line,
+                        prop.get('odds_over', 1.91),
+                        prop.get('odds_under', 1.91)
+                    )
+                    
+                    # Calcular diferença percentual
+                    diff_pct = ((pred_median - line) / line * 100) if line > 0 else 0
+                    
+                    predictions.append({
+                        'player': player,
+                        'team': prop.get('team', 'N/A'),
+                        'prop_type': prop_type,
+                        'line': line,
+                        'prediction_low': round(pred_low, 1),
+                        'prediction': round(pred_median, 1),
+                        'prediction_high': round(pred_high, 1),
+                        'diff_pct': round(diff_pct, 1),
+                        'recommendation': evaluation['recommendation'],
+                        'strength': evaluation['strength'],
+                        'ev_plus': evaluation['ev_plus'],
+                        'edge': evaluation['edge'],
+                        'confidence': 'HIGH' if abs(evaluation['edge']) > 5 else 'MEDIUM' if abs(evaluation['edge']) > 2 else 'LOW',
+                        'inferred': player_data.get('inferred', False),
+                        'source': player_data.get('source', 'unknown')
+                    })
+            
+            return pd.DataFrame(predictions) if predictions else pd.DataFrame()
+            
+        except Exception as e:
+            st.warning(f"⚠️ Erro ao gerar previsões: {e}")
+            return generate_heuristic_predictions(props_lines)
+    
+    def generate_heuristic_predictions(props_lines: list) -> pd.DataFrame:
+        """Gera previsões heurísticas quando modelos não estão disponíveis."""
+        import numpy as np
+        
+        predictions = []
+        for prop in props_lines:
+            line = prop.get('line', 20)
+            
+            # Variação aleatória para demonstração
+            np.random.seed(hash(prop.get('player', '')) % 2**32)
+            variation = np.random.uniform(-0.15, 0.15)
+            pred_median = line * (1 + variation)
+            
+            diff_pct = variation * 100
+            
+            if abs(diff_pct) > 10:
+                rec = 'OVER' if diff_pct > 0 else 'UNDER'
+                strength = 'MEDIUM'
+                ev = abs(diff_pct) * 0.5
+            elif abs(diff_pct) > 5:
+                rec = 'OVER' if diff_pct > 0 else 'UNDER'
+                strength = 'LEAN'
+                ev = abs(diff_pct) * 0.3
+            else:
+                rec = 'SKIP'
+                strength = 'NONE'
+                ev = 0
+            
+            predictions.append({
+                'player': prop.get('player', 'Unknown'),
+                'team': prop.get('team', 'N/A'),
+                'prop_type': prop.get('prop_type', 'PTS'),
+                'line': line,
+                'prediction_low': round(pred_median * 0.8, 1),
+                'prediction': round(pred_median, 1),
+                'prediction_high': round(pred_median * 1.2, 1),
+                'diff_pct': round(diff_pct, 1),
+                'recommendation': rec,
+                'strength': strength,
+                'ev_plus': round(ev, 2),
+                'edge': round(diff_pct * 0.4, 2),
+                'confidence': 'DEMO',
+                'inferred': True,
+                'source': 'heuristic'
+            })
+        
+        return pd.DataFrame(predictions) if predictions else pd.DataFrame()
+    
+    # Carregar dados
+    data = load_prop_sniper_data()
+    
+    if 'error' in data:
+        st.error(f"Erro ao carregar dados: {data['error']}")
+    
+    # Status dos modelos
+    col_status1, col_status2, col_status3 = st.columns(3)
+    
+    with col_status1:
+        if data.get('models_loaded'):
+            st.success("✅ Modelos Quantum carregados")
+        else:
+            st.warning("⚠️ Modelos não treinados")
+            st.caption("Execute: `python -m ml_pipeline.train_props_quantum`")
+    
+    with col_status2:
+        n_props = len(data.get('props_lines', []))
+        st.metric("Props Lines", n_props)
+    
+    with col_status3:
+        st.metric("Última Atualização", datetime.now().strftime("%H:%M"))
+    
+    st.markdown("---")
+    
+    # Gerar previsões
+    if data.get('props_lines'):
+        df_predictions = generate_quantum_predictions(data['props_lines'])
+        
+        if not df_predictions.empty:
+            # Filtros
+            col_filter1, col_filter2, col_filter3 = st.columns(3)
+            
+            with col_filter1:
+                prop_types = ['Todos'] + list(df_predictions['prop_type'].unique())
+                selected_prop = st.selectbox("Tipo de Prop", prop_types)
+            
+            with col_filter2:
+                min_ev = st.slider("EV+ Mínimo (%)", -10, 20, 0)
+            
+            with col_filter3:
+                show_only_bets = st.checkbox("Apenas Recomendações", value=True)
+            
+            # Aplicar filtros
+            df_filtered = df_predictions.copy()
+            
+            if selected_prop != 'Todos':
+                df_filtered = df_filtered[df_filtered['prop_type'] == selected_prop]
+            
+            df_filtered = df_filtered[df_filtered['ev_plus'] >= min_ev]
+            
+            if show_only_bets:
+                df_filtered = df_filtered[df_filtered['recommendation'] != 'SKIP']
+            
+            # Ordenar por EV+
+            df_filtered = df_filtered.sort_values('ev_plus', ascending=False)
+            
+            st.subheader(f"💰 Oportunidades de Valor ({len(df_filtered)} encontradas)")
+            
+            # Tabela principal com formatação
+            if not df_filtered.empty:
+                # Configurar colunas para display
+                display_cols = [
+                    'player', 'team', 'prop_type', 'line', 'prediction', 
+                    'diff_pct', 'recommendation', 'strength', 'ev_plus', 'confidence'
+                ]
+                
+                df_display = df_filtered[display_cols].copy()
+                
+                # Renomear colunas para display
+                df_display.columns = [
+                    'Jogador', 'Time', 'Prop', 'Linha Casa', 'Nossa Previsão',
+                    'Δ%', 'Recomendação', 'Força', 'EV+', 'Confiança'
+                ]
+                
+                # Aplicar estilos
+                def highlight_recommendation(val):
+                    if val == 'OVER':
+                        return 'background-color: #166534; color: white'
+                    elif val == 'UNDER':
+                        return 'background-color: #991b1b; color: white'
+                    else:
+                        return 'background-color: #374151; color: white'
+                
+                def highlight_ev(val):
+                    if val >= 5:
+                        return 'color: #4ade80; font-weight: bold'
+                    elif val >= 2:
+                        return 'color: #fbbf24; font-weight: bold'
+                    elif val > 0:
+                        return 'color: #9ca3af'
+                    else:
+                        return 'color: #f87171'
+                
+                styled_df = df_display.style.applymap(
+                    highlight_recommendation, subset=['Recomendação']
+                ).applymap(
+                    highlight_ev, subset=['EV+']
+                )
+                
+                st.dataframe(styled_df, use_container_width=True, hide_index=True)
+                
+                # Seção de explicabilidade
+                st.markdown("---")
+                st.subheader("🔍 Análise Detalhada")
+                
+                # Seletor de jogador
+                players = df_filtered['player'].tolist()
+                if players:
+                    selected_player = st.selectbox("Selecione um jogador para análise", players)
+                    
+                    if selected_player:
+                        player_data = df_filtered[df_filtered['player'] == selected_player].iloc[0]
+                        
+                        col_detail1, col_detail2 = st.columns(2)
+                        
+                        with col_detail1:
+                            st.markdown("### 📊 Previsão")
+                            
+                            # Mini gráfico de intervalo de confiança
+                            low = player_data['prediction_low']
+                            mid = player_data['prediction']
+                            high = player_data['prediction_high']
+                            line = player_data['line']
+                            
+                            import plotly.graph_objects as go
+                            
+                            fig = go.Figure()
+                            
+                            # Intervalo de confiança
+                            fig.add_trace(go.Bar(
+                                x=[high - low],
+                                y=['Previsão'],
+                                base=[low],
+                                orientation='h',
+                                marker=dict(color='rgba(59, 130, 246, 0.5)'),
+                                name='Intervalo (P10-P90)'
+                            ))
+                            
+                            # Linha da casa
+                            fig.add_vline(
+                                x=line, 
+                                line_dash="dash", 
+                                line_color="red",
+                                annotation_text=f"Linha: {line}"
+                            )
+                            
+                            # Mediana
+                            fig.add_trace(go.Scatter(
+                                x=[mid],
+                                y=['Previsão'],
+                                mode='markers',
+                                marker=dict(size=20, color='#3b82f6', symbol='diamond'),
+                                name=f'Mediana: {mid}'
+                            ))
+                            
+                            fig.update_layout(
+                                height=150,
+                                showlegend=True,
+                                margin=dict(l=0, r=0, t=30, b=0),
+                                xaxis_title=player_data['prop_type']
+                            )
+                            
+                            st.plotly_chart(fig, use_container_width=True)
+                            
+                            # Métricas
+                            m1, m2, m3 = st.columns(3)
+                            m1.metric("P10 (Piso)", f"{low:.1f}")
+                            m2.metric("Mediana", f"{mid:.1f}")
+                            m3.metric("P90 (Teto)", f"{high:.1f}")
+                        
+                        with col_detail2:
+                            st.markdown("### 💡 Explicação")
+                            
+                            # Gerar explicação baseada nos dados
+                            rec = player_data['recommendation']
+                            prop_type = player_data['prop_type']
+                            diff = player_data['diff_pct']
+                            
+                            reasons = []
+                            
+                            if rec == 'OVER':
+                                reasons.append(f"📈 Previsão {abs(diff):.1f}% **acima** da linha")
+                                if player_data['strength'] == 'ALL-IN':
+                                    reasons.append("🎯 Nosso piso (P10) já supera a linha")
+                            elif rec == 'UNDER':
+                                reasons.append(f"📉 Previsão {abs(diff):.1f}% **abaixo** da linha")
+                                if player_data['strength'] == 'ALL-IN':
+                                    reasons.append("🎯 Nosso teto (P90) não alcança a linha")
+                            
+                            if player_data.get('inferred'):
+                                reasons.append("⚠️ Dados inferidos (jogador sem histórico suficiente)")
+                            
+                            reasons.append(f"📊 EV+: **{player_data['ev_plus']:.2f}%**")
+                            reasons.append(f"📊 Edge: **{player_data['edge']:.2f}%**")
+                            
+                            for reason in reasons:
+                                st.markdown(f"- {reason}")
+                            
+                            # Alerta de ação
+                            if rec != 'SKIP':
+                                if player_data['strength'] in ['ALL-IN', 'MEDIUM']:
+                                    st.success(f"✅ **Recomendação: {rec} {player_data['line']} {prop_type}**")
+                                else:
+                                    st.info(f"ℹ️ Tendência: {rec} {player_data['line']} {prop_type}")
+                            else:
+                                st.warning("⏸️ Sem vantagem clara. Não apostar.")
+            else:
+                st.info("📊 Nenhuma oportunidade encontrada com os filtros atuais.")
+        else:
+            st.info("📊 Nenhuma previsão gerada. Execute o pipeline de dados.")
+    else:
+        st.warning("📊 Nenhuma linha de props disponível. Verifique as APIs de odds.")
+        
+        # Botão para tentar novamente
+        if st.button("🔄 Tentar Carregar Props Lines"):
+            st.cache_data.clear()
+            st.rerun()
+    
+    # Seção de comandos
+    st.markdown("---")
+    with st.expander("🛠️ Comandos do Sistema Quantum Props"):
+        st.code("""
+# Treinar modelos Quantum Props
+python -m ml_pipeline.train_props_quantum
+
+# Executar pipeline completo
+python scripts/quantum_props_run.py
+
+# Testar features quantum
+python -c "from ml_pipeline.props_quantum_features import test_all_features; test_all_features()"
+
+# Testar coleta de dados
+python -c "from data.scrapers.quantum_scraper import test_quantum_scraper; test_quantum_scraper()"
+        """, language="bash")

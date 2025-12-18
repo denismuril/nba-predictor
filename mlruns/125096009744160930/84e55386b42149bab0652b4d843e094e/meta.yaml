@@ -1,0 +1,15 @@
+artifact_uri: file:///home/denis/nba-predictor/mlruns/125096009744160930/84e55386b42149bab0652b4d843e094e/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '125096009744160930'
+lifecycle_stage: active
+run_id: 84e55386b42149bab0652b4d843e094e
+run_name: Quantum_Props_Full_Training
+run_uuid: 84e55386b42149bab0652b4d843e094e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766060117168
+status: 1
+tags: []
+user_id: denis

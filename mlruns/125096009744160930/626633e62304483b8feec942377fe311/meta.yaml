@@ -1,0 +1,15 @@
+artifact_uri: file:///home/denis/nba-predictor/mlruns/125096009744160930/626633e62304483b8feec942377fe311/artifacts
+end_time: 1766059468721
+entry_point_name: ''
+experiment_id: '125096009744160930'
+lifecycle_stage: active
+run_id: 626633e62304483b8feec942377fe311
+run_name: Minutes_XGBoost
+run_uuid: 626633e62304483b8feec942377fe311
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766059468108
+status: 4
+tags: []
+user_id: denis
