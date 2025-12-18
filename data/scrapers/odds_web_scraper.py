@@ -296,19 +296,16 @@ class OddsPediaScraper:
                 if not home_team or not away_team:
                     continue
                 
-                # Gera chave e dados
-                game_key = f"{home_team} vs {away_team}"
-                game_data = {
-                    "home_team": home_team,
-                    "away_team": away_team,
-                    "home_odds": 1.90,  # Odds default - JSON-LD não tem odds
-                    "away_odds": 1.90,
-                    "source": "oddspedia_scraper",
-                    "timestamp": datetime.now().isoformat(),
-                    "start_date": data.get('startDate'),
-                }
-                
-                odds_dict[game_key] = game_data
+                # JSON-LD não contém odds reais - apenas informações do jogo
+                # NÃO retornamos dados fictícios - isso causaria silent failure
+                # Em vez disso, logamos e pulamos, forçando fallback para parsing HTML
+                logger.warning(
+                    f"⚠️ JSON-LD encontrou jogo {home_team} vs {away_team} sem odds reais. "
+                    "Pulando para evitar dados fictícios."
+                )
+                # Não adicionamos ao odds_dict - o método vai retornar vazio
+                # e o caller tentará parsing alternativo
+                continue
                 
             except (json.JSONDecodeError, KeyError, TypeError) as e:
                 logger.debug(f"Erro ao parsear JSON-LD: {e}")
@@ -520,16 +517,7 @@ class OddsPediaScraper:
         
         Returns:
             Dict com odds no formato padronizado:
-            {
-                "HomeTeam vs AwayTeam": {
-                    "home_team": "HomeTeam",
-                    "away_team": "AwayTeam",
-                    "home_odds": 1.90,
-                    "away_odds": 1.90,
-                    "source": "oddspedia_scraper",
-                    "timestamp": "..."
-                }
-            }
+            {} (empty dict if no real odds found, triggers fallback)
             
         Raises:
             Exception: Se scraping falhar completamente

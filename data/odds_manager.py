@@ -259,6 +259,52 @@ class OddsDataManager:
 
         return None
 
+    async def fetch_player_props(self, date: str) -> List:
+        """
+        Busca player props (Points, Rebounds, Assists) do Action Network.
+        
+        Usa o Action Network scraper para extrair props de jogadores.
+        Em caso de falha, registra no log mas não interrompe o fluxo.
+        
+        Args:
+            date: Data no formato "YYYY-MM-DD"
+            
+        Returns:
+            Lista de PlayerProp objects. Lista vazia se scraping falhar.
+            
+        Example:
+            props = await manager.fetch_player_props("2024-12-18")
+            for prop in props:
+                print(f"{prop.player_name}: {prop.prop_type} {prop.line}")
+        """
+        try:
+            # Import aqui para evitar dependência circular
+            from data.scrapers.action_network_scraper import ActionNetworkScraper
+            
+            logger.info(f"🎯 Buscando player props para {date}...")
+            
+            scraper = ActionNetworkScraper(headless=True)
+            props = await scraper.fetch_props(date)
+            
+            if props:
+                logger.info(f"✅ {len(props)} player props encontrados")
+                
+                # Log estruturado de sucesso
+                logger.debug(f"Props por tipo: {self._count_props_by_type(props)}")
+            else:
+                logger.warning("⚠️ Nenhum player prop encontrado")
+            
+            return props
+            
+        except Exception as e:
+            logger.error(f"❌ Falha ao buscar player props: {e}", exc_info=True)
+            return []
+    
+    def _count_props_by_type(self, props: List) -> dict:
+        """Helper para contar props por tipo para logging."""
+        from collections import Counter
+        return dict(Counter(prop.prop_type for prop in props))
+
     async def close(self):
         """Fecha conexões de todos os provedores."""
         for provider in self.providers:

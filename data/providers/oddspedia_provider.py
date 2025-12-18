@@ -73,12 +73,21 @@ class OddsPediaProvider(OddsProvider):
 
                 game_id = f"{away_team.replace(' ', '_')}_vs_{home_team.replace(' ', '_')}_{datetime.now().strftime('%Y-%m-%d')}"
 
+                # Require explicitly provided odds - no defaults
+                home_odds = data.get("home_odds")
+                away_odds = data.get("away_odds")
+                
+                # Skip games without real odds to prevent silent failures
+                if home_odds is None or away_odds is None:
+                    logger.debug(f"⚠️ Skipping {game_key}: Missing real odds data")
+                    continue
+                
                 game = GameOdds(
                     game_id=game_id,
                     home_team=home_team,
                     away_team=away_team,
-                    home_odds=data.get("home_odds", 1.90),
-                    away_odds=data.get("away_odds", 1.90),
+                    home_odds=home_odds,
+                    away_odds=away_odds,
                     bookmaker="oddspedia",
                     source=self.name,
                     timestamp=datetime.now(),

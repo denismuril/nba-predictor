@@ -242,7 +242,25 @@ def _obter_odds_cached(force_source: Optional[str] = None) -> Dict:
 
 
 def get_odds_for_game(home_team: str, away_team: str, odds_cache: Optional[Dict] = None) -> Dict:
+    """
+    Retrieves odds for a specific game from cache.
+    
+    Args:
+        home_team: Home team name
+        away_team: Away team name
+        odds_cache: Optional cache dictionary
+        
+    Returns:
+        Dict with odds data
+        
+    Raises:
+        OddsUnavailableError: If odds not found in cache (no default fallback)
+    """
     if odds_cache:
         key = f"{home_team} vs {away_team}"
         if key in odds_cache: return odds_cache[key]
-    return {'home_odds': 1.90, 'away_odds': 1.90, 'source': 'default'}
+    
+    # NO DEFAULT ODDS - raise exception to force proper handling
+    from exceptions.odds_exceptions import OddsUnavailableError
+    logger.error(f"🚨 No odds available for {away_team} @ {home_team}")
+    raise OddsUnavailableError(f"Odds not found for {away_team} @ {home_team}")
