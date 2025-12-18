@@ -106,16 +106,16 @@ def normalize_player_name(raw_name: str, min_similarity: float = 0.80) -> Option
         logger.error(f"❌ Cannot normalize name: {e}")
         return None
     
-    # Ensure PLAYER column exists
-    if "PLAYER" not in players_df.columns:
-        logger.error("❌ 'PLAYER' column not found in nba_player_stats.csv")
+    # Ensure Player column exists
+    if "Player" not in players_df.columns:
+        logger.error("❌ 'Player' column not found in nba_player_stats.csv")
         return None
     
     best_match = None
     best_score = 0.0
     
     # Find best matching player
-    for player_name in players_df["PLAYER"].dropna().unique():
+    for player_name in players_df["Player"].dropna().unique():
         score = _similarity_score(raw_name, player_name)
         
         if score > best_score:

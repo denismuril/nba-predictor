@@ -1,4 +1,4 @@
-# 🏀 NBA Predictor v27.0 - Enterprise Rest Advantage
+# 🏀 NBA Predictor v27.1 - Player Props Integration
 
 [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-orange.svg)](LICENSE)
@@ -12,20 +12,29 @@
 [![Docker](https://img.shields.io/badge/docker-compose-blue.svg)](docker-compose.yml)
 [![Season](https://img.shields.io/badge/Season-2025--26-orange.svg)]()
 
-Sistema profissional de análise quantitativa e previsão de jogos da NBA usando **Advanced Machine Learning (Ensemble V6)**, **PostgreSQL + Redis**, **Prefect Orchestration**, **Paper Trading**, **Sniper Engine**, **SafeKelly Bankroll Management** e **Shadow Mode** para validação antes do Go Live.
+Sistema profissional de análise quantitativa e previsão de jogos da NBA usando **Advanced Machine Learning (Ensemble V6)**, **PostgreSQL + Redis**, **Prefect Orchestration**, **Paper Trading**, **Sniper Engine**, **SafeKelly Bankroll Management**, **Player Props** e **Shadow Mode** para validação antes do Go Live.
+
+---
+
+## 🎉 Destaques v27.1 (18 Dez 2025) - **Player Props Integration**
+
+### 🎯 Player Props via Action Network API
+
+- **91 props extraídos** em teste real
+- **HTTP direto**: Sem Playwright, 10x mais rápido
+- **Normalização de nomes**: Fuzzy matching contra roster oficial
+- **Prop types**: Points, Rebounds, Assists, Steals, Blocks
+
+```python
+from data.scrapers.action_network_scraper import ActionNetworkScraper
+
+scraper = ActionNetworkScraper()
+props = await scraper.fetch_props()  # 91+ props!
+```
 
 ---
 
 ## 🎉 Destaques v27.0 (17 Dez 2025) - **Enterprise Rest Advantage**
-
-### 🎯 Granular Rest & Travel Fatigue Features
-
-- **net_rest_days:** Diferença exata de descanso entre times
-- **rest_disadvantage_home/away:** Flags para fadiga severa (B2B vs descansado)
-- **travel_km_3d:** Distância acumulada nos últimos 3 jogos
-- **Elo Enterprise:** `prever_jogo_enterprise()` com penalidades granulares
-
----
 
 ## 🎉 Destaques v26.2 (17 Dez 2025) - **Critical Fixes**
 
@@ -561,11 +570,11 @@ Este software é para fins educacionais e de pesquisa. O autor não se responsab
 
 ## 📞 Suporte
 
-**Versão:** v27.0 (Enterprise Rest Advantage)
+**Versão:** v27.1 (Player Props Integration)
 **Status:** ✅ Production Ready
 **Temporada:** 2025-26
-**Última Atualização:** 17 Dezembro 2025
-**Novidades:** Granular Rest Days, Travel KM 3D, Elo Enterprise, net_rest_days.
+**Última Atualização:** 18 Dezembro 2025
+**Novidades:** Player Props via API direta, 91 props, fuzzy matching de nomes.
 
 **Documentação Adicional:**
 

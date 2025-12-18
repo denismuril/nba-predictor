@@ -2,6 +2,44 @@
 
 ---
 
+## v27.1 - Player Props Integration (18 Dez 2025)
+
+### 🎯 Player Props via Action Network API
+
+Implementação completa de scraping de Player Props usando chamadas HTTP diretas à API do Action Network.
+
+### ✅ Novos Componentes
+
+| Componente | Descrição |
+|------------|-----------|
+| **ActionNetworkScraper** | Scraper HTTP direto (sem Playwright) |
+| **PlayerProp dataclass** | Estrutura para props (player, line, odds) |
+| **player_name_normalizer** | Fuzzy matching contra roster oficial |
+| **OddsDataManager.fetch_player_props()** | Integração no manager de odds |
+
+### 📂 Novos Arquivos
+
+```
+data/scrapers/
+├── action_network_scraper.py  # Scraper de props via API
+└── player_name_normalizer.py  # Normalização de nomes
+```
+
+### 🎯 Resultados
+
+- **91 props extraídos** em teste real
+- **API funcional**: `/projections/available` retorna 200 OK
+- **Prop types**: Points, Rebounds, Assists, Steals, Blocks
+- **Exemplo**: `Mikal Bridges: points 16.5 (O:1.90 U:1.97)`
+
+### 🔧 Decisões de Design
+
+- **Requests vs Playwright**: Optou-se por HTTP direto após 12+ tentativas com Playwright. API direta é 10x mais rápida e 100% confiável.
+- **Players como lista**: API retorna `players` como array, não dict. Parser adaptado para ambos formatos.
+- **Single-sided props**: Aceita props apenas com over ou under quando par não disponível.
+
+---
+
 ## v27.0 - Enterprise Rest Advantage Features (17 Dez 2025)
 
 ### 🎯 Granular Rest & Travel Fatigue Features

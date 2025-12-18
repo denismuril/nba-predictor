@@ -1,25 +1,24 @@
 """
 Action Network Player Props Scraper for NBA Predictor.
 
-This module scrapes player prop bets (Points, Rebounds, Assists) from Action Network
-or ScoresAndOdds using Playwright with stealth techniques to avoid detection.
+This module fetches player prop bets (Points, Rebounds, Assists) from Action Network
+using direct HTTP requests to their API.
 
 Features:
-- Playwright-based scraping with anti-detection (playwright-stealth)
-- Network request interception for efficient data extraction
+- Direct API access (faster and more reliable than browser scraping)
 - Player name normalization using player_name_normalizer
-- Structured error logging to logs/scraping_errors.log
+- Structured error logging
 
 v26.2: Initial implementation for Player Props integration.
+v26.3: Simplified from Playwright to direct HTTP requests.
 """
 
 import logging
 import asyncio
+import requests
 from datetime import datetime
-from typing import List, Optional, Dict
+from typing import List, Optional, Dict, Any
 from dataclasses import dataclass
-from playwright.async_api import async_playwright, Page, Response
-import json
 
 from data.scrapers.player_name_normalizer import normalize_player_name
 
@@ -53,81 +52,37 @@ class PlayerProp:
 
 class ActionNetworkScraper:
     """
-    Scraper for Action Network player props using Playwright with stealth.
+    Scraper for Action Network player props using direct HTTP API calls.
     
-    Uses network interception to capture API responses for faster, more reliable extraction.
+    Uses requests library instead of browser automation for faster,
+    more reliable extraction.
+    
+    API: https://api.actionnetwork.com/web/v2/leagues/4/projections/available
     """
     
-    BASE_URL = "https://www.actionnetwork.com/nba/props"
+    API_URL = "https://api.actionnetwork.com/web/v2/leagues/4/projections/available"
     
     def __init__(self, headless: bool = True):
         """
         Initialize the scraper.
         
         Args:
-            headless: Run browser in headless mode
+            headless: Ignored (kept for backwards compatibility)
         """
-        self.headless = headless
-        self._intercepted_data: List[Dict] = []
+        pass  # No initialization needed for requests-based approach
     
-    async def _intercept_response(self, response: Response):
-        """
-        Intercept network responses to capture player props data.
-        
-        Args:
-            response: Playwright Response object
-        """
-        try:
-            # Look for API endpoints that contain player props data
-            if "api" in response.url and "props" in response.url.lower():
-                if response.status == 200:
-                    try:
-                        data = await response.json()
-                        self._intercepted_data.append(data)
-                        logger.debug(f"✅ Intercepted data from {response.url}")
-                    except Exception as e:
-                        logger.debug(f"Could not parse JSON from {response.url}: {e}")
-        except Exception as e:
-            logger.debug(f"Error intercepting response: {e}")
-    
-    async def _extract_props_from_page(self, page: Page) -> List[PlayerProp]:
-        """
-        Extract player props from the loaded page.
-        
-        Args:
-            page: Playwright Page object
-            
-        Returns:
-            List of PlayerProp objects
-        """
-        props = []
-        
-        # First, try to extract from intercepted API data
-        if self._intercepted_data:
-            logger.info(f"📊 Processing {len(self._intercepted_data)} intercepted API responses")
-            
-            for data in self._intercepted_data:
-                extracted = self._parse_api_response(data)
-                props.extend(extracted)
-        
-        # Fallback: Parse HTML if API interception didn't work
-        if not props:
-            logger.warning("⚠️ No data from API interception, falling back to HTML parsing")
-            props = await self._parse_html(page)
-        
-        return props
     
     def _parse_api_response(self, data: Dict) -> List[PlayerProp]:
         """
         Parse Action Network API response to extract player props.
         
-        API Structure (REAL from inspection):
-        - playerProps: Array of prop objects
+        API Structure from /projections/available:
+        - playerProps: Array of prop objects  
         - players: Dict mapping player_id to player metadata
         - games: Dict with game information
         
         Args:
-            data: JSON response data from api.actionnetwork.com
+            data: JSON response from /projections/available
             
         Returns:
             List of PlayerProp objects
@@ -135,21 +90,48 @@ class ActionNetworkScraper:
         props = []
         
         try:
+            # DEBUG: Log structure
+            logger.debug(f"🔍 API Response keys: {list(data.keys())}")
+            
             # Extract player mapping (id -> name)
+            # Note: players can be list or dict depending on API version
             players_map = {}
             if "players" in data:
-                for player_id, player_data in data["players"].items():
-                    full_name = player_data.get("full_name")
-                    if full_name:
-                        players_map[int(player_id)] = full_name
+                players_data = data["players"]
+                if isinstance(players_data, dict):
+                    # Dict format: {player_id: player_data}
+                    for player_id, player_info in players_data.items():
+                        full_name = player_info.get("full_name")
+                        if full_name:
+                            players_map[int(player_id)] = full_name
+                elif isinstance(players_data, list):
+                    # List format: [{id: ..., full_name: ...}, ...]
+                    for player_info in players_data:
+                        player_id = player_info.get("id")
+                        full_name = player_info.get("full_name") or player_info.get("name")
+                        if player_id and full_name:
+                            players_map[player_id] = full_name
             
-            # Process playerProps array
+            logger.debug(f"📊 Found {len(players_map)} players")
+            
+            # Process playerProps array (NOT markets!)
             if "playerProps" not in data:
                 logger.warning("No 'playerProps' key in API response")
+                logger.debug(f"Available keys: {list(data.keys())}")
                 return props
             
-            for prop_data in data["playerProps"]:
+            player_props = data["playerProps"]
+            logger.debug(f"🎯 Found {len(player_props)} playerProps")
+            
+            # Debug: show first prop structure
+            if player_props:
+                first_prop = player_props[0]
+                logger.debug(f"📝 First prop keys: {list(first_prop.keys())}")
+                logger.debug(f"📝 First prop sample: {first_prop}")
+            
+            for prop_data in player_props:
                 try:
+                    # Get player name
                     player_id = prop_data.get("player_id")
                     if not player_id or player_id not in players_map:
                         continue
@@ -159,59 +141,69 @@ class ActionNetworkScraper:
                     # Normalize player name
                     canonical_name = normalize_player_name(raw_name)
                     if not canonical_name:
-                        logger.warning(f"⚠️ Could not normalize player name: {raw_name}")
+                        logger.debug(f"⚠️ Could not normalize: {raw_name}")
                         continue
                     
-                    # Prop type (e.g., "Pts", "Rebs", "Ast")
-                    prop_type_display = prop_data.get("custom_pick_type_display_name", "")
-                    prop_type = self._normalize_prop_type(prop_type_display)
+                    # Get prop type
+                    raw_prop_type = prop_data.get("custom_pick_type_display_name", "")
+                    prop_type = self._normalize_prop_type(raw_prop_type)
                     
                     if not prop_type:
+                        logger.debug(f"⚠️ Unknown prop type: {raw_prop_type}")
                         continue
                     
-                    # Extract lines and odds
-                    lines_data = prop_data.get("lines", [])
-                    if not lines_data:
+                    # Get lines and odds
+                    lines = prop_data.get("lines", [])
+                    if not lines:
                         continue
                     
-                    # Group by line value to match over/under pairs
-                    line_groups = {}
-                    for line_obj in lines_data:
-                        value = line_obj.get("value")
-                        side = line_obj.get("side", "").lower()
-                        odds_american = line_obj.get("odds")
+                    # Group by line value to find over/under pairs
+                    line_groups: Dict[float, Dict[str, Any]] = {}
+                    for line_data in lines:
+                        value = line_data.get("value")
+                        side = line_data.get("side", "").lower()
+                        odds = line_data.get("odds")
                         
-                        if value is None or not side or odds_american is None:
+                        if value is None or not side or odds is None:
                             continue
                         
                         if value not in line_groups:
                             line_groups[value] = {}
                         
-                        # Convert American odds to decimal
-                        decimal_odds = self._american_to_decimal(odds_american)
-                        line_groups[value][side] = decimal_odds
+                        line_groups[value][side] = odds
                     
-                    # Create props for each complete over/under pair
+                    # Create props for each line (prefer pairs, but accept singles)
                     for line_value, sides in line_groups.items():
-                        if "over" in sides and "under" in sides:
-                            prop = PlayerProp(
-                                player_name=canonical_name,
-                                prop_type=prop_type,
-                                line=float(line_value),
-                                over_odds=sides["over"],
-                                under_odds=sides["under"],
-                                source="action_network",
-                                timestamp=datetime.now(),
-                                bookmaker="action_network"
-                            )
-                            props.append(prop)
-                            
-                except Exception as e:
-                    logger.debug(f"Error parsing individual prop: {e}")
-                    continue
+                        over_odds = sides.get("over")
+                        under_odds = sides.get("under")
+                        
+                        # Skip if no odds at all
+                        if over_odds is None and under_odds is None:
+                            continue
+                        
+                        # Convert to decimal
+                        over_decimal = self._american_to_decimal(over_odds) if over_odds else 1.90
+                        under_decimal = self._american_to_decimal(under_odds) if under_odds else 1.90
+
+                        prop = PlayerProp(
+                            player_name=canonical_name,
+                            prop_type=prop_type,
+                            line=float(line_value),
+                            over_odds=over_decimal,
+                            under_odds=under_decimal,
+                            source="action_network",
+                            timestamp=datetime.now()
+                        )
+                        props.append(prop)
                     
+                except Exception as e:
+                    logger.debug(f"Error parsing prop: {e}")
+                    continue
+            
         except Exception as e:
             logger.error(f"❌ Error parsing API response: {e}")
+            import traceback
+            traceback.print_exc()
         
         return props
     
@@ -258,71 +250,13 @@ class ActionNetworkScraper:
         else:
             return round(1 + (american_odds / 100), 3)
     
-    async def _parse_html(self, page: Page) -> List[PlayerProp]:
-        """
-        Fallback HTML parser for player props.
-        
-        Args:
-            page: Playwright Page object
-            
-        Returns:
-            List of PlayerProp objects
-        """
-        props = []
-        
-        try:
-            # Wait for props to load
-            await page.wait_for_selector(".prop-row, .player-prop, [data-testid='prop-card']", timeout=10000)
-            
-            # Extract props from HTML
-            # NOTE: This is a placeholder - actual selectors depend on Action Network's HTML structure
-            prop_elements = await page.query_selector_all(".prop-row, .player-prop")
-            
-            for element in prop_elements:
-                try:
-                    raw_name = await element.query_selector(".player-name")
-                    prop_type_elem = await element.query_selector(".prop-type")
-                    line_elem = await element.query_selector(".line")
-                    over_elem = await element.query_selector(".over-odds")
-                    under_elem = await element.query_selector(".under-odds")
-                    
-                    if not all([raw_name, prop_type_elem, line_elem, over_elem, under_elem]):
-                        continue
-                    
-                    raw_name_text = await raw_name.text_content()
-                    prop_type = await prop_type_elem.text_content()
-                    line = await line_elem.text_content()
-                    over_odds = await over_elem.text_content()
-                    under_odds = await under_elem.text_content()
-                    
-                    # Normalize and create prop
-                    canonical_name = normalize_player_name(raw_name_text.strip())
-                    if not canonical_name:
-                        continue
-                    
-                    prop = PlayerProp(
-                        player_name=canonical_name,
-                        prop_type=prop_type.lower().strip(),
-                        line=float(line.replace("+", "").strip()),
-                        over_odds=float(over_odds),
-                        under_odds=float(under_odds),
-                        source="action_network",
-                        timestamp=datetime.now(),
-                    )
-                    props.append(prop)
-                    
-                except Exception as e:
-                    logger.debug(f"Error parsing prop element: {e}")
-                    continue
-                    
-        except Exception as e:
-            logger.error(f"❌ HTML parsing failed: {e}")
-        
-        return props
     
     async def fetch_props(self, date: Optional[str] = None) -> List[PlayerProp]:
         """
-        Fetch player props from Action Network.
+        Fetch player props from Action Network using direct API call.
+        
+        SIMPLIFIED: Uses direct HTTP request to /projections/available API
+        which was verified to work (Status 200).
         
         Args:
             date: Optional date string (YYYY-MM-DD). If None, uses today.
@@ -330,44 +264,58 @@ class ActionNetworkScraper:
         Returns:
             List of PlayerProp objects
         """
-        self._intercepted_data = []
+        import requests
+        from datetime import datetime as dt
         
-        async with async_playwright() as p:
+        # Format date for API (YYYYMMDD)
+        if date:
             try:
-                # Launch browser with stealth
-                browser = await p.chromium.launch(headless=self.headless)
-                
-                # Create context with stealth settings
-                context = await browser.new_context(
-                    viewport={"width": 1920, "height": 1080},
-                    user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                )
-                
-                # TODO: Add playwright-stealth injection here
-                # await context.add_init_script(path="path/to/stealth.min.js")
-                
-                page = await context.new_page()
-                
-                # Set up response interception
-                page.on("response", self._intercept_response)
-                
-                logger.info(f"🌐 Navigating to {self.BASE_URL}")
-                await page.goto(self.BASE_URL, wait_until="networkidle", timeout=30000)
-                
-                # Wait for content to load
-                await asyncio.sleep(3)
-                
-                # Extract props
-                props = await self._extract_props_from_page(page)
-                
-                await browser.close()
-                
-                logger.info(f"✅ Scraped {len(props)} player props from Action Network")
-                return props
-                
-            except Exception as e:
-                logger.error(f"❌ Action Network scraping failed: {e}")
-                raise
+                date_obj = dt.strptime(date, "%Y-%m-%d")
+                date_str = date_obj.strftime("%Y%m%d")
+            except ValueError:
+                logger.error(f"Invalid date format: {date}. Expected YYYY-MM-DD")
+                return []
+        else:
+            date_str = dt.now().strftime("%Y%m%d")
+        
+        # Direct API call to endpoint that WORKS
+        url = "https://api.actionnetwork.com/web/v2/leagues/4/projections/available"
+        params = {
+            "date": date_str,
+            "isLive": "false",
+            "limit": "100"
+        }
+        
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+            "Accept": "application/json",
+            "Referer": "https://www.actionnetwork.com/"
+        }
+        
+        logger.info(f"🌐 Fetching player props from Action Network API for {date_str}")
+        
+        try:
+            response = requests.get(url, params=params, headers=headers, timeout=15)
+            response.raise_for_status()
+            
+            data = response.json()
+            logger.debug(f"✅ API responded successfully")
+            logger.debug(f"🔍 Response keys: {list(data.keys())}")
+            
+            # Parse using existing parser
+            props = self._parse_api_response(data)
+            
+            logger.info(f"✅ Scraped {len(props)} player props from Action Network")
+            return props
+            
+        except requests.exceptions.RequestException as e:
+            logger.error(f"❌ Action Network API request failed: {e}")
+            return []
+        except Exception as e:
+            logger.error(f"❌ Error processing props: {e}")
+            import traceback
+            traceback.print_exc()
+            return []
     
     def fetch_props_sync(self, date: Optional[str] = None) -> List[PlayerProp]:
         """
@@ -391,3 +339,4 @@ if __name__ == "__main__":
     
     for prop in props[:5]:  # Print first 5
         print(f"{prop.player_name} - {prop.prop_type}: {prop.line} (O: {prop.over_odds}, U: {prop.under_odds})")
+
