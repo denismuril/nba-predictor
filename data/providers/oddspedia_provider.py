@@ -5,6 +5,7 @@ Este módulo adapta o OddsPediaScraper existente para a nova interface OddsProvi
 permitindo sua utilização no OddsDataManager.
 
 v24.0: Adaptador para compatibilidade com arquitetura de provedores.
+v26.2: Adicionada validação de range e integrity logging.
 """
 
 import logging
@@ -12,6 +13,13 @@ from datetime import datetime
 from typing import List, Optional
 
 from data.interfaces.odds_provider import OddsProvider, GameOdds
+
+# Import do novo módulo de logging de integridade
+try:
+    from data.utils.integrity_logger import validate_odds_range, log_missing_data
+    INTEGRITY_LOGGING_AVAILABLE = True
+except ImportError:
+    INTEGRITY_LOGGING_AVAILABLE = False
 
 logger = logging.getLogger(__name__)
 

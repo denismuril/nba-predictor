@@ -153,3 +153,20 @@ class OddsProvider(ABC):
             True se o provedor está operacional, False caso contrário
         """
         pass
+    
+    async def get_player_props(self, date: str):
+        """
+        Obtém player props (Points, Rebounds, Assists) para uma data específica.
+        
+        OPCIONAL: Providers que não suportam player props não precisam implementar.
+        
+        Args:
+            date: Data no formato "YYYY-MM-DD"
+            
+        Returns:
+            Lista de PlayerProp objects
+            
+        Raises:
+            NotImplementedError: Se o provider não implementa player props
+        """
+        raise NotImplementedError(f"{self.name} does not support player props")
