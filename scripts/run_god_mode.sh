@@ -15,7 +15,7 @@ cd "$PROJECT_DIR" || exit 1
 # Exportar PYTHONPATH para garantir imports funcionem
 export PYTHONPATH="$PROJECT_DIR"
 
-# Ativar virtualenv se existir
+# Ativar virtualenv se existi
 if [ -f "$VENV_ACTIVATE" ]; then
     source "$VENV_ACTIVATE"
 fi

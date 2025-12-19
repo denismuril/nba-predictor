@@ -54,8 +54,8 @@ def run_prediction_pipeline(args: argparse.Namespace) -> Optional[List[Dict[str,
     Returns:
         Lista de previsões ou None em caso de erro.
     """
-    logger.info("🚀 Iniciando NBA Predictor v21.5 - Forensic Audit Complete...")
-
+    logger.info("🚀 Iniciando NBA Predictor v27.0 - God Mode Activated...")
+    
     # 0. Atualizar resultados pendentes
     logger.info("\n--- ETAPA 0: ATUALIZAÇÃO DE RESULTADOS ---")
     try:

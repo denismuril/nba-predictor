@@ -5,7 +5,7 @@
     "status": "DOUBTFUL",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-19T12:44:12.742380"
+    "updated_at": "2025-12-19T15:24:06.255761"
   },
   {
     "player_name": "Zach Collins",
@@ -13,7 +13,7 @@
     "status": "PROBABLE",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-19T12:44:12.742407"
+    "updated_at": "2025-12-19T15:24:06.255776"
   },
   {
     "player_name": "Chris Livingston",
@@ -21,7 +21,7 @@
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-19T12:44:12.742411"
+    "updated_at": "2025-12-19T15:24:06.255782"
   },
   {
     "player_name": "Joan Beringer",
@@ -29,6 +29,6 @@
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-19T12:44:12.742415"
+    "updated_at": "2025-12-19T15:24:06.255786"
   }
 ]
