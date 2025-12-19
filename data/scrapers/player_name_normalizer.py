@@ -10,13 +10,22 @@ Uses fuzzy matching against the nba_player_stats.csv reference file to handle:
 - Nicknames and alternative spellings
 
 v26.2: Initial implementation for Player Props integration.
+v26.4: Upgraded to thefuzz with rapidfuzz backend for better matching.
 """
 
 import logging
 import os
+import re
 from typing import Optional, Dict, List
-from difflib import SequenceMatcher
 import pandas as pd
+
+# Try to import thefuzz (preferred), fallback to difflib
+try:
+    from thefuzz import fuzz
+    THEFUZZ_AVAILABLE = True
+except ImportError:
+    THEFUZZ_AVAILABLE = False
+    from difflib import SequenceMatcher
 
 logger = logging.getLogger(__name__)
 
@@ -49,7 +58,9 @@ def _load_player_reference() -> pd.DataFrame:
         raise FileNotFoundError(f"Player stats file not found: {csv_path}")
     
     _PLAYER_CACHE = pd.read_csv(csv_path)
-    logger.info(f"✅ Loaded {len(_PLAYER_CACHE)} player references from {csv_path}")
+    
+    method = "thefuzz+rapidfuzz" if THEFUZZ_AVAILABLE else "difflib"
+    logger.info(f"✅ Loaded {len(_PLAYER_CACHE)} player references (using {method})")
     
     return _PLAYER_CACHE
 
@@ -57,6 +68,9 @@ def _load_player_reference() -> pd.DataFrame:
 def _similarity_score(name1: str, name2: str) -> float:
     """
     Calculate similarity score between two names.
+    
+    Uses thefuzz token_set_ratio if available (handles word reordering),
+    falls back to difflib SequenceMatcher.
     
     Handles abbreviated names like "D. Daniels" vs "Dyson Daniels".
     
@@ -76,8 +90,6 @@ def _similarity_score(name1: str, name2: str) -> float:
         return 1.0
     
     # Check for abbreviated first name pattern (e.g., "D. Daniels" vs "Dyson Daniels")
-    # Pattern: "X. Lastname" where X is first initial
-    import re
     abbrev_pattern = r'^([a-z])\.?\s+(.+)$'
     
     match1 = re.match(abbrev_pattern, n1)
@@ -86,15 +98,17 @@ def _similarity_score(name1: str, name2: str) -> float:
     # If one is abbreviated, check if initial matches and last name matches
     if match1 and not match2:
         initial1, lastname1 = match1.groups()
-        # n2 is the full name - check if first letter matches and lastname is similar
         parts2 = n2.split()
         if len(parts2) >= 2:
             first2 = parts2[0]
             lastname2 = ' '.join(parts2[1:])
             if first2.startswith(initial1):
-                lastname_score = SequenceMatcher(None, lastname1, lastname2).ratio()
+                if THEFUZZ_AVAILABLE:
+                    lastname_score = fuzz.ratio(lastname1, lastname2) / 100.0
+                else:
+                    lastname_score = SequenceMatcher(None, lastname1, lastname2).ratio()
                 if lastname_score > 0.85:
-                    return 0.90  # High confidence match for abbreviated names
+                    return 0.92  # High confidence match for abbreviated names
     
     elif match2 and not match1:
         initial2, lastname2 = match2.groups()
@@ -103,12 +117,20 @@ def _similarity_score(name1: str, name2: str) -> float:
             first1 = parts1[0]
             lastname1 = ' '.join(parts1[1:])
             if first1.startswith(initial2):
-                lastname_score = SequenceMatcher(None, lastname1, lastname2).ratio()
+                if THEFUZZ_AVAILABLE:
+                    lastname_score = fuzz.ratio(lastname1, lastname2) / 100.0
+                else:
+                    lastname_score = SequenceMatcher(None, lastname1, lastname2).ratio()
                 if lastname_score > 0.85:
-                    return 0.90
+                    return 0.92
     
-    # Use SequenceMatcher for fuzzy matching
-    return SequenceMatcher(None, n1, n2).ratio()
+    # Use thefuzz or fallback to difflib
+    if THEFUZZ_AVAILABLE:
+        # token_set_ratio handles word reordering and partial matches well
+        # e.g., "LeBron James" vs "James LeBron" still matches
+        return fuzz.token_set_ratio(n1, n2) / 100.0
+    else:
+        return SequenceMatcher(None, n1, n2).ratio()
 
 
 def normalize_player_name(raw_name: str, min_similarity: float = 0.80) -> Optional[str]:
@@ -137,7 +159,6 @@ def normalize_player_name(raw_name: str, min_similarity: float = 0.80) -> Option
     raw_name = raw_name.strip()
     
     # Reject names too short (likely team abbreviations like HOU, LAL, ATL)
-    # Real player names have at least 4 characters (e.g., "Naz Reid")
     if len(raw_name) < 4:
         logger.debug(f"Skipping short name (likely team abbrev): '{raw_name}'")
         return None
@@ -204,3 +225,8 @@ def clear_cache():
     _PLAYER_CACHE = None
     _NAME_TO_CANONICAL = {}
     logger.info("🔄 Player name cache cleared")
+
+
+def get_fuzzy_backend() -> str:
+    """Returns the name of the fuzzy matching backend in use."""
+    return "thefuzz+rapidfuzz" if THEFUZZ_AVAILABLE else "difflib"

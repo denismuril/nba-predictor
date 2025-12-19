@@ -271,6 +271,9 @@ class OddsDataManager:
         2. Linemate (XHR interception)
         3. BettingPros (consenso de mercado)
         4. Covers (linhas Over/Under)
+        5. PropsMadness (agregador público)
+        6. Props.com (best props today)
+        7. LineStar (DraftKings props)
         
         Args:
             date: Data no formato "YYYY-MM-DD"
@@ -284,31 +287,51 @@ class OddsDataManager:
                 print(f"{prop.player_name}: {prop.prop_type} {prop.line}")
         """
         # Import dos scrapers (lazy para evitar dependência circular)
+        # Now using props/ subdirectory for organization
         scrapers = []
         
         try:
-            from data.scrapers.action_network_scraper import ActionNetworkScraper
+            from data.scrapers.props.action_network_scraper import ActionNetworkScraper
             scrapers.append(("ActionNetwork", ActionNetworkScraper))
         except ImportError:
             logger.debug("ActionNetworkScraper não disponível")
         
         try:
-            from data.scrapers.linemate_scraper import LinemateScraper
+            from data.scrapers.props.linemate_scraper import LinemateScraper
             scrapers.append(("Linemate", LinemateScraper))
         except ImportError:
             logger.debug("LinemateScraper não disponível")
         
         try:
-            from data.scrapers.bettingpros_scraper import BettingProsScraper
+            from data.scrapers.props.bettingpros_scraper import BettingProsScraper
             scrapers.append(("BettingPros", BettingProsScraper))
         except ImportError:
             logger.debug("BettingProsScraper não disponível")
         
         try:
-            from data.scrapers.covers_scraper import CoversScraper
+            from data.scrapers.props.covers_scraper import CoversScraper
             scrapers.append(("Covers", CoversScraper))
         except ImportError:
             logger.debug("CoversScraper não disponível")
+        
+        # New scrapers (v26.4)
+        try:
+            from data.scrapers.props.propsmadness_scraper import PropsMadnessScraper
+            scrapers.append(("PropsMadness", PropsMadnessScraper))
+        except ImportError:
+            logger.debug("PropsMadnessScraper não disponível")
+        
+        try:
+            from data.scrapers.props.propscom_scraper import PropsComScraper
+            scrapers.append(("PropsComScraper", PropsComScraper))
+        except ImportError:
+            logger.debug("PropsComScraper não disponível")
+        
+        try:
+            from data.scrapers.props.linestar_scraper import LineStarScraper
+            scrapers.append(("LineStar", LineStarScraper))
+        except ImportError:
+            logger.debug("LineStarScraper não disponível")
         
         if not scrapers:
             logger.error("🚨 Nenhum scraper de player props disponível")

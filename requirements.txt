@@ -21,6 +21,8 @@ lxml>=4.9.0
 selenium>=4.0.0
 playwright>=1.40.0
 fake-useragent>=1.4.0
+thefuzz>=0.22.0
+rapidfuzz>=3.0.0
 
 # Async & Web Scraping
 aiohttp>=3.8.0

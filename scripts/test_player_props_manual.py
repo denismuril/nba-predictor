@@ -24,7 +24,7 @@ async def test_player_props_visual():
     print("  TESTE VISUAL: Action Network Player Props")
     print("=" * 70)
     
-    from data.scrapers.action_network_scraper import ActionNetworkScraper
+    from data.scrapers.props.action_network_scraper import ActionNetworkScraper
     
     # Modo NON-headless para ver o que está acontecendo
     print("\n🌐 Iniciando navegador (você verá a janela abrir)...")
