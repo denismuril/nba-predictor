@@ -22,6 +22,7 @@ from telegram.ext import (
 )
 from datetime import datetime, timedelta
 import pytz  # HOTFIX: Timezone handling
+import pandas as pd
 import os
 import sys
 import asyncio
@@ -364,7 +365,8 @@ async def props_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 elif hasattr(top_pts, 'empty') and not top_pts.empty:
                     msg += "🔥 *Pontos:*\n"
                     for _, p in top_pts.iterrows():
-                        val = p['PTS'] if pd.notna(p['PTS']) else 0.0
+                        pts = p.get('PTS', 0.0)
+                        val = pts if (pts is not None and pts == pts) else 0.0
                         msg += f"  • {p['PLAYER']}: {val:.1f}\n"
                 
                 # Rebotes
@@ -374,7 +376,8 @@ async def props_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 elif hasattr(top_reb, 'empty') and not top_reb.empty:
                     msg += "🖐️ *Rebotes:*\n"
                     for _, p in top_reb.iterrows():
-                        val = p['REB'] if pd.notna(p['REB']) else 0.0
+                        reb = p.get('REB', 0.0)
+                        val = reb if (reb is not None and reb == reb) else 0.0
                         msg += f"  • {p['PLAYER']}: {val:.1f}\n"
                         
                 # Assistências
@@ -384,7 +387,8 @@ async def props_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 elif hasattr(top_ast, 'empty') and not top_ast.empty:
                     msg += "🤝 *Assistências:*\n"
                     for _, p in top_ast.iterrows():
-                        val = p['AST'] if pd.notna(p['AST']) else 0.0
+                        ast = p.get('AST', 0.0)
+                        val = ast if (ast is not None and ast == ast) else 0.0
                         msg += f"  • {p['PLAYER']}: {val:.1f}\n"
 
             msg += "\n--------------------------------\n"
@@ -819,4 +823,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

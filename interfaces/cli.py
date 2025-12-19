@@ -373,7 +373,6 @@ def run_prediction_pipeline(args: argparse.Namespace) -> Optional[List[Dict[str,
     logger.info("\n--- ETAPA 3: EXPORTAÇÃO ---")
     if previsoes:
         try:
-            import pandas as pd
             df_previsoes = pd.DataFrame(previsoes)
 
             try:
