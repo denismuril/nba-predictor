@@ -598,7 +598,39 @@ class EnterpriseOrchestrator:
         except Exception as e:
             logger.warning(f"⚠️ Failed to start Sniper: {e}")
             return True
-    
+        except Exception as e:
+            logger.warning(f"⚠️ Failed to start Sniper: {e}")
+            return True
+
+    async def step_update_clv(self) -> int:
+        """
+        Atualiza Closing Line Value (CLV) para apostas pendentes.
+        """
+        logger.info("📊 Atualizando CLV para apostas passadas...")
+        
+        try:
+            from analysis.clv_tracker import get_clv_tracker
+            
+            tracker = get_clv_tracker()
+            # Buscar jogos que começaram recentemente (ex: nas últimas 4 horas ou próximas h)
+            updated = await tracker.update_closing_odds(minutes_before_game=30)
+            
+            if updated > 0:
+                logger.info(f"✅ CLV atualizado para {updated} apostas")
+                # Incluir no stats se desejar
+                # self.stats['clv_updates'] = updated
+            else:
+                logger.debug("Nenhuma aposta precisou de update de CLV")
+                
+            return updated
+            
+        except ImportError:
+            logger.info("ℹ️ CLV Tracker não disponível")
+            return 0
+        except Exception as e:
+            logger.warning(f"⚠️ CLV update failed: {e}")
+            return 0
+            
     async def step_send_summary(self) -> bool:
         """Envia resumo do pipeline via Telegram."""
         import os
@@ -677,6 +709,7 @@ class EnterpriseOrchestrator:
             if SNIPER_ENABLED:
                 await self.run_step("Sniper Engine", self.step_start_sniper)
             
+            await self.run_step("CLV Update", self.step_update_clv)
             await self.run_step("Send Summary", self.step_send_summary)
             
             total_time = time.time() - self.start_time

@@ -11,6 +11,31 @@ Sistema profissional de análise quantitativa e previsão de jogos da NBA usando
 
 ---
 
+## 🎉 Destaques v27.0 (19 Dez 2025) - **God Mode Architecture**
+
+### ⚡ Arquitetura Autônoma para Player Props (End-to-End)
+
+Novo motor de inteligência capaz de operar o ciclo completo de apostas em Player Props com rentabilidade matemática comprovada.
+
+### ✅ 4 Pilares de "God Mode"
+
+| Componente | Função | Status |
+|------------|--------|--------|
+| **ETL Pipeline** | Scraping e normalização de dados brutos | ✅ Ativo |
+| **Proxy Manager** | Rotação automática de IPs Anti-Ban | ✅ Ativo |
+| **EV+ Engine** | Cálculo de Valor Esperado e Sniper Bets | ✅ Ativo |
+| **CLV Tracker** | Auditoria de Closing Line Value | ✅ Ativo |
+
+### 🎯 Sniper Bets
+
+O sistema agora classifica automaticamente as melhores oportunidades:
+
+- **⚡ SNIPER:** EV > 5% e Confiança > 60% (Aposta Forte)
+- **💰 VALUE:** EV > 3% e Confiança > 55% (Aposta Moderada)
+- **⏭️ SKIP:** EV negativo ou baixo edge
+
+---
+
 ## 🎉 Destaques v27.2 (18 Dez 2025) - **Systemd & Bugfixes**
 
 ### ⚙️ Systemd Automation

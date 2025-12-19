@@ -1,0 +1,17 @@
+[Unit]
+Description=NBA Predictor God Mode - Daily Pipeline
+Documentation=https://github.com/denismuril/nba-predictor
+After=network.target postgresql.service redis.service
+
+[Service]
+Type=oneshot
+User=denis
+WorkingDirectory=/home/denis/nba-predictor
+ExecStart=/home/denis/nba-predictor/scripts/run_god_mode.sh
+StandardOutput=append:/home/denis/nba-predictor/logs/god_mode_service.log
+StandardError=append:/home/denis/nba-predictor/logs/god_mode_error.log
+Environment=PYTHONPATH=/home/denis/nba-predictor
+Environment=PATH=/home/denis/nba-predictor/venv/bin:/usr/local/bin:/usr/bin:/bin
+
+[Install]
+WantedBy=multi-user.target

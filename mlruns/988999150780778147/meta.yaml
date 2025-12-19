@@ -1,0 +1,6 @@
+artifact_location: file://wsl$/Ubuntu/home/denis/nba-predictor/mlruns/988999150780778147
+creation_time: 1766167671506
+experiment_id: '988999150780778147'
+last_update_time: 1766167671506
+lifecycle_stage: active
+name: NBA_Player_Props_v1

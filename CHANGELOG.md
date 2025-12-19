@@ -1,4 +1,44 @@
 
+## v27.0 - God Mode Architecture (End-to-End) (19 Dez 2025)
+
+### ⚡ Arquitetura Autônoma para Player Props
+
+Introdução do motor "God Mode" (End-to-End) focado na rentabilidade de Player Props com infraestrutura de resiliência e auditoria.
+
+### ✅ 4 Pilares Implementados
+
+| Pilar | Componente | Função |
+|-------|------------|--------|
+| **1. ETL Pipeline** | `data/processing/props_processor.py` | Integração de scrape, normalização e cálculo de features (L5, Rest, H2H). |
+| **2. Proxy Manager** | `infrastructure/proxy_manager.py` | Rotação automática de IPs e proteção de identidade para evitar 403/429. |
+| **3. EV+ Engine** | `ml_pipeline/player_props_engine.py` | Motor de inferência focado em Valor Esperado (EV) e classificação Sniper. |
+| **4. CLV Tracker** | `analysis/clv_tracker.py` | Auditoria de qualidade das apostas baseada na linha de fechamento. |
+
+### 🔍 Destaques Técnicos
+
+- **Zero Mock Data:** Pipeline recusa predições se dados históricos reais estiverem ausentes.
+- **Sniper Bets:** Classificação automática baseada em EV > 5% e Confiança > 60%.
+- **Resiliência:** Browser Stealth agora consome proxies rotativos automaticamente via Singleton.
+- **Auditoria:** `clv_tracker.py` registra o momento exato da aposta para comparação futura.
+
+### 📂 Arquivos Modificados/Criados
+
+```
+data/processing/
+└── props_processor.py     # NOVO: ETL Engine
+
+infrastructure/
+└── proxy_manager.py       # NOVO: Gestão de Proxies
+
+analysis/
+└── clv_tracker.py         # NOVO: Auditoria de Performance
+
+ml_pipeline/
+└── player_props_engine.py # UPDATE: Lógica EV+ e Sniper
+```
+
+---
+
 ## v27.2 - Systemd Automation & Stabilization (18 Dez 2025)
 
 ### ⚙️ Automação via Systemd
@@ -19,6 +59,7 @@ Substituição completa do `cron` por **Systemd Timers** para maior robustez e m
 
 - **Suite de Testes**: `pytest` rodando 100% (19 passed).
 - **Integração**: Verificado fluxo de `nba_predictor_web.py` consumindo novos props.
+
 # Changelog
 
 ---

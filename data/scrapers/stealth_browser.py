@@ -224,7 +224,8 @@ async def apply_stealth_patches(page: Page):
 @asynccontextmanager
 async def create_stealth_browser(
     headless: bool = True,
-    proxy: Optional[str] = None
+    proxy: Optional[str] = None,
+    use_proxy_manager: bool = True
 ):
     """
     Context manager para criar browser stealth.
@@ -232,6 +233,7 @@ async def create_stealth_browser(
     Args:
         headless: Modo headless
         proxy: URL de proxy (opcional)
+        use_proxy_manager: Se True, usa ProxyManager se proxy for None
         
     Yields:
         Tupla (browser, context, page)
@@ -242,6 +244,18 @@ async def create_stealth_browser(
     """
     if not PLAYWRIGHT_AVAILABLE:
         raise RuntimeError("Playwright não instalado. Execute: pip install playwright && playwright install chromium")
+    
+    # Integração com ProxyManager
+    if proxy is None and use_proxy_manager:
+        try:
+            # Import tardio para evitar ciclo
+            from infrastructure.proxy_manager import get_proxy_manager
+            pm = get_proxy_manager()
+            proxy = pm.get_proxy()
+            if proxy:
+                logger.debug(f"🔄 Proxy obtido do manager: {proxy}")
+        except ImportError:
+            pass  # ProxyManager não disponível ou erro de import
     
     browser = None
     try:

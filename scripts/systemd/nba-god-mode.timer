@@ -1,0 +1,12 @@
+[Unit]
+Description=Timer para NBA Predictor God Mode (Daily Run)
+Requires=nba-god-mode.service
+
+[Timer]
+# Executar diariamente às 10:30 da manhã (antes dos jogos, após injury reports iniciais)
+OnCalendar=*-*-* 16:30:00
+RandomizedDelaySec=300
+Persistent=true
+
+[Install]
+WantedBy=timers.target

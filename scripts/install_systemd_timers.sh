@@ -10,11 +10,15 @@ sudo cp /home/denis/nba-predictor/scripts/systemd/*.timer /etc/systemd/system/
 # Recarregar systemd
 sudo systemctl daemon-reload
 
-# Ativar e iniciar timers
-echo "✅ Ativando timers..."
-sudo systemctl enable --now nba-orchestrator.timer
-sudo systemctl enable --now nba-odds-tracking.timer
-sudo systemctl enable --now nba-weekly-update.timer
+# Parar e desativar serviços antigos (Clean up legacy)
+echo "🛑 Parando serviços antigos..."
+sudo systemctl disable --now nba-orchestrator.timer 2>/dev/null || true
+sudo systemctl disable --now nba-odds-tracking.timer 2>/dev/null || true
+sudo systemctl disable --now nba-weekly-update.timer 2>/dev/null || true
+
+# Ativar e iniciar NOVO timer God Mode
+echo "✅ Ativando God Mode Timer..."
+sudo systemctl enable --now nba-god-mode.timer
 
 # Remover cron antigo
 echo "🗑️ Removendo cron antigo..."
@@ -26,9 +30,9 @@ echo "📊 Status dos timers:"
 systemctl list-timers --all | grep nba
 
 echo ""
-echo "✅ Migração concluída!"
+echo "✅ Instalação e Migração concluída!"
 echo ""
 echo "Comandos úteis:"
-echo "  - Ver todos timers: systemctl list-timers --all | grep nba"
-echo "  - Ver logs: journalctl -u nba-orchestrator -f"
-echo "  - Testar manualmente: sudo systemctl start nba-orchestrator.service"
+echo "  - Ver timers: systemctl list-timers --all | grep nba"
+echo "  - Ver logs: ./scripts/monitor_god_mode.sh"
+echo "  - Testar manualmente: sudo systemctl start nba-god-mode.service"
