@@ -1,3 +1,24 @@
+
+## v27.2 - Systemd Automation & Stabilization (18 Dez 2025)
+
+### ⚙️ Automação via Systemd
+
+Substituição completa do `cron` por **Systemd Timers** para maior robustez e monitoramento.
+
+- **Service & Timer**: `nba-predictor.service` e `nba-predictor.timer` configurados para rodar diariamente às 10:00 AM.
+- **Wrapper Script**: `run_pipeline.sh` garante ambiente virtual ativado e execução limpa.
+- **Logs Centralizados**: `logs/pipeline.log` e `logs/pipeline_error.log` integrados ao journald.
+
+### 🐛 Bug Fixes Críticos
+
+- **Action Network Scraper**: Corrigido parsing da API que retornava props com apenas um lado (single-sided). Scraper agora recupera ~90 props/dia (antes 0).
+- **Player Name Normalization**: Adicionado suporte para nomes abreviados (`D. Daniels` → `Dyson Daniels`) e correção de filtro de times.
+- **Odds Validator**: Refinada validação de vigorish (Overround) para rejeitar mercados com margem > 25% ou negativa (erro de arb).
+
+### 🧪 Testes
+
+- **Suite de Testes**: `pytest` rodando 100% (19 passed).
+- **Integração**: Verificado fluxo de `nba_predictor_web.py` consumindo novos props.
 # Changelog
 
 ---

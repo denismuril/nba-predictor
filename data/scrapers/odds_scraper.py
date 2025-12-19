@@ -86,6 +86,18 @@ class OddsValidator:
     def validate_game_odds(home_odds: float, away_odds: float, game_key: str = "") -> bool:
         if not OddsValidator.validate_odds_value(home_odds, game_key): return False
         if not OddsValidator.validate_odds_value(away_odds, game_key): return False
+        
+        # Validate Vigorish/Overround
+        # Sum of implied probs (1/decimal) usually between 1.01 (1%) and 1.10 (10%)
+        # Allow up to 1.25 (25%) for some markets, and slightly below 1.0 for sharp lines/arbs
+        implied_sum = (1.0 / home_odds) + (1.0 / away_odds)
+        
+        if implied_sum > 1.25: # > 25% vigorish is suspicious
+            return False
+            
+        if implied_sum < 0.95: # < -5% arb/error is suspicious
+            return False
+            
         return True
     
     @staticmethod

@@ -225,21 +225,21 @@ async def jogos_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 vencedor = visitante
                 confianca = 100 - prob_casa
                 
-            msg += f"🏆 Vencedor: *{vencedor}* ({confianca:.1f}%)\n"
+            msg += f"🏆 Vencedor: *{vencedor}* ({confianca if confianca == confianca else 0.0:.1f}%)\n"
             
             # Spread Modelo
             if spread > 0:
-                msg += f"📉 Spread Justo: {casa} -{spread:.1f}\n"
+                msg += f"📉 Spread Justo: {casa} -{spread if spread == spread else 0.0:.1f}\n"
             else:
-                msg += f"📉 Spread Justo: {visitante} -{abs(spread):.1f}\n"
+                msg += f"📉 Spread Justo: {visitante} -{abs(spread) if spread == spread else 0.0:.1f}\n"
             
             # Placar Estimado & Totais
             total_est = prev.get('Total Previsto', 225.0)
             home_score = (total_est + spread) / 2
             away_score = (total_est - spread) / 2
             
-            msg += f"🔢 *Total Previsto:* {total_est:.1f} pts\n"
-            msg += f"📊 *Placar Est:* {casa} {home_score:.0f} x {away_score:.0f} {visitante}\n"
+            msg += f"🔢 *Total Previsto:* {total_est:.1f} pts\n" if total_est == total_est else "🔢 *Total Previsto:* N/A\n"
+            msg += f"📊 *Placar Est:* {casa} {home_score:.0f} x {away_score:.0f} {visitante}\n" if (home_score == home_score and away_score == away_score) else f"📊 *Placar Est:* {casa} ? x ? {visitante}\n"
             
             # ML Model Details (V6)
             if 'ML Model Home %' in prev:
@@ -364,7 +364,8 @@ async def props_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 elif hasattr(top_pts, 'empty') and not top_pts.empty:
                     msg += "🔥 *Pontos:*\n"
                     for _, p in top_pts.iterrows():
-                        msg += f"  • {p['PLAYER']}: {p['PTS']:.1f}\n"
+                        val = p['PTS'] if pd.notna(p['PTS']) else 0.0
+                        msg += f"  • {p['PLAYER']}: {val:.1f}\n"
                 
                 # Rebotes
                 top_reb = get_top_n(team_abbr, stats_df, 'REB', 3)
@@ -373,7 +374,8 @@ async def props_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 elif hasattr(top_reb, 'empty') and not top_reb.empty:
                     msg += "🖐️ *Rebotes:*\n"
                     for _, p in top_reb.iterrows():
-                        msg += f"  • {p['PLAYER']}: {p['REB']:.1f}\n"
+                        val = p['REB'] if pd.notna(p['REB']) else 0.0
+                        msg += f"  • {p['PLAYER']}: {val:.1f}\n"
                         
                 # Assistências
                 top_ast = get_top_n(team_abbr, stats_df, 'AST', 3)
@@ -382,7 +384,8 @@ async def props_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 elif hasattr(top_ast, 'empty') and not top_ast.empty:
                     msg += "🤝 *Assistências:*\n"
                     for _, p in top_ast.iterrows():
-                        msg += f"  • {p['PLAYER']}: {p['AST']:.1f}\n"
+                        val = p['AST'] if pd.notna(p['AST']) else 0.0
+                        msg += f"  • {p['PLAYER']}: {val:.1f}\n"
 
             msg += "\n--------------------------------\n"
             

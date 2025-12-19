@@ -236,6 +236,9 @@ def calcular_net_rating_v11(team_name: str, dfs: Dict[str, pd.DataFrame]) -> flo
     # 0 -> -10, 50 -> 0, 100 -> +10
     net_rating_final = (net_rating_norm - 50) / 5
     
+    if np.isnan(net_rating_final):
+        return 0.0
+        
     return net_rating_final
 
 def calculate_expected_efg(team_abbr: str, shot_quality_data: Dict[str, Any]) -> Optional[float]:

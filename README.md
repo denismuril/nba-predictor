@@ -1,18 +1,31 @@
-# 🏀 NBA Predictor v27.1 - Player Props Integration
+# 🏀 NBA Predictor v27.2 - Systemd Automation & Stabilization
 
 [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-orange.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/status-production-brightgreen.svg)]()
+[![Systemd](https://img.shields.io/badge/init-Systemd-green.svg)]()
 [![ML](https://img.shields.io/badge/ML-Ensemble%20V6-purple.svg)]()
 [![Bot](https://img.shields.io/badge/Telegram-Sniper%20Bot-blue.svg)]()
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue.svg)]()
-[![Redis](https://img.shields.io/badge/Redis-7.0-red.svg)]()
-[![Prefect](https://img.shields.io/badge/Prefect-2.14-blue.svg)]()
-[![MLflow](https://img.shields.io/badge/MLflow-Tracking-green.svg)]()
-[![Docker](https://img.shields.io/badge/docker-compose-blue.svg)](docker-compose.yml)
-[![Season](https://img.shields.io/badge/Season-2025--26-orange.svg)]()
 
-Sistema profissional de análise quantitativa e previsão de jogos da NBA usando **Advanced Machine Learning (Ensemble V6)**, **PostgreSQL + Redis**, **Prefect Orchestration**, **Paper Trading**, **Sniper Engine**, **SafeKelly Bankroll Management**, **Player Props** e **Shadow Mode** para validação antes do Go Live.
+Sistema profissional de análise quantitativa e previsão de jogos da NBA usando **Advanced Machine Learning (Ensemble V6)**, **Systemd Automation**, **PostgreSQL + Redis**, **Player Props** e **SafeKelly Bankroll Management**.
+
+---
+
+## 🎉 Destaques v27.2 (18 Dez 2025) - **Systemd & Bugfixes**
+
+### ⚙️ Systemd Automation
+
+Substituição do cron por timers nativos do Linux:
+
+- `nba-predictor.service` + `nba-predictor.timer`
+- Logs gerenciados e execução garantida em ambiente virtual
+- Agendamento diário automático (10:00 AM)
+
+### 🐛 Critical Fixes
+
+- **Action Network**: Recuperado scraping de props (API Parsing Fix)
+- **Normalização**: Suporte a abreviações (`D. Daniels`)
+- **Validação**: Verificação rigorosa de Vigorish/Overround
 
 ---
 

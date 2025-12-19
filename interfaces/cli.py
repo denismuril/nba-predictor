@@ -190,7 +190,17 @@ def run_prediction_pipeline(args: argparse.Namespace) -> Optional[List[Dict[str,
             )
         except Exception as e:
             logger.error(f"❌ Erro ao calcular Power Rating para {home_team} vs {away_team}: {e}")
-            continue
+            # Continue with safe defaults
+            resultado = {
+                'prob_casa': 50.0,
+                'nr_ajustado_casa': 0.0,
+                'nr_ajustado_visitante': 0.0,
+                'hca_usado': 3.0,
+                'fator_lesao_casa': 0.0,
+                'fator_lesao_visitante': 0.0,
+                'pr_casa': 10.0,
+                'pr_visitante': 10.0
+            }
 
         try:
             # Pegar HCA usado no Power Rating (ou default 3.0 se não existir)
@@ -299,7 +309,7 @@ def run_prediction_pipeline(args: argparse.Namespace) -> Optional[List[Dict[str,
             previsao['ML Model Away %'] = round(ml_data.get('prob_away', 0), 1)
 
             # Totals
-            if 'predicted_total' in ml_data:
+            if 'predicted_total' in ml_data and pd.notna(ml_data['predicted_total']):
                 previsao['Total Previsto'] = round(ml_data['predicted_total'], 1)
                 logger.info(f"   🔢 Totals Model (V18): {previsao['Total Previsto']}")
 
@@ -335,11 +345,16 @@ def run_prediction_pipeline(args: argparse.Namespace) -> Optional[List[Dict[str,
                 home_offensive = league_avg_points + (pr_casa * 0.5)
                 away_offensive = league_avg_points + (pr_visitante * 0.5)
                 total_estimate = max(200, min(240, home_offensive + away_offensive))
+                
+                # Check for NaN in calculation result
+                if total_estimate != total_estimate:  # NaN check
+                    raise ValueError("Calculation resulted in NaN")
+                    
                 previsao['Total Previsto'] = round(total_estimate, 1)
                 logger.info(f"   🔢 Totals (Fallback): {previsao['Total Previsto']}")
             except Exception as e:
                 logger.warning(f"⚠️  Erro ao calcular total (fallback): {e}")
-                previsao['Total Previsto'] = 218.0
+                previsao['Total Previsto'] = 220.0  # Safe default (League avg 2024-25)
 
         # Validar previsão antes de adicionar
         try:

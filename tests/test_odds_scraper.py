@@ -83,7 +83,9 @@ class TestOddsValidator:
         # Apenas o primeiro jogo deve passar
         assert len(validated) == 1
         assert 'Lakers vs Warriors' in validated
-        assert validated['Lakers vs Warriors']['validated'] == True
+        # Verifica se calculou fair odds (indicativo de validação bem sucedida)
+        assert 'fair_home_odds' in validated['Lakers vs Warriors']
+        assert validated['Lakers vs Warriors']['vigorish_pct'] > 0
 
 
 class TestTheOddsAPIClient:
