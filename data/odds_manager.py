@@ -261,44 +261,104 @@ class OddsDataManager:
 
     async def fetch_player_props(self, date: str) -> List:
         """
-        Busca player props (Points, Rebounds, Assists) do Action Network.
+        Busca player props (Points, Rebounds, Assists) de múltiplos scrapers.
         
-        Usa o Action Network scraper para extrair props de jogadores.
-        Em caso de falha, registra no log mas não interrompe o fluxo.
+        Implementa Chain of Responsibility: tenta cada scraper por ordem
+        de estabilidade até um retornar dados.
+        
+        Ordem de prioridade:
+        1. Action Network (API direta, mais estável)
+        2. Linemate (XHR interception)
+        3. BettingPros (consenso de mercado)
+        4. Covers (linhas Over/Under)
         
         Args:
             date: Data no formato "YYYY-MM-DD"
             
         Returns:
-            Lista de PlayerProp objects. Lista vazia se scraping falhar.
+            Lista de PlayerProp objects. Lista vazia se todos os scrapers falharem.
             
         Example:
             props = await manager.fetch_player_props("2024-12-18")
             for prop in props:
                 print(f"{prop.player_name}: {prop.prop_type} {prop.line}")
         """
+        # Import dos scrapers (lazy para evitar dependência circular)
+        scrapers = []
+        
         try:
-            # Import aqui para evitar dependência circular
             from data.scrapers.action_network_scraper import ActionNetworkScraper
-            
-            logger.info(f"🎯 Buscando player props para {date}...")
-            
-            scraper = ActionNetworkScraper(headless=True)
-            props = await scraper.fetch_props(date)
-            
-            if props:
-                logger.info(f"✅ {len(props)} player props encontrados")
-                
-                # Log estruturado de sucesso
-                logger.debug(f"Props por tipo: {self._count_props_by_type(props)}")
-            else:
-                logger.warning("⚠️ Nenhum player prop encontrado")
-            
-            return props
-            
-        except Exception as e:
-            logger.error(f"❌ Falha ao buscar player props: {e}", exc_info=True)
+            scrapers.append(("ActionNetwork", ActionNetworkScraper))
+        except ImportError:
+            logger.debug("ActionNetworkScraper não disponível")
+        
+        try:
+            from data.scrapers.linemate_scraper import LinemateScraper
+            scrapers.append(("Linemate", LinemateScraper))
+        except ImportError:
+            logger.debug("LinemateScraper não disponível")
+        
+        try:
+            from data.scrapers.bettingpros_scraper import BettingProsScraper
+            scrapers.append(("BettingPros", BettingProsScraper))
+        except ImportError:
+            logger.debug("BettingProsScraper não disponível")
+        
+        try:
+            from data.scrapers.covers_scraper import CoversScraper
+            scrapers.append(("Covers", CoversScraper))
+        except ImportError:
+            logger.debug("CoversScraper não disponível")
+        
+        if not scrapers:
+            logger.error("🚨 Nenhum scraper de player props disponível")
             return []
+        
+        logger.info(f"🎯 Buscando player props para {date}...")
+        
+        for scraper_name, scraper_class in scrapers:
+            try:
+                logger.info(f"🔄 Tentando {scraper_name}...")
+                scraper = scraper_class(headless=True)
+                
+                # Suporta tanto fetch_props quanto get_props
+                if hasattr(scraper, 'fetch_props'):
+                    props = await scraper.fetch_props(date)
+                elif hasattr(scraper, 'get_props'):
+                    props = await scraper.get_props(date)
+                else:
+                    logger.warning(f"⚠️ {scraper_name}: Método de fetch não encontrado")
+                    continue
+                
+                if props and len(props) > 0:
+                    logger.info(f"✅ {scraper_name}: {len(props)} props encontrados")
+                    logger.debug(f"Props por tipo: {self._count_props_by_type(props)}")
+                    
+                    # Log no arquivo de integridade
+                    try:
+                        from data.utils.integrity_logger import log_scraper_success
+                        log_scraper_success(scraper_name, len(props))
+                    except ImportError:
+                        pass
+                    
+                    return props
+                else:
+                    logger.warning(f"⚠️ {scraper_name}: Retornou lista vazia")
+                    
+            except Exception as e:
+                logger.warning(f"❌ {scraper_name} falhou: {e}")
+                
+                # Log de falha
+                try:
+                    from data.utils.integrity_logger import log_scraper_failure
+                    log_scraper_failure(scraper_name, type(e).__name__, str(e))
+                except ImportError:
+                    pass
+                
+                continue
+        
+        logger.error("🚨 Todos os scrapers de player props falharam")
+        return []
     
     def _count_props_by_type(self, props: List) -> dict:
         """Helper para contar props por tipo para logging."""

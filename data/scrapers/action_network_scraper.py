@@ -172,18 +172,30 @@ class ActionNetworkScraper:
                         
                         line_groups[value][side] = odds
                     
-                    # Create props for each line (prefer pairs, but accept singles)
+                    # Create props for each line (accept single-sided props too)
                     for line_value, sides in line_groups.items():
                         over_odds = sides.get("over")
                         under_odds = sides.get("under")
                         
-                        # Skip if no odds at all
+                        # Accept props with at least one side
+                        # If only one side available, use same odds for both
                         if over_odds is None and under_odds is None:
+                            logger.debug(f"⚠️ Skipping {canonical_name} {prop_type} L{line_value}: no odds")
                             continue
                         
-                        # Convert to decimal
-                        over_decimal = self._american_to_decimal(over_odds) if over_odds else 1.90
-                        under_decimal = self._american_to_decimal(under_odds) if under_odds else 1.90
+                        if over_odds is None:
+                            over_odds = under_odds
+                        if under_odds is None:
+                            under_odds = over_odds
+                        
+                        # Convert American odds to decimal
+                        over_decimal = self._american_to_decimal(over_odds)
+                        under_decimal = self._american_to_decimal(under_odds)
+                        
+                        # Validate odds range [1.01, 50.0]
+                        if not (1.01 <= over_decimal <= 50.0) or not (1.01 <= under_decimal <= 50.0):
+                            logger.debug(f"⚠️ Skipping {canonical_name} {prop_type}: odds out of range")
+                            continue
 
                         prop = PlayerProp(
                             player_name=canonical_name,

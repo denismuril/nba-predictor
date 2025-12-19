@@ -273,22 +273,17 @@ class TestGetOddsForGame:
         assert odds['away_odds'] == 2.05
         assert odds['source'] == 'theoddsapi'
     
-    def test_get_odds_default_when_not_in_cache(self):
-        """Testa que retorna default quando não está no cache."""
+    def test_get_odds_raises_when_not_in_cache(self):
+        """Testa que lança exceção quando não está no cache (não usa default 1.90)."""
         cache = {}
         
-        odds = get_odds_for_game('Lakers', 'Warriors', odds_cache=cache)
-        
-        assert odds['home_odds'] == 1.90
-        assert odds['away_odds'] == 1.90
-        assert odds['source'] == 'default'
+        with pytest.raises(OddsUnavailableError):
+            get_odds_for_game('Lakers', 'Warriors', odds_cache=cache)
     
-    def test_get_odds_no_cache(self):
-        """Testa que retorna default sem cache."""
-        odds = get_odds_for_game('Lakers', 'Warriors')
-        
-        assert odds['home_odds'] == 1.90
-        assert odds['away_odds'] == 1.90
+    def test_get_odds_raises_without_cache(self):
+        """Testa que lança exceção sem cache (não usa default 1.90)."""
+        with pytest.raises(OddsUnavailableError):
+            get_odds_for_game('Lakers', 'Warriors')
 
 
 # Integration test (requer API key real - skip por padrão)

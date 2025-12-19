@@ -1,0 +1,14 @@
+[Unit]
+Description=NBA Predictor Pipeline
+After=network.target
+
+[Service]
+Type=oneshot
+User=denis
+WorkingDirectory=/home/denis/nba-predictor
+ExecStart=/bin/bash /home/denis/nba-predictor/run_pipeline.sh
+StandardOutput=append:/home/denis/nba-predictor/logs/pipeline.log
+StandardError=append:/home/denis/nba-predictor/logs/pipeline_error.log
+
+[Install]
+WantedBy=multi-user.target

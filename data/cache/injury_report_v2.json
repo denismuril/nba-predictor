@@ -5,7 +5,7 @@
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-18T10:30:33.654174"
+    "updated_at": "2025-12-18T21:49:22.672562"
   },
   {
     "player_name": "Tyler Herro",
@@ -13,7 +13,7 @@
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-18T10:30:33.654222"
+    "updated_at": "2025-12-18T21:49:22.672583"
   },
   {
     "player_name": "Tyson Etienne",
@@ -21,15 +21,15 @@
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-18T10:30:33.654236"
+    "updated_at": "2025-12-18T21:49:22.672588"
   },
   {
     "player_name": "Tari Eason",
     "team": "HOU",
-    "status": "QUESTIONABLE",
+    "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-18T10:30:33.654245"
+    "updated_at": "2025-12-18T21:49:22.672593"
   },
   {
     "player_name": "Trey Alexander",
@@ -37,7 +37,7 @@
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-18T10:30:33.654254"
+    "updated_at": "2025-12-18T21:49:22.672597"
   },
   {
     "player_name": "Bradley Beal",
@@ -45,7 +45,7 @@
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-18T10:30:33.654262"
+    "updated_at": "2025-12-18T21:49:22.672601"
   },
   {
     "player_name": "Isaiah Hartenstein",
@@ -53,7 +53,7 @@
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-18T10:30:33.654270"
+    "updated_at": "2025-12-18T21:49:22.672605"
   },
   {
     "player_name": "Alex Antetokounmpo",
@@ -61,15 +61,15 @@
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-18T10:30:33.654277"
+    "updated_at": "2025-12-18T21:49:22.672608"
   },
   {
     "player_name": "Malaki Branham",
     "team": "WAS",
-    "status": "QUESTIONABLE",
+    "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-18T10:30:33.654285"
+    "updated_at": "2025-12-18T21:49:22.672612"
   },
   {
     "player_name": "Harrison Ingram",
@@ -77,7 +77,7 @@
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-18T10:30:33.654293"
+    "updated_at": "2025-12-18T21:49:22.672615"
   },
   {
     "player_name": "Isaac Jones",
@@ -85,31 +85,31 @@
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-18T10:30:33.654300"
+    "updated_at": "2025-12-18T21:49:22.672619"
   },
   {
     "player_name": "Anthony Davis",
     "team": "DAL",
-    "status": "QUESTIONABLE",
+    "status": "AVAILABLE",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-18T10:30:33.654308"
+    "updated_at": "2025-12-18T21:49:22.672623"
   },
   {
-    "player_name": "Al Horford",
+    "player_name": "Seth Curry",
     "team": "GSW",
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-18T10:30:33.654315"
+    "updated_at": "2025-12-18T21:49:22.672627"
   },
   {
     "player_name": "Grayson Allen",
     "team": "PHX",
-    "status": "QUESTIONABLE",
+    "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-18T10:30:33.654323"
+    "updated_at": "2025-12-18T21:49:22.672630"
   },
   {
     "player_name": "Deandre Ayton",
@@ -117,7 +117,7 @@
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-18T10:30:33.654331"
+    "updated_at": "2025-12-18T21:49:22.672633"
   },
   {
     "player_name": "Elijah Harkless",
@@ -125,7 +125,7 @@
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-18T10:30:33.654338"
+    "updated_at": "2025-12-18T21:49:22.672637"
   },
   {
     "player_name": "Jamal Cain",
@@ -133,7 +133,7 @@
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-18T10:30:33.654345"
+    "updated_at": "2025-12-18T21:49:22.672640"
   },
   {
     "player_name": "Tamar Bates",
@@ -141,7 +141,7 @@
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-18T10:30:33.654352"
+    "updated_at": "2025-12-18T21:49:22.672643"
   },
   {
     "player_name": "Devin Carter",
@@ -149,7 +149,7 @@
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-18T10:30:33.654358"
+    "updated_at": "2025-12-18T21:49:22.672646"
   },
   {
     "player_name": "Javonte Cooke",
@@ -157,6 +157,38 @@
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-18T10:30:33.654365"
+    "updated_at": "2025-12-18T21:49:22.672650"
+  },
+  {
+    "player_name": "Johni Broome",
+    "team": "PHI",
+    "status": "DOUBTFUL",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-18T21:49:22.672653"
+  },
+  {
+    "player_name": "Zach Collins",
+    "team": "CHI",
+    "status": "PROBABLE",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-18T21:49:22.672655"
+  },
+  {
+    "player_name": "Chris Livingston",
+    "team": "CLE",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-18T21:49:22.672659"
+  },
+  {
+    "player_name": "Joan Beringer",
+    "team": "MIN",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-18T21:49:22.672662"
   }
 ]

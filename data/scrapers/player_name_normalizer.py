@@ -58,6 +58,8 @@ def _similarity_score(name1: str, name2: str) -> float:
     """
     Calculate similarity score between two names.
     
+    Handles abbreviated names like "D. Daniels" vs "Dyson Daniels".
+    
     Args:
         name1: First name
         name2: Second name
@@ -72,6 +74,38 @@ def _similarity_score(name1: str, name2: str) -> float:
     # Exact match
     if n1 == n2:
         return 1.0
+    
+    # Check for abbreviated first name pattern (e.g., "D. Daniels" vs "Dyson Daniels")
+    # Pattern: "X. Lastname" where X is first initial
+    import re
+    abbrev_pattern = r'^([a-z])\.?\s+(.+)$'
+    
+    match1 = re.match(abbrev_pattern, n1)
+    match2 = re.match(abbrev_pattern, n2)
+    
+    # If one is abbreviated, check if initial matches and last name matches
+    if match1 and not match2:
+        initial1, lastname1 = match1.groups()
+        # n2 is the full name - check if first letter matches and lastname is similar
+        parts2 = n2.split()
+        if len(parts2) >= 2:
+            first2 = parts2[0]
+            lastname2 = ' '.join(parts2[1:])
+            if first2.startswith(initial1):
+                lastname_score = SequenceMatcher(None, lastname1, lastname2).ratio()
+                if lastname_score > 0.85:
+                    return 0.90  # High confidence match for abbreviated names
+    
+    elif match2 and not match1:
+        initial2, lastname2 = match2.groups()
+        parts1 = n1.split()
+        if len(parts1) >= 2:
+            first1 = parts1[0]
+            lastname1 = ' '.join(parts1[1:])
+            if first1.startswith(initial2):
+                lastname_score = SequenceMatcher(None, lastname1, lastname2).ratio()
+                if lastname_score > 0.85:
+                    return 0.90
     
     # Use SequenceMatcher for fuzzy matching
     return SequenceMatcher(None, n1, n2).ratio()
@@ -96,6 +130,23 @@ def normalize_player_name(raw_name: str, min_similarity: float = 0.80) -> Option
         >>> normalize_player_name("L. James")
         'LeBron James'
     """
+    # Reject empty or None
+    if not raw_name or not isinstance(raw_name, str):
+        return None
+    
+    raw_name = raw_name.strip()
+    
+    # Reject names too short (likely team abbreviations like HOU, LAL, ATL)
+    # Real player names have at least 4 characters (e.g., "Naz Reid")
+    if len(raw_name) < 4:
+        logger.debug(f"Skipping short name (likely team abbrev): '{raw_name}'")
+        return None
+    
+    # Reject if looks like a team abbreviation (all caps, 2-3 chars)
+    if raw_name.isupper() and len(raw_name) <= 3:
+        logger.debug(f"Skipping team abbreviation: '{raw_name}'")
+        return None
+    
     # Check cache first
     if raw_name in _NAME_TO_CANONICAL:
         return _NAME_TO_CANONICAL[raw_name]
