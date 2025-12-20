@@ -36,6 +36,18 @@ load_dotenv()  # Load .env file
 
 from interfaces.cli import run_prediction_pipeline
 
+# API Configuration (v27.0 SOTA)
+API_BASE_URL = os.getenv('NBA_API_URL', 'http://localhost:8000')
+API_ENABLED = os.getenv('NBA_API_ENABLED', 'false').lower() == 'true'
+
+# HTTP Client (opcional - fallback se não disponível)
+try:
+    import httpx
+    HTTPX_AVAILABLE = True
+except ImportError:
+    HTTPX_AVAILABLE = False
+    logging.warning("⚠️ httpx não instalado. API mode desabilitado.")
+
 # SECURITY: Token DEVE vir de variável de ambiente (nunca hardcoded)
 TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 if not TOKEN:

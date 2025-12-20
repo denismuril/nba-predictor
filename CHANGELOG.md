@@ -1,4 +1,77 @@
 
+## v28.0 - Hybrid SOTA Refactoring (20 Dez 2025)
+
+### 🚀 Refatoração Híbrida SOTA
+
+Modernização completa da camada de estatísticas históricas usando `nba_api` e nova API FastAPI, preservando scrapers de Odds/Props existentes.
+
+### ✅ Novos Componentes
+
+| Componente | Descrição |
+|------------|-----------|
+| **NBAStatsClient** | Cliente moderno para `nba_api` com cache SQLite e rate limiting |
+| **Features Module** | Feature engineering com decorador `@anti_leakage` e janelas deslizantes |
+| **FastAPI Backend** | API REST com endpoints `/update-data`, `/predict-today`, `/health` |
+| **Anti-Leakage Tests** | 16 testes rigorosos que falham se usar dados do futuro |
+
+### 📂 Novos Arquivos Criados
+
+```
+data/ingestion/
+├── __init__.py
+└── stats_client.py      # Cliente nba_api com cache SQLite
+
+ml_pipeline/
+└── features.py          # Features anti-leakage (rolling, EMA, season avg)
+
+api/
+├── __init__.py
+└── main.py              # FastAPI com endpoints REST
+
+tests/
+└── test_data_leakage.py # 16 testes anti-leakage
+```
+
+### 🔧 Arquivos Modificados
+
+- `telegram_bot/nba_tigrinho_bot.py` - Adicionado cliente httpx e config de API
+
+### 🛡️ Arquivos Preservados (Intocados)
+
+- `data/scrapers/linemate_scraper.py` ✅
+- `data/scrapers/bettingpros_scraper.py` ✅
+- `data/scrapers/stealth_browser.py` ✅
+
+### 🎯 NBAStatsClient - Métodos Principais
+
+| Método | Descrição |
+|--------|-----------|
+| `get_box_scores(game_id)` | Box scores detalhados |
+| `get_standings(season)` | Tabelas de classificação |
+| `get_team_game_log(team_id)` | Histórico de jogos por time |
+| `get_player_game_log(player_id)` | Stats de jogadores |
+
+### 🧪 Testes de Anti-Leakage
+
+- 16/16 testes passaram ✅
+- Rolling features com shift(1) validado
+- Integridade temporal com TimeSeriesSplit verificada
+- Isolamento multi-team confirmado
+
+### 🔧 Uso da API
+
+```bash
+# Iniciar API
+uvicorn api.main:app --host 0.0.0.0 --port 8000
+
+# Endpoints
+curl http://localhost:8000/health
+curl http://localhost:8000/predict-today
+curl -X POST http://localhost:8000/update-data
+```
+
+---
+
 ## v27.6 - Pipeline Stability & Odds Fallback (20 Dez 2025)
 
 ### 🔧 Correções de Estabilidade

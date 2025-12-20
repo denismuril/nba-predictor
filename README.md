@@ -1,4 +1,4 @@
-# 🏀 NBA Predictor v27.6 - Pipeline Stability
+# 🏀 NBA Predictor v28.0 - Hybrid SOTA Refactoring
 
 [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-orange.svg)](LICENSE)
@@ -8,18 +8,41 @@
 [![Bot](https://img.shields.io/badge/Telegram-Sniper%20Bot-blue.svg)]()
 [![Props](https://img.shields.io/badge/Props-SNIPER-red.svg)]()
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)]()
+[![API](https://img.shields.io/badge/API-FastAPI-green.svg)]()
 
-Sistema profissional de análise quantitativa e previsão de jogos da NBA usando **Ensemble ML V6**, **SNIPER Delivery Pipeline**, **Multi-Source Odds**, **Systemd Automation** e **SafeKelly Bankroll Management**.
+Sistema profissional de análise quantitativa e previsão de jogos da NBA usando **Ensemble ML V6**, **SNIPER Delivery Pipeline**, **Multi-Source Odds**, **FastAPI Backend**, **Systemd Automation** e **SafeKelly Bankroll Management**.
+
+---
+
+## 🎉 Destaques v28.0 (20 Dez 2025) - **Hybrid SOTA Refactoring**
+
+### 🚀 Modernização Completa
+
+Nova camada de ingestão de dados usando `nba_api` e API FastAPI robusta, preservando scrapers de Odds/Props.
+
+### ✅ Novos Recursos
+
+| Componente | Descrição |
+|------------|-----------|
+| **NBAStatsClient** | Cliente `nba_api` com cache SQLite |
+| **Features Module** | Decorador `@anti_leakage` |
+| **FastAPI Backend** | Endpoints REST para previsões |
+| **16 Testes Anti-Leakage** | Validação rigorosa |
+
+### 🔧 Uso
+
+```bash
+# Iniciar API
+uvicorn api.main:app --host 0.0.0.0 --port 8000
+
+# Testar
+curl http://localhost:8000/health
+curl http://localhost:8000/predict-today
+```
 
 ---
 
 ## 🎉 Destaques v27.5 (20 Dez 2025) - **SNIPER Delivery & Automation**
-
-### 🚀 Pipeline de Produção Completo
-
-Nova camada de entrega que conecta todos os componentes do sistema em um **pipeline automatizado end-to-end**.
-
-### ✅ Novos Recursos
 
 | Componente | Descrição |
 |------------|-----------|
@@ -684,11 +707,11 @@ Este software é para fins educacionais e de pesquisa. O autor não se responsab
 
 ## 📞 Suporte
 
-**Versão:** v27.6 (Pipeline Stability)
+**Versão:** v28.0 (Hybrid SOTA Refactoring)
 **Status:** ✅ Production Ready
 **Temporada:** 2025-26
 **Última Atualização:** 20 Dezembro 2025
-**Novidades:** Correção de features pace_trend para Totals V18, feedparser instalado, fallback para scrapers locais de odds.
+**Novidades:** API FastAPI, NBAStatsClient com cache SQLite, Features anti-leakage, 16 testes passando.
 
 **Documentação Adicional:**
 
