@@ -206,7 +206,11 @@ def step_analyze_props(processed_df: 'pd.DataFrame') -> 'pd.DataFrame':
             logger.warning("⚠️ Nenhuma oportunidade EV+ encontrada")
             return analyzed_df
         
-        sniper_count = len(analyzed_df[analyzed_df.get('is_sniper', False)])
+        sniper_count = 0
+        if 'is_sniper' in analyzed_df.columns:
+            sniper_count = analyzed_df['is_sniper'].sum()
+        elif 'ev' in analyzed_df.columns:
+            sniper_count = len(analyzed_df[analyzed_df['ev'] > config.SNIPER_EV_THRESHOLD])
         logger.info(f"✅ {len(analyzed_df)} oportunidades EV+ encontradas")
         logger.info(f"🎯 {sniper_count} Sniper Bets (EV > 10%)")
         

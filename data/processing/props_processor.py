@@ -584,9 +584,9 @@ class PropsProcessor:
             "player_name": prop.player_name,
             "prop_type": prop.prop_type,
             "line": prop.line,
-            "source": prop.source,
-            "timestamp": prop.timestamp.isoformat() if prop.timestamp else None,
-            "game_info": prop.game_info,
+            "source": getattr(prop, 'source', 'unknown'),
+            "timestamp": prop.timestamp.isoformat() if getattr(prop, 'timestamp', None) else None,
+            "game_info": game_info,  # Usar variável obtida via getattr
             
             # Features básicas
             "season_avg": season_avg,
