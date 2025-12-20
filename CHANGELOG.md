@@ -1,4 +1,37 @@
 
+## v27.6 - Pipeline Stability & Odds Fallback (20 Dez 2025)
+
+### 🔧 Correções de Estabilidade
+
+Correções críticas no pipeline de predição e sistema de odds.
+
+### ✅ Correções
+
+| Correção | Descrição |
+|----------|-----------|
+| **Pace Trend Features** | Adicionado `add_pace_volatility_features()` no `predict.py` para gerar features `home_pace_trend_10`, `away_pace_trend_10`, etc. requeridas pelo modelo Totals V18 |
+| **feedparser** | Instalado pacote para habilitar filtro de notícias RSS no `news_filter.py` |
+| **Odds Fallback** | `odds_shopping.py` agora usa `MultiSourceOddsScraper` como fallback quando API the-odds-api retorna 401/403 |
+
+### 📂 Arquivos Modificados
+
+- `ml_pipeline/predict.py` - Adicionada chamada para `add_pace_volatility_features()` (linhas 277-284)
+- `market/odds_shopping.py` - Nova função `_fetch_odds_from_local_scrapers()` e fallback para scrapers locais
+
+### 🧪 Validação
+
+Todos os módulos críticos testados e funcionando:
+
+- orchestrator ✅
+- train_ensemble_v6 ✅
+- optimize_hyperparameters_v6 ✅
+- train_all_models ✅
+- health_check ✅
+- telegram bot ✅
+- pytest ✅
+
+---
+
 ## v27.5 - SNIPER Delivery & Automation (20 Dez 2025)
 
 ### 🚀 Camada de Entrega e Automação Completa

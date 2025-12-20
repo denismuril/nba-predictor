@@ -217,14 +217,18 @@ API_TO_INTERNAL_MAP = {
 
 
 def fetch_multi_bookie_odds(sport='basketball_nba', regions='us,eu,uk'):
-    """Busca odds de h2h E spreads, normalizando nomes dos times."""
+    """Busca odds de h2h E spreads, normalizando nomes dos times.
+    
+    V27.3 FIX: Usa scrapers locais como fallback quando API retorna erro.
+    """
     if _odds_circuit_breaker.is_open():
         logger.warning("⚡ Circuit Breaker ABERTO: Pulando request de odds")
         return []
 
+    # V27.3 FIX: Tentar scrapers locais primeiro se API key ausente ou inválida
     if not ODDS_API_KEY or ODDS_API_KEY == "SUA_CHAVE_AQUI":
-        from exceptions.odds_exceptions import OddsAPIKeyMissingError
-        raise OddsAPIKeyMissingError("TheOddsAPI")
+        logger.info("🔄 API key ausente, usando scrapers locais...")
+        return _fetch_odds_from_local_scrapers()
 
     try:
         logger.info(f"🛒 Buscando odds em tempo real para {sport}...")
@@ -237,13 +241,19 @@ def fetch_multi_bookie_odds(sport='basketball_nba', regions='us,eu,uk'):
         }
 
         response = requests.get(url, params=params, timeout=10)
+        
+        # V27.3 FIX: Se erro 401/403, usar scrapers locais como fallback
+        if response.status_code in [401, 403]:
+            logger.warning(f"⚠️ API retornou {response.status_code}, usando scrapers locais...")
+            return _fetch_odds_from_local_scrapers()
+        
         response.raise_for_status()
         data = response.json()
 
         if not isinstance(data, list):
             logger.error(f"❌ API retornou formato inesperado: {type(data)}")
             _odds_circuit_breaker.record_failure()
-            return []
+            return _fetch_odds_from_local_scrapers()
 
         normalized_data = []
         for game in data:
@@ -262,17 +272,74 @@ def fetch_multi_bookie_odds(sport='basketball_nba', regions='us,eu,uk'):
         return normalized_data
 
     except requests.exceptions.Timeout:
-        logger.warning("⚠️ Timeout ao buscar odds")
+        logger.warning("⚠️ Timeout ao buscar odds, usando scrapers locais...")
         _odds_circuit_breaker.record_failure()
-        return []
+        return _fetch_odds_from_local_scrapers()
     except requests.exceptions.RequestException as e:
         logger.error(f"❌ Erro de rede: {e}")
         _odds_circuit_breaker.record_failure()
-        return []
+        return _fetch_odds_from_local_scrapers()
     except Exception as e:
         logger.error(f"❌ Erro inesperado: {e}")
         _odds_circuit_breaker.record_failure()
+        return _fetch_odds_from_local_scrapers()
+
+
+def _fetch_odds_from_local_scrapers():
+    """
+    V27.3 FIX: Busca odds de scrapers locais (OddsAgora, OddsScanner, etc).
+    
+    Converte formato dos scrapers para formato esperado pelo sistema.
+    """
+    try:
+        from data.scrapers.multi_odds_scraper import MultiSourceOddsScraper
+        
+        scraper = MultiSourceOddsScraper(headless=True)
+        raw_odds = scraper.fetch_odds()
+        
+        if not raw_odds:
+            logger.warning("⚠️ Scrapers locais não retornaram odds")
+            return []
+        
+        # Converter formato dos scrapers para formato esperado
+        normalized_data = []
+        for game_key, data in raw_odds.items():
+            home_name = data.get('home_team', '')
+            away_name = data.get('away_team', '')
+            home_odds = data.get('home_odds')
+            away_odds = data.get('away_odds')
+            
+            if not home_name or not away_name or not home_odds or not away_odds:
+                continue
+            
+            game = {
+                'home_team': home_name,
+                'away_team': away_name,
+                'home_team_id': API_TO_INTERNAL_MAP.get(home_name, home_name),
+                'away_team_id': API_TO_INTERNAL_MAP.get(away_name, away_name),
+                'bookmakers': [{
+                    'title': data.get('source', 'LocalScraper'),
+                    'markets': [{
+                        'key': 'h2h',
+                        'outcomes': [
+                            {'name': home_name, 'price': home_odds},
+                            {'name': away_name, 'price': away_odds}
+                        ]
+                    }]
+                }]
+            }
+            normalized_data.append(game)
+        
+        logger.info(f"✅ Scrapers locais: {len(normalized_data)} jogos obtidos")
+        return normalized_data
+        
+    except ImportError as e:
+        logger.error(f"❌ Falha ao importar scrapers locais: {e}")
         return []
+    except Exception as e:
+        logger.error(f"❌ Erro nos scrapers locais: {e}")
+        return []
+
 
 
 def _calculate_ev(prob_model: float, decimal_odds: float) -> float:

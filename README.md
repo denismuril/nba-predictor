@@ -1,4 +1,4 @@
-# 🏀 NBA Predictor v27.5 - SNIPER Delivery
+# 🏀 NBA Predictor v27.6 - Pipeline Stability
 
 [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-orange.svg)](LICENSE)
@@ -684,11 +684,11 @@ Este software é para fins educacionais e de pesquisa. O autor não se responsab
 
 ## 📞 Suporte
 
-**Versão:** v27.4 (Props Intelligence)
+**Versão:** v27.6 (Pipeline Stability)
 **Status:** ✅ Production Ready
 **Temporada:** 2025-26
 **Última Atualização:** 20 Dezembro 2025
-**Novidades:** Sistema Props Intelligence com Sniper Engine e integração de ProxyManager.
+**Novidades:** Correção de features pace_trend para Totals V18, feedparser instalado, fallback para scrapers locais de odds.
 
 **Documentação Adicional:**
 

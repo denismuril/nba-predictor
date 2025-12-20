@@ -274,6 +274,15 @@ def predict_next_games(date=None):
         from ml_pipeline.feature_engineering_v2 import add_rolling_four_factors
         df_full = add_rolling_four_factors(df_full, windows=[5, 10, 30])
 
+        # V18 FIX: Add Pace Volatility Features (required for Totals model)
+        # Features: home_pace_trend_10, away_pace_trend_10, home_pace_trend_5, away_pace_trend_5
+        try:
+            from ml_pipeline.pace_volatility import add_pace_volatility_features
+            df_full = add_pace_volatility_features(df_full, windows=[5, 10])
+            logger.info("   ✅ Pace Volatility features added (pace_trend_5, pace_trend_10)")
+        except Exception as e:
+            logger.warning(f"   ⚠️ Pace Volatility failed: {e}")
+
         # Features opcionais
         try:
             from ml_pipeline.feature_engineering_v2 import (
@@ -283,6 +292,7 @@ def predict_next_games(date=None):
             logger.info("   ✅ Context-aware rolling features added")
         except Exception as e:
             logger.warning(f"   ⚠️ Context-aware rolling failed: {e}")
+
 
         try:
             from ml_pipeline.feature_engineering_v2 import add_referee_features
