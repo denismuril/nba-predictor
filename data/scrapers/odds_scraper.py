@@ -122,6 +122,8 @@ class OddsValidator:
     @staticmethod
     def normalize_and_validate(odds_dict: Dict) -> Dict:
         validated = {}
+        today_str = datetime.now().strftime('%Y-%m-%d')
+        
         for game_key, odds_data in odds_dict.items():
             try:
                 home_odds = float(odds_data.get('home_odds', 0))
@@ -132,14 +134,28 @@ class OddsValidator:
                 
                 fair_home, fair_away, vig_pct = OddsValidator.remove_vigorish(home_odds, away_odds)
                 
+                # Gerar game_id a partir dos dados ou do game_key
+                home_team = odds_data.get('home_team', '')
+                away_team = odds_data.get('away_team', '')
+                
+                # Usar game_id existente OU gerar a partir de data + times
+                game_id = odds_data.get('game_id')
+                if not game_id:
+                    if home_team and away_team:
+                        game_id = f"{today_str}_{home_team}_{away_team}"
+                    else:
+                        # Fallback: extrair do game_key (formato "Team vs Team")
+                        game_id = f"{today_str}_{game_key.replace(' vs ', '_').replace(' ', '')}"
+                
                 validated[game_key] = {
+                    'game_id': game_id,
                     'home_odds': home_odds,
                     'away_odds': away_odds,
                     'fair_home_odds': fair_home,
                     'fair_away_odds': fair_away,
                     'vigorish_pct': vig_pct,
-                    'home_team': odds_data.get('home_team', ''),
-                    'away_team': odds_data.get('away_team', ''),
+                    'home_team': home_team,
+                    'away_team': away_team,
                     'source': odds_data.get('source', 'unknown'),
                     'timestamp': odds_data.get('timestamp', datetime.now().isoformat())
                 }

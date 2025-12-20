@@ -534,14 +534,16 @@ class PropsProcessor:
         # 4. Extrair oponente do game_info (se disponível)
         h2h_avg = None
         def_vs_pos = None
-        
-        if prop.game_info:
+
+        # Acesso defensivo a game_info (pode não existir em todos os scrapers)
+        game_info = getattr(prop, 'game_info', None)
+        if game_info:
             # Tentar extrair oponente do formato "LAL vs BOS"
-            parts = prop.game_info.replace("@", "vs").split("vs")
+            parts = game_info.replace("@", "vs").split("vs")
             if len(parts) == 2:
                 opponent = parts[1].strip()[:3].upper()  # Abreviação do time
                 h2h_avg = self._calculate_h2h_avg(prop.player_name, opponent, stat_col)
-                
+
                 # DEF_VS_POS - por enquanto None (dados reais pendentes)
                 position = player_stats.get("Position", None) if player_stats is not None else None
                 if position:

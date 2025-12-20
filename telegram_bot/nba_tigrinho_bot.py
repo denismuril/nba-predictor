@@ -149,6 +149,234 @@ logger = logging.getLogger(__name__)
 # SECURITY FIX: Admin já validado no início do arquivo (fail-fast)
 
 
+# =============================================================================
+# PLAYER PROPS ALERTS - Sistema de Alertas de Props EV+
+# =============================================================================
+
+async def send_prop_alert(
+    bot,
+    prop_data: dict,
+    chat_id: int = None,
+    is_sniper: bool = False
+) -> bool:
+    """
+    Envia alerta individual de Player Prop.
+    
+    Args:
+        bot: Instância do Bot do Telegram
+        prop_data: Dict com dados do prop:
+            - player_name: Nome do jogador
+            - team: Abreviação do time
+            - prop_type: Tipo (points, rebounds, assists)
+            - line: Linha da aposta
+            - direction: 'over' ou 'under'
+            - odds: Odds decimais
+            - model_projection: Projeção do modelo
+            - ev: Expected Value (decimal, ex: 0.125 = 12.5%)
+            - stake_pct: Stake sugerida em %
+            - stake_amount: Valor em R$ (opcional)
+        chat_id: ID do chat (usa ADMIN_CHAT_ID se não informado)
+        is_sniper: Se True, formata como Sniper Bet
+        
+    Returns:
+        True se enviado com sucesso
+        
+    Exemplo:
+        >>> await send_prop_alert(bot, {
+        ...     'player_name': 'LeBron James',
+        ...     'team': 'LAL',
+        ...     'prop_type': 'points',
+        ...     'line': 24.5,
+        ...     'direction': 'over',
+        ...     'odds': 1.95,
+        ...     'model_projection': 28.2,
+        ...     'ev': 0.125,
+        ...     'stake_pct': 1.5
+        ... })
+    """
+    if chat_id is None:
+        chat_id = ADMIN_CHAT_ID
+    
+    try:
+        # Extrair dados com fallbacks
+        player = prop_data.get('player_name', 'Unknown')
+        team = prop_data.get('team', prop_data.get('team_abbr', '???'))
+        prop_type = prop_data.get('prop_type', 'stat').upper()
+        line = prop_data.get('line', 0)
+        direction = prop_data.get('direction', 'over').upper()
+        odds = prop_data.get('odds', prop_data.get('odds_over', 1.90))
+        projection = prop_data.get('model_projection', prop_data.get('season_avg', line))
+        ev = prop_data.get('ev', prop_data.get('expected_value', 0))
+        stake_pct = prop_data.get('stake_pct', 0)
+        stake_amount = prop_data.get('stake_amount', 0)
+        
+        # Converter EV para percentual se necessário
+        ev_pct = ev * 100 if ev < 1 else ev
+        
+        # Determinar se é Sniper (EV > 10%)
+        is_sniper_bet = is_sniper or ev_pct > 10
+        
+        # Emojis de direção
+        direction_emoji = "📈" if direction == "OVER" else "📉"
+        
+        # Header baseado no tipo
+        if is_sniper_bet:
+            header = "🎯 *SNIPER ALERT* 🎯"
+        else:
+            header = "💡 *PROP ALERT*"
+        
+        # Formatar mensagem
+        msg = f"""{header}
+
+🏀 *{player}* ({team})
+{direction_emoji} *{direction} {line} {prop_type}* @ {odds:.2f}
+
+🤖 Modelo: {projection:.1f} | ✅ EV: +{ev_pct:.1f}%
+💰 Stake Sugerida: {stake_pct:.1f}% (Kelly)"""
+        
+        # Adicionar valor em R$ se disponível
+        if stake_amount > 0:
+            msg += f"\n💵 Valor: R$ {stake_amount:.2f}"
+        
+        # Adicionar razão se disponível
+        reason = prop_data.get('sniper_reason', prop_data.get('recommendation', ''))
+        if reason:
+            msg += f"\n\n📋 _{reason}_"
+        
+        # Enviar mensagem
+        await bot.send_message(
+            chat_id=chat_id,
+            text=msg,
+            parse_mode='Markdown'
+        )
+        
+        logger.info(f"🎯 Prop alert enviado: {player} {direction} {line} {prop_type}")
+        return True
+        
+    except Exception as e:
+        logger.error(f"❌ Erro ao enviar prop alert: {e}")
+        return False
+
+
+async def send_prop_alerts_batch(
+    bot,
+    props_df,
+    chat_id: int = None,
+    top_n: int = 5,
+    min_ev: float = 0.05
+) -> int:
+    """
+    Envia batch de alertas das melhores oportunidades de props.
+    
+    Itera sobre um DataFrame de props filtradas, ordena por EV
+    e envia apenas as top N melhores.
+    
+    Args:
+        bot: Instância do Bot do Telegram
+        props_df: DataFrame com props analisados (colunas: player_name, ev, etc)
+        chat_id: ID do chat (usa ADMIN_CHAT_ID se não informado)
+        top_n: Número máximo de alertas a enviar
+        min_ev: EV mínimo para incluir (decimal, ex: 0.05 = 5%)
+        
+    Returns:
+        Número de alertas enviados
+        
+    Exemplo:
+        >>> from ml_pipeline.player_props_engine import analyze_props
+        >>> analyzed_df = analyze_props(processed_df)
+        >>> alerts_sent = await send_prop_alerts_batch(bot, analyzed_df)
+    """
+    if chat_id is None:
+        chat_id = ADMIN_CHAT_ID
+    
+    if props_df is None or (hasattr(props_df, 'empty') and props_df.empty):
+        logger.info("ℹ️ Nenhuma prop para enviar em batch")
+        return 0
+    
+    try:
+        # Filtrar por EV mínimo
+        ev_col = 'ev' if 'ev' in props_df.columns else 'expected_value'
+        
+        if ev_col in props_df.columns:
+            filtered = props_df[props_df[ev_col] >= min_ev].copy()
+        else:
+            filtered = props_df.copy()
+        
+        if len(filtered) == 0:
+            logger.info("ℹ️ Nenhuma prop passou no filtro de EV mínimo")
+            return 0
+        
+        # Ordenar por EV (maior primeiro)
+        if ev_col in filtered.columns:
+            filtered = filtered.sort_values(ev_col, ascending=False)
+        
+        # Limitar ao top N
+        top_props = filtered.head(top_n)
+        
+        logger.info(f"📨 Enviando {len(top_props)} alertas de props...")
+        
+        # Enviar header
+        sniper_count = len(top_props[top_props[ev_col] > 0.10]) if ev_col in top_props.columns else 0
+        
+        header_msg = f"""🏀 *PLAYER PROPS ALERT*
+
+📊 Total: {len(filtered)} oportunidades EV+
+🎯 Sniper Bets: {sniper_count}
+
+Aqui estão as top {len(top_props)}:"""
+        
+        await bot.send_message(
+            chat_id=chat_id,
+            text=header_msg,
+            parse_mode='Markdown'
+        )
+        
+        await asyncio.sleep(0.5)
+        
+        # Enviar cada prop
+        alerts_sent = 0
+        
+        for idx, (_, row) in enumerate(top_props.iterrows(), 1):
+            # Converter row para dict
+            prop_data = row.to_dict()
+            
+            # Determinar se é sniper
+            ev = row.get(ev_col, 0)
+            is_sniper = ev > 0.10
+            
+            success = await send_prop_alert(
+                bot=bot,
+                prop_data=prop_data,
+                chat_id=chat_id,
+                is_sniper=is_sniper
+            )
+            
+            if success:
+                alerts_sent += 1
+            
+            # Delay para evitar rate limit
+            await asyncio.sleep(0.5)
+        
+        # Enviar footer com resumo
+        footer_msg = f"""
+✅ *{alerts_sent} alertas enviados*
+
+💡 _Use /props para mais detalhes_
+"""
+        await bot.send_message(
+            chat_id=chat_id,
+            text=footer_msg,
+            parse_mode='Markdown'
+        )
+        
+        logger.info(f"✅ Batch completo: {alerts_sent} props enviados")
+        return alerts_sent
+        
+    except Exception as e:
+        logger.error(f"❌ Erro no envio batch de props: {e}")
+        return 0
+
+
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """
     /start - Boas-vindas (SECURITY FIX: Auto-registro removido)

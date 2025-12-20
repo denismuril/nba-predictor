@@ -90,6 +90,9 @@ COPY --chown=nba:nba . .
 RUN mkdir -p /app/data/cache /app/logs /app/models \
     && chown -R nba:nba /app
 
+# Copiar e configurar entrypoint
+COPY --chmod=755 entrypoint.sh /app/entrypoint.sh
+
 # Switch para usuário non-root
 USER nba
 
@@ -100,5 +103,10 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
 # Porta padrão Streamlit
 EXPOSE 8501
 
-# Comando padrão (pode ser sobrescrito no docker-compose)
-CMD ["streamlit", "run", "nba_predictor_web.py", "--server.address=0.0.0.0", "--server.port=8501"]
+# Entrypoint para configuração automática
+ENTRYPOINT ["/app/entrypoint.sh"]
+
+# Comando padrão (web interface)
+# Opções: "web" (Streamlit), "bot" (Telegram), "cron" (scheduler)
+CMD ["web"]
+

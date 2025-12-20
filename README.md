@@ -1,4 +1,4 @@
-# 🏀 NBA Predictor v27.4 - Props Intelligence
+# 🏀 NBA Predictor v27.5 - SNIPER Delivery
 
 [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-orange.svg)](LICENSE)
@@ -6,44 +6,53 @@
 [![Systemd](https://img.shields.io/badge/init-Systemd-green.svg)]()
 [![ML](https://img.shields.io/badge/ML-Ensemble%20V6-purple.svg)]()
 [![Bot](https://img.shields.io/badge/Telegram-Sniper%20Bot-blue.svg)]()
-[![Props](https://img.shields.io/badge/Props-Intelligence-orange.svg)]()
+[![Props](https://img.shields.io/badge/Props-SNIPER-red.svg)]()
+[![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)]()
 
-Sistema profissional de análise quantitativa e previsão de jogos da NBA usando **Ensemble ML V6**, **Props Intelligence (Sniper Engine)**, **Multi-Source Odds Scraping**, **Systemd Automation** e **SafeKelly Bankroll Management**.
+Sistema profissional de análise quantitativa e previsão de jogos da NBA usando **Ensemble ML V6**, **SNIPER Delivery Pipeline**, **Multi-Source Odds**, **Systemd Automation** e **SafeKelly Bankroll Management**.
 
 ---
 
-## 🎉 Destaques v27.4 (20 Dez 2025) - **Props Intelligence**
+## 🎉 Destaques v27.5 (20 Dez 2025) - **SNIPER Delivery & Automation**
 
-### 🎯 Sistema "Props Intelligence" Ativado
+### 🚀 Pipeline de Produção Completo
 
-Nova camada de inteligência para identificação de apostas EV+ em **Player Props** usando regras heurísticas "Sniper".
+Nova camada de entrega que conecta todos os componentes do sistema em um **pipeline automatizado end-to-end**.
 
 ### ✅ Novos Recursos
 
 | Componente | Descrição |
 |------------|-----------|
-| **Sniper Engine** | Regras: OVER (Avg > Line+10%) e UNDER (Avg < Line-10%) |
-| **PropsProcessor** | Features: `diff_to_avg`, `last_5_hit_rate`, `implied_prob` |
-| **ProxyManager** | Lê proxies de `config/proxies.txt` com rotação automática |
+| **run_production_cycle.py** | Orquestrador principal do pipeline |
+| **send_prop_alert()** | Alertas Telegram com EV e Kelly |
+| **send_prop_alerts_batch()** | Envio em lote (Top 5) |
+| **entrypoint.sh** | Docker com modos web/bot/cron |
 
 ### 🔧 Uso
 
 ```bash
-# Rodar análise de props com dados de teste
-python run_props_analysis.py
+# Rodar pipeline completo
+python run_production_cycle.py
+
+# Docker (modos: web, bot, cron)
+docker run -e TELEGRAM_BOT_TOKEN=xxx -e TELEGRAM_ADMIN_ID=xxx nba-predictor bot
 ```
 
-### 🧪 Exemplo de Saída
+### 🎯 Formato de Alertas
 
 ```text
-🔥 RECOMENDAÇÃO: Aposte no UNDER Trae Young points
-   Média: 24.2 | Linha: 32.5 (-25.5% de vantagem)
-   Odds: 1.95 | EV: 22.4%
+🎯 SNIPER ALERT 🎯
+
+🏀 LeBron James (LAL)
+📈 OVER 24.5 POINTS @ 1.95
+
+🤖 Modelo: 28.2 | ✅ EV: +12.5%
+💰 Stake Sugerida: 1.5% (Kelly)
 ```
 
 ---
 
-## 🎉 Destaques v27.3 (19 Dez 2025) - **Multi-Source Odds Scraper**
+## 🎉 Destaques v27.4 (20 Dez 2025) - **Props Intelligence**
 
 ### 🌐 Sistema Multi-Fonte de Odds
 

@@ -392,17 +392,11 @@ async def navigate_with_retry(
             # Sucesso! Se estavamos usando proxy, marcar sucesso
             if pm and proxy_url:
                 pm.mark_success(proxy_url)
-                
-            return True
-            
+                return True
+
         except Exception as e:
             logger.warning(f"Erro navegando para {url}: {e} (tentativa {attempt + 1})")
             await human_delay(2, 5)
-    
+
     return False
-            
-        except Exception as e:
-            logger.warning(f"Erro navegando para {url}: {e} (tentativa {attempt + 1})")
-            await human_delay(2, 5)
-    
-    return False
+

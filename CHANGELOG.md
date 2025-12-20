@@ -1,4 +1,70 @@
 
+## v27.5 - SNIPER Delivery & Automation (20 Dez 2025)
+
+### 🚀 Camada de Entrega e Automação Completa
+
+Implementação da camada final de "Delivery" do sistema NBA Predictor, conectando todos os componentes existentes em um pipeline de produção automatizado.
+
+### ✅ Novos Componentes
+
+| Componente | Descrição |
+|------------|-----------|
+| **run_production_cycle.py** | Orquestrador principal do pipeline de Player Props |
+| **send_prop_alert()** | Alertas individuais de props via Telegram |
+| **send_prop_alerts_batch()** | Envio em lote das melhores oportunidades |
+| **entrypoint.sh** | Script Docker com múltiplos modos (web, bot, cron) |
+
+### 📂 Pipeline de Produção
+
+```
+1. Ingestão → OddsDataManager.fetch_player_props()
+2. Processamento → PropsProcessor.process_props()
+3. Inteligência → PlayerPropsEngine.analyze_props()
+4. Gestão de Banca → Kelly Criterion (Kelly/8)
+5. Entrega → Telegram (Top 5 EV+)
+6. Logs → logs/production_run.log (JSONL)
+```
+
+### 🎯 Formato de Alertas
+
+```text
+🎯 SNIPER ALERT 🎯
+
+🏀 LeBron James (LAL)
+📈 OVER 24.5 POINTS @ 1.95
+
+🤖 Modelo: 28.2 | ✅ EV: +12.5%
+💰 Stake Sugerida: 1.5% (Kelly)
+```
+
+### 🐛 Correções
+
+- **stealth_browser.py**: Removido código duplicado (linhas 404-409)
+- **Dockerfile**: Atualizado para usar entrypoint com modos configuráveis
+
+### 🐳 Docker Modes
+
+```bash
+# Web Interface (Streamlit)
+docker run -e TELEGRAM_BOT_TOKEN=xxx -e TELEGRAM_ADMIN_ID=xxx nba-predictor
+
+# Telegram Bot
+docker run -e TELEGRAM_BOT_TOKEN=xxx -e TELEGRAM_ADMIN_ID=xxx nba-predictor bot
+
+# Scheduler (Cron diário 15:00 UTC)
+docker run -e TELEGRAM_BOT_TOKEN=xxx -e TELEGRAM_ADMIN_ID=xxx nba-predictor cron
+```
+
+### 🔧 Uso Local
+
+```bash
+cd /home/denis/nba-predictor
+source venv/bin/activate
+python run_production_cycle.py
+```
+
+---
+
 ## v27.4 - Props Intelligence Activation (20 Dez 2025)
 
 ### 🎯 Ativação do Sistema "Props Intelligence"
