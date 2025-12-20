@@ -27,6 +27,13 @@ except ImportError:
     ODDSPEDIA_AVAILABLE = False
     logger = logging.getLogger(__name__)
 
+# Importar multi-source scraper (TIER 0 - Múltiplas fontes gratuitas)
+try:
+    from data.scrapers.multi_odds_scraper import MultiSourceOddsScraper
+    MULTI_SOURCE_AVAILABLE = True
+except ImportError:
+    MULTI_SOURCE_AVAILABLE = False
+
 # Rate Limiter Enterprise
 try:
     from infrastructure.rate_limiter import get_rate_limiter
@@ -225,7 +232,20 @@ def obter_odds(force_source: Optional[str] = None) -> Dict:
 def _obter_odds_cached(force_source: Optional[str] = None) -> Dict:
     """Função interna cacheada."""
     
-    # 1. TIER 1: OddsPedia (Web Scraper Gratuito)
+    # 0. TIER 0: Multi-Source Scraper (múltiplos sites gratuitos)
+    if force_source in [None, 'multi'] and MULTI_SOURCE_AVAILABLE:
+        try:
+            logger.info("🌐 TIER 0: Multi-Source Scraper (múltiplos sites)...")
+            scraper = MultiSourceOddsScraper()
+            res = scraper.fetch_odds()
+            valid = OddsValidator.normalize_and_validate(res)
+            if valid: 
+                logger.info(f"✅ Multi-Source retornou {len(valid)} jogos")
+                return valid
+        except Exception as e:
+            logger.warning(f"⚠️ Multi-Source falhou: {e}")
+    
+    # 1. TIER 1: OddsPedia (Web Scraper Gratuito - fallback direto)
     if force_source in [None, 'oddspedia'] and ODDSPEDIA_AVAILABLE:
         try:
             logger.info("📡 TIER 1: OddsPedia Scraper...")

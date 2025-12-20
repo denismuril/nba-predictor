@@ -34,8 +34,9 @@ class OddsPediaScraper:
     """
     
     BASE_URL = "https://oddspedia.com/br/basquete/eua/nba"
-    MIN_DELAY = 2.0
-    MAX_DELAY = 4.0
+    MIN_DELAY = 3.0
+    MAX_DELAY = 6.0
+    CLOUDFLARE_WAIT = 20  # Segundos extras para bypass Cloudflare
     
     def __init__(self, headless: bool = True):
         """
@@ -221,6 +222,8 @@ class OddsPediaScraper:
             'div[class*="match"]',
             'div[class*="event"]',
             'div[class*="game"]',
+            '.odd-box',  # Seletor de odds OddsPedia
+            '[class*="odds-row"]',
         ]
         
         games = []
@@ -434,6 +437,115 @@ class OddsPediaScraper:
         
         return odds_dict
     
+    async def _extract_from_nuxt(self, page) -> Dict:
+        """
+        Extrai dados de odds do objeto window.__NUXT__.
+        
+        O OddsPedia usa Nuxt.js e armazena dados iniciais em window.__NUXT__.
+        Esta é a fonte mais confiável de dados.
+        
+        Args:
+            page: Objeto page do Playwright
+            
+        Returns:
+            Dict com odds extraídas
+        """
+        odds_dict = {}
+        
+        try:
+            # Tenta extrair objeto __NUXT__
+            nuxt_data = await page.evaluate("""
+                () => {
+                    if (window.__NUXT__ && window.__NUXT__.data && window.__NUXT__.data[0]) {
+                        return {
+                            matchList: window.__NUXT__.data[0].matchList || [],
+                            odds: window.__NUXT__.data[0].odds || {}
+                        };
+                    }
+                    return null;
+                }
+            """)
+            
+            if not nuxt_data:
+                logger.debug("__NUXT__ não encontrado ou vazio")
+                return {}
+            
+            match_list = nuxt_data.get('matchList', [])
+            odds_map = nuxt_data.get('odds', {})
+            
+            logger.info(f"📊 __NUXT__: {len(match_list)} jogos, {len(odds_map)} odds")
+            
+            for match in match_list:
+                try:
+                    match_id = str(match.get('id', ''))
+                    
+                    # Extrai times
+                    home_name = match.get('homeTeamName', '') or match.get('home', {}).get('name', '')
+                    away_name = match.get('awayTeamName', '') or match.get('away', {}).get('name', '')
+                    
+                    if not home_name or not away_name:
+                        continue
+                    
+                    home_team = self._normalize_team_name(home_name)
+                    away_team = self._normalize_team_name(away_name)
+                    
+                    if not home_team or not away_team:
+                        continue
+                    
+                    # Busca odds para este jogo
+                    game_odds = odds_map.get(match_id, {})
+                    
+                    # Tenta diferentes estruturas de odds
+                    home_odds = None
+                    away_odds = None
+                    
+                    # Estrutura 1: odds diretas
+                    if isinstance(game_odds, dict):
+                        # Odds no formato {1: valor, 2: valor} ou 
+                        # {moneyLine: {home: valor, away: valor}}
+                        if '1' in game_odds:
+                            home_odds = self._parse_odds_value(str(game_odds['1']))
+                        if '2' in game_odds:
+                            away_odds = self._parse_odds_value(str(game_odds['2']))
+                        
+                        # Alternativa: estrutura aninhada
+                        if not home_odds:
+                            ml = game_odds.get('moneyLine', game_odds.get('ml', {}))
+                            if isinstance(ml, dict):
+                                home_odds = self._parse_odds_value(str(ml.get('home', ml.get('1', ''))))
+                                away_odds = self._parse_odds_value(str(ml.get('away', ml.get('2', ''))))
+                        
+                        # Alternativa: lista de odds
+                        if not home_odds and 'odds' in game_odds:
+                            odds_list = game_odds['odds']
+                            if isinstance(odds_list, list) and len(odds_list) >= 2:
+                                home_odds = self._parse_odds_value(str(odds_list[0].get('value', '')))
+                                away_odds = self._parse_odds_value(str(odds_list[1].get('value', '')))
+                    
+                    # Se encontrou odds válidas
+                    if home_odds and away_odds:
+                        game_key = f"{home_team} vs {away_team}"
+                        odds_dict[game_key] = {
+                            'home_team': home_team,
+                            'away_team': away_team,
+                            'home_odds': home_odds,
+                            'away_odds': away_odds,
+                            'source': 'oddspedia_nuxt',
+                            'match_id': match_id,
+                            'timestamp': datetime.now().isoformat()
+                        }
+                        
+                except Exception as e:
+                    logger.debug(f"Erro ao processar jogo do __NUXT__: {e}")
+                    continue
+            
+            logger.info(f"✅ Extraídos {len(odds_dict)} jogos via __NUXT__")
+            
+        except Exception as e:
+            logger.warning(f"Erro ao extrair __NUXT__: {e}")
+        
+        return odds_dict
+    
     async def _fetch_odds_async(self) -> Dict:
         """
         Busca odds de forma assíncrona usando Playwright.
@@ -467,12 +579,16 @@ class OddsPediaScraper:
                     wait_until='domcontentloaded'
                 )
                 
-                # Delay para parecer humano
+                # Aguardar bypass do Cloudflare (tempo extra)
+                logger.info(f"⏳ Aguardando Cloudflare ({self.CLOUDFLARE_WAIT}s)...")
+                await page.wait_for_timeout(self.CLOUDFLARE_WAIT * 1000)
+                
+                # Delay adicional para parecer humano
                 await page.wait_for_timeout(random.randint(2000, 4000))
                 
                 # Aguardar carregamento inicial do conteúdo (critical for SPA)
                 try:
-                    await page.wait_for_selector('div[class*="match"], div[class*="event"]', timeout=15000)
+                    await page.wait_for_selector('div[class*="match"], div[class*="event"], .odd-box__value', timeout=15000)
                 except Exception:
                     logger.warning("⚠️ Timeout aguardando seletor de jogos, tentando continuar...")
 
@@ -480,13 +596,17 @@ class OddsPediaScraper:
                 await self._scroll_page(page)
                 
                 # Aguardar conteúdo carregar
-                await page.wait_for_timeout(random.randint(1000, 2000))
+                await page.wait_for_timeout(random.randint(2000, 3000))
                 
-                # Extrair HTML
-                html = await page.content()
-                
-                # Parsear odds
-                odds_dict = self._extract_games_from_html(html)
+                # PRIORIDADE 0: Tentar extrair de window.__NUXT__
+                nuxt_odds = await self._extract_from_nuxt(page)
+                if nuxt_odds:
+                    logger.info(f"✅ Extraídos {len(nuxt_odds)} jogos via __NUXT__")
+                    odds_dict = nuxt_odds
+                else:
+                    # Fallback: Extrair do HTML
+                    html = await page.content()
+                    odds_dict = self._extract_games_from_html(html)
                 
                 if not odds_dict:
                     logger.warning("⚠️ Nenhum jogo encontrado. Dumpando HTML para debug.")

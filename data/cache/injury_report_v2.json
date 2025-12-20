@@ -1,34 +1,138 @@
 [
   {
-    "player_name": "Johni Broome",
-    "team": "PHI",
-    "status": "DOUBTFUL",
+    "player_name": "Tari Eason",
+    "team": "HOU",
+    "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-19T15:24:06.255761"
+    "updated_at": "2025-12-20T10:37:30.997034"
   },
   {
-    "player_name": "Zach Collins",
-    "team": "CHI",
+    "player_name": "Tamar Bates",
+    "team": "DEN",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-20T10:37:30.997051"
+  },
+  {
+    "player_name": "Anthony Davis",
+    "team": "DAL",
     "status": "PROBABLE",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-19T15:24:06.255776"
+    "updated_at": "2025-12-20T10:37:30.997059"
   },
   {
-    "player_name": "Chris Livingston",
-    "team": "CLE",
+    "player_name": "Tony Bradley",
+    "team": "IND",
+    "status": "QUESTIONABLE",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-20T10:37:30.997065"
+  },
+  {
+    "player_name": "Trey Alexander",
+    "team": "NOP",
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-19T15:24:06.255782"
+    "updated_at": "2025-12-20T10:37:30.997071"
   },
   {
-    "player_name": "Joan Beringer",
-    "team": "MIN",
+    "player_name": "Pat Connaughton",
+    "team": "CHA",
+    "status": "QUESTIONABLE",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-20T10:37:30.997076"
+  },
+  {
+    "player_name": "Isaac Jones",
+    "team": "DET",
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-19T15:24:06.255786"
+    "updated_at": "2025-12-20T10:37:30.997082"
+  },
+  {
+    "player_name": "Malaki Branham",
+    "team": "WAS",
+    "status": "QUESTIONABLE",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-20T10:37:30.997087"
+  },
+  {
+    "player_name": "Zach Edey",
+    "team": "MEM",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-20T10:37:30.997091"
+  },
+  {
+    "player_name": "Grayson Allen",
+    "team": "PHX",
+    "status": "QUESTIONABLE",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-20T10:37:30.997096"
+  },
+  {
+    "player_name": "Seth Curry",
+    "team": "GSW",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-20T10:37:30.997101"
+  },
+  {
+    "player_name": "Colin Castleton",
+    "team": "ORL",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-20T10:37:30.997105"
+  },
+  {
+    "player_name": "Elijah Harkless",
+    "team": "UTA",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-20T10:37:30.997110"
+  },
+  {
+    "player_name": "Javonte Cooke",
+    "team": "POR",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-20T10:37:30.997114"
+  },
+  {
+    "player_name": "Devin Carter",
+    "team": "SAC",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-20T10:37:30.997118"
+  },
+  {
+    "player_name": "Deandre Ayton",
+    "team": "LAL",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-20T10:37:30.997123"
+  },
+  {
+    "player_name": "Bradley Beal",
+    "team": "UNK",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-20T10:37:30.997127"
   }
 ]

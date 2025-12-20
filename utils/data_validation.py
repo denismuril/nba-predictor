@@ -208,6 +208,7 @@ class DataValidator:
                     # Tentar conversão
                     try:
                         df[rule.column] = col.astype(rule.dtype)
+                        col = df[rule.column]  # FIX: Atualizar referência para coluna convertida
                         warnings.append(f"'{rule.column}' convertido para {rule.dtype.__name__}")
                     except (ValueError, TypeError) as e:
                         errors.append(

@@ -1,0 +1,13 @@
+# NBA Predictor - Proxy List
+# Format: http://user:password@host:port
+# One proxy per line. Lines starting with # are comments.
+#
+# Example:
+# http://user1:pass1@proxy1.example.com:8080
+# http://user2:pass2@proxy2.example.com:8080
+#
+# To add your own proxies, replace the examples above with real proxy URLs.
+# Make sure to use residential proxies for better success rates.
+#
+# Dummy proxies for testing (will fail but won't break the system):
+# http://dummy:dummy@localhost:8080

@@ -367,6 +367,56 @@ class PropsProcessor:
         
         return float(h2h_games[stat_col].mean())
     
+    def _calculate_hit_rate(
+        self,
+        player_name: str,
+        stat_type: str,
+        line: float,
+        n_games: int = 5
+    ) -> Optional[float]:
+        """
+        Calcula a taxa de acerto (hit rate) para uma linha nos últimos N jogos.
+        
+        SNIPER INTELLIGENCE FEATURE:
+        Responde: "Quantas vezes o jogador bateu essa linha nos últimos 5 jogos?"
+        
+        Args:
+            player_name: Nome do jogador
+            stat_type: Tipo de stat ('PTS', 'REB', 'AST', etc)
+            line: Valor da linha para avaliar (ex: 25.5 pontos)
+            n_games: Número de jogos recentes a considerar (default: 5)
+            
+        Returns:
+            Hit rate (0.0 a 1.0) ou None se dados insuficientes
+        """
+        boxscores = self._load_boxscores()
+        if boxscores is None:
+            return None
+        
+        # Normalizar nome
+        canonical = normalize_player_name(player_name)
+        if canonical is None:
+            return None
+        
+        # Filtrar jogos do jogador
+        player_games = boxscores[boxscores["Player"] == canonical].copy()
+        
+        stat_col = stat_type.upper()
+        if stat_col not in player_games.columns:
+            return None
+        
+        # Pegar últimos N jogos
+        last_n = player_games.tail(n_games)
+        
+        if len(last_n) < 3:  # Mínimo 3 jogos para hit rate significativo
+            return None
+        
+        # Calcular quantas vezes bateu a linha (OVER)
+        hits = (last_n[stat_col] > line).sum()
+        hit_rate = hits / len(last_n)
+        
+        return float(hit_rate)
+    
     async def process_props(
         self, 
         props: List[PlayerProp],
@@ -507,7 +557,27 @@ class PropsProcessor:
                 )
                 return None
         
-        # 6. Montar row
+        # 6. SNIPER INTELLIGENCE: Calcular features diferenciais EV+
+        # diff_to_avg: Quantos pontos a linha está acima/abaixo da média
+        reference_avg = season_avg if season_avg is not None else l5_avg
+        diff_to_avg = None
+        diff_pct = None
+        if reference_avg is not None and reference_avg > 0:
+            diff_to_avg = prop.line - reference_avg
+            diff_pct = (prop.line - reference_avg) / reference_avg  # Percentual
+        
+        # last_5_games_hit_rate: % de vezes que bateu a linha nos últimos 5 jogos
+        last_5_hit_rate = self._calculate_hit_rate(prop.player_name, stat_col, prop.line)
+        
+        # implied_prob: Probabilidade implícita das odds (1 / decimal_odds)
+        over_implied_prob = None
+        under_implied_prob = None
+        if prop.over_odds and prop.over_odds > 1:
+            over_implied_prob = 1.0 / prop.over_odds
+        if prop.under_odds and prop.under_odds > 1:
+            under_implied_prob = 1.0 / prop.under_odds
+        
+        # 7. Montar row
         row = {
             "player_name": prop.player_name,
             "prop_type": prop.prop_type,
@@ -516,12 +586,19 @@ class PropsProcessor:
             "timestamp": prop.timestamp.isoformat() if prop.timestamp else None,
             "game_info": prop.game_info,
             
-            # Features
+            # Features básicas
             "season_avg": season_avg,
             "L5_AVG": l5_avg,
             "H2H_AVG": h2h_avg,
             "REST_DAYS": rest_days,
             "DEF_VS_POS": def_vs_pos,
+            
+            # SNIPER INTELLIGENCE Features
+            "diff_to_avg": diff_to_avg,
+            "diff_pct": diff_pct,
+            "last_5_hit_rate": last_5_hit_rate,
+            "over_implied_prob": over_implied_prob,
+            "under_implied_prob": under_implied_prob,
         }
         
         if include_odds:
@@ -545,6 +622,12 @@ class PropsProcessor:
             "REST_DAYS",
             "DEF_VS_POS",
             "line",
+            # Sniper Intelligence Features
+            "diff_to_avg",
+            "diff_pct",
+            "last_5_hit_rate",
+            "over_implied_prob",
+            "under_implied_prob",
         ]
     
     def prepare_for_inference(

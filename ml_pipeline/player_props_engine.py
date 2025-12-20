@@ -283,6 +283,171 @@ def _get_probability_from_projection(
     else:
         return 1.0 - prob_over
 
+
+# =============================================================================
+# FASE 5: SNIPER HEURISTIC ENGINE - Motor de Decisão Heurístico
+# =============================================================================
+
+def analyze_props(
+    processed_props: pd.DataFrame,
+    min_ev: float = 0.05,
+    min_odds: float = 1.85,
+    edge_threshold: float = 0.10
+) -> pd.DataFrame:
+    """
+    Motor de Decisão Heurístico para Player Props (Sniper Mode).
+    
+    Usa regras heurísticas avançadas enquanto não temos histórico suficiente
+    para treinar um XGBoost específico de props.
+    
+    REGRAS DE OURO (SNIPER):
+    - OVER: Se (Média da Temporada > Linha + 10%) E (Odd > 1.85)
+    - UNDER: Se (Média da Temporada < Linha - 10%) E (Odd > 1.85)
+    
+    Cálculo de EV:
+        EV = (Probabilidade_Estimada * Odd) - 1
+        
+    Args:
+        processed_props: DataFrame do PropsProcessor com features
+        min_ev: EV mínimo para retornar (0.05 = 5%)
+        min_odds: Odds mínimas para considerar (1.85)
+        edge_threshold: Vantagem mínima vs linha (0.10 = 10%)
+        
+    Returns:
+        DataFrame filtrado apenas com apostas EV+ contendo:
+        - player_name, prop_type, line
+        - season_avg, L5_AVG
+        - prediction: 'OVER' ou 'UNDER'
+        - edge_pct: Vantagem percentual
+        - estimated_prob: Probabilidade estimada
+        - ev: Valor esperado
+        - sniper_reason: Razão da recomendação
+    """
+    if processed_props is None or processed_props.empty:
+        logger.warning("⚠️ DataFrame vazio recebido em analyze_props")
+        return pd.DataFrame()
+    
+    df = processed_props.copy()
+    results = []
+    
+    logger.info(f"🎯 Analisando {len(df)} props com heurísticas Sniper...")
+    
+    for idx, row in df.iterrows():
+        try:
+            # Extrair dados básicos
+            player = row.get('player_name', 'Unknown')
+            prop_type = row.get('prop_type', 'points')
+            line = row.get('line', 0)
+            
+            # Média de referência (preferir season_avg, fallback L5_AVG)
+            season_avg = row.get('season_avg')
+            l5_avg = row.get('L5_AVG')
+            
+            if pd.isna(season_avg) and pd.isna(l5_avg):
+                continue  # Sem dados de referência
+            
+            reference_avg = season_avg if pd.notna(season_avg) else l5_avg
+            
+            if line <= 0 or reference_avg <= 0:
+                continue
+            
+            # Odds
+            over_odds = row.get('over_odds', 1.91)
+            under_odds = row.get('under_odds', 1.91)
+            
+            # Calcular edge (vantagem)
+            edge_pct = (reference_avg - line) / line  # Positivo = OVER favorável
+            
+            # Hit rate dos últimos 5 jogos (se disponível)
+            hit_rate = row.get('last_5_hit_rate')
+            
+            # ========================================
+            # APLICAR REGRAS SNIPER
+            # ========================================
+            
+            prediction = None
+            estimated_prob = 0.5
+            ev = -1.0
+            selected_odds = 0
+            sniper_reason = ""
+            
+            # REGRA OVER: Média > Linha + 10% e Odds > 1.85
+            if edge_pct > edge_threshold and pd.notna(over_odds) and over_odds >= min_odds:
+                prediction = 'OVER'
+                selected_odds = over_odds
+                
+                # Estimativa de probabilidade baseada no edge
+                # Edge 10% = ~55% prob, Edge 20% = ~60% prob (conservador)
+                estimated_prob = 0.50 + (edge_pct * 0.5)  # Escala conservadora
+                estimated_prob = min(0.75, max(0.50, estimated_prob))  # Cap 50-75%
+                
+                # Boost se hit rate alto
+                if hit_rate is not None and hit_rate >= 0.8:
+                    estimated_prob = min(0.80, estimated_prob + 0.05)
+                    sniper_reason = f"🔥 ELITE: Média {reference_avg:.1f} > Linha {line} (+{edge_pct*100:.0f}%) + Hit Rate {hit_rate*100:.0f}%"
+                else:
+                    sniper_reason = f"📈 OVER: Média {reference_avg:.1f} > Linha {line} (+{edge_pct*100:.0f}%)"
+                
+                # Calcular EV
+                ev = calculate_ev(estimated_prob, selected_odds)
+            
+            # REGRA UNDER: Média < Linha - 10% e Odds > 1.85
+            elif edge_pct < -edge_threshold and pd.notna(under_odds) and under_odds >= min_odds:
+                prediction = 'UNDER'
+                selected_odds = under_odds
+                
+                # Estimativa de probabilidade
+                estimated_prob = 0.50 + (abs(edge_pct) * 0.5)
+                estimated_prob = min(0.75, max(0.50, estimated_prob))
+                
+                # Boost se hit rate baixo (= bom para UNDER)
+                if hit_rate is not None and hit_rate <= 0.2:
+                    estimated_prob = min(0.80, estimated_prob + 0.05)
+                    sniper_reason = f"🔥 ELITE: Média {reference_avg:.1f} < Linha {line} ({edge_pct*100:.0f}%) + Hit Rate {hit_rate*100:.0f}%"
+                else:
+                    sniper_reason = f"📉 UNDER: Média {reference_avg:.1f} < Linha {line} ({edge_pct*100:.0f}%)"
+                
+                ev = calculate_ev(estimated_prob, selected_odds)
+            
+            # ========================================
+            # FILTRAR POR EV MÍNIMO
+            # ========================================
+            
+            if prediction and ev >= min_ev:
+                results.append({
+                    'player_name': player,
+                    'prop_type': prop_type,
+                    'line': line,
+                    'season_avg': season_avg,
+                    'L5_AVG': l5_avg,
+                    'last_5_hit_rate': hit_rate,
+                    'prediction': prediction,
+                    'odds': selected_odds,
+                    'edge_pct': round(edge_pct * 100, 1),  # Em percentual
+                    'estimated_prob': round(estimated_prob, 3),
+                    'ev': round(ev, 3),
+                    'ev_pct': round(ev * 100, 1),  # Em percentual
+                    'sniper_reason': sniper_reason,
+                    'source': row.get('source', 'unknown'),
+                    'game_info': row.get('game_info', ''),
+                })
+                
+        except Exception as e:
+            logger.warning(f"⚠️ Erro analisando prop de {row.get('player_name', '?')}: {e}")
+            continue
+    
+    result_df = pd.DataFrame(results)
+    
+    if not result_df.empty:
+        # Ordenar por EV (melhor primeiro)
+        result_df = result_df.sort_values('ev', ascending=False)
+        logger.info(f"✅ Encontradas {len(result_df)} apostas com EV+ >= {min_ev*100:.0f}%")
+    else:
+        logger.info("⚠️ Nenhuma aposta com EV positivo encontrada")
+    
+    return result_df
+
+
 def predict_with_ev(
     props_df: pd.DataFrame,
     models_dir: Path = None,

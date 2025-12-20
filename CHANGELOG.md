@@ -1,4 +1,117 @@
 
+## v27.4 - Props Intelligence Activation (20 Dez 2025)
+
+### 🎯 Ativação do Sistema "Props Intelligence"
+
+Nova camada de inteligência para identificação de apostas EV+ em Player Props usando regras heurísticas "Sniper".
+
+### ✅ Novos Recursos
+
+| Componente | Descrição |
+|------------|-----------|
+| **Sniper Engine** | Regras heurísticas: OVER (Avg > Line+10%) e UNDER (Avg < Line-10%) |
+| **PropsProcessor** | Features: `diff_to_avg`, `last_5_hit_rate`, `implied_prob` |
+| **ProxyManager** | Lê proxies de `config/proxies.txt` com rotação automática |
+| **Stealth Integration** | Proxies "queimados" são reportados automaticamente |
+
+### 📂 Arquivos Modificados/Criados
+
+```
+config/
+└── proxies.txt                  # NOVO: Lista de proxies (template)
+
+infrastructure/
+└── proxy_manager.py             # UPDATE: Carrega de config/proxies.txt
+
+data/processing/
+└── props_processor.py           # UPDATE: Sniper features (diff, hit_rate)
+
+ml_pipeline/
+└── player_props_engine.py       # UPDATE: Nova função analyze_props()
+
+data/scrapers/
+└── stealth_browser.py           # UPDATE: Integração com ProxyManager
+
+run_props_analysis.py            # NOVO: Script de verificação
+```
+
+### 🔧 Regras Sniper (Heurísticas)
+
+```python
+# OVER: Se Média > Linha + 10% E Odd > 1.85
+# UNDER: Se Média < Linha - 10% E Odd > 1.85
+# Retorna apenas apostas com EV > 5%
+```
+
+### 🧪 Resultado de Teste
+
+```text
+🔥 RECOMENDAÇÃO: Aposte no UNDER Trae Young points
+   Média: 24.2 | Linha: 32.5 (-25.5% de vantagem)
+   Odds: 1.95 | EV: 22.4%
+```
+
+---
+
+## v27.3 - Multi-Source Odds Scraper (19 Dez 2025)
+
+### 🌐 Sistema Multi-Fonte de Odds
+
+Novo sistema robusto de coleta de odds de **5 fontes gratuitas** com fallback inteligente, eliminando dependência de APIs pagas.
+
+### ✅ Novos Componentes
+
+| Componente | Descrição |
+|------------|-----------|
+| **MultiSourceOddsScraper** | Orquestrador com fallback e execução paralela |
+| **OddsAgoraScraper** | Scraper para oddsagora.com.br |
+| **OddsScannerScraper** | Scraper para oddsscanner.com |
+| **SportyTraderScraper** | Scraper para sportytrader.com |
+| **OddsSharkScraper** | Scraper para oddsshark.com |
+| **BaseSiteScraper** | Classe base abstrata com utilitários |
+
+### 📂 Novos Arquivos
+
+```
+data/scrapers/odds_sites/
+├── __init__.py
+├── base_scraper.py      # Classe base + PlaywrightMixin
+├── odds_agora.py        # OddsAgora (BR)
+├── odds_scanner.py      # OddsScanner (BR)
+├── sporty_trader.py     # SportyTrader (PT-BR)
+└── odds_shark.py        # OddsShark (US)
+
+data/scrapers/
+└── multi_odds_scraper.py  # Orquestrador multi-fonte
+```
+
+### 🔧 Arquivos Modificados
+
+- `data/scrapers/odds_web_scraper.py`:
+  - Novo método `_extract_from_nuxt()` para extrair odds do `window.__NUXT__`
+  - Tempo de espera Cloudflare aumentado para 20s
+  - Novos seletores CSS para `.odd-box__value`
+
+- `data/scrapers/odds_scraper.py`:
+  - Adicionado TIER 0 (MultiSourceOddsScraper) na hierarquia de fallback
+
+### 🎯 Hierarquia de Fallback
+
+```
+TIER 0: MultiSource (5 sites gratuitos)
+    → OddsPedia → OddsAgora → OddsScanner → SportyTrader → OddsShark
+TIER 1: OddsPedia (fallback direto)
+TIER 2: TheOddsAPI (API paga)
+```
+
+### 🧪 Resultados de Teste
+
+- **OddsAgora retornou 31 jogos** em teste real
+- **8 testes pytest passaram** (TestOddsValidator)
+- Todos os módulos integrados sem erros
+
+---
+
 ## v27.0 - God Mode Architecture (End-to-End) (19 Dez 2025)
 
 ### ⚡ Arquitetura Autônoma para Player Props

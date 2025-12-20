@@ -311,6 +311,9 @@ async def create_stealth_browser(
             # Aplicar patches stealth
             await apply_stealth_patches(page)
             
+            # Anexar proxy à página para uso em retry/reporting
+            page.proxy_used = proxy
+            
             logger.debug(f"Stealth browser criado: {viewport['width']}x{viewport['height']}")
             
             yield browser, context, page
@@ -338,6 +341,15 @@ async def navigate_with_retry(
     Returns:
         True se sucesso, False se bloqueado/falhou
     """
+    # Importar ProxyManager dinamicamente
+    try:
+        from infrastructure.proxy_manager import get_proxy_manager
+        pm = get_proxy_manager()
+    except ImportError:
+        pm = None
+
+    proxy_url = getattr(page, "proxy_used", None)
+
     for attempt in range(max_retries):
         try:
             response = await page.goto(url, wait_until="domcontentloaded", timeout=timeout)
@@ -349,14 +361,17 @@ async def navigate_with_retry(
             status = response.status
             
             # Detectar bloqueio
-            if status == 403:
-                logger.warning(f"⚠️ Bloqueio detectado (403) para {url}")
-                await human_delay(5, 10)  # Esperar mais tempo
-                continue
-            
-            if status == 429:
-                logger.warning(f"⚠️ Rate limit (429) para {url}")
-                await human_delay(30, 60)  # Esperar muito mais
+            if status == 403 or status == 429:
+                logger.warning(f"⚠️ Bloqueio detectado ({status}) para {url}")
+                
+                # Reportar proxy queimado/falho
+                if pm and proxy_url:
+                    reason = f"Status {status} on {url}"
+                    pm.report_dead_proxy(proxy_url, reason)
+                    logger.info(f"🔥 Proxy reportado como falho: {proxy_url}")
+                
+                waitTime = 30 if status == 429 else 5
+                await human_delay(waitTime, waitTime * 1.5)
                 continue
             
             if status >= 400:
@@ -367,9 +382,24 @@ async def navigate_with_retry(
             content = await page.content()
             if "captcha" in content.lower() or "challenge" in content.lower():
                 logger.warning(f"⚠️ Captcha detectado para {url}")
+                
+                # Reportar proxy como suspeito/falho
+                if pm and proxy_url:
+                    pm.report_dead_proxy(proxy_url, f"Captcha on {url}")
+                
                 return False
             
+            # Sucesso! Se estavamos usando proxy, marcar sucesso
+            if pm and proxy_url:
+                pm.mark_success(proxy_url)
+                
             return True
+            
+        except Exception as e:
+            logger.warning(f"Erro navegando para {url}: {e} (tentativa {attempt + 1})")
+            await human_delay(2, 5)
+    
+    return False
             
         except Exception as e:
             logger.warning(f"Erro navegando para {url}: {e} (tentativa {attempt + 1})")

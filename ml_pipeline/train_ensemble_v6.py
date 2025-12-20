@@ -188,17 +188,36 @@ def train_ensemble_model_v6():
     logger.info("🛡️ Aplicando Allowlist de Features (Anti-Leakage V2)...")
 
     # Prefixos PERMITIDOS (Dados conhecidos ANTES do jogo)
+    # FIX: Incluir prefixos home_ e away_ que são os reais no dataset
     SAFE_PREFIXES = [
-        'rolling_',      # Médias móveis passadas
-        'elo_',          # Elo Ratings pré-jogo
-        'rest_',         # Dias de descanso
-        'is_b2b',        # Flag de fadiga
-        'feat_',         # Features calculadas explicitamente
-        'encoded_'       # Variáveis categóricas tratadas
+        'home_rolling_',  # Médias móveis passadas (home team)
+        'away_rolling_',  # Médias móveis passadas (away team)
+        'home_elo',       # Elo Ratings pré-jogo
+        'away_elo',       # Elo Ratings pré-jogo
+        'home_rest_',     # Dias de descanso
+        'away_rest_',     # Dias de descanso
+        'home_is_b2b',    # Flag de fadiga (home)
+        'away_is_b2b',    # Flag de fadiga (away)
+        'home_net_rating_', # Net rating trends
+        'away_net_rating_', # Net rating trends
+        'home_sos_',      # Strength of schedule
+        'away_sos_',      # Strength of schedule
+        'home_win_streak', # Win streak
+        'away_win_streak', # Win streak
+        'interaction_',   # Feature interactions
+        'feat_',          # Features calculadas explicitamente
+        'encoded_',       # Variáveis categóricas tratadas
+        'elo_',           # Elo-related features (elo_diff, etc)
+        'rest_',          # Rest diff, etc
     ]
 
     # Colunas específicas permitidas
-    SAFE_COLS = ['home_elo', 'away_elo', 'home_rest_days', 'away_rest_days']
+    SAFE_COLS = [
+        'home_elo', 'away_elo', 'elo_diff',
+        'home_rest_days', 'away_rest_days', 'rest_diff',
+        'home_is_back_to_back', 'away_is_back_to_back',
+        'home_altitude_advantage', 'away_altitude_advantage',
+    ]
 
     # Filtrar: Só manter se começar com prefixo seguro OU estiver na lista segura
     input_cols = [c for c in X.columns if any(c.startswith(p) for p in SAFE_PREFIXES) or c in SAFE_COLS]

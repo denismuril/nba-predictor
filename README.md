@@ -1,4 +1,4 @@
-# 🏀 NBA Predictor v27.2 - Systemd Automation & Stabilization
+# 🏀 NBA Predictor v27.4 - Props Intelligence
 
 [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-orange.svg)](LICENSE)
@@ -6,8 +6,75 @@
 [![Systemd](https://img.shields.io/badge/init-Systemd-green.svg)]()
 [![ML](https://img.shields.io/badge/ML-Ensemble%20V6-purple.svg)]()
 [![Bot](https://img.shields.io/badge/Telegram-Sniper%20Bot-blue.svg)]()
+[![Props](https://img.shields.io/badge/Props-Intelligence-orange.svg)]()
 
-Sistema profissional de análise quantitativa e previsão de jogos da NBA usando **Advanced Machine Learning (Ensemble V6)**, **Systemd Automation**, **PostgreSQL + Redis**, **Player Props** e **SafeKelly Bankroll Management**.
+Sistema profissional de análise quantitativa e previsão de jogos da NBA usando **Ensemble ML V6**, **Props Intelligence (Sniper Engine)**, **Multi-Source Odds Scraping**, **Systemd Automation** e **SafeKelly Bankroll Management**.
+
+---
+
+## 🎉 Destaques v27.4 (20 Dez 2025) - **Props Intelligence**
+
+### 🎯 Sistema "Props Intelligence" Ativado
+
+Nova camada de inteligência para identificação de apostas EV+ em **Player Props** usando regras heurísticas "Sniper".
+
+### ✅ Novos Recursos
+
+| Componente | Descrição |
+|------------|-----------|
+| **Sniper Engine** | Regras: OVER (Avg > Line+10%) e UNDER (Avg < Line-10%) |
+| **PropsProcessor** | Features: `diff_to_avg`, `last_5_hit_rate`, `implied_prob` |
+| **ProxyManager** | Lê proxies de `config/proxies.txt` com rotação automática |
+
+### 🔧 Uso
+
+```bash
+# Rodar análise de props com dados de teste
+python run_props_analysis.py
+```
+
+### 🧪 Exemplo de Saída
+
+```text
+🔥 RECOMENDAÇÃO: Aposte no UNDER Trae Young points
+   Média: 24.2 | Linha: 32.5 (-25.5% de vantagem)
+   Odds: 1.95 | EV: 22.4%
+```
+
+---
+
+## 🎉 Destaques v27.3 (19 Dez 2025) - **Multi-Source Odds Scraper**
+
+### 🌐 Sistema Multi-Fonte de Odds
+
+Novo sistema robusto de coleta de odds de **5 fontes gratuitas** com fallback inteligente:
+
+### ✅ Fontes Implementadas
+
+| Fonte | País | Status |
+|-------|------|--------|
+| **OddsPedia** | BR | ✅ Melhorado (Nuxt.js) |
+| **OddsAgora** | BR | ✅ Novo |
+| **OddsScanner** | BR | ✅ Novo |
+| **SportyTrader** | PT-BR | ✅ Novo |
+| **OddsShark** | US | ✅ Novo |
+
+### 🎯 Hierarquia de Fallback
+
+```
+TIER 0: MultiSource → OddsAgora → OddsScanner → SportyTrader → OddsShark
+TIER 1: OddsPedia (fallback direto)
+TIER 2: TheOddsAPI (API paga - apenas se necessário)
+```
+
+### 🔧 Uso
+
+```python
+from data.scrapers.multi_odds_scraper import MultiSourceOddsScraper
+
+scraper = MultiSourceOddsScraper()
+odds = scraper.fetch_odds()  # Fallback automático entre fontes
+```
 
 ---
 
@@ -608,11 +675,11 @@ Este software é para fins educacionais e de pesquisa. O autor não se responsab
 
 ## 📞 Suporte
 
-**Versão:** v27.1 (Player Props Integration)
+**Versão:** v27.4 (Props Intelligence)
 **Status:** ✅ Production Ready
 **Temporada:** 2025-26
-**Última Atualização:** 18 Dezembro 2025
-**Novidades:** Player Props via API direta, 91 props, fuzzy matching de nomes.
+**Última Atualização:** 20 Dezembro 2025
+**Novidades:** Sistema Props Intelligence com Sniper Engine e integração de ProxyManager.
 
 **Documentação Adicional:**
 

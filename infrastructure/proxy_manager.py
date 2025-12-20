@@ -151,35 +151,116 @@ class ProxyManager:
     
     def _load_from_env(self) -> List[str]:
         """
-        Carrega lista de proxies do .env.
+        Carrega lista de proxies do .env ou config/proxies.txt.
         
-        Formato esperado:
+        Ordem de prioridade:
+            1. Variável de ambiente PROXY_LIST
+            2. Arquivo .env (PROXY_LIST=...)
+            3. Arquivo config/proxies.txt
+            
+        Formato do .env:
             PROXY_LIST=http://user:pass@host1:port,http://user:pass@host2:port
+            
+        Formato do proxies.txt:
+            # Comentários começam com #
+            http://user:pass@host1:port
+            http://user:pass@host2:port
             
         Returns:
             Lista de URLs de proxy
         """
         env_value = os.getenv("PROXY_LIST", "")
         
-        if not env_value:
-            # Tentar carregar de arquivo .env manualmente
-            env_path = Path(__file__).parent.parent / ".env"
-            if env_path.exists():
-                try:
-                    with open(env_path, "r") as f:
-                        for line in f:
-                            if line.startswith("PROXY_LIST="):
-                                env_value = line.split("=", 1)[1].strip().strip('"\'')
-                                break
-                except Exception as e:
-                    logger.debug(f"Não foi possível ler .env: {e}")
+        # 1. Tentar carregar da variável de ambiente
+        if env_value:
+            proxies = [p.strip() for p in env_value.split(",") if p.strip()]
+            logger.info(f"✅ Carregados {len(proxies)} proxies da variável PROXY_LIST")
+            return proxies
         
-        if not env_value:
-            return []
+        # 2. Tentar carregar de arquivo .env
+        env_path = Path(__file__).parent.parent / ".env"
+        if env_path.exists():
+            try:
+                with open(env_path, "r") as f:
+                    for line in f:
+                        if line.startswith("PROXY_LIST="):
+                            env_value = line.split("=", 1)[1].strip().strip('"\'')
+                            if env_value:
+                                proxies = [p.strip() for p in env_value.split(",") if p.strip()]
+                                logger.info(f"✅ Carregados {len(proxies)} proxies do .env")
+                                return proxies
+            except Exception as e:
+                logger.debug(f"Não foi possível ler .env: {e}")
         
-        proxies = [p.strip() for p in env_value.split(",") if p.strip()]
-        logger.info(f"✅ Carregados {len(proxies)} proxies do .env")
+        # 3. Tentar carregar de config/proxies.txt
+        proxies_file = Path(__file__).parent.parent / "config" / "proxies.txt"
+        if proxies_file.exists():
+            try:
+                proxies = self._load_from_file(proxies_file)
+                if proxies:
+                    logger.info(f"✅ Carregados {len(proxies)} proxies de config/proxies.txt")
+                    return proxies
+            except Exception as e:
+                logger.debug(f"Não foi possível ler proxies.txt: {e}")
+        
+        return []
+    
+    def _load_from_file(self, file_path: Path) -> List[str]:
+        """
+        Carrega proxies de um arquivo de texto.
+        
+        Formato:
+            - Uma URL de proxy por linha
+            - Linhas começando com # são ignoradas (comentários)
+            - Linhas em branco são ignoradas
+            
+        Args:
+            file_path: Caminho para o arquivo
+            
+        Returns:
+            Lista de URLs de proxy válidas
+        """
+        proxies = []
+        
+        with open(file_path, 'r') as f:
+            for line in f:
+                line = line.strip()
+                
+                # Ignorar linhas vazias e comentários
+                if not line or line.startswith('#'):
+                    continue
+                
+                # Validar formato básico (deve ter protocol://)
+                if '://' in line:
+                    proxies.append(line)
+                else:
+                    logger.debug(f"Linha ignorada (formato inválido): {line[:30]}...")
+        
         return proxies
+    
+    def get_random_proxy(self) -> Optional[str]:
+        """
+        Obtém um proxy aleatório disponível.
+        
+        Alias para get_proxy() com nome mais explicito.
+        
+        Returns:
+            URL do proxy ou None se nenhum disponível
+        """
+        return self.get_proxy()
+    
+    def report_dead_proxy(self, proxy_url: str, reason: str = "Dead proxy"):
+        """
+        Reporta um proxy como morto/não funcional.
+        
+        Alias para mark_burned() com nome mais amigável.
+        
+        Args:
+            proxy_url: URL do proxy
+            reason: Motivo da falha
+        """
+        self.mark_burned(proxy_url, reason)
+    
     
     def get_proxy(self) -> Optional[str]:
         """
