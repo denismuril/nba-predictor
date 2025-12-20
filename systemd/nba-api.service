@@ -1,0 +1,25 @@
+[Unit]
+Description=NBA Predictor FastAPI Service
+After=network.target postgresql.service redis.service
+Wants=postgresql.service redis.service
+
+[Service]
+Type=simple
+User=denis
+Group=denis
+WorkingDirectory=/home/denis/nba-predictor
+Environment="PATH=/home/denis/nba-predictor/venv/bin:/usr/local/bin:/usr/bin:/bin"
+ExecStart=/home/denis/nba-predictor/venv/bin/uvicorn api.main:app --host 0.0.0.0 --port 8000
+Restart=always
+RestartSec=10
+
+# Logs
+StandardOutput=append:/home/denis/nba-predictor/logs/api.log
+StandardError=append:/home/denis/nba-predictor/logs/api_error.log
+
+# Security
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

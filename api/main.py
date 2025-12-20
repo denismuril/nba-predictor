@@ -255,11 +255,9 @@ async def update_data(
                 
                 # Fallback: chamar scrapers diretamente
                 try:
-                    from data.scrapers.odds_scraper import OddsCollector
+                    from data.scrapers.odds_scraper import obter_odds
                     
-                    collector = OddsCollector()
-                    today = datetime.now().strftime("%Y-%m-%d")
-                    odds = await collector.fetch_all_odds(today)
+                    odds = obter_odds()
                     
                     if odds:
                         odds_updated = True
@@ -295,43 +293,27 @@ async def predict_today():
         
         # 1. Obter previsões do modelo
         try:
-            from ml_pipeline.predict import NBAPredictor
+            from ml_pipeline.predict import predict_next_games
             
-            predictor = NBAPredictor()
-            raw_predictions = predictor.predict_today()
+            raw_predictions = predict_next_games(date=today)
             
             if raw_predictions is not None and len(raw_predictions) > 0:
                 for _, row in raw_predictions.iterrows():
                     pred = _row_to_prediction(row)
                     predictions.append(pred)
+                logger.info(f"✅ {len(predictions)} previsões geradas")
         except Exception as e:
             logger.warning(f"⚠️ Erro obtendo previsões: {e}")
-            
-            # Fallback: usar predict.py diretamente
-            try:
-                from ml_pipeline.predict import main as predict_main
-                
-                class Args:
-                    date = today
-                    ml = True
-                    backtest = False
-                
-                result = predict_main(Args())
-                if result:
-                    # Processar resultado se disponível
-                    pass
-            except Exception as e2:
-                logger.error(f"❌ Fallback de previsões falhou: {e2}")
         
         # 2. Cruzar com odds de mercado
         try:
-            from data.scrapers.odds_scraper import OddsCollector
+            from data.scrapers.odds_scraper import obter_odds
             
-            collector = OddsCollector()
-            odds_data = await collector.get_cached_odds(today)
+            odds_data = obter_odds()
             
             if odds_data:
                 predictions = _enrich_with_odds(predictions, odds_data)
+                logger.info(f"✅ Odds obtidas para {len(odds_data)} jogos")
         except Exception as e:
             logger.warning(f"⚠️ Erro buscando odds: {e}")
         
