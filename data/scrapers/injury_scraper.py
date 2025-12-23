@@ -131,24 +131,42 @@ def scrape_injury_report_pdf():
     found_pdf = False
     pdf_content = None
     
-    # Tentar horários do mais recente para o mais antigo (em ET)
+    # Gerar lista de horários a tentar (do mais recente para o mais antigo)
+    # PDFs são publicados a cada 15 minutos: 12:00, 12:15, 12:30, 12:45, 1:00...
     current_hour_et = now_et.hour
+    current_minute_et = now_et.minute
     
-    # Lista de horários a tentar (do mais recente para o mais antigo)
-    hours_to_try = list(range(min(current_hour_et + 1, 23), 0, -1))
+    # Arredondar minuto atual para o intervalo de 15 min mais próximo (para baixo)
+    current_minute_rounded = (current_minute_et // 15) * 15
     
-    for h in hours_to_try:
-        # Formato: 06AM, 01PM, etc.
-        if h == 0:
-            time_str = "12AM"
-        elif h < 12:
-            time_str = f"{h:02d}AM"
-        elif h == 12:
-            time_str = "12PM"
+    # Gerar todos os slots de 15 min do horário atual para trás
+    times_to_try = []
+    for h in range(current_hour_et, -1, -1):
+        if h == current_hour_et:
+            # Para a hora atual, começar do minuto arredondado
+            minutes_range = range(current_minute_rounded, -1, -15)
         else:
-            time_str = f"{h-12:02d}PM"
+            # Para horas anteriores, tentar todos os minutos (45, 30, 15, 00)
+            minutes_range = [45, 30, 15, 0]
         
-        url = f"https://ak-static.cms.nba.com/referee/injury/Injury-Report_{date_str}_{time_str}.pdf"
+        for m in minutes_range:
+            times_to_try.append((h, m))
+    
+    for h, m in times_to_try:
+        # Formato: 12_45PM, 01_00PM, 11_30AM, etc.
+        if h == 0:
+            time_str = f"12_{m:02d}AM"
+        elif h < 12:
+            time_str = f"{h:02d}_{m:02d}AM"
+        elif h == 12:
+            time_str = f"12_{m:02d}PM"
+        else:
+            time_str = f"{h-12:02d}_{m:02d}PM"
+        
+        url = (
+            f"https://ak-static.cms.nba.com/referee/injury/"
+            f"Injury-Report_{date_str}_{time_str}.pdf"
+        )
         try:
             logger.debug(f"    Verificando: {url}")
             pdf_content = _fetch_pdf_with_retry(url)

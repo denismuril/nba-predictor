@@ -1,35 +1,59 @@
 [
   {
-    "player_name": "Tari Eason",
-    "team": "HOU",
+    "player_name": "Haywood Highsmith",
+    "team": "BKN",
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-20T14:09:37.367797"
+    "updated_at": "2025-12-23T15:37:12.569032"
   },
   {
-    "player_name": "Tamar Bates",
-    "team": "DEN",
-    "status": "OUT",
-    "description": "Via NBA Official PDF",
-    "source": "NBA_Official",
-    "updated_at": "2025-12-20T14:09:37.367825"
-  },
-  {
-    "player_name": "Anthony Davis",
-    "team": "DAL",
-    "status": "PROBABLE",
-    "description": "Via NBA Official PDF",
-    "source": "NBA_Official",
-    "updated_at": "2025-12-20T14:09:37.367832"
-  },
-  {
-    "player_name": "Tony Bradley",
-    "team": "IND",
+    "player_name": "Dominick Barlow",
+    "team": "PHI",
     "status": "QUESTIONABLE",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-20T14:09:37.367836"
+    "updated_at": "2025-12-23T15:37:12.569072"
+  },
+  {
+    "player_name": "Josh Green",
+    "team": "CHA",
+    "status": "PROBABLE",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-23T15:37:12.569081"
+  },
+  {
+    "player_name": "Noa Essengue",
+    "team": "CHI",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-23T15:37:12.569087"
+  },
+  {
+    "player_name": "Dyson Daniels",
+    "team": "ATL",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-23T15:37:12.569094"
+  },
+  {
+    "player_name": "Alex Antetokounmpo",
+    "team": "MIL",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-23T15:37:12.569104"
+  },
+  {
+    "player_name": "Tyrese Haliburton",
+    "team": "IND",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-23T15:37:12.569112"
   },
   {
     "player_name": "Trey Alexander",
@@ -37,95 +61,63 @@
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-20T14:09:37.367839"
+    "updated_at": "2025-12-23T15:37:12.569119"
   },
   {
-    "player_name": "Pat Connaughton",
-    "team": "CHA",
-    "status": "QUESTIONABLE",
-    "description": "Via NBA Official PDF",
-    "source": "NBA_Official",
-    "updated_at": "2025-12-20T14:09:37.367844"
-  },
-  {
-    "player_name": "Isaac Jones",
-    "team": "DET",
+    "player_name": "Lonzo Ball",
+    "team": "CLE",
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-20T14:09:37.367848"
+    "updated_at": "2025-12-23T15:37:12.569125"
   },
   {
-    "player_name": "Malaki Branham",
-    "team": "WAS",
-    "status": "QUESTIONABLE",
-    "description": "Via NBA Official PDF",
-    "source": "NBA_Official",
-    "updated_at": "2025-12-20T14:09:37.367851"
-  },
-  {
-    "player_name": "Zach Edey",
-    "team": "MEM",
+    "player_name": "Tyler Herro",
+    "team": "MIA",
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-20T14:09:37.367854"
+    "updated_at": "2025-12-23T15:37:12.569132"
   },
   {
-    "player_name": "Grayson Allen",
-    "team": "PHX",
-    "status": "QUESTIONABLE",
+    "player_name": "Joan Beringer",
+    "team": "MIN",
+    "status": "AVAILABLE",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-20T14:09:37.367858"
+    "updated_at": "2025-12-23T15:37:12.569138"
   },
   {
-    "player_name": "Seth Curry",
-    "team": "GSW",
+    "player_name": "Harrison Ingram",
+    "team": "SAS",
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-20T14:09:37.367861"
+    "updated_at": "2025-12-23T15:37:12.569144"
   },
   {
-    "player_name": "Colin Castleton",
-    "team": "ORL",
-    "status": "OUT",
-    "description": "Via NBA Official PDF",
-    "source": "NBA_Official",
-    "updated_at": "2025-12-20T14:09:37.367864"
-  },
-  {
-    "player_name": "Elijah Harkless",
-    "team": "UTA",
-    "status": "OUT",
-    "description": "Via NBA Official PDF",
-    "source": "NBA_Official",
-    "updated_at": "2025-12-20T14:09:37.367868"
-  },
-  {
-    "player_name": "Javonte Cooke",
-    "team": "POR",
-    "status": "OUT",
-    "description": "Via NBA Official PDF",
-    "source": "NBA_Official",
-    "updated_at": "2025-12-20T14:09:37.367871"
-  },
-  {
-    "player_name": "Devin Carter",
-    "team": "SAC",
-    "status": "OUT",
-    "description": "Via NBA Official PDF",
-    "source": "NBA_Official",
-    "updated_at": "2025-12-20T14:09:37.367874"
-  },
-  {
-    "player_name": "Deandre Ayton",
+    "player_name": "Luka Doncic",
     "team": "LAL",
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-20T14:09:37.367876"
+    "updated_at": "2025-12-23T15:37:12.569149"
+  },
+  {
+    "player_name": "Grayson Allen",
+    "team": "PHX",
+    "status": "DOUBTFUL",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-23T15:37:12.569155"
+  },
+  {
+    "player_name": "Devin Carter",
+    "team": "SAC",
+    "status": "QUESTIONABLE",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-23T15:37:12.569160"
   },
   {
     "player_name": "Bradley Beal",
@@ -133,6 +125,6 @@
     "status": "OUT",
     "description": "Via NBA Official PDF",
     "source": "NBA_Official",
-    "updated_at": "2025-12-20T14:09:37.367879"
+    "updated_at": "2025-12-23T15:37:12.569164"
   }
 ]
