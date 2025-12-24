@@ -769,8 +769,34 @@ with tab1:
     # LÓGICA UNIFICADA: Sempre carregar previsões primeiro para garantir Confiança e Dados do Modelo
     daily_games = db.get_latest_predictions(date_str)
 
-    # Se não houver previsões, tentar histórico (mas sem confiança)
+    # Se não houver previsões no banco, oferecer opção de gerar em tempo real
     if daily_games.empty:
+        st.warning(f"⚠️ Nenhuma previsão salva para {date_str}.")
+        
+        col_btn1, col_btn2 = st.columns(2)
+        with col_btn1:
+            if st.button("🔮 Gerar Previsões Agora", key="generate_predictions"):
+                with st.spinner("Gerando previsões... (pode demorar 1-2 min)"):
+                    try:
+                        from ml_pipeline.predict import predict_next_games
+                        predictions_df = predict_next_games(date_str)
+                        
+                        if predictions_df is not None and not predictions_df.empty:
+                            # Converter para formato esperado pelo dashboard
+                            daily_games = predictions_df.copy()
+                            if 'confidence' not in daily_games.columns:
+                                daily_games['confidence'] = 'MEDIUM'
+                            st.success(f"✅ {len(daily_games)} previsões geradas!")
+                            st.rerun()
+                        else:
+                            st.error("❌ Nenhum jogo encontrado para esta data.")
+                    except Exception as e:
+                        st.error(f"❌ Erro ao gerar previsões: {e}")
+        
+        with col_btn2:
+            st.info("💡 Ou rode: `python -m ml_pipeline.predict " + date_str + "`")
+        
+        # Fallback: tentar histórico (mas sem confiança)
         if not df.empty and 'date' in df.columns:
              daily_games = df[df['date'].astype(str).str.startswith(date_str)].copy()
              daily_games['confidence'] = 'N/A' # Histórico puro não tem confiança

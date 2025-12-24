@@ -685,6 +685,71 @@ def predict_next_games(date=None):
     return results
 
 
+def save_predictions_to_db(predictions_df, date_str):
+    """
+    Salva previsões no banco de dados para exibição no dashboard.
+    
+    Args:
+        predictions_df: DataFrame retornado por predict_next_games()
+        date_str: Data no formato YYYY-MM-DD
+    """
+    if predictions_df is None or predictions_df.empty:
+        logger.warning("⚠️ Nenhuma previsão para salvar")
+        return
+    
+    try:
+        from data.repositories.db_manager import get_db_manager
+        db = get_db_manager()
+        
+        # Converter DataFrame para formato esperado por db.save_predictions()
+        predictions_list = []
+        for _, row in predictions_df.iterrows():
+            pred = {
+                'Data': date_str,
+                'Casa': row.get('home_team', ''),
+                'Visitante': row.get('away_team', ''),
+                'Prob Casa %': row.get('prob_home', 50.0),
+                'Prob Visitante %': row.get('prob_away', 50.0),
+                'Confiança': row.get('confidence', 'MEDIUM'),
+                'Total Previsto': row.get('predicted_total', 0),
+                'Odd Casa': row.get('odds_home', 0),
+                'Odd Visitante': row.get('odds_away', 0),
+                # Métricas V21
+                'home_shooting_luck': row.get('home_shooting_luck', 0.0),
+                'away_shooting_luck': row.get('away_shooting_luck', 0.0),
+                'home_rapm_penalty': row.get('home_rapm_penalty', 0.0),
+                'away_rapm_penalty': row.get('away_rapm_penalty', 0.0),
+                'rapm_impact_diff': row.get('rapm_impact_diff', 0.0),
+                'home_fatigue_score': row.get('home_fatigue_score', 0.0),
+                'away_fatigue_score': row.get('away_fatigue_score', 0.0),
+                'home_elo': row.get('home_elo', 0.0),
+                'away_elo': row.get('away_elo', 0.0),
+                'projected_pace_vegas': row.get('projected_pace_vegas', 0.0),
+                'home_injuries_list': row.get('home_injuries_list', ''),
+                'away_injuries_list': row.get('away_injuries_list', ''),
+            }
+            predictions_list.append(pred)
+        
+        db.save_predictions(predictions_list)
+        logger.info(f"💾 {len(predictions_list)} previsões salvas no banco de dados")
+        
+    except Exception as e:
+        logger.error(f"❌ Erro ao salvar previsões no banco: {e}")
+
+
 if __name__ == "__main__":
-    preds = predict_next_games()
+    import sys
+    date = sys.argv[1] if len(sys.argv) > 1 else None
+    
+    # Se não passou data, usar hoje
+    if date is None:
+        date = datetime.now().strftime('%Y-%m-%d')
+    
+    preds = predict_next_games(date)
     print(preds)
+    
+    # Salvar no banco de dados para o dashboard
+    if preds is not None and not preds.empty:
+        save_predictions_to_db(preds, date)
+        print(f"\n✅ Previsões salvas no banco de dados para {date}")
+
