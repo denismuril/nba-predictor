@@ -1,914 +1,162 @@
 [
   {
-    "player_name": "Mouhamed Gueye",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.340159"
-  },
-  {
-    "player_name": "Dyson Daniels",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.340272"
-  },
-  {
-    "player_name": "NFaly Dante",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Oct 1",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.340335"
-  },
-  {
-    "player_name": "Eli John Ndiaye",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Jul 2",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.340392"
-  },
-  {
-    "player_name": "Kristaps Porzingis",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 29",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.340442"
-  },
-  {
-    "player_name": "Jordan Walsh",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.340506"
-  },
-  {
-    "player_name": "Jayson Tatum",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Apr 1",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.340554"
-  },
-  {
-    "player_name": "Drake Powell",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 27",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.340616"
-  },
-  {
-    "player_name": "Cam Thomas",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 29",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.340661"
-  },
-  {
-    "player_name": "Haywood Highsmith",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Jan 4",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.340708"
-  },
-  {
-    "player_name": "Mason Plumlee",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.340765"
-  },
-  {
-    "player_name": "Ryan Kalkbrenner",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.340809"
-  },
-  {
-    "player_name": "Grant Williams",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.340856"
-  },
-  {
-    "player_name": "Matas Buzelis",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.340915"
-  },
-  {
-    "player_name": "Noa Essengue",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Oct 1",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.340959"
-  },
-  {
-    "player_name": "Lonzo Ball",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 25",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.341017"
-  },
-  {
-    "player_name": "Larry Nance",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 29",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.341061"
-  },
-  {
-    "player_name": "Max Strus",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 29",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.341103"
-  },
-  {
-    "player_name": "Evan Mobley",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 27",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.341145"
-  },
-  {
-    "player_name": "PJ Washington",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 25",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.341220"
-  },
-  {
-    "player_name": "Klay Thompson",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 25",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.341266"
-  },
-  {
-    "player_name": "Dwight Powell",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 25",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.341307"
-  },
-  {
-    "player_name": "Max Christie",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 25",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.341348"
-  },
-  {
-    "player_name": "Dereck Lively",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Oct 1",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.341390"
-  },
-  {
-    "player_name": "Kyrie Irving",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Feb 12",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.341431"
-  },
-  {
-    "player_name": "Dante Exum",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Oct 1",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.341479"
-  },
-  {
-    "player_name": "Cameron Johnson",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 25",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.341539"
-  },
-  {
-    "player_name": "Tamar Bates",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Apr 1",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.341581"
-  },
-  {
-    "player_name": "Christian Braun",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Jan 9",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.341676"
-  },
-  {
-    "player_name": "Aaron Gordon",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Jan 2",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.341730"
-  },
-  {
-    "player_name": "Ronald Holland",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.341808"
-  },
-  {
-    "player_name": "Isaac Jones",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 27",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.341877"
-  },
-  {
-    "player_name": "Seth Curry",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 25",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.341939"
-  },
-  {
-    "player_name": "Al Horford",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 25",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.341990"
-  },
-  {
-    "player_name": "Dorian Finney-Smith",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Jan 1",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.342039"
-  },
-  {
-    "player_name": "Fred VanVleet",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Jun 1",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.342073"
-  },
-  {
-    "player_name": "Isaiah Jackson",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.342120"
-  },
-  {
-    "player_name": "Ben Sheppard",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.342153"
-  },
-  {
-    "player_name": "Aaron Nesmith",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.342186"
-  },
-  {
-    "player_name": "Obi Toppin",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Feb 2",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.342217"
-  },
-  {
-    "player_name": "Tyrese Haliburton",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Oct 1",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.342252"
-  },
-  {
-    "player_name": "Ivica Zubac",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Jan 12",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.342297"
-  },
-  {
-    "player_name": "Derrick Jones",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 30",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.342430"
-  },
-  {
-    "player_name": "Bradley Beal",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Oct 1",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.342469"
-  },
-  {
-    "player_name": "Rui Hachimura",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 25",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.342518"
-  },
-  {
-    "player_name": "Luka Doncic",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 25",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.342552"
-  },
-  {
-    "player_name": "Jaxson Hayes",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 25",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.342582"
-  },
-  {
-    "player_name": "Gabe Vincent",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 28",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.342614"
-  },
-  {
-    "player_name": "Cedric Coward",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.342654"
-  },
-  {
-    "player_name": "Vince Williams",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.342688"
-  },
-  {
-    "player_name": "Ja Morant",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.342724"
-  },
-  {
-    "player_name": "Brandon Clarke",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Jan 15",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.342758"
-  },
-  {
-    "player_name": "John Konchar",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Jan 6",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.342788"
-  },
-  {
-    "player_name": "Zach Edey",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Jan 9",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.342820"
-  },
-  {
-    "player_name": "Ty Jerome",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Jan 15",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.342849"
-  },
-  {
-    "player_name": "Scotty Pippen",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Jan 15",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.342883"
-  },
-  {
-    "player_name": "Pelle Larsson",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.342926"
-  },
-  {
-    "player_name": "Tyler Herro",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.342959"
-  },
-  {
-    "player_name": "Nikola Jovic",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.342990"
-  },
-  {
-    "player_name": "Terry Rozier",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Feb 20",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.343020"
-  },
-  {
-    "player_name": "Gary Trent",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.343060"
-  },
-  {
-    "player_name": "Giannis Antetokounmpo",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 31",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.343093"
-  },
-  {
-    "player_name": "Taurean Prince",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Jan 2",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.343127"
-  },
-  {
-    "player_name": "Jaden McDaniels",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 25",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.343167"
-  },
-  {
-    "player_name": "Joe Ingles",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 25",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.343197"
-  },
-  {
-    "player_name": "Jordan Poole",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.343236"
-  },
-  {
-    "player_name": "Herbert Jones",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.343267"
-  },
-  {
-    "player_name": "Dejounte Murray",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Jan 2",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.343297"
-  },
-  {
-    "player_name": "Guerschon Yabusele",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 25",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.343335"
-  },
-  {
-    "player_name": "Jalen Brunson",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 25",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.343365"
-  },
-  {
-    "player_name": "OG Anunoby",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 25",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.343395"
-  },
-  {
-    "player_name": "Miles McBride",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 25",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.343423"
-  },
-  {
-    "player_name": "Landry Shamet",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 25",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.343455"
-  },
-  {
-    "player_name": "Ajay Mitchell",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 25",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.343493"
-  },
-  {
-    "player_name": "Ousmane Dieng",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 25",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.343524"
-  },
-  {
-    "player_name": "Chet Holmgren",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 25",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.343554"
-  },
-  {
-    "player_name": "Jaylin Williams",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 25",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.343593"
-  },
-  {
-    "player_name": "Nikola Topic",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Feb 20",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.343667"
-  },
-  {
-    "player_name": "Thomas Sorber",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Oct 1",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.343706"
-  },
-  {
-    "player_name": "Goga Bitadze",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.343751"
-  },
-  {
-    "player_name": "Tristan da Silva",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.343785"
-  },
-  {
-    "player_name": "Jalen Suggs",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.343819"
-  },
-  {
-    "player_name": "Moritz Wagner",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.343851"
-  },
-  {
-    "player_name": "Franz Wagner",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.343905"
-  },
-  {
-    "player_name": "Colin Castleton",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.343938"
-  },
-  {
-    "player_name": "Quentin Grimes",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.343980"
-  },
-  {
-    "player_name": "VJ Edgecombe",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.344012"
-  },
-  {
-    "player_name": "Dominick Barlow",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.344044"
-  },
-  {
-    "player_name": "Kelly Oubre",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.344078"
-  },
-  {
-    "player_name": "Trendon Watford",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 28",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.344110"
-  },
-  {
-    "player_name": "Grayson Allen",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.344151"
-  },
-  {
-    "player_name": "Jalen Green",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Jan 7",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.344183"
-  },
-  {
-    "player_name": "Koby Brea",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 27",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.344214"
-  },
-  {
-    "player_name": "Robert Williams",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.344258"
-  },
-  {
-    "player_name": "Jerami Grant",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.344292"
-  },
-  {
-    "player_name": "Scoot Henderson",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.344326"
-  },
-  {
-    "player_name": "Jrue Holiday",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.344358"
-  },
-  {
-    "player_name": "Matisse Thybulle",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.344390"
-  },
-  {
-    "player_name": "Blake Wesley",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Jan 30",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.344420"
-  },
-  {
-    "player_name": "Damian Lillard",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Oct 1",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.344450"
+    "player_name": "Moussa Cisse",
+    "team": "DAL",
+    "status": "AVAILABLE",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-27T20:55:05.000961"
   },
   {
     "player_name": "Devin Carter",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 27",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.344492"
+    "team": "SAC",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-27T20:55:05.001001"
   },
   {
-    "player_name": "Keegan Murray",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 27",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.344523"
+    "player_name": "Tamar Bates",
+    "team": "DEN",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-27T20:55:05.001013"
   },
   {
-    "player_name": "Zach LaVine",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 30",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.344554"
+    "player_name": "Goga Bitadze",
+    "team": "ORL",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-27T20:55:05.001023"
   },
   {
-    "player_name": "Domantas Sabonis",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Jan 18",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.344585"
+    "player_name": "Grayson Allen",
+    "team": "PHX",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-27T20:55:05.001032"
   },
   {
-    "player_name": "Drew Eubanks",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Jan 4",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.344698"
+    "player_name": "Trey Alexander",
+    "team": "NOP",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-27T20:55:05.001042"
   },
   {
-    "player_name": "Jakob Poeltl",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.344768"
+    "player_name": "Tyson Etienne",
+    "team": "BKN",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-27T20:55:05.001051"
   },
   {
-    "player_name": "RJ Barrett",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 28",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.344805"
+    "player_name": "Mike Conley",
+    "team": "MIN",
+    "status": "AVAILABLE",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-27T20:55:05.001060"
   },
   {
-    "player_name": "Jusuf Nurkic",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.344852"
+    "player_name": "Darius Garland",
+    "team": "CLE",
+    "status": "PROBABLE",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-27T20:55:05.001069"
   },
   {
-    "player_name": "Lauri Markkanen",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.344884"
+    "player_name": "Alperen Sengun",
+    "team": "HOU",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-27T20:55:05.001076"
   },
   {
-    "player_name": "Georges Niang",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 30",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.344918"
+    "player_name": "Tyrese Haliburton",
+    "team": "IND",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-27T20:55:05.001085"
   },
   {
-    "player_name": "Walker Kessler",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Oct 1",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.344953"
+    "player_name": "Bam Adebayo",
+    "team": "MIA",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-27T20:55:05.001093"
   },
   {
-    "player_name": "Bub Carrington",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.344994"
+    "player_name": "Alex Antetokounmpo",
+    "team": "MIL",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-27T20:55:05.001101"
   },
   {
-    "player_name": "Corey Kispert",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Dec 26",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.345025"
+    "player_name": "Noa Essengue",
+    "team": "CHI",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-27T20:55:05.001109"
   },
   {
-    "player_name": "Cam Whitmore",
-    "team": "UNK",
-    "status": "UNKNOWN",
-    "description": "Jan 27",
-    "source": "ESPN",
-    "updated_at": "2025-12-24T13:24:08.345058"
+    "player_name": "Josh Hart",
+    "team": "NYK",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-27T20:55:05.001116"
+  },
+  {
+    "player_name": "Ace Bailey",
+    "team": "UTA",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-27T20:55:05.001123"
+  },
+  {
+    "player_name": "Harrison Barnes",
+    "team": "SAS",
+    "status": "AVAILABLE",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-27T20:55:05.001132"
+  },
+  {
+    "player_name": "Ousmane Dieng",
+    "team": "OKC",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-27T20:55:05.001139"
+  },
+  {
+    "player_name": "Brandon Clarke",
+    "team": "MEM",
+    "status": "OUT",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-27T20:55:05.001145"
+  },
+  {
+    "player_name": "Malaki Branham",
+    "team": "WAS",
+    "status": "QUESTIONABLE",
+    "description": "Via NBA Official PDF",
+    "source": "NBA_Official",
+    "updated_at": "2025-12-27T20:55:05.001153"
   }
 ]
